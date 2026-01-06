@@ -1,6 +1,4 @@
-﻿using MoneyKind4Opos;
-
-namespace MoneyKind4Opos;
+﻿namespace MoneyKind4Opos;
 
 /// <summary>Cash face information</summary>
 /// <param name="Value">Face value</param>

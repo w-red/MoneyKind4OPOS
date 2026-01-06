@@ -18,7 +18,7 @@ public interface IMoneyKind<TCurrency, TSelf>
     /// <summary>Convert to cash counts string.</summary>
     public string ToCashCountsString()
     {
-        var coinsPart = 
+        var coinsPart =
             TCurrency.Coins
             .Select(
                 f => $"{f.Value}:{Counts.GetValueOrDefault(f, 0)}");
@@ -64,7 +64,7 @@ public interface IMoneyKind<TCurrency, TSelf>
         foreach (var ent in sec
             .Split(',').Select(s => s.Split(':')))
         {
-            if (ent.Length == 2 && 
+            if (ent.Length == 2 &&
                 decimal.TryParse(ent[0], out var val))
             {
                 if (int.TryParse(ent[1], out var cnt))
