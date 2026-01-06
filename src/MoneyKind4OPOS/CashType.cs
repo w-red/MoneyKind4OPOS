@@ -1,5 +1,6 @@
 ﻿namespace MoneyKind4Opos;
 
+/// <summary>Cash type.</summary>
 public enum CashType
 {
     /// <summary>Undefined cash type.</summary>

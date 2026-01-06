@@ -12,7 +12,7 @@ public interface ICurrency
     static abstract decimal MinimumUnit { get; }
 
     /// <summary>Coin faces.</summary>
-    static abstract IEnumerable<CashFaceInfo> Coins {get;}
+    static abstract IEnumerable<CashFaceInfo> Coins { get; }
 
     /// <summary>Bill faces.</summary>
     static abstract IEnumerable<CashFaceInfo> Bills { get; }
