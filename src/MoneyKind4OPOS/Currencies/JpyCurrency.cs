@@ -1,6 +1,7 @@
-﻿using MoneyKind4Opos.Codes;
+﻿using MoneyKind4Opos;
+using MoneyKind4Opos.Codes;
 
-namespace MoneyKind4Opos.Jpy;
+namespace MoneyKind4OPOS.Currencies;
 
 /// <summary>Japanese Yen Currency</summary>
 public class JpyCurrency : ICurrency
