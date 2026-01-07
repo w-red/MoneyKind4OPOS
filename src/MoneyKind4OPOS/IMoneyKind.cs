@@ -23,7 +23,7 @@ public interface IMoneyKind<TCurrency, TSelf>
             .Select(
                 f => $"{f.Value}:{Counts.GetValueOrDefault(f, 0)}");
         var billsPart =
-            TCurrency.Coins
+            TCurrency.Bills
             .Select(
                 f => $"{f.Value}:{Counts.GetValueOrDefault(f, 0)}");
 
@@ -39,21 +39,32 @@ public interface IMoneyKind<TCurrency, TSelf>
         var sections = cashCounts.Split(';');
         if (sections.Length > 0)
         {
-            ParseSection(
-                sections[0],
-                TCurrency.Coins,
-                ret.Counts);
+            ParseSection(sections[0], TCurrency.Coins, ret.Counts);
         }
         if (sections.Length > 1)
         {
-            ParseSection(
-                sections[1],
-                TCurrency.Bills,
-                ret.Counts);
+            ParseSection(sections[1], TCurrency.Bills, ret.Counts);
         }
 
         return ret;
     }
+
+    /// <summary>Total amount.</summary>
+    public decimal TotalAmount() =>
+        Counts
+        .Sum(kvp => kvp.Key.Value * kvp.Value);
+
+    /// <summary>Coin amount.</summary>
+    public decimal CoinAmount() =>
+        Counts
+        .Where(kvp => kvp.Key.Type == CashType.Coin)
+        .Sum(kvp => kvp.Key.Value * kvp.Value);
+
+    /// <summary>Bill amount.</summary>
+    public decimal BillAmount() =>
+        Counts
+        .Where(kvp => kvp.Key.Type == CashType.Bill)
+        .Sum(kvp => kvp.Key.Value * kvp.Value);
 
     /// <summary>Parse face section.</summary>
     private static void ParseSection(
@@ -61,23 +72,27 @@ public interface IMoneyKind<TCurrency, TSelf>
         IEnumerable<CashFaceInfo> faces,
         IDictionary<CashFaceInfo, int> counts)
     {
-        foreach (var ent in sec
-            .Split(',').Select(s => s.Split(':')))
+        var parsed =
+            sec
+            .Split(',',
+                StringSplitOptions.RemoveEmptyEntries
+                | StringSplitOptions.TrimEntries)
+            .Select(s => s.Split(':'))
+            .Select(
+                p =>
+                    p is [var vs, var cs]
+                    && decimal.TryParse(vs, out var v)
+                    && int.TryParse(cs, out var c)
+                    ? (Face:
+                        faces.FirstOrDefault(f => f.Value == v),
+                        Count: c)
+                    : (Face: null, Count: 0)
+            )
+            .Where(t => t.Face is not null);
+
+        foreach (var (face, count) in parsed)
         {
-            if (ent.Length == 2 &&
-                decimal.TryParse(ent[0], out var val))
-            {
-                if (int.TryParse(ent[1], out var cnt))
-                {
-                    // 利用可能な額面リストから一致するものを探す
-                    var face = faces
-                        .FirstOrDefault(f => f.Value == val);
-                    if (face != null)
-                    {
-                        counts[face] = cnt;
-                    }
-                }
-            }
+            counts[face!] = count;
         }
     }
 }
