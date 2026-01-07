@@ -1,7 +1,6 @@
-﻿using MoneyKind4Opos;
-using MoneyKind4Opos.Codes;
+﻿using MoneyKind4Opos.Codes;
 
-namespace MoneyKind4OPOS.Currencies;
+namespace MoneyKind4Opos.Currencies;
 
 /// <summary>Euro Currency</summary>
 public class EurCurrency : ICurrency

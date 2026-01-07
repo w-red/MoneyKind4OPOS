@@ -1,3 +1,4 @@
 <Solution>
-  <Project Path="MoneyKind4OPOS/MoneyKind4OPOS.csproj" Id="42dd16eb-b9b0-4a1a-9a2e-65a21771d480" DisplayName="MoneyKind4Opos" />
+  <Project Path="../test/MoneyKind4OposTest/MoneyKind4OposTest.csproj" Id="87ad265f-f39a-4163-8ec9-f741040eed5e" DisplayName="MoneyKind4OposTest" />
+  <Project Path="MoneyKind4Opos/MoneyKind4Opos.csproj" Id="42dd16eb-b9b0-4a1a-9a2e-65a21771d480" DisplayName="MoneyKind4Opos" />
 </Solution>

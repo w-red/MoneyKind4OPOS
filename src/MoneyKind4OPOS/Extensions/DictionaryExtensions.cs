@@ -1,4 +1,4 @@
-﻿namespace MoneyKind4OPOS.Extensions;
+﻿namespace MoneyKind4Opos.Extensions;
 
 /// <summary>IDictionary extensions.</summary>
 public static class DictionaryExtensions
