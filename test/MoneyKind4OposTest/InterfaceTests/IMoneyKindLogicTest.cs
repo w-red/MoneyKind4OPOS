@@ -1,14 +1,19 @@
 using MoneyKind4Opos;
 using MoneyKind4Opos.Codes;
+using MoneyKind4Opos.Currencies;
 using Shouldly;
+using System.Globalization;
 
 namespace MoneyKind4OPOSTest.InterfaceTests;
 
-/// <summary>IMoneyKind DIM tests using Stub implementation.</summary>
+/// <summary>IMoneyKind tests using Stub implementation.</summary>
 public class IMoneyKindLogicTest
 {
     /// <summary>Stub Currency</summary>
-    private class StubCurrency : ICurrency
+    private class StubCurrency : 
+        ICurrency,
+        ICashCountFormattable<StubCurrency>,
+        ICurrencyFormattable<StubCurrency>
     {
         private static readonly CashFaceInfo[] _coins =
         [
@@ -24,13 +29,26 @@ public class IMoneyKindLogicTest
 
         public static Iso4217 Code => Iso4217.USD;
         public static decimal MinimumUnit => 0.5m;
+        public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits =>
+            [new SubsidiaryUnit("Cent", "¢", 0.01m)];
+
         public static IEnumerable<CashFaceInfo> Coins => _coins;
         public static IEnumerable<CashFaceInfo> Bills => _bills;
+
+        public static string Symbol => "$";
+        public static bool IsZeroPadding => false;
+        public static CurrencyDisplayFormat DisplayFormat => new(
+            Placement: SymbolPlacement.Prefix,
+            DecimalZeroReplacement: ".",
+            GroupSeparator: ",",
+            DecimalSeparator: "."
+        );
+        public static NumberFormatInfo NumberFormat =>
+            NumberFormatInfo.InvariantInfo;
+
     }
 
     private class StubMoneyKind : MoneyKind<StubCurrency> { }
-
-    #region TotalAmount Tests
 
     [Fact]
     public void TotalAmount_WithNoCoins_ShouldBeZero()
@@ -43,23 +61,19 @@ public class IMoneyKindLogicTest
     public void TotalAmount_WithCoinsAndBills_ShouldSumCorrectly()
     {
         var mk = new StubMoneyKind();
-        mk.Counts[StubCurrency.Coins.First(c => c.Value == 0.5m)] = 2; // 0.5 * 2 = 1.0
-        mk.Counts[StubCurrency.Coins.First(c => c.Value == 1.0m)] = 3; // 1.0 * 3 = 3.0
-        mk.Counts[StubCurrency.Bills.First(b => b.Value == 5.0m)] = 1; // 5.0 * 1 = 5.0
+        mk[0.5m] = 2; // 0.5 * 2 = 1.0
+        mk[1.0m] = 3; // 1.0 * 3 = 3.0
+        mk[5.0m] = 1; // 5.0 * 1 = 5.0
         
         mk.TotalAmount().ShouldBe(9.0m);
     }
-
-    #endregion
-
-    #region CoinAmount Tests
 
     [Fact]
     public void CoinAmount_ShouldOnlySumCoins()
     {
         var mk = new StubMoneyKind();
-        mk.Counts[StubCurrency.Coins.First(c => c.Value == 0.5m)] = 2; // 0.5 * 2 = 1.0
-        mk.Counts[StubCurrency.Bills.First(b => b.Value == 5.0m)] = 1; // 5.0 (紙幣なので除外)
+        mk[0.5m] = 2; // 0.5 * 2 = 1.0
+        mk[5.0m] = 1; // 5.0 (紙幣なので除外)
         
         mk.CoinAmount().ShouldBe(1.0m);
     }
@@ -68,37 +82,29 @@ public class IMoneyKindLogicTest
     public void CoinAmount_WithNoBills_ShouldEqualTotalAmount()
     {
         var mk = new StubMoneyKind();
-        mk.Counts[StubCurrency.Coins.First(c => c.Value == 1.0m)] = 5;
+        mk[1.0m] = 5;
         
         mk.CoinAmount().ShouldBe(mk.TotalAmount());
     }
-
-    #endregion
-
-    #region BillAmount Tests
 
     [Fact]
     public void BillAmount_ShouldOnlySumBills()
     {
         var mk = new StubMoneyKind();
-        mk.Counts[StubCurrency.Coins.First(c => c.Value == 0.5m)] = 2; // 1.0 (硬貨なので除外)
-        mk.Counts[StubCurrency.Bills.First(b => b.Value == 10.0m)] = 2; // 10.0 * 2 = 20.0
+        mk[0.5m] = 2; // 1.0 (硬貨なので除外)
+        mk[10.0m] = 2; // 10.0 * 2 = 20.0
         
         mk.BillAmount().ShouldBe(20.0m);
     }
 
-    #endregion
-
-    #region Parse Tests
-
     [Fact]
     public void Parse_WithValidString_ShouldRestoreCounts()
     {
-        var mk = StubMoneyKind.Parse("0.5:2,1:1;5:1");
+        var mk = StubMoneyKind.Parse(".50:2,1:1;5:1");
         
-        mk.Counts[StubCurrency.Coins.First(c => c.Value == 0.5m)].ShouldBe(2);
-        mk.Counts[StubCurrency.Coins.First(c => c.Value == 1.0m)].ShouldBe(1);
-        mk.Counts[StubCurrency.Bills.First(b => b.Value == 5.0m)].ShouldBe(1);
+        mk[0.5m].ShouldBe(2);
+        mk[1.0m].ShouldBe(1);
+        mk[5.0m].ShouldBe(1);
     }
 
     [Fact]
@@ -114,7 +120,7 @@ public class IMoneyKindLogicTest
         var mk = StubMoneyKind.Parse("0.5:3");
         
         mk.Counts.Count.ShouldBe(1);
-        mk.Counts[StubCurrency.Coins.First(c => c.Value == 0.5m)].ShouldBe(3);
+        mk[0.5m].ShouldBe(3);
     }
 
     [Fact]
@@ -123,7 +129,7 @@ public class IMoneyKindLogicTest
         var mk = StubMoneyKind.Parse(";10:2");
         
         mk.Counts.Count.ShouldBe(1);
-        mk.Counts[StubCurrency.Bills.First(b => b.Value == 10.0m)].ShouldBe(2);
+        mk[10.0m].ShouldBe(2);
     }
 
     [Fact]
@@ -136,20 +142,16 @@ public class IMoneyKindLogicTest
         mk.TotalAmount().ShouldBe(5.5m);
     }
 
-    #endregion
-
-    #region ToCashCountsString Tests
-
     [Fact]
     public void ToCashCountsString_WithEmptyCounts_ShouldReturnZeros()
     {
         var mk = new StubMoneyKind();
         var result = mk.ToCashCountsString();
         
-        result.ShouldContain("0.5:0");
-        result.ShouldContain("1.0:0");
-        result.ShouldContain("5.0:0");
-        result.ShouldContain("10.0:0");
+        result.ShouldContain(".5:0");
+        result.ShouldContain("1:0");
+        result.ShouldContain("5:0");
+        result.ShouldContain("10:0");
         result.ShouldContain(";"); 
     }
 
@@ -157,21 +159,21 @@ public class IMoneyKindLogicTest
     public void ToCashCountsString_WithCounts_ShouldFormatCorrectly()
     {
         var mk = new StubMoneyKind();
-        mk.Counts[StubCurrency.Coins.First(c => c.Value == 0.5m)] = 2;
-        mk.Counts[StubCurrency.Bills.First(b => b.Value == 5.0m)] = 1;
+        mk[0.5m] = 2;
+        mk[5.0m] = 1;
         
         var result = mk.ToCashCountsString();
         
-        result.ShouldContain("0.5:2");
-        result.ShouldContain("5.0:1");
+        result.ShouldContain(".5:2");
+        result.ShouldContain("5:1");
     }
 
     [Fact]
     public void ToCashCountsString_RoundTrip_ShouldPreserveData()
     {
         var original = new StubMoneyKind();
-        original.Counts[StubCurrency.Coins.First(c => c.Value == 1.0m)] = 3;
-        original.Counts[StubCurrency.Bills.First(b => b.Value == 10.0m)] = 2;
+        original[1.0m] = 3;
+        original[10.0m] = 2;
         
         var serialized = original.ToCashCountsString();
         var restored = StubMoneyKind.Parse(serialized);
@@ -179,5 +181,4 @@ public class IMoneyKindLogicTest
         restored.TotalAmount().ShouldBe(original.TotalAmount());
     }
 
-    #endregion
 }

@@ -9,6 +9,21 @@ public class EurCurrency : ICurrency
     public static Iso4217 Code => Iso4217.EUR;
     /// <inheritdoc/>
     public static decimal MinimumUnit => 0.01m;
+
+    /// <inheritdoc/>
+    public static string Symbol => "€";
+    /// <inheritdoc/>
+    public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits =>
+    [
+        new SubsidiaryUnit("Cent", "¢", 0.01m),
+    ];
+
+    /// <inheritdoc/>
+    public static CurrencyDisplayFormat DisplayFormat => new(
+        Placement: SymbolPlacement.Prefix,
+        DecimalZeroReplacement: "."
+    );
+
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [

@@ -1,4 +1,5 @@
-﻿using MoneyKind4Opos.Extensions;
+﻿using MoneyKind4Opos.Currencies;
+using MoneyKind4Opos.Extensions;
 
 namespace MoneyKind4Opos;
 
@@ -6,8 +7,30 @@ namespace MoneyKind4Opos;
 /// <typeparam name="TCurrency">Currency type</typeparam>
 public class MoneyKind<TCurrency>
     : IMoneyKind<TCurrency, MoneyKind<TCurrency>>
-    where TCurrency : ICurrency
+    where TCurrency : 
+        ICurrency, 
+        ICashCountFormattable<TCurrency>,
+        ICurrencyFormattable<TCurrency>
 {
+    private static readonly string _defaultCoinFormat =
+        ICurrency
+        .GetDefaultFormat(TCurrency.MinimumUnit, TCurrency.IsZeroPadding);
+
+    private static readonly string _defaultBillFormat =
+        ICurrency
+        .GetDefaultFormat(1m, TCurrency.IsZeroPadding);
+
+    private static readonly Dictionary<(decimal faceValue, CashType Type), CashFaceInfo> _faceLookup =
+        TCurrency.Coins.Concat(TCurrency.Bills)
+        .ToDictionary(f => (f.Value, f.Type));
+
+    private static readonly Dictionary<decimal, CashFaceInfo> _autoFaceLookup =
+        TCurrency.Coins.Concat(TCurrency.Bills)
+        .GroupBy(f => f.Value)
+        .ToDictionary(
+            g => g.Key,
+            g => g.OrderBy(f => f.Type).First());
+
     /// <inheritdoc/>
     public IDictionary<CashFaceInfo, int> Counts { get; } =
         new Dictionary<CashFaceInfo, int>();
@@ -16,17 +39,39 @@ public class MoneyKind<TCurrency>
     public MoneyKind() { }
 
     /// <inheritdoc/>
-    public string ToCashCountsString()
+    public int this[decimal faceValue]
     {
-        var coinsPart =
-            TCurrency.Coins
-            .Select(f => $"{f.Value}:{Counts.GetValueOrDefault(f, 0)}");
-        var billsPart =
-            TCurrency.Bills
-            .Select(f => $"{f.Value}:{Counts.GetValueOrDefault(f, 0)}");
-
-        return $"{string.Join(",", coinsPart)};{string.Join(",", billsPart)}";
+        get => _autoFaceLookup.TryGetValue(faceValue, out var face) ? Counts.GetValueOrDefault(face, 0) : 0;
+        set
+        {
+            if (_autoFaceLookup.TryGetValue(faceValue, out var face))
+            {
+                Counts[face] = value;
+            }
+        }
     }
+
+    /// <inheritdoc/>
+    public int this[decimal faceValue, CashType type]
+    {
+        get => _faceLookup.TryGetValue((faceValue, type), out var face) ? Counts.GetValueOrDefault(face, 0) : 0;
+        set
+        {
+            if (_faceLookup.TryGetValue((faceValue, type), out var face))
+            {
+                Counts[face] = value;
+            }
+        }
+    }
+
+    /// <inheritdoc/>
+    public string ToCashCountsString(
+        string? coinFormat = null,
+        string? billFormat = null) =>
+        TCurrency.ToCashCountsString(
+            Counts,
+            coinFormat ?? _defaultCoinFormat,
+            billFormat ?? _defaultBillFormat);
 
     /// <inheritdoc/>
     public static MoneyKind<TCurrency> Parse(string cashCounts)

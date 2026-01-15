@@ -1,10 +1,12 @@
-﻿namespace MoneyKind4Opos;
+﻿using MoneyKind4Opos.Currencies;
+
+namespace MoneyKind4Opos;
 
 /// <summary>Interface of MoneyKind</summary>
 /// <typeparam name="TCurrency">Currency type</typeparam>
 /// <typeparam name="TSelf">Self type</typeparam>
 public interface IMoneyKind<TCurrency, TSelf>
-    where TCurrency : ICurrency
+    where TCurrency : ICurrency, ICashCountFormattable<TCurrency>
     where TSelf : IMoneyKind<TCurrency, TSelf>, new()
 {
     /// <summary>Cash face and count.</summary>
@@ -15,9 +17,23 @@ public interface IMoneyKind<TCurrency, TSelf>
     /// </remarks>
     IDictionary<CashFaceInfo, int> Counts { get; }
 
-    /// <summary>Convert to cash counts string.</summary>
+    /// <summary>Access count by face value (auto-detect type).</summary>
+    /// <param name="faceValue">Face value</param>
+    /// <returns>Count</returns>
+    int this[decimal faceValue] { get; set; }
+
+    /// <summary>Access count by face value and type.</summary>
+    /// <param name="faceValue">Face value</param>
+    /// <param name="type">Cash type</param>
+    /// <returns>Count</returns>
+    int this[decimal faceValue, CashType type] { get; set; }
+
+    /// <summary>Convert to cash counts string with optional formats.</summary>
+    /// <param name="coinFormat">Format for coin faces. If null, uses TCurrency.DefaultFormat.</param>
+    /// <param name="billFormat">Format for bill faces. If null, uses "#".</param>
     /// <returns>Cash counts string</returns>
-    string ToCashCountsString();
+    string ToCashCountsString(string? coinFormat = null, string? billFormat = null) =>
+        TCurrency.ToCashCountsString(Counts, coinFormat, billFormat);
 
     /// <summary>Parse.</summary>
     /// <param name="cashCounts">Cash counts string</param>

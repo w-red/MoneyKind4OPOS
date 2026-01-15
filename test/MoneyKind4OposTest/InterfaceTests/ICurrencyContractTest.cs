@@ -1,4 +1,3 @@
-using MoneyKind4Opos;
 using MoneyKind4Opos.Currencies;
 using Shouldly;
 
