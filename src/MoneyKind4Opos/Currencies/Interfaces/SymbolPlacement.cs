@@ -1,4 +1,4 @@
-﻿namespace MoneyKind4Opos;
+﻿namespace MoneyKind4Opos.Currencies.Interfaces;
 
 /// <summary>Symbol placement enumeration.</summary>
 public enum SymbolPlacement

@@ -1,6 +1,6 @@
 ﻿using MoneyKind4Opos.Codes;
 
-namespace MoneyKind4Opos.Currencies;
+namespace MoneyKind4Opos.Currencies.Interfaces;
 
 /// <summary>Core Interface of Currency</summary>
 public interface ICurrency

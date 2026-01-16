@@ -1,6 +1,4 @@
-﻿using MoneyKind4Opos.Currencies;
-
-namespace MoneyKind4Opos;
+﻿namespace MoneyKind4Opos.Currencies.Interfaces;
 
 /// <summary>Interface of MoneyKind</summary>
 /// <typeparam name="TCurrency">Currency type</typeparam>

@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace MoneyKind4Opos.Currencies;
+namespace MoneyKind4Opos.Currencies.Interfaces;
 
 /// <summary>Interface of Currency Formattable, for display.</summary>
 public interface ICurrencyFormattable<TSelf> : ICurrency

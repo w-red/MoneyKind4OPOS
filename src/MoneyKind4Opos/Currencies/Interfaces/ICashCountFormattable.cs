@@ -1,6 +1,6 @@
 ﻿using MoneyKind4Opos.Extensions;
 
-namespace MoneyKind4Opos.Currencies;
+namespace MoneyKind4Opos.Currencies.Interfaces;
 
 /// <summary>Defines capabilities for CashCount string formatting (for OPOS/UPOS devices).</summary>
 public interface ICashCountFormattable<TSelf> : ICurrency

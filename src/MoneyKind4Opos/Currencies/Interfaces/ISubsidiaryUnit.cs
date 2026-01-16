@@ -1,4 +1,4 @@
-﻿namespace MoneyKind4Opos.Currencies;
+﻿namespace MoneyKind4Opos.Currencies.Interfaces;
 
 /// <summary>Interface for subsidiary unit.</summary>
 public interface ISubsidiaryUnit

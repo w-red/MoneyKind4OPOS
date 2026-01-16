@@ -1,7 +1,6 @@
-﻿using MoneyKind4Opos.Currencies;
-using MoneyKind4Opos.Extensions;
+﻿using MoneyKind4Opos.Extensions;
 
-namespace MoneyKind4Opos;
+namespace MoneyKind4Opos.Currencies.Interfaces;
 
 /// <summary>MoneyKind implementation.</summary>
 /// <typeparam name="TCurrency">Currency type</typeparam>
@@ -14,11 +13,29 @@ public class MoneyKind<TCurrency>
 {
     private static readonly string _defaultCoinFormat =
         ICurrency
-        .GetDefaultFormat(TCurrency.MinimumUnit, TCurrency.IsZeroPadding);
+        .GetDefaultFormat(
+            TCurrency.MinimumUnit,
+            TCurrency.IsZeroPadding);
 
     private static readonly string _defaultBillFormat =
         ICurrency
-        .GetDefaultFormat(1m, TCurrency.IsZeroPadding);
+        .GetDefaultFormat(
+            1m,
+            TCurrency.IsZeroPadding);
+
+    private static readonly Dictionary<decimal, CashFaceInfo> _coinFaceLookup =
+        TCurrency.Coins
+        .GroupBy(f => f.Value)
+        .ToDictionary(
+            k => k.Key,
+            v => v.OrderBy(o => o.Type).First());
+
+    private static readonly Dictionary<decimal, CashFaceInfo> _billFaceLookup =
+        TCurrency.Bills
+        .GroupBy(f => f.Value)
+        .ToDictionary(
+            k => k.Key,
+            v => v.OrderBy(o => o.Type).First());
 
     private static readonly Dictionary<(decimal faceValue, CashType Type), CashFaceInfo> _faceLookup =
         TCurrency.Coins.Concat(TCurrency.Bills)
@@ -77,14 +94,23 @@ public class MoneyKind<TCurrency>
     public static MoneyKind<TCurrency> Parse(string cashCounts)
     {
         var ret = new MoneyKind<TCurrency>();
-        var sections = cashCounts.Split(';');
-        if (sections.Length > 0)
+        if (cashCounts.Split(';') is [var coinsec, var billsec, ..])
         {
-            ParseSection(sections[0], TCurrency.Coins, ret.Counts);
+            ParseSection(
+                coinsec,
+                _coinFaceLookup,
+                ret.Counts);
+            ParseSection(
+                billsec,
+                _billFaceLookup,
+                ret.Counts);
         }
-        if (sections.Length > 1)
+        else if (cashCounts.Split(';') is [var coins])
         {
-            ParseSection(sections[1], TCurrency.Bills, ret.Counts);
+            ParseSection(
+                coins,
+                _coinFaceLookup,
+                ret.Counts);
         }
 
         return ret;
@@ -92,7 +118,8 @@ public class MoneyKind<TCurrency>
 
     /// <inheritdoc/>
     public decimal TotalAmount() =>
-        Counts.Sum(kvp => kvp.Key.Value * kvp.Value);
+        Counts
+        .Sum(kvp => kvp.Key.Value * kvp.Value);
 
     /// <inheritdoc/>
     public decimal CoinAmount() =>
@@ -109,28 +136,31 @@ public class MoneyKind<TCurrency>
     /// <summary>Parse face section.</summary>
     private static void ParseSection(
         string sec,
-        IEnumerable<CashFaceInfo> faces,
+        IReadOnlyDictionary<decimal, CashFaceInfo> faceLookup,
         IDictionary<CashFaceInfo, int> counts)
     {
-        var parsed =
-            sec
+        var query = sec
             .Split(',',
                 StringSplitOptions.RemoveEmptyEntries
                 | StringSplitOptions.TrimEntries)
             .Select(s => s.Split(':'))
-            .Select(
-                p =>
-                    p is [var vs, var cs]
-                    && decimal.TryParse(vs, out var v)
-                    && int.TryParse(cs, out var c)
-                    ? (Face: faces.FirstOrDefault(f => f.Value == v), Count: c)
-                    : (Face: null, Count: 0)
-            )
-            .Where(t => t.Face is not null);
+            .Select(parts =>
+                parts is [var vs, var cs]
+                && decimal.TryParse(vs, out var v)
+                && int.TryParse(cs, out var c)
+                ? (IsSucess: true, Value: v, Count: c)
+                : (IsSucess: false, Value: 0, Count: 0))
+            .Select(svc =>
+                svc.IsSucess
+                && faceLookup.TryGetValue(svc.Value, out var face)
+                ? (Face: face, svc.Count)
+                : (Face: null, Count: 0))
+            .Where(w => w.Face is not null)
+            .Select(s => (Face: s.Face!, s.Count));
 
-        foreach (var (face, count) in parsed)
+        foreach (var (face, count) in query)
         {
-            counts[face!] = count;
+            counts[face] = count;
         }
     }
 }

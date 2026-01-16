@@ -1,4 +1,4 @@
-﻿namespace MoneyKind4Opos.Currencies;
+﻿namespace MoneyKind4Opos.Currencies.Interfaces;
 
 /// <summary>Cash face information.</summary>
 /// <param name="Value">Face value.</param>
