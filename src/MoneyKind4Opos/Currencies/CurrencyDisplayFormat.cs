@@ -1,4 +1,6 @@
-﻿namespace MoneyKind4Opos.Currencies;
+﻿using MoneyKind4Opos.Currencies.Interfaces;
+
+namespace MoneyKind4Opos.Currencies;
 
 /// <summary>Currency display format.</summary>
 /// <param name="Placement">Symbol placement.</param>

@@ -1,6 +1,6 @@
-using MoneyKind4Opos;
 using MoneyKind4Opos.Codes;
 using MoneyKind4Opos.Currencies;
+using MoneyKind4Opos.Currencies.Interfaces;
 using Shouldly;
 using System.Globalization;
 
@@ -91,8 +91,8 @@ public class IMoneyKindLogicTest
     public void BillAmount_ShouldOnlySumBills()
     {
         var mk = new StubMoneyKind();
-        mk[0.5m] = 2; // 1.0 (硬貨なので除外)
-        mk[10.0m] = 2; // 10.0 * 2 = 20.0
+        mk[0.5m] = 2; // 1.0 (coin)
+        mk[10.0m] = 2; // 10.0 * 2 = 20.0(bill)
         
         mk.BillAmount().ShouldBe(20.0m);
     }
@@ -135,10 +135,10 @@ public class IMoneyKindLogicTest
     [Fact]
     public void Parse_WithUndefinedFace_ShouldIgnoreIt()
     {
-        // 999 は定義されていない額面
+        // 999 is undefined face value
         var mk = StubMoneyKind.Parse("0.5:1,999:5;5:1");
         
-        mk.Counts.Count.ShouldBe(2); // 0.5 と 5 のみ
+        mk.Counts.Count.ShouldBe(2); // 0.5:1 and 5:1
         mk.TotalAmount().ShouldBe(5.5m);
     }
 

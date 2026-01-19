@@ -1,4 +1,5 @@
 ﻿using MoneyKind4Opos.Codes;
+using MoneyKind4Opos.Currencies.Interfaces;
 
 namespace MoneyKind4Opos.Currencies;
 
@@ -10,7 +11,7 @@ public class CnyCurrency : ICurrency
     /// <inheritdoc/>
     public static decimal MinimumUnit => 0.01m;
     /// <inheritdoc/>
-    public static string Symbol => "¥";
+    public static string Symbol => "元";
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits =>
     [
@@ -20,8 +21,7 @@ public class CnyCurrency : ICurrency
 
     /// <inheritdoc/>
     public static CurrencyDisplayFormat DisplayFormat => new(
-        Placement: SymbolPlacement.Prefix,
-        DecimalZeroReplacement: "."
+        Placement: SymbolPlacement.Postfix
     );
 
     /// <inheritdoc/>

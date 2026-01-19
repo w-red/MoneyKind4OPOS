@@ -1,4 +1,5 @@
 ﻿using MoneyKind4Opos.Codes;
+using MoneyKind4Opos.Currencies.Interfaces;
 using System.Globalization;
 
 namespace MoneyKind4Opos.Currencies;

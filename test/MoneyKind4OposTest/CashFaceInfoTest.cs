@@ -1,5 +1,4 @@
-using MoneyKind4Opos;
-using MoneyKind4Opos.Currencies;
+using MoneyKind4Opos.Currencies.Interfaces;
 using Shouldly;
 
 namespace MoneyKind4OPOSTest;
