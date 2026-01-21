@@ -22,7 +22,7 @@ public interface ICurrencyFormattable<TSelf> : ICurrency
     public static virtual string ToLocalString(decimal amount) =>
         TSelf.Local.Format(amount);
 
-    /// <summary>Standard alias for conversion.</summary>
+    /// <summary>Standard currency alias for conversion.</summary>
     public static virtual string ToCurrencyString(decimal amount) =>
         TSelf.ToLocalString(amount);
 }
