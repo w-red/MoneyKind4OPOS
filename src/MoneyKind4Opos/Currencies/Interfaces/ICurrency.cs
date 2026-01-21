@@ -12,6 +12,7 @@ public interface ICurrency
     static abstract decimal MinimumUnit { get; }
 
     /// <summary>Subsidiary units.</summary>
+    /// <remarks>Order by Ratio(large to small)!</remarks>
     static abstract IEnumerable<ISubsidiaryUnit> SubsidiaryUnits { get; }
 
     /// <summary>Generates a default format string based on a decimal scale.</summary>
@@ -22,12 +23,13 @@ public interface ICurrency
         decimal unit,
         bool isZeroPadding = false)
     {
-        var fill = isZeroPadding ? '0' : '#';
+        var fill =
+            isZeroPadding ? '0' : '#';
 
         return unit.Scale switch
         {
-            <= 0 => $"{fill}",
-            var s => $"{fill}." + new string(fill, s)
+            <= 0 => "0",
+            var s => "0." + new string(fill, s)
         };
     }
 }

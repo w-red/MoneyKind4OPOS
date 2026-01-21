@@ -10,7 +10,7 @@ public interface IMoneyKind<TCurrency, TSelf>
     /// <summary>Cash face and count.</summary>
     /// <remarks>
     /// <list type="bullet">
-    /// <item><description>Key: Face, <see cref="CashFaceInfo"/></description></item>
+    /// <item><description>Key: Face as <see cref="CashFaceInfo"/></description></item>
     /// <item><description>Value: Count</description></item></list>
     /// </remarks>
     IDictionary<CashFaceInfo, int> Counts { get; }
@@ -30,7 +30,9 @@ public interface IMoneyKind<TCurrency, TSelf>
     /// <param name="coinFormat">Format for coin faces. If null, uses TCurrency.DefaultFormat.</param>
     /// <param name="billFormat">Format for bill faces. If null, uses "#".</param>
     /// <returns>Cash counts string</returns>
-    string ToCashCountsString(string? coinFormat = null, string? billFormat = null) =>
+    string ToCashCountsString(
+        string? coinFormat = null,
+        string? billFormat = null) =>
         TCurrency.ToCashCountsString(Counts, coinFormat, billFormat);
 
     /// <summary>Parse.</summary>

@@ -79,7 +79,7 @@ public class ICurrencyContractTest
     {
         var minimumUnit = GetMinimumUnit(currencyType);
         var coins = GetCoins(currencyType);
-        
+
         if (coins.Any())
         {
             var smallestCoin = coins.Min(c => c.Value);
@@ -87,19 +87,21 @@ public class ICurrencyContractTest
         }
     }
 
-    // ヘルパーメソッド: リフレクションを使って静的プロパティを取得
+    /// <summary>Get coins of currency type.(helper method)</summary>
     private static IEnumerable<CashFaceInfo> GetCoins(Type currencyType)
     {
         var property = currencyType.GetProperty("Coins");
         return (IEnumerable<CashFaceInfo>)property!.GetValue(null)!;
     }
 
+    /// <summary>Get bills of currency type.(helper method)</summary>
     private static IEnumerable<CashFaceInfo> GetBills(Type currencyType)
     {
         var property = currencyType.GetProperty("Bills");
         return (IEnumerable<CashFaceInfo>)property!.GetValue(null)!;
     }
 
+    /// <summary>Get minimum unit of currency type.(helper method)</summary>
     private static decimal GetMinimumUnit(Type currencyType)
     {
         var property = currencyType.GetProperty("MinimumUnit");

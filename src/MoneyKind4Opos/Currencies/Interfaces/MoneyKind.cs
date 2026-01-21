@@ -11,36 +11,44 @@ public class MoneyKind<TCurrency>
         ICashCountFormattable<TCurrency>,
         ICurrencyFormattable<TCurrency>
 {
+    /// <summary>default string format used for displaying coin values.</summary>
     private static readonly string _defaultCoinFormat =
         ICurrency
         .GetDefaultFormat(
             TCurrency.MinimumUnit,
             TCurrency.IsZeroPadding);
 
-    private static readonly string _defaultBillFormat =
-        ICurrency
-        .GetDefaultFormat(
-            1m,
-            TCurrency.IsZeroPadding);
+    /// <summary>default string format used for displaying bill values.</summary>
+    private static readonly string _defaultBillFormat = _defaultCoinFormat;
 
+    /// <summary>Lookup for coin faces by value.</summary>
     private static readonly Dictionary<decimal, CashFaceInfo> _coinFaceLookup =
-        TCurrency.Coins
+        TCurrency
+        .Coins
         .GroupBy(f => f.Value)
         .ToDictionary(
-            k => k.Key,
-            v => v.OrderBy(o => o.Type).First());
+            g => g.Key,
+            g => g.OrderBy(f => f.Type).First());
 
+    /// <summary>Lookup for bill faces by value.</summary>
     private static readonly Dictionary<decimal, CashFaceInfo> _billFaceLookup =
-        TCurrency.Bills
+        TCurrency
+        .Bills
         .GroupBy(f => f.Value)
         .ToDictionary(
-            k => k.Key,
-            v => v.OrderBy(o => o.Type).First());
+            g => g.Key,
+            g => g.OrderBy(f => f.Type).First());
 
+    /// <summary>Lookup for money faces by value.</summary>
     private static readonly Dictionary<(decimal faceValue, CashType Type), CashFaceInfo> _faceLookup =
-        TCurrency.Coins.Concat(TCurrency.Bills)
-        .ToDictionary(f => (f.Value, f.Type));
+        TCurrency
+        .Coins.Concat(TCurrency.Bills)
+        .GroupBy(f => (Value: f.Value, f.Type))
+        .ToDictionary(
+            g => g.Key,
+            g => g.First());
 
+    /// <summary>Lookup for money faces by value (auto type).</summary>
     private static readonly Dictionary<decimal, CashFaceInfo> _autoFaceLookup =
         TCurrency.Coins.Concat(TCurrency.Bills)
         .GroupBy(f => f.Value)
@@ -58,27 +66,35 @@ public class MoneyKind<TCurrency>
     /// <inheritdoc/>
     public int this[decimal faceValue]
     {
-        get => _autoFaceLookup.TryGetValue(faceValue, out var face) ? Counts.GetValueOrDefault(face, 0) : 0;
-        set
-        {
-            if (_autoFaceLookup.TryGetValue(faceValue, out var face))
-            {
-                Counts[face] = value;
-            }
-        }
+        get => 
+            GetCount(
+                _autoFaceLookup
+                .GetValueOrDefault(faceValue));
+        set => 
+            SetCount(
+                _autoFaceLookup
+                .GetValueOrDefault(faceValue), value);
     }
 
     /// <inheritdoc/>
     public int this[decimal faceValue, CashType type]
     {
-        get => _faceLookup.TryGetValue((faceValue, type), out var face) ? Counts.GetValueOrDefault(face, 0) : 0;
-        set
-        {
-            if (_faceLookup.TryGetValue((faceValue, type), out var face))
-            {
-                Counts[face] = value;
-            }
-        }
+        get => GetCount(
+            _faceLookup
+            .GetValueOrDefault((faceValue, type)));
+        set => SetCount(
+            _faceLookup
+            .GetValueOrDefault((faceValue, type)), value);
+    }
+
+    /// <summary>Gets the count for a specific cash face safely.</summary>
+    private int GetCount(CashFaceInfo? face) =>
+        face is { } f ? Counts.GetValueOrDefault(f, 0) : 0;
+
+    /// <summary>Sets the count for a specific cash face safely.</summary>
+    private void SetCount(CashFaceInfo? face, int value)
+    {
+        if (face is { } f) Counts[f] = value;
     }
 
     /// <inheritdoc/>
@@ -149,7 +165,7 @@ public class MoneyKind<TCurrency>
                 && decimal.TryParse(vs, out var v)
                 && int.TryParse(cs, out var c)
                 ? (IsSucess: true, Value: v, Count: c)
-                : (IsSucess: false, Value: 0, Count: 0))
+                : (IsSucess: false, Value: 0m, Count: 0))
             .Select(svc =>
                 svc.IsSucess
                 && faceLookup.TryGetValue(svc.Value, out var face)

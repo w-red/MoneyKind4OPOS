@@ -1,31 +1,41 @@
 ﻿using MoneyKind4Opos.Codes;
 using MoneyKind4Opos.Currencies.Interfaces;
+using System.Globalization;
 
 namespace MoneyKind4Opos.Currencies;
 
 /// <summary>US Dollar Currency</summary>
-public class UsdCurrency : ICurrency
+public class UsdCurrency : ICurrency, ICashCountFormattable<UsdCurrency>, ICurrencyFormattable<UsdCurrency>
 {
+    private static readonly NumberFormatInfo _nfi = new()
+    {
+        CurrencySymbol = "$",
+        CurrencyPositivePattern = 0, // $n
+        CurrencyGroupSeparator = ",",
+        CurrencyDecimalSeparator = ".",
+        CurrencyDecimalDigits = 2,
+    };
+
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.USD;
     /// <inheritdoc/>
     public static decimal MinimumUnit => 0.01m;
 
     /// <inheritdoc/>
-    public static string Symbol => "$";
+    public static CurrencyFormattingOptions Global { get; } = new(
+        Symbol: "$",
+        NumberFormat: _nfi,
+        DisplayFormat: new(SymbolPlacement.Prefix)
+    );
+
+    /// <inheritdoc/>
+    public static CurrencyFormattingOptions Local => Global;
+
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits =>
     [
         new SubsidiaryUnit("Cent", "¢", 0.01m),
     ];
-
-    /// <inheritdoc/>
-    public static CurrencyDisplayFormat DisplayFormat => new(
-        Placement: SymbolPlacement.Prefix,
-        DecimalZeroReplacement: ".",
-        GroupSeparator: ",",
-        DecimalSeparator: "."
-    );
 
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
@@ -48,4 +58,7 @@ public class UsdCurrency : ICurrency
         new(50.00m, CashType.Bill, "50 Dollar Bill", "Fifty Dollar Bill"),
         new(100.00m, CashType.Bill, "100 Dollar Bill", "One Hundred Dollar Bill"),
     ];
+
+    /// <inheritdoc/>
+    public static bool IsZeroPadding => false;
 }
