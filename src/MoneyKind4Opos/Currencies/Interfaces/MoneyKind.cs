@@ -198,12 +198,44 @@ public class MoneyKind<TCurrency>
     /// <inheritdoc/>
     public bool IsPayable(decimal amount)
     {
-        return CalculateChange(amount)
-            .TotalAmount() == amount;
+        return CalculateChangeDetail(amount).IsSucceed;
     }
 
     /// <inheritdoc/>
     public MoneyKind<TCurrency> CalculateChange(decimal amount)
+    {
+        return CalculateChangeDetail(amount).PayableChange;
+    }
+
+    /// <inheritdoc/>
+    public ChangeCalculationResult<TCurrency, MoneyKind<TCurrency>>
+        CalculateChangeDetail(decimal amount)
+    {
+        // Pass 1: Calculate what can be paid given the current inventory
+        var payable = 
+            Calculate(amount, useInventory: true);
+        var remaining = 
+            amount - payable.TotalAmount();
+
+        // Pass 2: Calculate the ideal breakdown for the remaining (missing) amount
+        var missing = 
+            Calculate(remaining, useInventory: false);
+
+        return new ChangeCalculationResult<TCurrency, MoneyKind<TCurrency>>
+        {
+            PayableChange = payable,
+            RemainingAmount = remaining,
+            MissingChange = missing
+        };
+    }
+
+    /// <summary>Calculates a denominations breakdown for a given amount.</summary>
+    /// <param name="amount">Amount to calculate</param>
+    /// <param name="useInventory"><list type="bullet">
+    /// <item><term>true</term>uses current inventory to limit available denominations.</item>
+    /// <item><term>false</term>assumes infinite stock.</item>
+    /// </list></param>
+    protected MoneyKind<TCurrency> Calculate(decimal amount, bool useInventory)
     {
         var ret = new MoneyKind<TCurrency>();
         var remaining = amount;
@@ -215,29 +247,22 @@ public class MoneyKind<TCurrency>
 
         foreach (var face in _allDescendingFaces)
         {
-            // How many of this face do we need?
             var neededCount = (int)(remaining / face.Value);
             if (neededCount > 0)
             {
-                // How many of this face do we have?
-                var availableCount = Counts[face];
+                var availableCount =
+                    useInventory ?
+                    Counts[face] : int.MaxValue;
                 var takableCount =
-                    Math
-                    .Min(neededCount, availableCount);
+                    Math.Min(neededCount, availableCount);
 
                 if (takableCount > 0)
                 {
                     ret.Counts[face] = takableCount;
                     remaining -= face.Value * takableCount;
                 }
-
-                if (remaining <= 0)
-                {
-                    break;
-                }
             }
         }
-
         return ret;
     }
 

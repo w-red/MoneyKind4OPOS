@@ -69,6 +69,11 @@ public interface IMoneyKind<TCurrency, TSelf>
     bool IsPayable (decimal amount);
 
     /// <summary>Calculate change for the given amount.</summary>
-    /// <returns>Change as <see cref="IMoneyKind{TCurrency, TSelf}"></returns>
+    /// <returns>Change as <see cref="IMoneyKind{TCurrency, TSelf}"/></returns>
     TSelf CalculateChange(decimal amount);
+
+    /// <summary>Calculate change details for the given amount.</summary>
+    /// <param name="amount">Amount to calculate</param>
+    /// <returns>Calculation result with payable change, remaining amount, and missing kinds.</returns>
+    ChangeCalculationResult<TCurrency, TSelf> CalculateChangeDetail(decimal amount);
 }
