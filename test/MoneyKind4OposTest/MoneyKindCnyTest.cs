@@ -32,7 +32,10 @@ public class MoneyKindCnyTest
         var input = "1:1,999:10;100:1";
         var mk = MoneyKind<CnyCurrency>.Parse(input);
 
-        mk.Counts.Count.ShouldBe(2); // Only 1 Yuan (coin) and 100 Yuan (bill)
+        mk[1, CashType.Coin].ShouldBe(1);
+        mk[100, CashType.Bill].ShouldBe(1);
+        mk.Counts
+            .Count(c => c.Value > 0).ShouldBe(2); // Only 1 Yuan (coin) and 100 Yuan (bill)
         mk.TotalAmount().ShouldBe(101.0m);
 
         // Setter for undefined value

@@ -93,6 +93,7 @@ public class MoneyKindAlgorithmTest
         // Need 500, only 200 possible
         var change = inventory.CalculateChange(500m);
 
+        change[100].ShouldBe(2);
         change.TotalAmount().ShouldBe(200m);
     }
 

@@ -107,16 +107,21 @@ public class IMoneyKindLogicTest
         var mk = StubMoneyKind.Parse(".05:3,.50:2,1:10;5:20");
 
         mk[0.05m].ShouldBe(3);
+        mk[0.05m, CashType.Coin].ShouldBe(3);
         mk[0.5m].ShouldBe(2);
+        mk[0.5m, CashType.Coin].ShouldBe(2);
         mk[1.0m].ShouldBe(10);
+        mk[1.0m, CashType.Coin].ShouldBe(10);
         mk[5.0m].ShouldBe(20);
+        mk[5.0m, CashType.Bill].ShouldBe(20);
     }
 
     [Fact]
     public void Parse_WithEmptyString_ShouldReturnEmptyCounts()
     {
         var mk = StubMoneyKind.Parse("");
-        mk.Counts.Count.ShouldBe(0);
+        mk.Counts
+            .Count(w => w.Value > 0).ShouldBe(0);
     }
 
     [Fact]
@@ -124,8 +129,12 @@ public class IMoneyKindLogicTest
     {
         var mk = StubMoneyKind.Parse("0.5:3");
 
-        mk.Counts.Count.ShouldBe(1);
+        mk.Counts
+            .Count(c => c.Value > 0)
+            .ShouldBe(1);
         mk[0.5m].ShouldBe(3);
+        mk[0.5m, CashType.Coin].ShouldBe(3);
+        mk.TotalAmount().ShouldBe(1.5m);
     }
 
     [Fact]
@@ -133,8 +142,11 @@ public class IMoneyKindLogicTest
     {
         var mk = StubMoneyKind.Parse(";10:2");
 
-        mk.Counts.Count.ShouldBe(1);
+        mk.Counts
+            .Count(c => c.Value > 0)
+            .ShouldBe(1);
         mk[10.0m].ShouldBe(2);
+        mk.TotalAmount().ShouldBe(20.0m);
     }
 
     [Fact]
@@ -143,7 +155,9 @@ public class IMoneyKindLogicTest
         // 999 is undefined face value
         var mk = StubMoneyKind.Parse("0.5:1,999:5;5:1");
 
-        mk.Counts.Count.ShouldBe(2); // 0.5:1 and 5:1
+        mk.Counts
+            .Count(c => c.Value > 0)
+            .ShouldBe(2); // 0.5:1 and 5:1
         mk.TotalAmount().ShouldBe(5.5m);
     }
 
