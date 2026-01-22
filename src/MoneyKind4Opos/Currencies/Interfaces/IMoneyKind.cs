@@ -33,12 +33,17 @@ public interface IMoneyKind<TCurrency, TSelf>
     string ToCashCountsString(
         string? coinFormat = null,
         string? billFormat = null) =>
-        TCurrency.ToCashCountsString(Counts, coinFormat, billFormat);
+        TCurrency
+        .ToCashCountsString(
+            Counts,
+            coinFormat,
+            billFormat);
 
     /// <summary>Parse.</summary>
     /// <param name="cashCounts">Cash counts string</param>
     /// <returns>parse result</returns>
-    static abstract TSelf Parse(string cashCounts);
+    static abstract TSelf Parse(
+        string cashCounts);
 
     /// <summary>Total amount.</summary>
     /// <returns>Total amount</returns>
@@ -51,4 +56,19 @@ public interface IMoneyKind<TCurrency, TSelf>
     /// <summary>Bill amount.</summary>
     /// <returns>Bill amount</returns>
     decimal BillAmount();
+
+    /// <summary>Add another MoneyKind to this one.</summary>
+    void Add(TSelf other);
+
+    /// <summary>Subtract another MoneyKind to this one.</summary>
+    /// <exception cref="InvalidOperationException">Change can not pay.</exception>
+    void Subtract(TSelf other);
+
+    /// <summary>Is payable?</summary>
+    /// <param name="amount">Amount to check</param>
+    bool IsPayable (decimal amount);
+
+    /// <summary>Calculate change for the given amount.</summary>
+    /// <returns>Change as <see cref="IMoneyKind{TCurrency, TSelf}"></returns>
+    TSelf CalculateChange(decimal amount);
 }

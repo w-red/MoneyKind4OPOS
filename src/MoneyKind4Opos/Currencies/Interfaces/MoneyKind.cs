@@ -1,4 +1,4 @@
-﻿using MoneyKind4Opos.Extensions;
+using MoneyKind4Opos.Extensions;
 
 namespace MoneyKind4Opos.Currencies.Interfaces;
 
@@ -43,7 +43,7 @@ public class MoneyKind<TCurrency>
     private static readonly Dictionary<(decimal faceValue, CashType Type), CashFaceInfo> _faceLookup =
         TCurrency
         .Coins.Concat(TCurrency.Bills)
-        .GroupBy(f => (Value: f.Value, f.Type))
+        .GroupBy(f => (f.Value, f.Type))
         .ToDictionary(
             g => g.Key,
             g => g.First());
@@ -61,7 +61,16 @@ public class MoneyKind<TCurrency>
         new Dictionary<CashFaceInfo, int>();
 
     /// <summary>Initializes a new instance of the <see cref="MoneyKind{TCurrency}"/> class.</summary>
-    public MoneyKind() { }
+    public MoneyKind()
+    {
+        // Initialize all supported denominations with 0 counts.
+        // This supports direct indexer access (e.g., Counts[face] += value)
+        // without KeyNotFoundException.
+        foreach (var face in TCurrency.Bills.Concat(TCurrency.Coins))
+        {
+            Counts[face] = 0;
+        }
+    }
 
     /// <inheritdoc/>
     public int this[decimal faceValue]
@@ -148,6 +157,89 @@ public class MoneyKind<TCurrency>
         Counts
         .Where(kvp => kvp.Key.Type == CashType.Bill)
         .Sum(kvp => kvp.Key.Value * kvp.Value);
+
+    /// <summary>All faces in descending order for greedy algorithm.</summary>
+    private static readonly IReadOnlyList<CashFaceInfo> _allDescendingFaces =
+        [.. TCurrency.Bills.Concat(TCurrency.Coins)
+        .Where(f => f.Value > 0)
+        .OrderByDescending(f => f.Value)
+        .ThenByDescending(f => f.Type)];
+
+    /// <inheritdoc/>
+    public void Add(MoneyKind<TCurrency> other)
+    {
+        var filtered = other.Counts
+            .Where(kv => kv.Value != 0);
+        foreach (var kvp in filtered)
+        {
+            Counts[kvp.Key] +=
+                kvp.Value;
+        }
+    }
+
+    /// <inheritdoc/>
+    public void Subtract(MoneyKind<TCurrency> other)
+    {
+        var filtered = other.Counts
+            .Where(kv => kv.Value != 0);
+        foreach (var kvp in filtered)
+        {
+            var current = Counts[kvp.Key];
+            if (current < kvp.Value)
+            {
+                throw new InvalidOperationException(
+                    $"Insufficient inventory for {kvp.Key.Value} ({kvp.Key.Type}). " +
+                    $"Current: {current}, Required: {kvp.Value}");
+            }
+            Counts[kvp.Key] -= kvp.Value;
+        }
+    }
+
+    /// <inheritdoc/>
+    public bool IsPayable(decimal amount)
+    {
+        return CalculateChange(amount)
+            .TotalAmount() == amount;
+    }
+
+    /// <inheritdoc/>
+    public MoneyKind<TCurrency> CalculateChange(decimal amount)
+    {
+        var ret = new MoneyKind<TCurrency>();
+        var remaining = amount;
+
+        if (remaining <= 0)
+        {
+            return ret;
+        }
+
+        foreach (var face in _allDescendingFaces)
+        {
+            // How many of this face do we need?
+            var neededCount = (int)(remaining / face.Value);
+            if (neededCount > 0)
+            {
+                // How many of this face do we have?
+                var availableCount = Counts[face];
+                var takableCount =
+                    Math
+                    .Min(neededCount, availableCount);
+
+                if (takableCount > 0)
+                {
+                    ret.Counts[face] = takableCount;
+                    remaining -= face.Value * takableCount;
+                }
+
+                if (remaining <= 0)
+                {
+                    break;
+                }
+            }
+        }
+
+        return ret;
+    }
 
     /// <summary>Parse face section.</summary>
     private static void ParseSection(
