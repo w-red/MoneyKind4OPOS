@@ -1,5 +1,6 @@
 using MoneyKind4Opos.Currencies;
 using MoneyKind4Opos.Currencies.Interfaces;
+using MoneyKind4Opos.Extensions;
 using Shouldly;
 
 namespace MoneyKind4OPOSTest;
@@ -101,5 +102,17 @@ public class MoneyKindCnyTest
         var expected = "0.01:1,0.02:0,0.05:0,0.1:0,0.2:0,0.5:0,1:0;0.1:0,0.5:0,1:0,5:0,10:0,20:0,50:0,100:5";
 
         result.ShouldBe(expected);
+    }
+
+    [Theory]
+    [InlineData(0.12, "1角2分")]
+    [InlineData(0.50, "5角")]
+    [InlineData(0.05, "5分")]
+    [InlineData(1.50, "1.50元")] // Over 1 Yuan uses standard format
+    [InlineData(1.00, "1.00元")]
+    [InlineData(0.00, "0.00元")]
+    public void Cny_ToLocalString_ShouldFormatSubsidiaryUnits(decimal amount, string expected)
+    {
+        amount.ToLocalString<CnyCurrency>().ShouldBe(expected);
     }
 }
