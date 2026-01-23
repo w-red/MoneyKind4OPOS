@@ -1,3 +1,4 @@
+using MoneyKind4Opos.Currencies.Interfaces;
 using Shouldly;
 
 namespace MoneyKind4OPOSTest;
@@ -30,5 +31,28 @@ public class DecimalHashTest
         };
         dict.ContainsKey(1m).ShouldBeTrue("Dictionary failed to find 1m when 1.00m was the key.");
         dict.ContainsKey(1.0m).ShouldBeTrue("Dictionary failed to find 1.0m when 1.00m was the key.");
+    }
+
+    [Fact]
+    public void MoneyKind_Indexer_ShouldBeScaleInvariant()
+    {
+        // Using JPY as a concrete example
+        var mk = new MoneyKind<MoneyKind4Opos.Currencies.JpyCurrency>();
+        
+        // 1. Set using high precision
+        mk[100.000m] = 10;
+        
+        // 2. Access using low precision
+        mk[100m].ShouldBe(10);
+        
+        // 3. Update using intermediate precision
+        mk[100.0m] = 20;
+        
+        // 4. Verify original key also reflects change
+        mk[100.000m].ShouldBe(20);
+        
+        // 5. Verify it didn't create multiple entries in the underlying dictionary
+        // (MoneyKind initializes all supported denominations, so we check they aren't unexpectedly increased)
+        mk.Counts.Values.Sum().ShouldBe(20); 
     }
 }
