@@ -10,6 +10,12 @@ public class CnyCurrency :
     ICashCountFormattable<CnyCurrency>,
     ICurrencyFormattable<CnyCurrency>
 {
+    /// <inheritdoc/>
+    public static Iso4217 Code => Iso4217.CNY;
+    /// <inheritdoc/>
+    public static decimal MinimumUnit => 0.01m;
+
+    /// <summary>Global number format.</summary>
     private static readonly NumberFormatInfo _globalNfi = new()
     {
         CurrencySymbol = "¥",
@@ -19,6 +25,7 @@ public class CnyCurrency :
         CurrencyDecimalDigits = 2,
     };
 
+    /// <summary>Local number format.</summary>
     private static readonly NumberFormatInfo _localNfi = new()
     {
         CurrencySymbol = "元",
@@ -27,11 +34,6 @@ public class CnyCurrency :
         CurrencyDecimalSeparator = ".",
         CurrencyDecimalDigits = 2,
     };
-
-    /// <inheritdoc/>
-    public static Iso4217 Code => Iso4217.CNY;
-    /// <inheritdoc/>
-    public static decimal MinimumUnit => 0.01m;
 
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Global { get; } = new(
@@ -77,14 +79,15 @@ public class CnyCurrency :
         }
     );
 
+    /// <inheritdoc/>
+    public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits => _subsidiaryUnits;
+
+    /// <summary>Subsidiary units definitions.</summary>
     private static readonly ISubsidiaryUnit[] _subsidiaryUnits =
     [
         new SubsidiaryUnit("Jiao", "角", 0.10m),
         new SubsidiaryUnit("Fen", "分", 0.01m),
     ];
-
-    /// <inheritdoc/>
-    public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits => _subsidiaryUnits;
 
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
