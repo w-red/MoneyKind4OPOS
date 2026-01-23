@@ -149,6 +149,18 @@ public class IMoneyKindLogicTest
         mk.TotalAmount().ShouldBe(20.0m);
     }
 
+    [Theory]
+    [InlineData("0.5:1,0.5:2", 1.0)]   // Last one wins in current implementation (0.5:2 = 1.0 total)
+    [InlineData(" 0.5 : 2 ", 1.0)]    // Whitespace handling
+    [InlineData(".5:3", 1.5)]         // Leading dot
+    [InlineData("0.5:1,invalid:9,1:1", 1.5)] // Mixed valid/invalid
+    [InlineData("0.5:1;1:2", 2.5)]    // Standard mixed
+    public void Parse_VariousFormats_ShouldBeHandledGracefully(string input, decimal expectedTotal)
+    {
+        var mk = StubMoneyKind.Parse(input);
+        mk.TotalAmount().ShouldBe(expectedTotal);
+    }
+
     [Fact]
     public void Parse_WithUndefinedFace_ShouldIgnoreIt()
     {

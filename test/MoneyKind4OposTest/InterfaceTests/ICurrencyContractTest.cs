@@ -7,104 +7,62 @@ namespace MoneyKind4OPOSTest.InterfaceTests;
 /// <summary>ICurrency contract tests.</summary>
 public class ICurrencyContractTest
 {
+    public static IEnumerable<object[]> AllCurrencies => 
+        MoneyKind4OposTest.CurrencyTestHelper.GetAllCurrencyTypesAsXUnitData();
+
     [Theory]
-    [InlineData(typeof(JpyCurrency))]
-    [InlineData(typeof(UsdCurrency))]
-    [InlineData(typeof(EurCurrency))]
-    [InlineData(typeof(GbpCurrency))]
-    [InlineData(typeof(CnyCurrency))]
+    [MemberData(nameof(AllCurrencies))]
     public void Coins_ShouldNotBeNull(Type currencyType)
     {
-        var coins = GetCoins(currencyType);
+        var coins = MoneyKind4OposTest.CurrencyTestHelper.GetCoins(currencyType);
         coins.ShouldNotBeNull();
     }
 
     [Theory]
-    [InlineData(typeof(JpyCurrency))]
-    [InlineData(typeof(UsdCurrency))]
-    [InlineData(typeof(EurCurrency))]
-    [InlineData(typeof(GbpCurrency))]
-    [InlineData(typeof(CnyCurrency))]
+    [MemberData(nameof(AllCurrencies))]
     public void Bills_ShouldNotBeNull(Type currencyType)
     {
-        var bills = GetBills(currencyType);
+        var bills = MoneyKind4OposTest.CurrencyTestHelper.GetBills(currencyType);
         bills.ShouldNotBeNull();
     }
 
     [Theory]
-    [InlineData(typeof(JpyCurrency))]
-    [InlineData(typeof(UsdCurrency))]
-    [InlineData(typeof(EurCurrency))]
-    [InlineData(typeof(GbpCurrency))]
-    [InlineData(typeof(CnyCurrency))]
+    [MemberData(nameof(AllCurrencies))]
     public void Coins_ShouldHaveUniqueValues(Type currencyType)
     {
-        var coins = GetCoins(currencyType);
+        var coins = MoneyKind4OposTest.CurrencyTestHelper.GetCoins(currencyType);
         var values = coins.Select(c => c.Value).ToList();
         values.ShouldBeUnique();
     }
 
     [Theory]
-    [InlineData(typeof(JpyCurrency))]
-    [InlineData(typeof(UsdCurrency))]
-    [InlineData(typeof(EurCurrency))]
-    [InlineData(typeof(GbpCurrency))]
-    [InlineData(typeof(CnyCurrency))]
+    [MemberData(nameof(AllCurrencies))]
     public void Bills_ShouldHaveUniqueValues(Type currencyType)
     {
-        var bills = GetBills(currencyType);
+        var bills = MoneyKind4OposTest.CurrencyTestHelper.GetBills(currencyType);
         var values = bills.Select(b => b.Value).ToList();
         values.ShouldBeUnique();
     }
 
     [Theory]
-    [InlineData(typeof(JpyCurrency))]
-    [InlineData(typeof(UsdCurrency))]
-    [InlineData(typeof(EurCurrency))]
-    [InlineData(typeof(GbpCurrency))]
-    [InlineData(typeof(CnyCurrency))]
+    [MemberData(nameof(AllCurrencies))]
     public void MinimumUnit_ShouldBePositive(Type currencyType)
     {
-        var minimumUnit = GetMinimumUnit(currencyType);
+        var minimumUnit = MoneyKind4OposTest.CurrencyTestHelper.GetMinimumUnit(currencyType);
         minimumUnit.ShouldBeGreaterThan(0);
     }
 
     [Theory]
-    [InlineData(typeof(JpyCurrency))]
-    [InlineData(typeof(UsdCurrency))]
-    [InlineData(typeof(EurCurrency))]
-    [InlineData(typeof(GbpCurrency))]
-    [InlineData(typeof(CnyCurrency))]
+    [MemberData(nameof(AllCurrencies))]
     public void MinimumUnit_ShouldMatchSmallestCoinValue(Type currencyType)
     {
-        var minimumUnit = GetMinimumUnit(currencyType);
-        var coins = GetCoins(currencyType);
+        var minimumUnit = MoneyKind4OposTest.CurrencyTestHelper.GetMinimumUnit(currencyType);
+        var coins = MoneyKind4OposTest.CurrencyTestHelper.GetCoins(currencyType);
 
         if (coins.Any())
         {
             var smallestCoin = coins.Min(c => c.Value);
             minimumUnit.ShouldBe(smallestCoin);
         }
-    }
-
-    /// <summary>Get coins of currency type.(helper method)</summary>
-    private static IEnumerable<CashFaceInfo> GetCoins(Type currencyType)
-    {
-        var property = currencyType.GetProperty("Coins");
-        return (IEnumerable<CashFaceInfo>)property!.GetValue(null)!;
-    }
-
-    /// <summary>Get bills of currency type.(helper method)</summary>
-    private static IEnumerable<CashFaceInfo> GetBills(Type currencyType)
-    {
-        var property = currencyType.GetProperty("Bills");
-        return (IEnumerable<CashFaceInfo>)property!.GetValue(null)!;
-    }
-
-    /// <summary>Get minimum unit of currency type.(helper method)</summary>
-    private static decimal GetMinimumUnit(Type currencyType)
-    {
-        var property = currencyType.GetProperty("MinimumUnit");
-        return (decimal)property!.GetValue(null)!;
     }
 }
