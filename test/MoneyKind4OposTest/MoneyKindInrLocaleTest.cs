@@ -21,19 +21,19 @@ public class MoneyKindInrLocaleTest
     /// <param name="cultureName">The culture identifier (e.g., ur-IN).</param>
     /// <param name="expectedFormattedCrore">The exact expected string for 1 Crore (10,000,000).</param>
     [Theory]
-    [InlineData("hi-IN", "₹1,00,00,000.00")]      // Hindi: Standard Rupee symbol, no space
-    [InlineData("bn-IN", "₹1,00,00,000.00")]      // Bengali
-    [InlineData("te-IN", "₹1,00,00,000.00")]      // Telugu
-    [InlineData("mr-IN", "₹1,00,00,000.00")]      // Marathi
-    [InlineData("ta-IN", "₹1,00,00,000.00")]      // Tamil
-    [InlineData("ur-IN", "₹ 1٬00٬00٬000٫00")]     // Urdu: "Absolute Solution" with special separators and spaces
-    [InlineData("gu-IN", "₹1,00,00,000.00")]      // Gujarati
-    [InlineData("kn-IN", "₹1,00,00,000.00")]      // Kannada
-    [InlineData("ml-IN", "₹1,00,00,000.00")]      // Malayalam
-    [InlineData("pa-IN", "₹1,00,00,000.00")]      // Punjabi
-    [InlineData("or-IN", "₹1,00,00,000.00")]      // Odia
-    [InlineData("as-IN", "₹ 1,00,00,000.00")]     // Assamese: Absolute Solution with space
-    [InlineData("kok-IN", "₹ 1,00,00,000.00")]    // Konkani: Absolute Solution with space
+    [InlineData("hi-IN", "₹1,00,00,000.00")]    // Hindi: Standard Rupee symbol, no space
+    [InlineData("bn-IN", "₹1,00,00,000.00")]    // Bengali
+    [InlineData("te-IN", "₹1,00,00,000.00")]    // Telugu
+    [InlineData("mr-IN", "₹1,00,00,000.00")]    // Marathi
+    [InlineData("ta-IN", "₹1,00,00,000.00")]    // Tamil
+    [InlineData("ur-IN", "₹ 1٬00٬00٬000٫00")]   // Urdu: "Absolute Solution" with special separators and spaces
+    [InlineData("gu-IN", "₹1,00,00,000.00")]    // Gujarati
+    [InlineData("kn-IN", "₹1,00,00,000.00")]    // Kannada
+    [InlineData("ml-IN", "₹1,00,00,000.00")]    // Malayalam
+    [InlineData("pa-IN", "₹1,00,00,000.00")]    // Punjabi
+    [InlineData("or-IN", "₹1,00,00,000.00")]    // Odia
+    [InlineData("as-IN", "₹ 1,00,00,000.00")]   // Assamese: Absolute Solution with space
+    [InlineData("kok-IN", "₹ 1,00,00,000.00")]  // Konkani: Absolute Solution with space
     public void Inr_Culture_Absolute_Solution_Test(string cultureName, string expectedFormattedCrore)
     {
         CultureInfo culture;

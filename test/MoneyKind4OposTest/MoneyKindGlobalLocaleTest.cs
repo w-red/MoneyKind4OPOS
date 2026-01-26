@@ -54,32 +54,32 @@ public class MoneyKindGlobalLocaleTest
     }
 
     [Theory]
-    [InlineData("de-DE", $"1.234,56{Uni.Space}{Uni.Euro}")] // Germany
-    [InlineData("fr-FR", $"1{Uni.NNBSP}234,56{Uni.Space}{Uni.Euro}")] // France (NNBSP/Space pair)
-    [InlineData("it-IT", $"1.234,56{Uni.Space}{Uni.Euro}")] // Italy
-    [InlineData("es-ES", $"1.234,56{Uni.Space}{Uni.Euro}")] // Spain
-    [InlineData("nl-BE", $"{Uni.Euro}{Uni.Space}1.234,56")] // Belgium (Dutch): Prefix
-    [InlineData("fr-BE", $"1{Uni.NNBSP}234,56{Uni.Space}{Uni.Euro}")] // Belgium (French): NNBSP
-    [InlineData("de-BE", $"1.234,56{Uni.Space}{Uni.Euro}")] // Belgium (German)
-    [InlineData("nl-NL", $"{Uni.Euro}{Uni.Space}1.234,56")] // Netherlands: Prefix
-    [InlineData("en-IE", $"{Uni.Euro}1,234.56")]          // Ireland: En-style
-    [InlineData("et-EE", $"1{Uni.NBSP}234,56{Uni.Space}{Uni.Euro}")] // Estonia: NBSP
-    [InlineData("el-GR", $"1.234,56{Uni.Space}{Uni.Euro}")] // Greece
-    [InlineData("sk-SK", $"1{Uni.NBSP}234,56{Uni.Space}{Uni.Euro}")] // Slovakia
-    [InlineData("sl-SI", $"1.234,56{Uni.Space}{Uni.Euro}")] // Slovenia
-    [InlineData("pt-PT", $"1{Uni.NBSP}234,56{Uni.Space}{Uni.Euro}")] // Portugal
-    [InlineData("lv-LV", $"1{Uni.NBSP}234,56{Uni.Space}{Uni.Euro}")] // Latvia
-    [InlineData("lt-LT", $"1{Uni.NBSP}234,56{Uni.Space}{Uni.Euro}")] // Lithuania
-    [InlineData("mt-MT", $"{Uni.Euro}1,234.56")]          // Malta (Maltese)
-    [InlineData("en-MT", $"{Uni.Euro}1,234.56")]          // Malta (English)
-    [InlineData("ca-AD", $"1.234,56{Uni.Space}{Uni.Euro}")] // Andorra
-    [InlineData("fr-MC", $"1{Uni.NNBSP}234,56{Uni.Space}{Uni.Euro}")] // Monaco
-    [InlineData("it-SM", $"1.234,56{Uni.Space}{Uni.Euro}")] // San Marino
-    [InlineData("it-VA", $"1.234,56{Uni.Space}{Uni.Euro}")] // Vatican City
-    [InlineData("bg-BG", $"1{Uni.NBSP}234,56{Uni.Space}{Uni.Lev}")] // Bulgaria (Lev)
-    [InlineData("el-CY", $"1.234,56{Uni.Space}{Uni.Euro}")] // Cyprus (Greek)
-    [InlineData("tr-CY", $"{Uni.Euro}1.234,56")]          // Cyprus (Turkish): Prefix
-    [InlineData("be-BY", $"1{Uni.NBSP}234,56{Uni.Space}Br")] // Belarus (Br)
+    [InlineData("de-DE", $"1.234,56{Uni.Space}{Uni.Euro}")]             // Germany
+    [InlineData("fr-FR", $"1{Uni.NNBSP}234,56{Uni.Space}{Uni.Euro}")]   // France (NNBSP/Space pair)
+    [InlineData("it-IT", $"1.234,56{Uni.Space}{Uni.Euro}")]             // Italy
+    [InlineData("es-ES", $"1.234,56{Uni.Space}{Uni.Euro}")]             // Spain
+    [InlineData("nl-BE", $"{Uni.Euro}{Uni.Space}1.234,56")]             // Belgium (Dutch): Prefix
+    [InlineData("fr-BE", $"1{Uni.NNBSP}234,56{Uni.Space}{Uni.Euro}")]   // Belgium (French): NNBSP
+    [InlineData("de-BE", $"1.234,56{Uni.Space}{Uni.Euro}")]             // Belgium (German)
+    [InlineData("nl-NL", $"{Uni.Euro}{Uni.Space}1.234,56")]             // Netherlands: Prefix
+    [InlineData("en-IE", $"{Uni.Euro}1,234.56")]                        // Ireland: En-style
+    [InlineData("et-EE", $"1{Uni.NBSP}234,56{Uni.Space}{Uni.Euro}")]    // Estonia: NBSP
+    [InlineData("el-GR", $"1.234,56{Uni.Space}{Uni.Euro}")]             // Greece
+    [InlineData("sk-SK", $"1{Uni.NBSP}234,56{Uni.Space}{Uni.Euro}")]    // Slovakia
+    [InlineData("sl-SI", $"1.234,56{Uni.Space}{Uni.Euro}")]             // Slovenia
+    [InlineData("pt-PT", $"1{Uni.NBSP}234,56{Uni.Space}{Uni.Euro}")]    // Portugal
+    [InlineData("lv-LV", $"1{Uni.NBSP}234,56{Uni.Space}{Uni.Euro}")]    // Latvia
+    [InlineData("lt-LT", $"1{Uni.NBSP}234,56{Uni.Space}{Uni.Euro}")]    // Lithuania
+    [InlineData("mt-MT", $"{Uni.Euro}1,234.56")]                        // Malta (Maltese)
+    [InlineData("en-MT", $"{Uni.Euro}1,234.56")]                        // Malta (English)
+    [InlineData("ca-AD", $"1.234,56{Uni.Space}{Uni.Euro}")]             // Andorra
+    [InlineData("fr-MC", $"1{Uni.NNBSP}234,56{Uni.Space}{Uni.Euro}")]   // Monaco
+    [InlineData("it-SM", $"1.234,56{Uni.Space}{Uni.Euro}")]             // San Marino
+    [InlineData("it-VA", $"1.234,56{Uni.Space}{Uni.Euro}")]             // Vatican City
+    [InlineData("bg-BG", $"1{Uni.NBSP}234,56{Uni.Space}{Uni.Lev}")]     // Bulgaria (Lev)
+    [InlineData("el-CY", $"1.234,56{Uni.Space}{Uni.Euro}")]             // Cyprus (Greek)
+    [InlineData("tr-CY", $"{Uni.Euro}1.234,56")]                        // Cyprus (Turkish): Prefix
+    [InlineData("be-BY", $"1{Uni.NBSP}234,56{Uni.Space}Br")]            // Belarus (Br)
     public void Eur_Union_Absolute_Solution_Test(string cultureName, string expected)
     {
         VerifyAbsoluteSolution(cultureName, "EUR", expected);
@@ -87,14 +87,14 @@ public class MoneyKindGlobalLocaleTest
 
     [Theory]
     [InlineData("en-GB", $"{Uni.Pound}1,234.56")]
-    [InlineData("cy-GB", $"{Uni.Pound}1,234.56")] // Wales
-    [InlineData("gd-GB", $"{Uni.Pound}1,234.56")] // Scotland
-    [InlineData("en-GG", $"{Uni.Pound}1,234.56")]
-    [InlineData("en-JE", $"{Uni.Pound}1,234.56")]
-    [InlineData("en-IM", $"{Uni.Pound}1,234.56")]
-    [InlineData("en-GI", $"{Uni.Pound}1,234.56")]
-    [InlineData("en-SH", $"{Uni.Pound}1,234.56")] // Saint Helena
-    [InlineData("en-FK", $"{Uni.Pound}1,234.56")]
+    [InlineData("cy-GB", $"{Uni.Pound}1,234.56")]   // Wales
+    [InlineData("gd-GB", $"{Uni.Pound}1,234.56")]   // Scotland
+    [InlineData("en-GG", $"{Uni.Pound}1,234.56")]   // Guernsey
+    [InlineData("en-JE", $"{Uni.Pound}1,234.56")]   // Jersey
+    [InlineData("en-IM", $"{Uni.Pound}1,234.56")]   // Isle of Man
+    [InlineData("en-GI", $"{Uni.Pound}1,234.56")]   // Gibraltar
+    [InlineData("en-SH", $"{Uni.Pound}1,234.56")]   // Saint Helena
+    [InlineData("en-FK", $"{Uni.Pound}1,234.56")]   // Falkland Islands
     public void Gbp_Union_Absolute_Solution_Test(string cultureName, string expected)
     {
         VerifyAbsoluteSolution(cultureName, "GBP", expected);
@@ -122,7 +122,7 @@ public class MoneyKindGlobalLocaleTest
 
     [Theory]
     [InlineData("ja-JP", $"{Uni.Yen}1,234")]
-    [InlineData("zh-CN", $"{Uni.Yen}1,234.56")]
+    [InlineData("zh-CN", $"{Uni.Yen}1,234.56")]                 // China
     [InlineData("zh-HK", "HK$1,234.56")]                        // Hong Kong (CNY)
     [InlineData("zh-MO", "MOP$1,234.56")]                       // Macau (CNY)
     [InlineData("de-CH", $"CHF{Uni.Space}1{Uni.Apos}234.50")]   // Swiss German
