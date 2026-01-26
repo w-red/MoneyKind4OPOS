@@ -28,20 +28,14 @@ public class MoneyKindAudTest
     {
         var mk = new MoneyKind<AudCurrency>();
 
-        mk[100m] = 2; // bill
-        mk[50m] = 5;  // bill
-        mk[2m] = 10;  // coin
-        mk[0.05m] = 4; // coin (5 cents)
+        mk[100m] = 2;   // bill
+        mk[50m] = 5;    // bill
+        mk[2m] = 10;    // coin
+        mk[0.05m] = 4;  // coin (5 cents)
 
         var result = mk.ToCashCountsString();
 
-        // Expect specific order or presence
-        result.ShouldContain("0.05:4");
-        result.ShouldContain("2:10");
-        result.ShouldContain("50:5");
-        result.ShouldContain("100:2");
-        
-        // Structure check
-        result.ShouldContain(";");
+        // Expected format: "coinFace1:count1,...;billFace1:count1,..."
+        result.ShouldBe("0.05:4,0.1:0,0.2:0,0.5:0,1:0,2:10;5:0,10:0,20:0,50:5,100:2");
     }
 }
