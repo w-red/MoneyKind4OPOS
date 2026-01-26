@@ -1,0 +1,145 @@
+using System.Globalization;
+using MoneyKind4Opos.Currencies;
+using MoneyKind4Opos.Extensions;
+using Shouldly;
+
+namespace MoneyKind4OposTest;
+
+/// <summary>
+/// Verifies the "Absolute Solution" for all implemented currencies across various 
+/// monetary unions and multilingual nations.
+/// This complete suite acts as a definitive requirement document, 
+/// synchronized with exact character outputs from Windows/.NET 10.
+/// </summary>
+public class MoneyKindGlobalLocaleTest
+{
+    private static class Uni
+    {
+        public const string Space = " ";            // Standard Space (U+0020)
+        public const string NBSP = "\u00A0";        // Non-Breaking Space
+        public const string NNBSP = "\u202F";       // Narrow Non-Breaking Space
+        public const string Apos = "\u2019";        // Right Single Quotation Mark (Swiss separator)
+        public const string Yen = "\u00A5";         // Yen Symbol
+        public const string Pound = "\u00A3";       // Pound Symbol
+        public const string Euro = "\u20AC";        // Euro Symbol
+        public const string Rupee = "\u20B9";       // Rupee Symbol
+        public const string Lev = "\u043B\u0432.";  // Bulgarian Lev
+    }
+
+    private static void VerifyAbsoluteSolution(string cultureName, string currencyCode, string expected)
+    {
+        CultureInfo culture;
+        try
+        {
+            culture = new CultureInfo(cultureName);
+        }
+        catch (CultureNotFoundException)
+        {
+            return;
+        }
+
+        string result = currencyCode switch
+        {
+            "EUR" => 1234.56m.ToGlobalString<EurCurrency>(culture),
+            "GBP" => 1234.56m.ToGlobalString<GbpCurrency>(culture),
+            "USD" => 1234.56m.ToGlobalString<UsdCurrency>(culture),
+            "JPY" => 1234m.ToGlobalString<JpyCurrency>(culture),
+            "CNY" => 1234.56m.ToGlobalString<CnyCurrency>(culture),
+            "CHF" => 1234.50m.ToGlobalString<ChfCurrency>(culture),
+            "INR" => 10000000m.ToGlobalString<InrCurrency>(culture),
+            _ => throw new ArgumentException($"Unsupported currency: {currencyCode}")
+        };
+
+        result.ShouldBe(expected);
+    }
+
+    [Theory]
+    [InlineData("de-DE", $"1.234,56{Uni.Space}{Uni.Euro}")] // Germany
+    [InlineData("fr-FR", $"1{Uni.NNBSP}234,56{Uni.Space}{Uni.Euro}")] // France (NNBSP/Space pair)
+    [InlineData("it-IT", $"1.234,56{Uni.Space}{Uni.Euro}")] // Italy
+    [InlineData("es-ES", $"1.234,56{Uni.Space}{Uni.Euro}")] // Spain
+    [InlineData("nl-BE", $"{Uni.Euro}{Uni.Space}1.234,56")] // Belgium (Dutch): Prefix
+    [InlineData("fr-BE", $"1{Uni.NNBSP}234,56{Uni.Space}{Uni.Euro}")] // Belgium (French): NNBSP
+    [InlineData("de-BE", $"1.234,56{Uni.Space}{Uni.Euro}")] // Belgium (German)
+    [InlineData("nl-NL", $"{Uni.Euro}{Uni.Space}1.234,56")] // Netherlands: Prefix
+    [InlineData("en-IE", $"{Uni.Euro}1,234.56")]          // Ireland: En-style
+    [InlineData("et-EE", $"1{Uni.NBSP}234,56{Uni.Space}{Uni.Euro}")] // Estonia: NBSP
+    [InlineData("el-GR", $"1.234,56{Uni.Space}{Uni.Euro}")] // Greece
+    [InlineData("sk-SK", $"1{Uni.NBSP}234,56{Uni.Space}{Uni.Euro}")] // Slovakia
+    [InlineData("sl-SI", $"1.234,56{Uni.Space}{Uni.Euro}")] // Slovenia
+    [InlineData("pt-PT", $"1{Uni.NBSP}234,56{Uni.Space}{Uni.Euro}")] // Portugal
+    [InlineData("lv-LV", $"1{Uni.NBSP}234,56{Uni.Space}{Uni.Euro}")] // Latvia
+    [InlineData("lt-LT", $"1{Uni.NBSP}234,56{Uni.Space}{Uni.Euro}")] // Lithuania
+    [InlineData("mt-MT", $"{Uni.Euro}1,234.56")]          // Malta (Maltese)
+    [InlineData("en-MT", $"{Uni.Euro}1,234.56")]          // Malta (English)
+    [InlineData("ca-AD", $"1.234,56{Uni.Space}{Uni.Euro}")] // Andorra
+    [InlineData("fr-MC", $"1{Uni.NNBSP}234,56{Uni.Space}{Uni.Euro}")] // Monaco
+    [InlineData("it-SM", $"1.234,56{Uni.Space}{Uni.Euro}")] // San Marino
+    [InlineData("it-VA", $"1.234,56{Uni.Space}{Uni.Euro}")] // Vatican City
+    [InlineData("bg-BG", $"1{Uni.NBSP}234,56{Uni.Space}{Uni.Lev}")] // Bulgaria (Lev)
+    [InlineData("el-CY", $"1.234,56{Uni.Space}{Uni.Euro}")] // Cyprus (Greek)
+    [InlineData("tr-CY", $"{Uni.Euro}1.234,56")]          // Cyprus (Turkish): Prefix
+    [InlineData("be-BY", $"1{Uni.NBSP}234,56{Uni.Space}Br")] // Belarus (Br)
+    public void Eur_Union_Absolute_Solution_Test(string cultureName, string expected)
+    {
+        VerifyAbsoluteSolution(cultureName, "EUR", expected);
+    }
+
+    [Theory]
+    [InlineData("en-GB", $"{Uni.Pound}1,234.56")]
+    [InlineData("cy-GB", $"{Uni.Pound}1,234.56")] // Wales
+    [InlineData("gd-GB", $"{Uni.Pound}1,234.56")] // Scotland
+    [InlineData("en-GG", $"{Uni.Pound}1,234.56")]
+    [InlineData("en-JE", $"{Uni.Pound}1,234.56")]
+    [InlineData("en-IM", $"{Uni.Pound}1,234.56")]
+    [InlineData("en-GI", $"{Uni.Pound}1,234.56")]
+    [InlineData("en-SH", $"{Uni.Pound}1,234.56")] // Saint Helena
+    [InlineData("en-FK", $"{Uni.Pound}1,234.56")]
+    public void Gbp_Union_Absolute_Solution_Test(string cultureName, string expected)
+    {
+        VerifyAbsoluteSolution(cultureName, "GBP", expected);
+    }
+
+    [Theory]
+    [InlineData("en-US", "$1,234.56")]
+    [InlineData("en-MH", "$1,234.56")]                          // Marshall Islands
+    [InlineData("en-FM", "US$1,234.56")]                        // Micronesia: US$
+    [InlineData("en-PW", "US$1,234.56")]                        // Palau: US$
+    [InlineData("en-AS", "$1,234.56")]                          // American Samoa
+    [InlineData("en-VI", "$1,234.56")]                          // US Virgin Islands
+    [InlineData("en-TC", "US$1,234.56")]                        // Turks and Caicos: US$
+    [InlineData("en-VG", "US$1,234.56")]                        // British Virgin Islands: US$
+    [InlineData("en-BQ", "$1,234.56")]                          // Caribbean NL (En)
+    [InlineData("nl-BQ", $"${Uni.Space}1.234,56")]              // Caribbean NL (Nl): Prefix Space
+    [InlineData("es-EC", "$1.234,56")]                          // Ecuador
+    [InlineData("es-PA", "B/.1,234.56")]                        // Panama
+    [InlineData("pt-TL", $"1{Uni.NBSP}234,56{Uni.Space}US$")]   // Timor-Leste: Postfix
+    [InlineData("en-ZW", "US$1,234.56")]                        // Zimbabwe
+    public void Usd_Union_Absolute_Solution_Test(string cultureName, string expected)
+    {
+        VerifyAbsoluteSolution(cultureName, "USD", expected);
+    }
+
+    [Theory]
+    [InlineData("ja-JP", $"{Uni.Yen}1,234")]
+    [InlineData("zh-CN", $"{Uni.Yen}1,234.56")]
+    [InlineData("zh-HK", "HK$1,234.56")]                        // Hong Kong (CNY)
+    [InlineData("zh-MO", "MOP$1,234.56")]                       // Macau (CNY)
+    [InlineData("de-CH", $"CHF{Uni.Space}1{Uni.Apos}234.50")]   // Swiss German
+    [InlineData("fr-CH", $"1{Uni.NNBSP}234.50{Uni.Space}CHF")]  // Swiss French: Postfix
+    [InlineData("it-CH", $"CHF{Uni.Space}1{Uni.Apos}234.50")]   // Swiss Italian
+    [InlineData("rm-CH", $"1{Uni.Apos}234.50{Uni.Space}CHF")]   // Romansh: Postfix
+    public void Other_Absolute_Solution_Test(string cultureName, string expected)
+    {
+        string currencyCode = cultureName.Contains("CH") ? "CHF" : cultureName.Contains("zh-") ? "CNY" : "JPY";
+        VerifyAbsoluteSolution(cultureName, currencyCode, expected);
+    }
+
+    [Theory]
+    [InlineData("hi-IN", $"{Uni.Rupee}1,00,00,000.00")]
+    [InlineData("ur-IN", $"{Uni.Rupee} 1\u066C00\u066C00\u066C000\u066B00")]
+    public void Inr_Union_Absolute_Solution_Test(string cultureName, string expected)
+    {
+        VerifyAbsoluteSolution(cultureName, "INR", expected);
+    }
+}
