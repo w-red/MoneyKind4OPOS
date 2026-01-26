@@ -6,8 +6,8 @@ namespace MoneyKind4Opos.Currencies.Interfaces;
 /// <typeparam name="TCurrency">Currency type</typeparam>
 public class MoneyKind<TCurrency>
     : IMoneyKind<TCurrency, MoneyKind<TCurrency>>
-    where TCurrency : 
-        ICurrency, 
+    where TCurrency :
+        ICurrency,
         ICashCountFormattable<TCurrency>,
         ICurrencyFormattable<TCurrency>
 {
@@ -75,11 +75,11 @@ public class MoneyKind<TCurrency>
     /// <inheritdoc/>
     public int this[decimal faceValue]
     {
-        get => 
+        get =>
             GetCount(
                 _autoFaceLookup
                 .GetValueOrDefault(faceValue));
-        set => 
+        set =>
             SetCount(
                 _autoFaceLookup
                 .GetValueOrDefault(faceValue), value);
@@ -212,13 +212,13 @@ public class MoneyKind<TCurrency>
         CalculateChangeDetail(decimal amount)
     {
         // Pass 1: Calculate what can be paid given the current inventory
-        var payable = 
+        var payable =
             Calculate(amount, useInventory: true);
-        var remaining = 
+        var remaining =
             amount - payable.TotalAmount();
 
         // Pass 2: Calculate the ideal breakdown for the remaining (missing) amount
-        var missing = 
+        var missing =
             Calculate(remaining, useInventory: false);
 
         return new ChangeCalculationResult<TCurrency, MoneyKind<TCurrency>>

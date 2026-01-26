@@ -1,5 +1,5 @@
-using System.Globalization;
 using MoneyKind4Opos.Codes;
+using System.Globalization;
 
 namespace MoneyKind4Opos.Currencies.Interfaces;
 
@@ -17,7 +17,7 @@ public record CurrencyFormattingOptions(
 {
     /// <summary>Mapping from ISO 4217 currency code to default culture name and optional symbol.
     /// null, use the 3-letter ISO code (e.g., "CHF") is used.</summary>
-    private static readonly Dictionary<Iso4217, (string CultureName, string? Symbol)> 
+    private static readonly Dictionary<Iso4217, (string CultureName, string? Symbol)>
         _isoToCultureMap = new()
     {
         { Iso4217.JPY, ("ja-JP", "¥") },
@@ -74,7 +74,7 @@ public record CurrencyFormattingOptions(
         else if (_isoToCultureMap.TryGetValue(code, out var map))
         {
             targetCulture = map.CultureName;
-            symbol = 
+            symbol =
                 map.Symbol
                 ?? code.ToString();
         }
@@ -90,10 +90,10 @@ public record CurrencyFormattingOptions(
             .NumberFormat.Clone();
 
         // Override symbol if 3-letter code is preferred
-        nfi.CurrencySymbol = 
-            overrideSymbol 
+        nfi.CurrencySymbol =
+            overrideSymbol
             ?? (
-                preferThreeLetterSymbol 
+                preferThreeLetterSymbol
                 ? code.ToString()
                 : symbol
             );
@@ -114,31 +114,59 @@ public record CurrencyFormattingOptions(
 
     /// <summary>Formats the specified amount using the options.</summary>
     /// <param name="amount">The decimal amount to format.</param>
+    /// <param name="culture">Optional culture override for dynamic formatting.</param>
     /// <returns>A formatted string.</returns>
-    public string Format(decimal amount)
+    public string Format(decimal amount, CultureInfo? culture = null)
     {
-        if (CustomFormatter != null)
+        var options = culture != null ? WithCulture(culture) : this;
+
+        if (options.CustomFormatter != null)
         {
-            return CustomFormatter(amount);
+            return options.CustomFormatter(amount);
         }
 
-        var formatted = amount.ToString("C", NumberFormat);
+        var formatted = amount.ToString("C", options.NumberFormat);
 
         // Apply DecimalZeroReplacement logic from DisplayFormat
         if (amount % 1 == 0
-            && !string.IsNullOrEmpty(DisplayFormat.DecimalZeroReplacement))
+            && !string.IsNullOrEmpty(options.DisplayFormat.DecimalZeroReplacement))
         {
-            var digits = 
-                NumberFormat.CurrencyDecimalDigits;
-            var zeroPart = 
+            var digits =
+                options.NumberFormat.CurrencyDecimalDigits;
+            var zeroPart =
                 0
-                .ToString($"F{digits}", NumberFormat)[1..];
+                .ToString($"F{digits}", options.NumberFormat)[1..];
 
             formatted = formatted.Replace(
                 zeroPart,
-                $"{DisplayFormat.DecimalSeparator}{DisplayFormat.DecimalZeroReplacement}");
+                $"{options.DisplayFormat.DecimalSeparator}{options.DisplayFormat.DecimalZeroReplacement}");
         }
 
         return formatted;
+    }
+
+    /// <summary>
+    /// Creates a new instance of <see cref="CurrencyFormattingOptions"/> using the numeric format
+    /// of the specified culture while preserving the custom formatter logic.
+    /// </summary>
+    /// <param name="culture">The target culture.</param>
+    /// <returns>A new <see cref="CurrencyFormattingOptions"/> instance.</returns>
+    public CurrencyFormattingOptions WithCulture(CultureInfo culture)
+    {
+        var nfi = (NumberFormatInfo)culture.NumberFormat.Clone();
+
+        return this with
+        {
+            Symbol = nfi.CurrencySymbol,
+            NumberFormat = nfi,
+            DisplayFormat = DisplayFormat with
+            {
+                Placement = nfi.CurrencyPositivePattern switch
+                {
+                    0 or 2 => SymbolPlacement.Prefix,
+                    _ => SymbolPlacement.Postfix
+                }
+            }
+        };
     }
 }

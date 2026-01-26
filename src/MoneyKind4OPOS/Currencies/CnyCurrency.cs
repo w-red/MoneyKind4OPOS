@@ -61,7 +61,7 @@ public class CnyCurrency :
                     {
                         result += $"{count}{unit.Symbol}";
                         remaining -= count * unit.Ratio;
-                        remaining = 
+                        remaining =
                             Math.Round(
                                 remaining,
                                 _localNfi.CurrencyDecimalDigits);
