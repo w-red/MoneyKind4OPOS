@@ -11,9 +11,9 @@ public class MoneyKindAudTest
     [Theory]
     [InlineData("", 0)]
     [InlineData(";", 0)]
-    [InlineData("0.05:2,0.1:1,0.2:1,0.5:1,1:1,2:1;5:1,10:1,20:1,50:1,100:1", 189.95)]
+    [InlineData("0.05:1,0.1:2,0.2:3,0.5:4,1:5,2:6;5:7,10:8,20:9,50:10,100:11", 1914.85)]
     [InlineData("0.05:10,0.1:5;", 1.0)] // Coins only
-    [InlineData(";20:5,50:2", 200)] // Bills only
+    [InlineData(";20:5,50:2", 200)]     // Bills only
     [InlineData("1:10,2:5;10:2,100:1", 140)]
     public void Aud_Parse_And_TotalAmount_ShouldBeCorrect(
         string input, decimal expectedTotal)

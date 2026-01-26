@@ -16,6 +16,7 @@ public class CurrencyIsoCodeTest
     [InlineData(typeof(CnyCurrency), Iso4217.CNY, 156, 0.01)]
     [InlineData(typeof(ChfCurrency), Iso4217.CHF, 756, 0.05)]
     [InlineData(typeof(InrCurrency), Iso4217.INR, 356, 0.50)]
+    [InlineData(typeof(AudCurrency), Iso4217.AUD, 36, 0.05)]
     public void Currency_ShouldHaveCorrectIsoCodeAndMinimumUnit(
         Type currencyType, 
         Iso4217 expectedEnum, 
@@ -50,5 +51,6 @@ public class CurrencyIsoCodeTest
         ((int)Iso4217.CNY).ShouldBe(156);
         ((int)Iso4217.CHF).ShouldBe(756);
         ((int)Iso4217.INR).ShouldBe(356);
+        ((int)Iso4217.AUD).ShouldBe(36);
     }
 }
