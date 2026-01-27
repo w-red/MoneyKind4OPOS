@@ -5,24 +5,25 @@ namespace MoneyKind4Opos.Currencies.Interfaces;
 /// <summary>MoneyKind implementation.</summary>
 /// <typeparam name="TCurrency">Currency type</typeparam>
 public class MoneyKind<TCurrency>
-    : IMoneyKind<TCurrency, MoneyKind<TCurrency>>
+    : IMoneyKind<TCurrency, MoneyKind<TCurrency>>,
+        ICashCountValidatable<TCurrency>
     where TCurrency :
         ICurrency,
         ICashCountFormattable<TCurrency>,
         ICurrencyFormattable<TCurrency>
 {
     /// <summary>default string format used for displaying coin values.</summary>
-    private static readonly string _defaultCoinFormat =
+    protected static readonly string _defaultCoinFormat =
         ICurrency
         .GetDefaultFormat(
             TCurrency.MinimumUnit,
             TCurrency.IsZeroPadding);
 
     /// <summary>default string format used for displaying bill values.</summary>
-    private static readonly string _defaultBillFormat = _defaultCoinFormat;
+    protected static readonly string _defaultBillFormat = _defaultCoinFormat;
 
     /// <summary>Lookup for coin faces by value.</summary>
-    private static readonly Dictionary<decimal, CashFaceInfo> _coinFaceLookup =
+    protected static readonly Dictionary<decimal, CashFaceInfo> _coinFaceLookup =
         TCurrency
         .Coins
         .GroupBy(f => f.Value)
@@ -31,7 +32,7 @@ public class MoneyKind<TCurrency>
             g => g.OrderBy(f => f.Type).First());
 
     /// <summary>Lookup for bill faces by value.</summary>
-    private static readonly Dictionary<decimal, CashFaceInfo> _billFaceLookup =
+    protected static readonly Dictionary<decimal, CashFaceInfo> _billFaceLookup =
         TCurrency
         .Bills
         .GroupBy(f => f.Value)
@@ -40,7 +41,7 @@ public class MoneyKind<TCurrency>
             g => g.OrderBy(f => f.Type).First());
 
     /// <summary>Lookup for money faces by value.</summary>
-    private static readonly Dictionary<(decimal faceValue, CashType Type), CashFaceInfo> _faceLookup =
+    protected static readonly Dictionary<(decimal faceValue, CashType Type), CashFaceInfo> _faceLookup =
         TCurrency
         .Coins.Concat(TCurrency.Bills)
         .GroupBy(f => (f.Value, f.Type))
@@ -49,7 +50,7 @@ public class MoneyKind<TCurrency>
             g => g.First());
 
     /// <summary>Lookup for money faces by value (auto type).</summary>
-    private static readonly Dictionary<decimal, CashFaceInfo> _autoFaceLookup =
+    protected static readonly Dictionary<decimal, CashFaceInfo> _autoFaceLookup =
         TCurrency.Coins.Concat(TCurrency.Bills)
         .GroupBy(f => f.Value)
         .ToDictionary(
@@ -97,11 +98,11 @@ public class MoneyKind<TCurrency>
     }
 
     /// <summary>Gets the count for a specific cash face safely.</summary>
-    private int GetCount(CashFaceInfo? face) =>
+    protected int GetCount(CashFaceInfo? face) =>
         face is { } f ? Counts.GetValueOrDefault(f, 0) : 0;
 
     /// <summary>Sets the count for a specific cash face safely.</summary>
-    private void SetCount(CashFaceInfo? face, int value)
+    protected void SetCount(CashFaceInfo? face, int value)
     {
         if (face is { } f) Counts[f] = value;
     }
@@ -159,7 +160,7 @@ public class MoneyKind<TCurrency>
         .Sum(kvp => kvp.Key.Value * kvp.Value);
 
     /// <summary>All faces in descending order for greedy algorithm.</summary>
-    private static readonly IReadOnlyList<CashFaceInfo> _allDescendingFaces =
+    protected static readonly IReadOnlyList<CashFaceInfo> _allDescendingFaces =
         [.. TCurrency.Bills.Concat(TCurrency.Coins)
         .Where(f => f.Value > 0)
         .OrderByDescending(f => f.Value)
@@ -267,7 +268,7 @@ public class MoneyKind<TCurrency>
     }
 
     /// <summary>Parse face section.</summary>
-    private static void ParseSection(
+    protected static void ParseSection(
         string sec,
         IReadOnlyDictionary<decimal, CashFaceInfo> faceLookup,
         IDictionary<CashFaceInfo, int> counts)
@@ -294,6 +295,137 @@ public class MoneyKind<TCurrency>
         foreach (var (face, count) in query)
         {
             counts[face] = count;
+        }
+    }
+
+    /// <inheritdoc/>
+    public bool IsValidFaceValue(decimal faceValue) =>
+        _autoFaceLookup.ContainsKey(faceValue);
+    /// <inheritdoc/>
+    public bool IsValidCount(int count) =>
+        count >= 0;
+
+    /// <inheritdoc/>
+    public bool TrySetCashCount(
+        decimal faceValue,
+        int count,
+        out string? error)
+    {
+        // Validate count
+        if (!IsValidCount(count))
+        {
+            error = $"Count {count} must be greater than or equal to 0.";
+            return false;
+        }
+
+        // Validate and retrieve face value with auto type detection
+        var face = _autoFaceLookup.GetValueOrDefault(faceValue);
+        if (face is null)
+        {
+            error = $"Face value {faceValue} is not a valid denomination for {TCurrency.Code}.";
+            return false;
+        }
+
+        // Set the count
+        Counts[face] = count;
+        error = null;
+        return true;
+    }
+
+    /// <inheritdoc/>
+    public bool TrySetCashCount(
+        decimal faceValue,
+        CashType type,
+        int count,
+        out string? error)
+    {
+        // Validate count
+        if (!IsValidCount(count))
+        {
+            error = $"Count {count} must be greater than or equal to 0.";
+            return false;
+        }
+
+        // Validate and retrieve face value with specific type
+        var face = _faceLookup.GetValueOrDefault((faceValue, type));
+        if (face is null)
+        {
+            error = $"Face value {faceValue} of type {type} is not a valid denomination for {TCurrency.Code}.";
+            return false;
+        }
+
+        // Set the count
+        Counts[face] = count;
+        error = null;
+        return true;
+    }
+
+    /// <inheritdoc/>
+    public bool TryValidateParse(string cashCounts, out List<string> warnings)
+    {
+        warnings = [];
+
+        if (string.IsNullOrEmpty(cashCounts))
+        {
+            return true; // Empty string is valid (all zero counts)
+        }
+
+        var sections = cashCounts.Split(';');
+
+        // Validate coin section if present
+        if (sections.Length > 0 && !string.IsNullOrEmpty(sections[0]))
+        {
+            ValidateSection(sections[0], _coinFaceLookup, warnings);
+        }
+
+        // Validate bill section if present
+        if (sections.Length > 1 && !string.IsNullOrEmpty(sections[1]))
+        {
+            ValidateSection(sections[1], _billFaceLookup, warnings);
+        }
+
+        return true; // Always returns true (warnings are collected, not errors)
+    }
+
+    /// <summary>Validates a section of the CashCounts string and collects warnings.</summary>
+    protected static void ValidateSection(
+        string section,
+        Dictionary<decimal, CashFaceInfo> faceLookup,
+        List<string> warnings)
+    {
+        foreach (var item in section.Split(','))
+        {
+            if (string.IsNullOrWhiteSpace(item))
+                continue;
+
+            var parts = item.Split(':');
+            if (parts.Length != 2)
+            {
+                warnings.Add($"Invalid format for item '{item}'. Expected 'value:count'.");
+                continue;
+            }
+
+            if (!decimal.TryParse(parts[0], out var faceValue))
+            {
+                warnings.Add($"Invalid face value '{parts[0]}' in item '{item}'.");
+                continue;
+            }
+
+            if (!int.TryParse(parts[1], out var count))
+            {
+                warnings.Add($"Invalid count '{parts[1]}' in item '{item}'.");
+                continue;
+            }
+
+            if (!faceLookup.ContainsKey(faceValue))
+            {
+                warnings.Add($"Face value {faceValue} is not a valid denomination for {TCurrency.Code}.");
+            }
+
+            if (count < 0)
+            {
+                warnings.Add($"Count {count} in item '{item}' must be greater than or equal to 0.");
+            }
         }
     }
 }
