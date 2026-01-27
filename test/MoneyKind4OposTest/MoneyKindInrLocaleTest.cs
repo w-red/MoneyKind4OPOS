@@ -1,6 +1,6 @@
-using System.Globalization;
 using MoneyKind4Opos.Currencies;
 using Shouldly;
+using System.Globalization;
 
 namespace MoneyKind4OposTest;
 
@@ -55,7 +55,7 @@ public class MoneyKindInrLocaleTest
 
         decimal amount = 10000000m; // 1 Crore
         var formatted = amount.ToString("C", nfi);
-        
+
         // Exact match comparison - validating the Absolute Solution (separators, symbols, spacing).
         formatted.ShouldBe(expectedFormattedCrore);
     }
@@ -72,7 +72,7 @@ public class MoneyKindInrLocaleTest
 
         decimal amount = 10000000m;
         var result = InrCurrency.Global.Format(amount);
-        
+
         // International/Global absolute solution for this library
         result.ShouldBe("₹1,00,00,000.00");
     }

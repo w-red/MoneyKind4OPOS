@@ -17,13 +17,13 @@ public class MoneyKindFormatTest
         mk[1000] = 5;  // Bill
 
         var result = mk.ToCashCountsString();
-        
+
         // Default JpyCurrency format: "1:0,5:0,10:0,50:0,100:2,500:0;1000:5,2000:0,5000:0,10000:0"
         var sections = result.Split(';');
         sections.Length.ShouldBe(2);
-        
-        sections[0].ShouldContain("100:2");   
-        sections[1].ShouldContain("1000:5");  
+
+        sections[0].ShouldContain("100:2");
+        sections[1].ShouldContain("1000:5");
         // 0-counts are included by default implementation
         sections[0].ShouldContain("500:0");
     }
@@ -35,7 +35,7 @@ public class MoneyKindFormatTest
         mk[10000] = 1;
 
         var result = mk.ToCashCountsString();
-        
+
         // Coin section exists but all counts are 0
         var sections = result.Split(';');
         sections[0].ShouldContain("1:0");
@@ -58,7 +58,7 @@ public class MoneyKindFormatTest
         var mk = new MoneyKind<JpyCurrency>();
         // All JPY denominations should be present with :0
         var result = mk.ToCashCountsString();
-        
+
         result.ShouldContain("100:0");
         result.ShouldContain("10:0");
         result.ShouldContain("1000:0");
@@ -72,7 +72,7 @@ public class MoneyKindFormatTest
 
         // Explicit decimal format
         var result = mk.ToCashCountsString(coinFormat: "0.00");
-        
+
         result.ShouldContain("0.50:2");
     }
 
@@ -85,7 +85,7 @@ public class MoneyKindFormatTest
 
         // .NET format string ".##" omits leading zero for values < 1
         var result = mk.ToCashCountsString(coinFormat: ".##");
-        
+
         result.ShouldContain(".5:1");
         result.ShouldContain(".05:2");
     }

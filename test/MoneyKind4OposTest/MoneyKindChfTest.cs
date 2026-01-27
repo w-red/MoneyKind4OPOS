@@ -23,12 +23,12 @@ public class MoneyKindChfTest
         // 1. Greedy takes 0.10 x 1 (Remaining 0.07)
         // 2. Greedy takes 0.05 x 1 (Remaining 0.02)
         // 3. No more coins available for 0.02.
-        
+
         result.IsSucceed.ShouldBeFalse();
         result.PayableChange[0.10m].ShouldBe(1);
         result.PayableChange[0.05m].ShouldBe(1);
         result.PayableChange.TotalAmount().ShouldBe(0.15m);
-        
+
         result.RemainingAmount.ShouldBe(0.02m);
     }
 
@@ -46,7 +46,7 @@ public class MoneyKindChfTest
         mk[0.05m] = 1;
 
         var result = mk.ToCashCountsString();
-        
+
         // Assert: Actual output format is "0.05:1,0.1:0,..." without extra digits
         result.ShouldContain("0.05:1");
         result.ShouldContain("0.1:0");

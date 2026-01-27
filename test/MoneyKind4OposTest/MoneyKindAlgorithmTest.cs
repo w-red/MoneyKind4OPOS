@@ -11,7 +11,7 @@ public class MoneyKindAlgorithmTest
     {
         var inventory = new MoneyKind<JpyCurrency>();
         var deposit = new MoneyKind<JpyCurrency>();
-        
+
         inventory[1000] = 5;
         deposit[1000] = 2;
         deposit[500] = 3;

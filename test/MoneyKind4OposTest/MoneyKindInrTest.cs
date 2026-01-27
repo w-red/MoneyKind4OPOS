@@ -41,7 +41,7 @@ public class MoneyKindInrTest
         result.ShouldContain("2:10");
         result.ShouldContain("100:5");
         result.ShouldContain("500:2");
-        
+
         // Structure check
         result.ShouldContain(";");
     }
@@ -52,7 +52,7 @@ public class MoneyKindInrTest
     {
         var amount = 123456.78m;
         var formatted = amount.ToString("N", InrCurrency.Global.NumberFormat);
-        
+
         // Expected: 1,23,456.78 (Indian system)
         // Default: 123,456.78 (Western system)
         formatted.ShouldBe("1,23,456.78");

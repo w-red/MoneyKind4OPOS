@@ -1,7 +1,7 @@
-using System.Globalization;
 using MoneyKind4Opos.Currencies;
 using MoneyKind4Opos.Extensions;
 using Shouldly;
+using System.Globalization;
 
 namespace MoneyKind4OposTest;
 

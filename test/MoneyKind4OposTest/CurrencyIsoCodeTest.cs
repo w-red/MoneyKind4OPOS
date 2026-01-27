@@ -18,9 +18,9 @@ public class CurrencyIsoCodeTest
     [InlineData(typeof(InrCurrency), Iso4217.INR, 356, 0.50)]
     [InlineData(typeof(AudCurrency), Iso4217.AUD, 36, 0.05)]
     public void Currency_ShouldHaveCorrectIsoCodeAndMinimumUnit(
-        Type currencyType, 
-        Iso4217 expectedEnum, 
-        int expectedNumeric, 
+        Type currencyType,
+        Iso4217 expectedEnum,
+        int expectedNumeric,
         double expectedMinUnit)
     {
         // Access static abstract properties via reflection
@@ -32,7 +32,7 @@ public class CurrencyIsoCodeTest
 
         // Verify Enum value
         actualCode.ShouldBe(expectedEnum);
-        
+
         // Verify underlying Numeric value (ISO 4217 Standard)
         ((int)actualCode).ShouldBe(expectedNumeric);
 

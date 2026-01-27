@@ -25,7 +25,7 @@ public class MoneyKindParseTest
         result[500, CashType.Coin].ShouldBe(1);
         result[100, CashType.Coin].ShouldBe(2);
         result[1000, CashType.Bill].ShouldBe(3);
-        
+
         // Negative check (ensure they are NOT the wrong type)
         result[1000, CashType.Coin].ShouldBe(0);
         result[500, CashType.Bill].ShouldBe(0);
@@ -44,7 +44,7 @@ public class MoneyKindParseTest
 
         result.CoinAmount().ShouldBe(700m);
         result.BillAmount().ShouldBe(0m);
-        
+
         result[500, CashType.Coin].ShouldBe(1);
         result[1000, CashType.Bill].ShouldBe(0);
     }
@@ -58,7 +58,7 @@ public class MoneyKindParseTest
 
         result.CoinAmount().ShouldBe(0m);
         result.BillAmount().ShouldBe(5000m);
-        
+
         result[1000, CashType.Bill].ShouldBe(5);
     }
 
@@ -124,7 +124,7 @@ public class MoneyKindParseTest
 
         result[500].ShouldBe(-1);
         result[1000].ShouldBe(-2);
-        
+
         // Total should be -2500
         result.TotalAmount().ShouldBe(-2500m);
         result.CoinAmount().ShouldBe(-500m);
@@ -135,7 +135,7 @@ public class MoneyKindParseTest
     public void Parse_UsdSpecificFormat_ShouldHandleLeadingDot()
     {
         // USD style often omits leading zero for cents: ".5" (50c), ".05" (5c)
-        var input = ".5:1,.05:2"; 
+        var input = ".5:1,.05:2";
         var result = MoneyKind<UsdCurrency>.Parse(input);
 
         result[0.5m].ShouldBe(1);   // 50 cents (Half Dollar coin)

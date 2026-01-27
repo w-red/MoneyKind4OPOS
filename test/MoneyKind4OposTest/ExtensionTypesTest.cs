@@ -35,7 +35,7 @@ public class ExtensionTypesTest
         // EurCurrency Global: CurrencyPositivePattern = 3 (n €), GroupSeparator = ".", DecimalSeparator = ","
         decimal value = 1234.56m;
         var result = value.ToGlobalString<EurCurrency>();
-        
+
         // Expected: "1.234,56 €" (Space before symbol, comma as decimal)
         result.ShouldBe("1.234,56 €");
     }
@@ -45,7 +45,7 @@ public class ExtensionTypesTest
     {
         decimal value = 10000m;
         var result = value.ToCurrencyString<JpyCurrency>();
-        
+
         // ToCurrencyString aliases ToLocalString by default
         result.ShouldBe("10,000円");
     }

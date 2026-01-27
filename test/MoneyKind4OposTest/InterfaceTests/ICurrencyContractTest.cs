@@ -1,5 +1,3 @@
-using MoneyKind4Opos.Currencies;
-using MoneyKind4Opos.Currencies.Interfaces;
 using Shouldly;
 
 namespace MoneyKind4OPOSTest.InterfaceTests;
@@ -7,8 +5,10 @@ namespace MoneyKind4OPOSTest.InterfaceTests;
 /// <summary>ICurrency contract tests.</summary>
 public class ICurrencyContractTest
 {
-    public static IEnumerable<object[]> AllCurrencies => 
-        MoneyKind4OposTest.CurrencyTestHelper.GetAllCurrencyTypesAsXUnitData();
+    public static IEnumerable<object[]> AllCurrencies =>
+        MoneyKind4OposTest
+        .CurrencyTestHelper
+        .GetAllCurrencyTypesAsXUnitData();
 
     [Theory]
     [MemberData(nameof(AllCurrencies))]

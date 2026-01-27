@@ -1,6 +1,5 @@
 using MoneyKind4Opos.Codes;
 using MoneyKind4Opos.Currencies.Interfaces;
-using MoneyKind4Opos.Currencies;
 using Shouldly;
 using System.Globalization;
 
@@ -27,13 +26,13 @@ public class MockChfCurrency : ICurrency, ICashCountFormattable<MockChfCurrency>
     ];
 
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits => [];
-    
+
     // Formatting stubs for test
     public static CurrencyFormattingOptions Global { get; } = new(
-        Symbol: "Fr.", 
-        NumberFormat: NumberFormatInfo.InvariantInfo, 
+        Symbol: "Fr.",
+        NumberFormat: NumberFormatInfo.InvariantInfo,
         DisplayFormat: new(SymbolPlacement.Prefix));
-        
+
     public static CurrencyFormattingOptions Local => Global;
 }
 
@@ -55,9 +54,9 @@ public class CurrencyRoundingTest
         result.IsSucceed.ShouldBeFalse();
         result.PayableChange[0.05m].ShouldBe(1);
         result.PayableChange.TotalAmount().ShouldBe(0.05m);
-        
+
         result.RemainingAmount.ShouldBe(0.02m); // Exactly 0.02 short
-        
+
         // MissingChange logic will try to explain how to get 0.02 using the same denominations.
         // Since no denomination is <= 0.02, MissingChange.TotalAmount() will be 0.
         result.MissingChange.TotalAmount().ShouldBe(0m);

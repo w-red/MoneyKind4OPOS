@@ -45,7 +45,7 @@ public class MoneyKindDetailTest
         result.IsSucceed.ShouldBeFalse();
         result.PayableChange.TotalAmount().ShouldBe(500m); // 払えたのは500円のみ
         result.RemainingAmount.ShouldBe(700m); // 残り700円不足
-        
+
         // 理想的な不足構成 (700円 = 500円x1 + 100円x2)
         result.MissingChange[500].ShouldBe(1);
         result.MissingChange[100].ShouldBe(2);
@@ -61,7 +61,7 @@ public class MoneyKindDetailTest
         result.IsSucceed.ShouldBeFalse();
         result.PayableChange.TotalAmount().ShouldBe(140m); // 140円まで
         result.RemainingAmount.ShouldBe(10m);
-        
+
         // 足りないのは「あと10円」
         result.MissingChange[10].ShouldBe(1);
     }
@@ -86,7 +86,7 @@ public class MoneyKindDetailTest
         result.IsSucceed.ShouldBeFalse();
         result.PayableChange.TotalAmount().ShouldBe(0m);
         result.RemainingAmount.ShouldBe(1600m);
-        
+
         // 理想的な構成すべてが Missing に入る
         result.MissingChange[1000].ShouldBe(1);
         result.MissingChange[500].ShouldBe(1);
@@ -101,7 +101,7 @@ public class MoneyKindDetailTest
 
         result.IsSucceed.ShouldBeFalse();
         result.RemainingAmount.ShouldBe(0.75m);
-        
+
         // EURの金種構成: 0.50 (50c), 0.20 (20c), 0.05 (5c)
         result.MissingChange[0.5m].ShouldBe(1);
         result.MissingChange[0.2m].ShouldBe(1);
