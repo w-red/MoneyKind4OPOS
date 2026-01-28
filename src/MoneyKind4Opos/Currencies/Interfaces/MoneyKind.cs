@@ -6,7 +6,8 @@ namespace MoneyKind4Opos.Currencies.Interfaces;
 /// <typeparam name="TCurrency">Currency type</typeparam>
 public class MoneyKind<TCurrency>
     : IMoneyKind<TCurrency, MoneyKind<TCurrency>>,
-        ICashCountValidatable<TCurrency>
+      ICashCountValidatable<TCurrency>,
+      IMoneyKindRoundable<TCurrency, MoneyKind<TCurrency>>
     where TCurrency :
         ICurrency,
         ICashCountFormattable<TCurrency>,
@@ -432,4 +433,27 @@ public class MoneyKind<TCurrency>
             }
         }
     }
+
+    /// <inheritdoc/>
+    public decimal RoundToMinimumUnit(
+        decimal amount,
+        MidpointRounding rounding = MidpointRounding.ToEven)
+    {
+        return TCurrency.MinimumUnit <= 0
+            ? throw new InvalidOperationException(
+                $"Currency {TCurrency.Code} has an invalid minimum unit.")
+            : decimal.Round(
+            amount / TCurrency.MinimumUnit,
+            rounding) * TCurrency.MinimumUnit;
+    }
+
+    /// <inheritdoc/>
+    public bool IsRoundedToMinimumUnit(decimal amount)
+    {
+        return TCurrency
+            .MinimumUnit > 0
+            && amount %
+                TCurrency.MinimumUnit == 0;
+    }
+
 }
