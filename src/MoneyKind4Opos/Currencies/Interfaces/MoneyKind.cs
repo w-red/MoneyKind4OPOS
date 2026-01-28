@@ -99,7 +99,8 @@ public class MoneyKind<TCurrency>
 
     /// <summary>Gets the count for a specific cash face safely.</summary>
     protected int GetCount(CashFaceInfo? face) =>
-        face is { } f ? Counts.GetValueOrDefault(f, 0) : 0;
+        face is { } f ?
+        Counts.GetValueOrDefault(f, 0) : 0;
 
     /// <summary>Sets the count for a specific cash face safely.</summary>
     protected void SetCount(CashFaceInfo? face, int value)
@@ -120,23 +121,26 @@ public class MoneyKind<TCurrency>
     public static MoneyKind<TCurrency> Parse(string cashCounts)
     {
         var ret = new MoneyKind<TCurrency>();
-        if (cashCounts.Split(';') is [var coinsec, var billsec, ..])
+        var sections = cashCounts.Split(';');
+
+        switch (sections)
         {
+        case [var coinSec, var billSec, ..]:
             ParseSection(
-                coinsec,
+                coinSec,
                 _coinFaceLookup,
                 ret.Counts);
             ParseSection(
-                billsec,
+                billSec,
                 _billFaceLookup,
                 ret.Counts);
-        }
-        else if (cashCounts.Split(';') is [var coins])
-        {
+            break;
+        case [var coinSec]:
             ParseSection(
-                coins,
+                coinSec,
                 _coinFaceLookup,
                 ret.Counts);
+            break;
         }
 
         return ret;

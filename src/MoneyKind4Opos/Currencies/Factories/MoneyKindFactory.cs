@@ -9,7 +9,7 @@ public static class MoneyKindFactory
 {
     /// <summary>Cache for currency code to currency type mapping.</summary>
     private static readonly Lazy<Dictionary<string, Type>> _currencyTypeCache =
-        new(() => BuildCurrencyTypeCache());
+        new(BuildCurrencyTypeCache);
 
     /// <summary>Creates a MoneyKind instance from OPOS device properties.</summary>
     /// <param name="currencyCode">ISO 4217 currency code (e.g., "JPY", "AUD", "USD").</param>
@@ -59,8 +59,6 @@ public static class MoneyKindFactory
         out List<string> warnings)
         where TCurrency : ICurrency, ICashCountFormattable<TCurrency>, ICurrencyFormattable<TCurrency>
     {
-        warnings = [];
-
         var (coins, bills) = ParseCurrencyCashList(currencyCashList);
         var mk = new MoneyKind<TCurrency>();
 
@@ -137,46 +135,39 @@ public static class MoneyKindFactory
     private static (List<decimal> coins, List<decimal> bills) ParseCurrencyCashList(
         string currencyCashList)
     {
-        var coins = new List<decimal>();
-        var bills = new List<decimal>();
-
         if (string.IsNullOrWhiteSpace(currencyCashList))
         {
-            return (coins, bills);
+            return ([], []);
         }
 
         var sections = currencyCashList.Split(';');
 
-        // Parse coin section (before semicolon)
-        if (sections.Length > 0
-            && !string.IsNullOrWhiteSpace(sections[0]))
+        return sections switch
         {
-            var coinValues = sections[0].Split(',', StringSplitOptions.TrimEntries);
-            foreach (var value in coinValues)
-            {
-                if (decimal.TryParse(value, out var coin))
-                {
-                    coins.Add(coin);
-                }
-            }
-        }
-
-        // Parse bill section (after semicolon)
-        if (sections.Length > 1
-            && !string.IsNullOrWhiteSpace(sections[1]))
-        {
-            var billValues = sections[1].Split(',', StringSplitOptions.TrimEntries);
-            foreach (var value in billValues)
-            {
-                if (decimal.TryParse(value, out var bill))
-                {
-                    bills.Add(bill);
-                }
-            }
-        }
-
-        return (coins, bills);
+            [var coinSec, var billSec, ..] =>
+                (ParseDenominationSection(coinSec),
+                 ParseDenominationSection(billSec)),
+            [var coinSec] =>
+                (ParseDenominationSection(coinSec),
+                 []),
+            _ => ([], [])
+        };
     }
+
+    /// <summary>
+    /// Parses a denomination section string into a list of decimal values using LINQ.
+    /// Filters out values that cannot be parsed as decimals.
+    /// </summary>
+    /// <param name="section">The section string containing comma-separated values.</param>
+    /// <returns>List of successfully parsed decimal values.</returns>
+    private static List<decimal> ParseDenominationSection(string section) =>
+        [.. section
+            .Split(',',
+                StringSplitOptions.RemoveEmptyEntries
+                | StringSplitOptions.TrimEntries)
+            .Select(s => (success: decimal.TryParse(s, out var value), value))
+            .Where(x => x.success)
+            .Select(x => x.value)];
 
     /// <summary>Creates a MoneyKind instance using reflection.</summary>
     private static object CreateMoneyKindInstance(
