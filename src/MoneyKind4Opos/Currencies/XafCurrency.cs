@@ -5,6 +5,7 @@ using System.Globalization;
 namespace MoneyKind4Opos.Currencies;
 
 /// <summary>Central African CFA Franc</summary>
+/// <seealso href="https://www.bceao.int/fr/content/billets-et-pieces">Les billets et les pièces (BCEAO)</seealso>
 public class XafCurrency :
     ICurrency,
     ICashCountFormattable<XafCurrency>,

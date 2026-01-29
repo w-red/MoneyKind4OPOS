@@ -5,6 +5,7 @@ using System.Globalization;
 namespace MoneyKind4Opos.Currencies;
 
 /// <summary>Swiss Franc Currency</summary>
+/// <seealso href="https://www.snb.ch/en/the-snb/cash/banknotes">Banknotes (Swiss National Bank)</seealso>
 public class ChfCurrency :
     ICurrency,
     ICashCountFormattable<ChfCurrency>,

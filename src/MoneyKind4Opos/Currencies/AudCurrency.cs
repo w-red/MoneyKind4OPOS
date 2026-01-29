@@ -5,6 +5,7 @@ using System.Globalization;
 namespace MoneyKind4Opos.Currencies;
 
 /// <summary>Australian Dollar Currency</summary>
+/// <seealso href="https://banknotes.rba.gov.at/australias-banknotes/banknotes-in-circulation/">Banknotes in Circulation (Reserve Bank of Australia)</seealso>
 public class AudCurrency :
     ICurrency,
     ICashCountFormattable<AudCurrency>,

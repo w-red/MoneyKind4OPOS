@@ -5,6 +5,7 @@ using System.Globalization;
 namespace MoneyKind4Opos.Currencies;
 
 /// <summary>Indian Rupee Currency</summary>
+/// <seealso href="https://www.rbi.org.in/commonperson/English/Scripts/FAQs.aspx?Id=3158">Banknotes and Coins (Reserve Bank of India)</seealso>
 public class InrCurrency :
     ICurrency,
     ICashCountFormattable<InrCurrency>,

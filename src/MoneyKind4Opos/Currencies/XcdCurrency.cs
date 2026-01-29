@@ -5,6 +5,7 @@ using System.Globalization;
 namespace MoneyKind4Opos.Currencies;
 
 /// <summary>Eastern Caribbean Dollar</summary>
+/// <seealso href="https://www.eccb-centralbank.org/it-s-here-the-new-family-of-ec-polymer-notes">Banknotes (Eastern Caribbean Central Bank)</seealso>
 public class XcdCurrency :
     ICurrency,
     ICashCountFormattable<XcdCurrency>,
@@ -60,6 +61,7 @@ public class XcdCurrency :
     /// Denominations are based on the polymer series.
     /// Reference: https://www.eccb-centralbank.org/p/polymer-banknotes-1
     /// </remarks>
+    /// <seealso href="https://www.eccb-centralbank.org/p/polymer-banknotes-1">Polymer Banknotes (Eastern Caribbean Central Bank)</seealso>
     public static IEnumerable<CashFaceInfo> Bills =>
     [
         new(5m, CashType.Bill, "5 Dollars", "$5"),

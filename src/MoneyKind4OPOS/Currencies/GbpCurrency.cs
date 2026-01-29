@@ -5,6 +5,7 @@ using System.Globalization;
 namespace MoneyKind4Opos.Currencies;
 
 /// <summary>British Pound Sterling Currency</summary>
+/// <seealso href="https://www.acbi.org.uk/banknotes/scottish-banknotes.html">Scottish Banknotes (Association of Commercial Banknote Issuers)</seealso>
 public class GbpCurrency : ICurrency, ICashCountFormattable<GbpCurrency>, ICurrencyFormattable<GbpCurrency>
 {
     private static readonly NumberFormatInfo _nfi = new()
