@@ -56,9 +56,12 @@ public class XcdCurrency :
     ];
 
     /// <inheritdoc/>
+    /// <remarks>
+    /// Denominations are based on the polymer series.
+    /// Reference: https://www.eccb-centralbank.org/p/polymer-banknotes-1
+    /// </remarks>
     public static IEnumerable<CashFaceInfo> Bills =>
     [
-        new(2m, CashType.Bill, "2 Dollars", "$2"),
         new(5m, CashType.Bill, "5 Dollars", "$5"),
         new(10m, CashType.Bill, "10 Dollars", "$10"),
         new(20m, CashType.Bill, "20 Dollars", "$20"),
