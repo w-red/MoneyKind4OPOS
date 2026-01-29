@@ -48,6 +48,11 @@ public class MoneyKindGlobalLocaleTest
             "CHF" => 1234.50m.ToGlobalString<ChfCurrency>(culture),
             "AUD" => 1234.00m.ToGlobalString<AudCurrency>(culture),
             "INR" => 10000000m.ToGlobalString<InrCurrency>(culture),
+            "XOF" => 1234m.ToGlobalString<XofCurrency>(culture),
+            "XAF" => 1234m.ToGlobalString<XafCurrency>(culture),
+            "XCD" => 1234.55m.ToGlobalString<XcdCurrency>(culture),
+            "ZAR" => 1234.50m.ToGlobalString<ZarCurrency>(culture),
+            "NZD" => 1234.50m.ToGlobalString<NzdCurrency>(culture),
             _ => throw new ArgumentException($"Unsupported currency: {currencyCode}")
         };
 
@@ -166,5 +171,63 @@ public class MoneyKindGlobalLocaleTest
     public void Inr_Union_Absolute_Solution_Test(string cultureName, string expected)
     {
         VerifyAbsoluteSolution(cultureName, "INR", expected);
+    }
+
+    [Theory]
+    [InlineData("fr-SN", $"1{Uni.NNBSP}234{Uni.Space}F{Uni.NNBSP}CFA")]  // Senegal
+    [InlineData("fr-CI", $"1{Uni.NNBSP}234{Uni.Space}F{Uni.NNBSP}CFA")]  // Côte d'Ivoire
+    [InlineData("fr-BJ", $"1{Uni.NNBSP}234{Uni.Space}F{Uni.NNBSP}CFA")]  // Benin
+    [InlineData("fr-BF", $"1{Uni.NNBSP}234{Uni.Space}F{Uni.NNBSP}CFA")]  // Burkina Faso
+    [InlineData("fr-GW", $"1{Uni.NNBSP}234{Uni.Space}F{Uni.NNBSP}CFA")]  // Guinea-Bissau
+    [InlineData("fr-ML", $"1{Uni.NNBSP}234{Uni.Space}F{Uni.NNBSP}CFA")]  // Mali
+    [InlineData("fr-NE", $"1{Uni.NNBSP}234{Uni.Space}F{Uni.NNBSP}CFA")]  // Niger
+    [InlineData("fr-TG", $"1{Uni.NNBSP}234{Uni.Space}F{Uni.NNBSP}CFA")]  // Togo
+    public void Xof_Union_Absolute_Solution_Test(string cultureName, string expected)
+    {
+        VerifyAbsoluteSolution(cultureName, "XOF", expected);
+    }
+
+    [Theory]
+    [InlineData("fr-CM", $"1{Uni.NNBSP}234{Uni.Space}FCFA")]  // Cameroon
+    [InlineData("fr-CF", $"1{Uni.NNBSP}234{Uni.Space}FCFA")]  // Central African Republic
+    [InlineData("fr-TD", $"1{Uni.NNBSP}234{Uni.Space}FCFA")]  // Chad
+    [InlineData("fr-CG", $"1{Uni.NNBSP}234{Uni.Space}FCFA")]  // Republic of the Congo
+    [InlineData("fr-GQ", $"1{Uni.NNBSP}234{Uni.Space}FCFA")]  // Equatorial Guinea
+    [InlineData("fr-GA", $"1{Uni.NNBSP}234{Uni.Space}FCFA")]  // Gabon
+    public void Xaf_Union_Absolute_Solution_Test(string cultureName, string expected)
+    {
+        VerifyAbsoluteSolution(cultureName, "XAF", expected);
+    }
+
+    [Theory]
+    [InlineData("en-AG", "$1,234.55")]  // Antigua and Barbuda
+    [InlineData("en-DM", "$1,234.55")]  // Dominica
+    [InlineData("en-GD", "$1,234.55")]  // Grenada
+    [InlineData("en-KN", "$1,234.55")]  // Saint Kitts and Nevis
+    [InlineData("en-LC", "$1,234.55")]  // Saint Lucia
+    [InlineData("en-VC", "$1,234.55")]  // Saint Vincent and the Grenadines
+    public void Xcd_Union_Absolute_Solution_Test(string cultureName, string expected)
+    {
+        VerifyAbsoluteSolution(cultureName, "XCD", expected);
+    }
+
+    [Theory]
+    [InlineData("en-ZA", $"R1{Uni.NBSP}234,50")]  // South Africa (English) - uses R and NBSP
+    [InlineData("af-ZA", $"R1{Uni.NBSP}234,50")]  // South Africa (Afrikaans) - uses R and NBSP
+    [InlineData("en-NA", "$1,234.50")]            // Namibia (English) - uses $ and Comma separator
+    [InlineData("af-NA", $"$1{Uni.NBSP}234,50")]  // Namibia (Afrikaans) - uses $ and NBSP
+    public void Zar_Union_Absolute_Solution_Test(string cultureName, string expected)
+    {
+        VerifyAbsoluteSolution(cultureName, "ZAR", expected);
+    }
+
+    [Theory]
+    [InlineData("en-NZ", "$1,234.50")]  // New Zealand
+    [InlineData("en-CK", "$1,234.50")]  // Cook Islands
+    [InlineData("en-NU", "$1,234.50")]  // Niue
+    [InlineData("en-TK", "$1,234.50")]  // Tokelau
+    public void Nzd_Union_Absolute_Solution_Test(string cultureName, string expected)
+    {
+        VerifyAbsoluteSolution(cultureName, "NZD", expected);
     }
 }
