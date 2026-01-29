@@ -5,7 +5,10 @@ using System.Globalization;
 namespace MoneyKind4Opos.Currencies;
 
 /// <summary>US Dollar Currency</summary>
-public class UsdCurrency : ICurrency, ICashCountFormattable<UsdCurrency>, ICurrencyFormattable<UsdCurrency>
+public class UsdCurrency :
+    ICurrency,
+    ICashCountFormattable<UsdCurrency>,
+    ICurrencyFormattable<UsdCurrency>
 {
     private static readonly NumberFormatInfo _nfi = new()
     {

@@ -6,7 +6,10 @@ namespace MoneyKind4Opos.Currencies;
 
 /// <summary>Singapore Dollar Currency</summary>
 /// <seealso href="https://www.mas.gov.sg/currency/Singapores-Currencies">Notes and Coins (Monetary Authority of Singapore)</seealso>
-public class SgdCurrency : ICurrency, ICashCountFormattable<SgdCurrency>, ICurrencyFormattable<SgdCurrency>
+public class SgdCurrency :
+    ICurrency,
+    ICashCountFormattable<SgdCurrency>,
+    ICurrencyFormattable<SgdCurrency>
 {
     private static readonly NumberFormatInfo _nfi = new()
     {

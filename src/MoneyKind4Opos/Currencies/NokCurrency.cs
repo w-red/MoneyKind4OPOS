@@ -6,7 +6,10 @@ namespace MoneyKind4Opos.Currencies;
 
 /// <summary>Norwegian Krone Currency</summary>
 /// <seealso href="https://www.norges-bank.no/en/topics/notes-and-coins/">Notes and coins (Norges Bank)</seealso>
-public class NokCurrency : ICurrency, ICashCountFormattable<NokCurrency>, ICurrencyFormattable<NokCurrency>
+public class NokCurrency :
+    ICurrency,
+    ICashCountFormattable<NokCurrency>,
+    ICurrencyFormattable<NokCurrency>
 {
     private static readonly NumberFormatInfo _nfi = new()
     {

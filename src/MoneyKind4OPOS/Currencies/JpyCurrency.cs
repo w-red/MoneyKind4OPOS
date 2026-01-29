@@ -6,7 +6,10 @@ namespace MoneyKind4Opos.Currencies;
 
 /// <summary>Japanese Yen Currency</summary>
 /// <seealso href="https://www.boj.or.jp/en/note_tfjgs/note/index.htm">Banknotes and Coins (Bank of Japan)</seealso>
-public class JpyCurrency : ICurrency, ICashCountFormattable<JpyCurrency>, ICurrencyFormattable<JpyCurrency>
+public class JpyCurrency :
+    ICurrency,
+    ICashCountFormattable<JpyCurrency>,
+    ICurrencyFormattable<JpyCurrency>
 {
     private static readonly NumberFormatInfo _globalNfi = new()
     {

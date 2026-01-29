@@ -6,7 +6,10 @@ namespace MoneyKind4Opos.Currencies;
 
 /// <summary>Canadian Dollar Currency</summary>
 /// <seealso href="https://www.bankofcanada.ca/banknotes/">Banknotes (Bank of Canada)</seealso>
-public class CadCurrency : ICurrency, ICashCountFormattable<CadCurrency>, ICurrencyFormattable<CadCurrency>
+public class CadCurrency :
+    ICurrency,
+    ICashCountFormattable<CadCurrency>,
+    ICurrencyFormattable<CadCurrency>
 {
     private static readonly NumberFormatInfo _nfi = new()
     {
