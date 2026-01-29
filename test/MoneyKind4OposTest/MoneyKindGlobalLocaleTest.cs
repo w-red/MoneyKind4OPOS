@@ -46,6 +46,7 @@ public class MoneyKindGlobalLocaleTest
             "JPY" => 1234m.ToGlobalString<JpyCurrency>(culture),
             "CNY" => 1234.56m.ToGlobalString<CnyCurrency>(culture),
             "CHF" => 1234.50m.ToGlobalString<ChfCurrency>(culture),
+            "AUD" => 1234.00m.ToGlobalString<AudCurrency>(culture),
             "INR" => 10000000m.ToGlobalString<InrCurrency>(culture),
             _ => throw new ArgumentException($"Unsupported currency: {currencyCode}")
         };
@@ -95,6 +96,8 @@ public class MoneyKindGlobalLocaleTest
     [InlineData("en-GI", $"{Uni.Pound}1,234.56")]   // Gibraltar
     [InlineData("en-SH", $"{Uni.Pound}1,234.56")]   // Saint Helena
     [InlineData("en-FK", $"{Uni.Pound}1,234.56")]   // Falkland Islands
+    [InlineData("en-MS", "$1,234.56")]              // Montserrat: Uses $ for GBP
+    [InlineData("en-VG", "US$1,234.56")]            // British Virgin Islands: Uses US$ for GBP
     public void Gbp_Union_Absolute_Solution_Test(string cultureName, string expected)
     {
         VerifyAbsoluteSolution(cultureName, "GBP", expected);
@@ -115,6 +118,7 @@ public class MoneyKindGlobalLocaleTest
     [InlineData("es-PA", "B/.1,234.56")]                        // Panama
     [InlineData("pt-TL", $"1{Uni.NBSP}234,56{Uni.Space}US$")]   // Timor-Leste: Postfix
     [InlineData("en-ZW", "US$1,234.56")]                        // Zimbabwe
+    [InlineData("es-SV", "$1,234.56")]                          // El Salvador: Uses $
     public void Usd_Union_Absolute_Solution_Test(string cultureName, string expected)
     {
         VerifyAbsoluteSolution(cultureName, "USD", expected);
@@ -122,17 +126,38 @@ public class MoneyKindGlobalLocaleTest
 
     [Theory]
     [InlineData("ja-JP", $"{Uni.Yen}1,234")]
+    public void Jpy_Absolute_Solution_Test(string cultureName, string expected)
+    {
+        VerifyAbsoluteSolution(cultureName, "JPY", expected);
+    }
+
+    [Theory]
     [InlineData("zh-CN", $"{Uni.Yen}1,234.56")]                 // China
-    [InlineData("zh-HK", "HK$1,234.56")]                        // Hong Kong (CNY)
-    [InlineData("zh-MO", "MOP$1,234.56")]                       // Macau (CNY)
+    [InlineData("zh-HK", "HK$1,234.56")]                        // Hong Kong
+    [InlineData("zh-MO", "MOP$1,234.56")]                       // Macau
+    public void Cny_Absolute_Solution_Test(string cultureName, string expected)
+    {
+        VerifyAbsoluteSolution(cultureName, "CNY", expected);
+    }
+
+    [Theory]
     [InlineData("de-CH", $"CHF{Uni.Space}1{Uni.Apos}234.50")]   // Swiss German
     [InlineData("fr-CH", $"1{Uni.NNBSP}234.50{Uni.Space}CHF")]  // Swiss French: Postfix
     [InlineData("it-CH", $"CHF{Uni.Space}1{Uni.Apos}234.50")]   // Swiss Italian
     [InlineData("rm-CH", $"1{Uni.Apos}234.50{Uni.Space}CHF")]   // Romansh: Postfix
-    public void Other_Absolute_Solution_Test(string cultureName, string expected)
+    public void Chf_Absolute_Solution_Test(string cultureName, string expected)
     {
-        string currencyCode = cultureName.Contains("CH") ? "CHF" : cultureName.Contains("zh-") ? "CNY" : "JPY";
-        VerifyAbsoluteSolution(cultureName, currencyCode, expected);
+        VerifyAbsoluteSolution(cultureName, "CHF", expected);
+    }
+
+    [Theory]
+    [InlineData("en-AU", "$1,234.00")]  // Australia
+    [InlineData("en-KI", "$1,234.00")]  // Kiribati
+    [InlineData("en-NR", "$1,234.00")]  // Nauru
+    [InlineData("en-TV", "$1,234.00")]  // Tuvalu
+    public void Aud_Absolute_Solution_Test(string cultureName, string expected)
+    {
+        VerifyAbsoluteSolution(cultureName, "AUD", expected);
     }
 
     [Theory]

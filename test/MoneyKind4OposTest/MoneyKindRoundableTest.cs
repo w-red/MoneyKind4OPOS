@@ -12,8 +12,8 @@ public class MoneyKindRoundableTest
     [InlineData(100.00, MidpointRounding.ToEven, 100.00)]
     [InlineData(100.01, MidpointRounding.ToEven, 100.00)]
     [InlineData(100.02, MidpointRounding.ToEven, 100.00)]
-    [InlineData(100.03, MidpointRounding.ToEven, 100.00)]
-    [InlineData(100.04, MidpointRounding.ToEven, 100.00)]
+    [InlineData(100.03, MidpointRounding.ToEven, 100.05)]
+    [InlineData(100.04, MidpointRounding.ToEven, 100.05)]
     [InlineData(100.025, MidpointRounding.ToEven, 100.00)]
     [InlineData(100.035, MidpointRounding.ToEven, 100.05)]
     public void Aud_RoundToMinimumUnit_WithToEven_ShouldRoundCorrectly(
@@ -26,14 +26,27 @@ public class MoneyKindRoundableTest
         result.ShouldBe(expected);
     }
 
+    /// <summary>Negative value tests for standard Rounding with AUD.</summary>
+    [Theory]
+    [InlineData(-100.01, MidpointRounding.AwayFromZero, -100.00)] // -2000.2 -> -2000 (Nearest)
+    [InlineData(-100.04, MidpointRounding.ToZero, -100.00)]      // -2000.8 -> -2000 (ToZero)
+    [InlineData(-100.03, MidpointRounding.ToEven, -100.05)]      // -2000.6 -> -2001 (Nearest)
+    public void Aud_RoundToMinimumUnit_Negative_ShouldRoundCorrectly(
+        decimal amount, MidpointRounding rounding, decimal expected)
+    {
+        var mk = new MoneyKind<AudCurrency>();
+        var result = mk.RoundToMinimumUnit(amount, rounding);
+        result.ShouldBe(expected);
+    }
+
     /// <summary>RoundToMinimumUnit tests with AwayFromZero mode.</summary>
     [Theory]
-    [InlineData(100.01, 100.05)]
-    [InlineData(100.02, 100.05)]
-    [InlineData(100.03, 100.05)]
+    [InlineData(100.01, 100.00)] // 2000.2 -> 2000 (Nearest)
+    [InlineData(100.02, 100.00)]
+    [InlineData(100.03, 100.05)] // 2000.6 -> 2001 (Nearest)
     [InlineData(100.04, 100.05)]
-    [InlineData(100.025, 100.05)]
-    public void Aud_RoundToMinimumUnit_WithAwayFromZero_ShouldRoundUp(
+    [InlineData(100.025, 100.05)] // Midpoint -> AwayFromZero
+    public void Aud_RoundToMinimumUnit_WithAwayFromZero_ShouldRoundCorrectly(
         decimal amount, decimal expected)
     {
         var mk = new MoneyKind<AudCurrency>();
@@ -75,6 +88,22 @@ public class MoneyKindRoundableTest
                 amount,
                 rounding);
         
+        result.ShouldBe(expected);
+    }
+
+    /// <summary>Standard integer-scale Rounding tests using JPY.</summary>
+    [Theory]
+    [InlineData(-1.2, MidpointRounding.AwayFromZero, -1.0)]
+    [InlineData(-1.8, MidpointRounding.ToZero, -1.0)]
+    [InlineData(-1.5, MidpointRounding.ToEven, -2.0)]
+    [InlineData(-2.5, MidpointRounding.ToEven, -2.0)]
+    [InlineData(1.2, MidpointRounding.AwayFromZero, 1.0)]
+    [InlineData(1.8, MidpointRounding.ToZero, 1.0)]
+    public void Jpy_RoundToMinimumUnit_Standard_ShouldRoundExactly(
+        decimal amount, MidpointRounding rounding, decimal expected)
+    {
+        var mk = new MoneyKind<JpyCurrency>();
+        var result = mk.RoundToMinimumUnit(amount, rounding);
         result.ShouldBe(expected);
     }
 
