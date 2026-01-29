@@ -82,10 +82,10 @@ public class MoneyKindGlobalLocaleTest
     [InlineData("fr-MC", $"1{Uni.NNBSP}234,56{Uni.Space}{Uni.Euro}")]   // Monaco
     [InlineData("it-SM", $"1.234,56{Uni.Space}{Uni.Euro}")]             // San Marino
     [InlineData("it-VA", $"1.234,56{Uni.Space}{Uni.Euro}")]             // Vatican City
-    [InlineData("bg-BG", $"1{Uni.NBSP}234,56{Uni.Space}{Uni.Lev}")]     // Bulgaria (Lev)
+    [InlineData("bg-BG", $"1{Uni.NBSP}234,56{Uni.Space}{Uni.Euro}")]     // Bulgaria (Lev) -> Should stay Euro
     [InlineData("el-CY", $"1.234,56{Uni.Space}{Uni.Euro}")]             // Cyprus (Greek)
     [InlineData("tr-CY", $"{Uni.Euro}1.234,56")]                        // Cyprus (Turkish): Prefix
-    [InlineData("be-BY", $"1{Uni.NBSP}234,56{Uni.Space}Br")]            // Belarus (Br)
+    [InlineData("be-BY", $"1{Uni.NBSP}234,56{Uni.Space}{Uni.Euro}")]    // Belarus (Br) -> Should stay Euro
     public void Eur_Union_Absolute_Solution_Test(string cultureName, string expected)
     {
         VerifyAbsoluteSolution(cultureName, "EUR", expected);
@@ -101,8 +101,8 @@ public class MoneyKindGlobalLocaleTest
     [InlineData("en-GI", $"{Uni.Pound}1,234.56")]   // Gibraltar
     [InlineData("en-SH", $"{Uni.Pound}1,234.56")]   // Saint Helena
     [InlineData("en-FK", $"{Uni.Pound}1,234.56")]   // Falkland Islands
-    [InlineData("en-MS", "$1,234.56")]              // Montserrat: Uses $ for GBP
-    [InlineData("en-VG", "US$1,234.56")]            // British Virgin Islands: Uses US$ for GBP
+    [InlineData("en-MS", $"{Uni.Pound}1,234.56")]   // Montserrat: Enforce Pound symbol
+    [InlineData("en-VG", $"{Uni.Pound}1,234.56")]   // British Virgin Islands: Enforce Pound symbol
     public void Gbp_Union_Absolute_Solution_Test(string cultureName, string expected)
     {
         VerifyAbsoluteSolution(cultureName, "GBP", expected);
@@ -111,18 +111,18 @@ public class MoneyKindGlobalLocaleTest
     [Theory]
     [InlineData("en-US", "$1,234.56")]
     [InlineData("en-MH", "$1,234.56")]                          // Marshall Islands
-    [InlineData("en-FM", "US$1,234.56")]                        // Micronesia: US$
-    [InlineData("en-PW", "US$1,234.56")]                        // Palau: US$
+    [InlineData("en-FM", "$1,234.56")]                          // Micronesia: Identity forced to $
+    [InlineData("en-PW", "$1,234.56")]                          // Palau: Identity forced to $
     [InlineData("en-AS", "$1,234.56")]                          // American Samoa
     [InlineData("en-VI", "$1,234.56")]                          // US Virgin Islands
-    [InlineData("en-TC", "US$1,234.56")]                        // Turks and Caicos: US$
-    [InlineData("en-VG", "US$1,234.56")]                        // British Virgin Islands: US$
+    [InlineData("en-TC", "$1,234.56")]                          // Turks and Caicos: Identity forced to $
+    [InlineData("en-VG", "$1,234.56")]                          // British Virgin Islands: Identity forced to $
     [InlineData("en-BQ", "$1,234.56")]                          // Caribbean NL (En)
     [InlineData("nl-BQ", $"${Uni.Space}1.234,56")]              // Caribbean NL (Nl): Prefix Space
     [InlineData("es-EC", "$1.234,56")]                          // Ecuador
-    [InlineData("es-PA", "B/.1,234.56")]                        // Panama
-    [InlineData("pt-TL", $"1{Uni.NBSP}234,56{Uni.Space}US$")]   // Timor-Leste: Postfix
-    [InlineData("en-ZW", "US$1,234.56")]                        // Zimbabwe
+    [InlineData("es-PA", "$1,234.56")]                          // Panama: Identity forced to $
+    [InlineData("pt-TL", $"1{Uni.NBSP}234,56{Uni.Space}$")]     // Timor-Leste: Postfix Identity forced to $
+    [InlineData("en-ZW", "$1,234.56")]                          // Zimbabwe: Identity forced to $
     [InlineData("es-SV", "$1,234.56")]                          // El Salvador: Uses $
     public void Usd_Union_Absolute_Solution_Test(string cultureName, string expected)
     {
@@ -138,8 +138,8 @@ public class MoneyKindGlobalLocaleTest
 
     [Theory]
     [InlineData("zh-CN", $"{Uni.Yen}1,234.56")]                 // China
-    [InlineData("zh-HK", "HK$1,234.56")]                        // Hong Kong
-    [InlineData("zh-MO", "MOP$1,234.56")]                       // Macau
+    [InlineData("zh-HK", $"{Uni.Yen}1,234.56")]                 // Hong Kong: Enforce Yen symbol
+    [InlineData("zh-MO", $"{Uni.Yen}1,234.56")]                 // Macau: Enforce Yen symbol
     public void Cny_Absolute_Solution_Test(string cultureName, string expected)
     {
         VerifyAbsoluteSolution(cultureName, "CNY", expected);
@@ -156,10 +156,10 @@ public class MoneyKindGlobalLocaleTest
     }
 
     [Theory]
-    [InlineData("en-AU", "$1,234.00")]  // Australia
-    [InlineData("en-KI", "$1,234.00")]  // Kiribati
-    [InlineData("en-NR", "$1,234.00")]  // Nauru
-    [InlineData("en-TV", "$1,234.00")]  // Tuvalu
+    [InlineData("en-AU", "AUD1,234.00")]  // Australia
+    [InlineData("en-KI", "AUD1,234.00")]  // Kiribati
+    [InlineData("en-NR", "AUD1,234.00")]  // Nauru
+    [InlineData("en-TV", "AUD1,234.00")]  // Tuvalu
     public void Aud_Absolute_Solution_Test(string cultureName, string expected)
     {
         VerifyAbsoluteSolution(cultureName, "AUD", expected);
@@ -174,58 +174,58 @@ public class MoneyKindGlobalLocaleTest
     }
 
     [Theory]
-    [InlineData("fr-SN", $"1{Uni.NNBSP}234{Uni.Space}F{Uni.NNBSP}CFA")]  // Senegal
-    [InlineData("fr-CI", $"1{Uni.NNBSP}234{Uni.Space}F{Uni.NNBSP}CFA")]  // Côte d'Ivoire
-    [InlineData("fr-BJ", $"1{Uni.NNBSP}234{Uni.Space}F{Uni.NNBSP}CFA")]  // Benin
-    [InlineData("fr-BF", $"1{Uni.NNBSP}234{Uni.Space}F{Uni.NNBSP}CFA")]  // Burkina Faso
-    [InlineData("fr-GW", $"1{Uni.NNBSP}234{Uni.Space}F{Uni.NNBSP}CFA")]  // Guinea-Bissau
-    [InlineData("fr-ML", $"1{Uni.NNBSP}234{Uni.Space}F{Uni.NNBSP}CFA")]  // Mali
-    [InlineData("fr-NE", $"1{Uni.NNBSP}234{Uni.Space}F{Uni.NNBSP}CFA")]  // Niger
-    [InlineData("fr-TG", $"1{Uni.NNBSP}234{Uni.Space}F{Uni.NNBSP}CFA")]  // Togo
+    [InlineData("fr-SN", $"1{Uni.NNBSP}234{Uni.Space}XOF")]  // Senegal
+    [InlineData("fr-CI", $"1{Uni.NNBSP}234{Uni.Space}XOF")]  // Côte d'Ivoire
+    [InlineData("fr-BJ", $"1{Uni.NNBSP}234{Uni.Space}XOF")]  // Benin
+    [InlineData("fr-BF", $"1{Uni.NNBSP}234{Uni.Space}XOF")]  // Burkina Faso
+    [InlineData("fr-GW", $"1{Uni.NNBSP}234{Uni.Space}XOF")]  // Guinea-Bissau
+    [InlineData("fr-ML", $"1{Uni.NNBSP}234{Uni.Space}XOF")]  // Mali
+    [InlineData("fr-NE", $"1{Uni.NNBSP}234{Uni.Space}XOF")]  // Niger
+    [InlineData("fr-TG", $"1{Uni.NNBSP}234{Uni.Space}XOF")]  // Togo
     public void Xof_Union_Absolute_Solution_Test(string cultureName, string expected)
     {
         VerifyAbsoluteSolution(cultureName, "XOF", expected);
     }
 
     [Theory]
-    [InlineData("fr-CM", $"1{Uni.NNBSP}234{Uni.Space}FCFA")]  // Cameroon
-    [InlineData("fr-CF", $"1{Uni.NNBSP}234{Uni.Space}FCFA")]  // Central African Republic
-    [InlineData("fr-TD", $"1{Uni.NNBSP}234{Uni.Space}FCFA")]  // Chad
-    [InlineData("fr-CG", $"1{Uni.NNBSP}234{Uni.Space}FCFA")]  // Republic of the Congo
-    [InlineData("fr-GQ", $"1{Uni.NNBSP}234{Uni.Space}FCFA")]  // Equatorial Guinea
-    [InlineData("fr-GA", $"1{Uni.NNBSP}234{Uni.Space}FCFA")]  // Gabon
+    [InlineData("fr-CM", $"1{Uni.NNBSP}234{Uni.Space}XAF")]  // Cameroon
+    [InlineData("fr-CF", $"1{Uni.NNBSP}234{Uni.Space}XAF")]  // Central African Republic
+    [InlineData("fr-TD", $"1{Uni.NNBSP}234{Uni.Space}XAF")]  // Chad
+    [InlineData("fr-CG", $"1{Uni.NNBSP}234{Uni.Space}XAF")]  // Republic of the Congo
+    [InlineData("fr-GQ", $"1{Uni.NNBSP}234{Uni.Space}XAF")]  // Equatorial Guinea
+    [InlineData("fr-GA", $"1{Uni.NNBSP}234{Uni.Space}XAF")]  // Gabon
     public void Xaf_Union_Absolute_Solution_Test(string cultureName, string expected)
     {
         VerifyAbsoluteSolution(cultureName, "XAF", expected);
     }
 
     [Theory]
-    [InlineData("en-AG", "$1,234.55")]  // Antigua and Barbuda
-    [InlineData("en-DM", "$1,234.55")]  // Dominica
-    [InlineData("en-GD", "$1,234.55")]  // Grenada
-    [InlineData("en-KN", "$1,234.55")]  // Saint Kitts and Nevis
-    [InlineData("en-LC", "$1,234.55")]  // Saint Lucia
-    [InlineData("en-VC", "$1,234.55")]  // Saint Vincent and the Grenadines
+    [InlineData("en-AG", "EC$1,234.55")]  // Antigua and Barbuda
+    [InlineData("en-DM", "EC$1,234.55")]  // Dominica
+    [InlineData("en-GD", "EC$1,234.55")]  // Grenada
+    [InlineData("en-KN", "EC$1,234.55")]  // Saint Kitts and Nevis
+    [InlineData("en-LC", "EC$1,234.55")]  // Saint Lucia
+    [InlineData("en-VC", "EC$1,234.55")]  // Saint Vincent and the Grenadines
     public void Xcd_Union_Absolute_Solution_Test(string cultureName, string expected)
     {
         VerifyAbsoluteSolution(cultureName, "XCD", expected);
     }
 
     [Theory]
-    [InlineData("en-ZA", $"R1{Uni.NBSP}234,50")]  // South Africa (English) - uses R and NBSP
-    [InlineData("af-ZA", $"R1{Uni.NBSP}234,50")]  // South Africa (Afrikaans) - uses R and NBSP
-    [InlineData("en-NA", "$1,234.50")]            // Namibia (English) - uses $ and Comma separator
-    [InlineData("af-NA", $"$1{Uni.NBSP}234,50")]  // Namibia (Afrikaans) - uses $ and NBSP
+    [InlineData("en-ZA", $"ZAR1{Uni.NBSP}234,50")]  // South Africa (English)
+    [InlineData("af-ZA", $"ZAR1{Uni.NBSP}234,50")]  // South Africa (Afrikaans)
+    [InlineData("en-NA", "ZAR1,234.50")]            // Namibia (English)
+    [InlineData("af-NA", $"ZAR1{Uni.NBSP}234,50")]  // Namibia (Afrikaans)
     public void Zar_Union_Absolute_Solution_Test(string cultureName, string expected)
     {
         VerifyAbsoluteSolution(cultureName, "ZAR", expected);
     }
 
     [Theory]
-    [InlineData("en-NZ", "$1,234.50")]  // New Zealand
-    [InlineData("en-CK", "$1,234.50")]  // Cook Islands
-    [InlineData("en-NU", "$1,234.50")]  // Niue
-    [InlineData("en-TK", "$1,234.50")]  // Tokelau
+    [InlineData("en-NZ", "NZ$1,234.50")]  // New Zealand
+    [InlineData("en-CK", "NZ$1,234.50")]  // Cook Islands
+    [InlineData("en-NU", "NZ$1,234.50")]  // Niue
+    [InlineData("en-TK", "NZ$1,234.50")]  // Tokelau
     public void Nzd_Union_Absolute_Solution_Test(string cultureName, string expected)
     {
         VerifyAbsoluteSolution(cultureName, "NZD", expected);

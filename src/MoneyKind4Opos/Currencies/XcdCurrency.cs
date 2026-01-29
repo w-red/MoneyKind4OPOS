@@ -5,7 +5,10 @@ using System.Globalization;
 namespace MoneyKind4Opos.Currencies;
 
 /// <summary>Eastern Caribbean Dollar</summary>
-public class XcdCurrency : ICurrency, ICashCountFormattable<XcdCurrency>, ICurrencyFormattable<XcdCurrency>
+public class XcdCurrency :
+    ICurrency,
+    ICashCountFormattable<XcdCurrency>,
+    ICurrencyFormattable<XcdCurrency>
 {
     private static readonly NumberFormatInfo _nfi = new()
     {
@@ -23,7 +26,13 @@ public class XcdCurrency : ICurrency, ICashCountFormattable<XcdCurrency>, ICurre
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Global { get; } = new(
         Symbol: "EC$",
-        NumberFormat: (NumberFormatInfo)_nfi.Clone(),
+        NumberFormat: new NumberFormatInfo 
+        { 
+            CurrencySymbol = "EC$", 
+            CurrencyGroupSeparator = ",", 
+            CurrencyDecimalSeparator = ".", 
+            CurrencyDecimalDigits = 2 
+        },
         DisplayFormat: new(SymbolPlacement.Prefix)
     );
 

@@ -99,16 +99,10 @@ public record CurrencyFormattingOptions(
             );
 
         // Determine symbol placement based on CurrencyPositivePattern
-        var placement = nfi.CurrencyPositivePattern switch
-        {
-            0 or 2 => SymbolPlacement.Prefix,  // $n or $ n
-            _ => SymbolPlacement.Postfix       // n$ or n $
-        };
-
         return new CurrencyFormattingOptions(
             Symbol: nfi.CurrencySymbol,
             NumberFormat: nfi,
-            DisplayFormat: new CurrencyDisplayFormat(placement)
+            DisplayFormat: new CurrencyDisplayFormat(GetPlacement(nfi))
         );
     }
 
@@ -155,18 +149,34 @@ public record CurrencyFormattingOptions(
     {
         var nfi = (NumberFormatInfo)culture.NumberFormat.Clone();
 
+        // Merge currency identity (preserve predefined symbol and digits)
+        ApplyIdentity(nfi);
+
         return this with
         {
             Symbol = nfi.CurrencySymbol,
             NumberFormat = nfi,
             DisplayFormat = DisplayFormat with
             {
-                Placement = nfi.CurrencyPositivePattern switch
-                {
-                    0 or 2 => SymbolPlacement.Prefix,
-                    _ => SymbolPlacement.Postfix
-                }
+                Placement = GetPlacement(nfi)
             }
+        };
+    }
+
+    /// <summary>Apply currency identity to the specified number format.</summary>
+    private void ApplyIdentity(NumberFormatInfo target)
+    {
+        target.CurrencySymbol = NumberFormat.CurrencySymbol;
+        target.CurrencyDecimalDigits = NumberFormat.CurrencyDecimalDigits;
+    }
+
+    /// <summary>Determines symbol placement from NumberFormatInfo pattern.</summary>
+    private static SymbolPlacement GetPlacement(NumberFormatInfo nfi)
+    {
+        return nfi.CurrencyPositivePattern switch
+        {
+            0 or 2 => SymbolPlacement.Prefix,
+            _ => SymbolPlacement.Postfix
         };
     }
 }

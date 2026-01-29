@@ -5,7 +5,10 @@ using System.Globalization;
 namespace MoneyKind4Opos.Currencies;
 
 /// <summary>West African CFA Franc</summary>
-public class XofCurrency : ICurrency, ICashCountFormattable<XofCurrency>, ICurrencyFormattable<XofCurrency>
+public class XofCurrency :
+    ICurrency,
+    ICashCountFormattable<XofCurrency>,
+    ICurrencyFormattable<XofCurrency>
 {
     private static readonly NumberFormatInfo _nfi = new()
     {
@@ -25,7 +28,13 @@ public class XofCurrency : ICurrency, ICashCountFormattable<XofCurrency>, ICurre
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Global { get; } = new(
         Symbol: "XOF",
-        NumberFormat: (NumberFormatInfo)_nfi.Clone(),
+        NumberFormat: new NumberFormatInfo 
+        { 
+            CurrencySymbol = "XOF", 
+            CurrencyGroupSeparator = " ", 
+            CurrencyDecimalSeparator = ",", 
+            CurrencyDecimalDigits = 0 
+        },
         DisplayFormat: new(SymbolPlacement.Prefix)
     );
 

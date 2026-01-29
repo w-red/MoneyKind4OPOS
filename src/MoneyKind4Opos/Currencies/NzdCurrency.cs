@@ -5,7 +5,10 @@ using System.Globalization;
 namespace MoneyKind4Opos.Currencies;
 
 /// <summary>New Zealand Dollar</summary>
-public class NzdCurrency : ICurrency, ICashCountFormattable<NzdCurrency>, ICurrencyFormattable<NzdCurrency>
+public class NzdCurrency :
+    ICurrency,
+    ICashCountFormattable<NzdCurrency>,
+    ICurrencyFormattable<NzdCurrency>
 {
     private static readonly NumberFormatInfo _nfi = new()
     {
@@ -23,7 +26,13 @@ public class NzdCurrency : ICurrency, ICashCountFormattable<NzdCurrency>, ICurre
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Global { get; } = new(
         Symbol: "NZ$",
-        NumberFormat: (NumberFormatInfo)_nfi.Clone(),
+        NumberFormat: new NumberFormatInfo 
+        { 
+            CurrencySymbol = "NZ$", 
+            CurrencyGroupSeparator = ",", 
+            CurrencyDecimalSeparator = ".", 
+            CurrencyDecimalDigits = 2 
+        },
         DisplayFormat: new(SymbolPlacement.Prefix)
     );
 

@@ -5,7 +5,10 @@ using System.Globalization;
 namespace MoneyKind4Opos.Currencies;
 
 /// <summary>South African Rand</summary>
-public class ZarCurrency : ICurrency, ICashCountFormattable<ZarCurrency>, ICurrencyFormattable<ZarCurrency>
+public class ZarCurrency :
+    ICurrency,
+    ICashCountFormattable<ZarCurrency>,
+    ICurrencyFormattable<ZarCurrency>
 {
     private static readonly NumberFormatInfo _nfi = new()
     {
