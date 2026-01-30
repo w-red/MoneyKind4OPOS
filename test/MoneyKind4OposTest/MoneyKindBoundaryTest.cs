@@ -4,9 +4,7 @@ using Shouldly;
 
 namespace MoneyKind4OposTest;
 
-/// <summary>
-/// Boundary tests for change calculation logic (Greedy algorithm).
-/// </summary>
+/// <summary>Boundary tests for change calculation logic (Greedy algorithm).</summary>
 public class MoneyKindBoundaryTest
 {
     [Fact]
@@ -38,7 +36,7 @@ public class MoneyKindBoundaryTest
 
         result.IsSucceed.ShouldBeFalse();
         result.RemainingAmount.ShouldBe(1m);
-        result.MissingChange[1].ShouldBe(1);
+        result.MissingChange[1, CashType.Coin].ShouldBe(1);
     }
 
     [Fact]
