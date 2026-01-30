@@ -4,9 +4,7 @@ using Shouldly;
 
 namespace MoneyKind4OposTest;
 
-/// <summary>
-/// Tests for C# 14 Extension Types defined in CurrencyExtensions.
-/// </summary>
+/// <summary>Tests for C# 14 Extension Types defined in CurrencyExtensions.</summary>
 public class ExtensionTypesTest
 {
     [Theory]
