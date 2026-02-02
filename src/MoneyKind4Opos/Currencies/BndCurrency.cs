@@ -4,7 +4,12 @@ using System.Globalization;
 
 namespace MoneyKind4Opos.Currencies;
 
-/// <summary>New Zealand Dollar</summary>
+/// <summary>Brunei Dollar Currency</summary>
+/// <remarks>
+/// <list type="bullet">
+/// <item><term>Currency</term><description><seealso href="https://www.bdcb.gov.bn/currency/circulation">BDCB - Currency in Circulation</seealso></description></item>
+/// </list>
+/// </remarks>
 public class BndCurrency :
     ICurrency,
     ICashCountFormattable<BndCurrency>,
