@@ -5,7 +5,7 @@ using Shouldly;
 namespace MoneyKind4OposTest;
 
 /// <summary>MoneyKind&lt;AedCurrency&gt; tests.</summary>
-public class MoneyKindAedTest
+public class MoneyKindQarTest
 {
     [Theory]
     [InlineData("0.25:1,1:1;5:1", 6.25)]
