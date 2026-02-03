@@ -8,8 +8,8 @@ namespace MoneyKind4OposTest;
 public class MoneyKindSekTest
 {
     [Theory]
-    [InlineData("0.01:1;1:1", 1.01)]
-    [InlineData("0.25:1;100:1", 100.25)]
+    [InlineData("1:1;20:1", 21)]
+    [InlineData("10:1;1000:1", 1010)]
     public void Sek_Parse_ShouldWork(string input, decimal expected)
     {
          var mk = MoneyKind<SekCurrency>.Parse(input);

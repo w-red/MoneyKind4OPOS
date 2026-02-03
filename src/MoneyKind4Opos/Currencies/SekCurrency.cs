@@ -27,7 +27,7 @@ public class SekCurrency :
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.SEK;
     /// <inheritdoc/>
-    public static decimal MinimumUnit => 0.5m;
+    public static decimal MinimumUnit => 1m;
 
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Global { get; } = new(
