@@ -21,7 +21,7 @@ public class ClpCurrency :
         CurrencySymbol = "$",
         CurrencyGroupSeparator = ",",
         CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 2,
+        CurrencyDecimalDigits = 0,
     };
 
     /// <inheritdoc/>
