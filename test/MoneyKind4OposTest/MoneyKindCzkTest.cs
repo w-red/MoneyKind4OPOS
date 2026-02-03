@@ -9,8 +9,8 @@ namespace MoneyKind4OposTest;
 public class MoneyKindCzkTest
 {
     [Theory]
-    [InlineData("0.01:1,1:1;500:1", 501.01)]
-    [InlineData("0.5:1;50:1,100:1", 150.5)]
+    [InlineData("1:1;100:1", 101)]
+    [InlineData("50:1;5000:1", 5050)]
     public void Czk_Parse_ShouldWork(string input, decimal expected)
     {
          var mk = MoneyKind<CzkCurrency>.Parse(input);

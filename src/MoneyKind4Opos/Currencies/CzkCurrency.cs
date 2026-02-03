@@ -27,7 +27,7 @@ public class CzkCurrency :
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.CZK;
     /// <inheritdoc/>
-    public static decimal MinimumUnit => 10m;
+    public static decimal MinimumUnit => 1m;
 
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Global { get; } = new(
