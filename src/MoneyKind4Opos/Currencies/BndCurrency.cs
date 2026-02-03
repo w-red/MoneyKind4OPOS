@@ -54,11 +54,11 @@ public class BndCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(0.01m, CashType.Coin, "1 Cents", "1¢"),
-        new(0.05m, CashType.Coin, "5 Cents", "10¢"),
-        new(0.10m, CashType.Coin, "10 Cents", "10¢"),
-        new(0.20m, CashType.Coin, "20 Cents", "20¢"),
-        new(0.50m, CashType.Coin, "50 Cents", "50¢"),
+        new(0.01m, CashType.Coin, "1 Cent Coin", "1¢"),
+        new(0.05m, CashType.Coin, "5 Cents Coin", "5¢"),
+        new(0.10m, CashType.Coin, "10 Cents Coin", "10¢"),
+        new(0.20m, CashType.Coin, "20 Cents Coin", "20¢"),
+        new(0.50m, CashType.Coin, "50 Cents Coin", "50¢"),
     ];
 
     /// <inheritdoc/>
