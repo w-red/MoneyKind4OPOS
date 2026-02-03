@@ -25,7 +25,7 @@ public class MxnCurrency :
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.MXN;
     /// <inheritdoc/>
-    public static decimal MinimumUnit => 0.01m;
+    public static decimal MinimumUnit => 0.1m;
 
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Global { get; } = new(
