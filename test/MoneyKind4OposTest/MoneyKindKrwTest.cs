@@ -9,8 +9,8 @@ namespace MoneyKind4OposTest;
 public class MoneyKindKrwTest
 {
     [Theory]
-    [InlineData("0.01:1,1:1;500:1", 501.01)]
-    [InlineData("0.5:1;50:1,100:1", 150.5)]
+    [InlineData("1:1;1000:1", 1001)]
+    [InlineData("500:1;50000:1", 50500)]
     public void Krw_Parse_ShouldWork(string input, decimal expected)
     {
          var mk = MoneyKind<KrwCurrency>.Parse(input);
