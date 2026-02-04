@@ -3,8 +3,9 @@ using MoneyKind4Opos.Currencies;
 using MoneyKind4Opos.Currencies.Interfaces;
 using Shouldly;
 
-namespace MoneyKind4OPOSTest;
+namespace MoneyKind4OposTest;
 
+/// <summary>MoneyKind&lt;CadCurrency&gt; tests.</summary>
 public class MoneyKindCadTest
 {
     [Theory]

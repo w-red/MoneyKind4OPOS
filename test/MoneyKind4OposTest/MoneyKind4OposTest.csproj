@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\MoneyKind4OPOS\MoneyKind4Opos.csproj" />
+    <ProjectReference Include="..\..\src\MoneyKind4Opos\MoneyKind4Opos.csproj" />
   </ItemGroup>
 
 </Project>

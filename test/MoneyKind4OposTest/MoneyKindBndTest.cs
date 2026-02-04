@@ -4,6 +4,7 @@ using Shouldly;
 
 namespace MoneyKind4OposTest;
 
+/// <summary>MoneyKind&lt;BndCurrency&gt; tests.</summary>
 public class MoneyKindBndTest
 {
     [Theory]

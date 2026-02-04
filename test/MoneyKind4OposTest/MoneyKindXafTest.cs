@@ -5,6 +5,7 @@ using Shouldly;
 
 namespace MoneyKind4OPOSTest;
 
+/// <summary>MoneyKind&lt;XafCurrency&gt; tests.</summary>
 public class MoneyKindXafTest
 {
     [Theory]

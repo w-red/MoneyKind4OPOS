@@ -5,6 +5,7 @@ using Shouldly;
 
 namespace MoneyKind4OPOSTest;
 
+/// <summary>MoneyKind&lt;NokCurrency&gt; tests.</summary>
 public class MoneyKindNokTest
 {
     [Theory]

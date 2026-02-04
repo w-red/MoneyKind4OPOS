@@ -3,7 +3,7 @@ using MoneyKind4Opos.Currencies.Interfaces;
 using Shouldly;
 using System.Globalization;
 
-namespace MoneyKind4OPOSTest.InterfaceTests;
+namespace MoneyKind4OposTest.InterfaceTests;
 
 /// <summary>IMoneyKind tests using Stub implementation.</summary>
 public class IMoneyKindLogicTest

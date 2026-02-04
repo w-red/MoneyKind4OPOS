@@ -5,6 +5,7 @@ using Xunit;
 
 namespace MoneyKind4OposTest;
 
+/// <summary>MoneyKind&lt;JodCurrency&gt; tests.</summary>
 public class MoneyKindJodTest
 {
     [Theory]

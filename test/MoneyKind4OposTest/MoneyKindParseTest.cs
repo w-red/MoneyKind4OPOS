@@ -4,9 +4,7 @@ using Shouldly;
 
 namespace MoneyKind4OposTest;
 
-/// <summary>
-/// Tests for MoneyKind.Parse and related parsing logic.
-/// </summary>
+/// <summary>Tests for MoneyKind. Parse and related parsing logic.</summary>
 public class MoneyKindParseTest
 {
     [Fact]

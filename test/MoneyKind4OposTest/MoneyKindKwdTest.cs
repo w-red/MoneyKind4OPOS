@@ -5,6 +5,7 @@ using Xunit;
 
 namespace MoneyKind4OposTest;
 
+/// <summary>MoneyKind&lt;KwdCurrency&gt; tests.</summary>
 public class MoneyKindKwdTest
 {
     [Theory]

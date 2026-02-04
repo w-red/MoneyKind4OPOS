@@ -3,8 +3,9 @@ using MoneyKind4Opos.Currencies.Interfaces;
 using MoneyKind4Opos.Codes;
 using Shouldly;
 
-namespace MoneyKind4OPOSTest;
+namespace MoneyKind4OposTest;
 
+/// <summary>MoneyKind&lt;XcdCurrency&gt; tests.</summary>
 public class MoneyKindXcdTest
 {
     [Theory]

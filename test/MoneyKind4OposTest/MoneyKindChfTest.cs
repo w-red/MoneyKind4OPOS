@@ -4,7 +4,7 @@ using Shouldly;
 
 namespace MoneyKind4OposTest;
 
-/// <summary>Tests for Swiss Franc (CHF) specific logic and rounding.</summary>
+/// <summary>MoneyKind&lt;ChfCurrency&gt; tests.</summary>
 public class MoneyKindChfTest
 {
     [Fact]

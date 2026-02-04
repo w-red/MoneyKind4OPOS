@@ -5,9 +5,7 @@ using Shouldly;
 
 namespace MoneyKind4OPOSTest;
 
-/// <summary>
-/// Tests for MoneyKind with GbpCurrency (British Pound).
-/// </summary>
+/// <summary>Tests for MoneyKind with GbpCurrency (British Pound).</summary>
 public class MoneyKindGbpTest
 {
     [Fact]

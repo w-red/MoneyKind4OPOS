@@ -2,7 +2,7 @@ using MoneyKind4Opos.Codes;
 using MoneyKind4Opos.Currencies;
 using Shouldly;
 
-namespace MoneyKind4OPOSTest.Currencies;
+namespace MoneyKind4OposTest.Currencies;
 
 public class JpyCurrencyTest
 {

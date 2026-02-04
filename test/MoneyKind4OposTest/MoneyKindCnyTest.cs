@@ -3,7 +3,7 @@ using MoneyKind4Opos.Currencies.Interfaces;
 using MoneyKind4Opos.Extensions;
 using Shouldly;
 
-namespace MoneyKind4OPOSTest;
+namespace MoneyKind4OposTest;
 
 /// <summary>Tests for MoneyKind with CnyCurrency (Complex case with overlaps).</summary>
 public class MoneyKindCnyTest

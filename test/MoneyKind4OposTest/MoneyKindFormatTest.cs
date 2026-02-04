@@ -4,9 +4,7 @@ using Shouldly;
 
 namespace MoneyKind4OposTest;
 
-/// <summary>
-/// Tests for MoneyKind.ToCashCountsString.
-/// </summary>
+/// <summary>Tests for MoneyKind.ToCashCountsString.</summary>
 public class MoneyKindFormatTest
 {
     [Fact]

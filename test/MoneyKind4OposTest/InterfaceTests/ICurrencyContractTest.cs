@@ -1,6 +1,6 @@
 using Shouldly;
 
-namespace MoneyKind4OPOSTest.InterfaceTests;
+namespace MoneyKind4OposTest.InterfaceTests;
 
 /// <summary>ICurrency contract tests.</summary>
 public class ICurrencyContractTest

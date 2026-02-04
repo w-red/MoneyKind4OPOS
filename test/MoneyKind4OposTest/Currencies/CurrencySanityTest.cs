@@ -2,7 +2,7 @@ using MoneyKind4Opos.Currencies.Interfaces;
 using Shouldly;
 using System.Reflection;
 
-namespace MoneyKind4OPOSTest.Currencies;
+namespace MoneyKind4OposTest.Currencies;
 
 /// <summary>Sanity tests for all currency implementations.</summary>
 public class CurrencySanityTest
