@@ -201,7 +201,6 @@ public class CurrencyFormattingOptionsTest
         options.NumberFormat.CurrencyDecimalDigits.ShouldBe(2);
     }
 
-
     [Fact]
     public void FromIso4217_CHF_GermanSwiss_ShouldFormatCorrectly()
     {

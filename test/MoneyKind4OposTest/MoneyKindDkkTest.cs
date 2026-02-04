@@ -1,7 +1,6 @@
 using MoneyKind4Opos.Currencies;
 using MoneyKind4Opos.Currencies.Interfaces;
 using Shouldly;
-using Xunit;
 
 namespace MoneyKind4OposTest;
 
