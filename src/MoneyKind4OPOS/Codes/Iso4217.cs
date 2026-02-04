@@ -273,7 +273,7 @@ public enum Iso4217
     /// <summary>Syrian Pound</summary>
     SYP = 760,
     /// <summary>New Taiwan Dollar</summary>
-    TWD = 901,
+    TWD = 158,
     /// <summary>Somoni</summary>
     TJS = 972,
     /// <summary>Tanzanian Shilling</summary>
