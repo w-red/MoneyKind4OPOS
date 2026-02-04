@@ -4,10 +4,11 @@ using System.Globalization;
 
 namespace MoneyKind4Opos.Currencies;
 
-/// <summary>Saudi Riyal Currency</summary>
+/// <summary>Cayman Islands Dollar Currency</summary>
 /// <remarks>
 /// <list type="bullet">
-/// <item><term>Currency</term><description><seealso href="https://www.sama.gov.sa/en-US/Currency/pages/sixthissue.aspx">SAMA - Sixth Issue</seealso></description></item>
+/// <item><term>Banknotes</term><description><seealso href="https://www.cima.ky/circulating-banknotes">CIMA - Circulating Banknotes</seealso></description></item>
+/// <item><term>Coins</term><description><seealso href="https://www.cima.ky/circulating-coins">CIMA - Circulating Coins</seealso></description></item>
 /// </list>
 /// </remarks>
 public class KydCurrency :
