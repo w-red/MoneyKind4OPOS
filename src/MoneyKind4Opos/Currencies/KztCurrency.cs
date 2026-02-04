@@ -4,10 +4,11 @@ using System.Globalization;
 
 namespace MoneyKind4Opos.Currencies;
 
-/// <summary>Belarusian Ruble Currency</summary>
+/// <summary>Kazakhstani Tenge Currency</summary>
 /// <remarks>
 /// <list type="bullet">
-/// <item><term>Banknotes and Coins</term><description><seealso href="https://president.gov.by/en/belarus/economics/banking-system/national-currency">National Currency - President of the Republic of Belarus</seealso></description></item>
+/// <item><term>Bills</term><description><seealso href="https://nationalbank.kz/en/news/banknoty">Banknotes - NBRK</seealso></description></item>
+/// <item><term>Coins</term><description><seealso href="https://nationalbank.kz/en/catalog/coins">Coins - NBRK</seealso></description></item>
 /// </list>
 /// </remarks>
 public class KztCurrency :
