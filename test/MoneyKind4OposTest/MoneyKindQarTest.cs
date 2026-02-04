@@ -8,8 +8,8 @@ namespace MoneyKind4OposTest;
 public class MoneyKindQarTest
 {
     [Theory]
-    [InlineData("0.005:1;1:1", 1.005)]
-    [InlineData("0.050:1;0.100:1,50:1", 50.150)]
+    [InlineData("0.01:1;1:1", 1.01)]
+    [InlineData("0.05:1,0.1:1;50:1", 50.15)]
     public void Qar_Parse_ShouldWork(string input, decimal expected)
     {
          var mk = MoneyKind<QarCurrency>.Parse(input);

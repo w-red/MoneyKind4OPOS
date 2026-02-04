@@ -7,7 +7,8 @@ namespace MoneyKind4Opos.Currencies;
 /// <summary>Qatari Riyal Currency</summary>
 /// <remarks>
 /// <list type="bullet">
-/// <item><term>Currency</term><description><seealso href="https://cbo.gov.om/Pages/Currency.aspx">CBO - currency</seealso></description></item>
+/// <item><term>Banknotes</term><description><seealso href="https://www.qcb.gov.qa/en/Pages/HistoryOfBanknotes.aspx">Banknotes - QCB</seealso></description></item>
+/// <item><term>Coins</term><description><seealso href="https://marhaba.qa/currency-and-banking-sector-in-qatar/">Coins - QCB</seealso></description></item>
 /// </list>
 /// </remarks>
 public class QarCurrency :
@@ -18,27 +19,27 @@ public class QarCurrency :
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.QAR;
     /// <inheritdoc/>
-    public static decimal MinimumUnit => 0.005m;
+    public static decimal MinimumUnit => 0.01m;
 
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits =>
     [
-        new SubsidiaryUnit("Baisa", null, 0.001m),
+        new SubsidiaryUnit("Dirham", null, 0.01m),
     ];
 
     private static readonly NumberFormatInfo _nfi = new()
     {
-        CurrencySymbol = "Rials",
+        CurrencySymbol = "QR",
         CurrencyPositivePattern = 3, // n $
         CurrencyGroupSeparator = ",",
         CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 3,
+        CurrencyDecimalDigits = 2,
     };
 
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Global { get; } =
         new(
-            Symbol: "Dinars",
+            Symbol: "QR",
             NumberFormat: _nfi,
             DisplayFormat: new(SymbolPlacement.Postfix)
         );
@@ -49,21 +50,21 @@ public class QarCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(0.005m, CashType.Coin, "5 Baisa Coin", "5b"),
-        new(0.01m, CashType.Coin, "10 Baisa Coin", "10b"),
-        new(0.025m, CashType.Coin, "25 Baisa Coin", "25b"),
-        new(0.05m, CashType.Coin, "50 Baisa Coin", "50b"),
+        new(0.01m, CashType.Coin, "1 Dirham Coin", "1d"),
+        new(0.05m, CashType.Coin, "5 Dirham Coin", "5d"),
+        new(0.10m, CashType.Coin, "10 Dirham Coin", "10d"),
+        new(0.25m, CashType.Coin, "25 Dirham Coin", "25d"),
+        new(0.50m, CashType.Coin, "50 Dirham Coin", "50d"),
     ];
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Bills =>
     [
-        new(0.1m, CashType.Bill, "100 Baisa Coin", "100b"),
-        new(0.5m, CashType.Bill, "1/2 Rial Bill", "1/2 Rial"),
-        new(1.0m, CashType.Bill, "1 Rial Bill", "1 Rial"),
-        new(5.0m, CashType.Bill, "5 Rials Bill", "5 Rials"),
-        new(10.0m, CashType.Bill, "10 Rials Bill", "10 Rials"),
-        new(20.0m, CashType.Bill, "20 Rials Bill", "20 Rials"),
-        new(50.0m, CashType.Bill, "50 Rials Bill", "50 Rials"),
+        new(1.0m, CashType.Bill, "1 QR Bill", "1 QR"),
+        new(5.0m, CashType.Bill, "5 QR Bill", "5 QR"),
+        new(10.0m, CashType.Bill, "10 QR Bill", "10 QR"),
+        new(50.0m, CashType.Bill, "50 QR Bill", "50 QR"),
+        new(100.0m, CashType.Bill, "100 QR Bill", "100 QR"),
+        new(200.0m, CashType.Bill, "200 QR Bill", "200 QR"),
     ];
 
     /// <inheritdoc/>
