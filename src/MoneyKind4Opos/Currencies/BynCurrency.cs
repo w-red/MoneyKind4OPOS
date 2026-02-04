@@ -4,6 +4,12 @@ using System.Globalization;
 
 namespace MoneyKind4Opos.Currencies;
 
+/// <summary>Belarusian Ruble Currency</summary>
+/// <remarks>
+/// <list type="bullet">
+/// <item><term>Banknotes and Coins</term><description><seealso href="https://president.gov.by/en/belarus/economics/banking-system/national-currency">National Currency - President of the Republic of Belarus</seealso></description></item>
+/// </list>
+/// </remarks>
 public class BynCurrency :
     ICurrency,
     ICashCountFormattable<BynCurrency>,
