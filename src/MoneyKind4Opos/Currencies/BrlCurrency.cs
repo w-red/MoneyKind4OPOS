@@ -4,7 +4,7 @@ using System.Globalization;
 
 namespace MoneyKind4Opos.Currencies;
 
-/// <summary>Jordanian Dinar Currency</summary>
+/// <summary>Brazilian Real Currency</summary>
 /// <remarks>
 /// <list type="bullet">
 /// <item><term>Bills</term><description><seealso href="https://www.bcb.gov.br/en/banknotesandcoins/firstseriesreal">Banknotes - BCB</seealso></description></item>
