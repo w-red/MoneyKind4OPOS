@@ -32,7 +32,7 @@ public class AedCurrency :
         CurrencyPositivePattern = 3, // n $
         CurrencyGroupSeparator = ",",
         CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 3,
+        CurrencyDecimalDigits = 2,
     };
 
     /// <inheritdoc/>
