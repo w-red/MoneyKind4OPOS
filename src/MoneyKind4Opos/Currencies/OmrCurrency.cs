@@ -32,13 +32,13 @@ public class OmrCurrency :
         CurrencyPositivePattern = 3, // n $
         CurrencyGroupSeparator = ",",
         CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 3,
+        CurrencyDecimalDigits = 2,
     };
 
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Global { get; } =
         new(
-            Symbol: "Dinars",
+            Symbol: "Rials",
             NumberFormat: _nfi,
             DisplayFormat: new(SymbolPlacement.Postfix)
         );
