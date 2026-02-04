@@ -18,12 +18,14 @@ public class JodCurrency :
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.JOD;
     /// <inheritdoc/>
-    public static decimal MinimumUnit => 0.010m;
+    public static decimal MinimumUnit => 0.001m;
 
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits =>
     [
-        new SubsidiaryUnit("Piastres", null, 0.010m),
+        new SubsidiaryUnit("Dirham", null, 0.100m),
+        new SubsidiaryUnit("Piastre", null, 0.010m),
+        new SubsidiaryUnit("Fils", null, 0.001m),
     ];
 
     private static readonly NumberFormatInfo _nfi = new()
@@ -49,20 +51,22 @@ public class JodCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(0.01m, CashType.Coin, "1 Piastres Coin", "1p"),
+        new(0.001m, CashType.Coin, "1 Fils Coin", "1f"),
+        new(0.005m, CashType.Coin, "5 Fils Coin", "5f"),
+        new(0.01m, CashType.Coin, "1 Piastre Coin", "1p"),
         new(0.05m, CashType.Coin, "5 Piastres Coin", "5p"),
         new(0.1m, CashType.Coin, "10 Piastres Coin", "10p"),
-        new(0.25m, CashType.Coin, "1/4 Dinars Coin", "1/4 Dinars"),
-        new(0.5m, CashType.Coin, "1/2 Dinars Coin", "1/2 Dinars"),
+        new(0.25m, CashType.Coin, "1/4 JD Coin", "1/4 JD"),
+        new(0.5m, CashType.Coin, "1/2 JD Coin", "1/2 JD"),
     ];
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Bills =>
     [
-        new(1.0m, CashType.Bill, "1 Dinars Bill", "1 Dinars"),
-        new(5.0m, CashType.Bill, "5 Dinars Bill", "5 Dinars"),
-        new(10.0m, CashType.Bill, "10 Dinars Bill", "10 Dinars"),
-        new(25.0m, CashType.Bill, "25 Dinars Bill", "25 Dinars"),
-        new(50.0m, CashType.Bill, "50 Dinars Bill", "50 Dinars"),
+        new(1.0m, CashType.Bill, "1 JD Bill", "1 JD"),
+        new(5.0m, CashType.Bill, "5 JD Bill", "5 JD"),
+        new(10.0m, CashType.Bill, "10 JD Bill", "10 JD"),
+        new(20.0m, CashType.Bill, "20 JD Bill", "20 JD"),
+        new(50.0m, CashType.Bill, "50 JD Bill", "50 JD"),
     ];
 
     /// <inheritdoc/>
