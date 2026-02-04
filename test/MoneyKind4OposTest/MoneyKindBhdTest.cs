@@ -8,8 +8,8 @@ namespace MoneyKind4OposTest;
 public class MoneyKindBhdTest
 {
     [Theory]
-    [InlineData("0.005:1;1:1", 1.005)]
-    [InlineData("0.5:1;0.5:1,25:1", 26.000)]
+    [InlineData("0.5:1;0.5:1,20:1", 21)]
+    [InlineData("0.1:1;1:1", 1.1)]
     public void Bhd_Parse_ShouldWork(string input, decimal expected)
     {
          var mk = MoneyKind<BhdCurrency>.Parse(input);

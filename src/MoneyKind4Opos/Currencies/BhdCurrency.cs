@@ -7,8 +7,7 @@ namespace MoneyKind4Opos.Currencies;
 /// <summary>Bahraini Dinar Currency</summary>
 /// <remarks>
 /// <list type="bullet">
-/// <item><term>Bill</term><description><seealso href="https://www.cbb.gov.bh/currency-issue/">CBB - Currency Issue</seealso></description></item>
-/// <item><term>Coin</term><description><seealso href="https://www.cbb.gov.bh/current-coins/">Current Coins</seealso></description></item>
+/// <item><term>Bill and Coin</term><description><seealso href="https://www.cbb.gov.bh/currency-issue/">CBB - Currency Issue</seealso></description></item>
 /// </list>
 /// </remarks>
 public class BhdCurrency :
@@ -50,12 +49,12 @@ public class BhdCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(0.005m, CashType.Coin, "5 fils Coin", "5f"),
-        new(0.01m, CashType.Coin, "10 fils Coin", "10f"),
-        new(0.025m, CashType.Coin, "25 fils Coin", "25f"),
-        new(0.05m, CashType.Coin, "50 fils Coin", "50f"),
-        new(0.1m, CashType.Coin, "100 fils Coin", "100f"),
-        new(0.5m, CashType.Coin, "500 fils Coin", "500f"),
+        new(0.005m, CashType.Coin, "5 Fils Coin", "5f"),
+        new(0.01m, CashType.Coin, "10 Fils Coin", "10f"),
+        new(0.025m, CashType.Coin, "25 Fils Coin", "25f"),
+        new(0.05m, CashType.Coin, "50 Fils Coin", "50f"),
+        new(0.1m, CashType.Coin, "100 Fils Coin", "100f"),
+        new(0.5m, CashType.Coin, "500 Fils Coin", "500f"),
     ];
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Bills =>
@@ -64,10 +63,7 @@ public class BhdCurrency :
         new(1.0m, CashType.Bill, "BD 1", "BD 1"),
         new(5.0m, CashType.Bill, "BD 5", "BD 5"),
         new(10.0m, CashType.Bill, "BD 10", "BD 10"),
-        new(25.0m, CashType.Bill, "BD 25", "BD 25"),
-        new(50.0m, CashType.Bill, "BD 50", "BD 50"),
-        new(100.0m, CashType.Bill, "BD 100", "BD 100"),
-        new(500.0m, CashType.Bill, "BD 500", "BD 500"),
+        new(20.0m, CashType.Bill, "BD 20", "BD 20"),
     ];
 
     /// <inheritdoc/>
