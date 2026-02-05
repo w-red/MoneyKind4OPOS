@@ -25,7 +25,7 @@ public class MxnCurrency :
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.MXN;
     /// <inheritdoc/>
-    public static decimal MinimumUnit => 0.1m;
+    public static decimal MinimumUnit => 0.05m;
 
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Global { get; } = new(
@@ -56,6 +56,7 @@ public class MxnCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
+        new(0.05m, CashType.Coin, "5¢ Coin", "5¢"),
         new(0.1m, CashType.Coin, "10¢ Coin", "10¢"),
         new(0.2m, CashType.Coin, "20¢ Coin", "20¢"),
         new(0.5m, CashType.Coin, "50¢ Coin", "50¢"),

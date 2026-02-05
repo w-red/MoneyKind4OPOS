@@ -20,7 +20,7 @@ public class BrlCurrency :
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.BRL;
     /// <inheritdoc/>
-    public static decimal MinimumUnit => 0.010m;
+    public static decimal MinimumUnit => 0.01m;
 
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits =>

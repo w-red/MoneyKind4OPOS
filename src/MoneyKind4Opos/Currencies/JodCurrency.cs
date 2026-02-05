@@ -18,7 +18,7 @@ public class JodCurrency :
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.JOD;
     /// <inheritdoc/>
-    public static decimal MinimumUnit => 0.001m;
+    public static decimal MinimumUnit => 0.01m;
 
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits =>
@@ -51,8 +51,6 @@ public class JodCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(0.001m, CashType.Coin, "1 Fils Coin", "1f"),
-        new(0.005m, CashType.Coin, "5 Fils Coin", "5f"),
         new(0.01m, CashType.Coin, "1 Piastre Coin", "1p"),
         new(0.05m, CashType.Coin, "5 Piastres Coin", "5p"),
         new(0.1m, CashType.Coin, "10 Piastres Coin", "10p"),
