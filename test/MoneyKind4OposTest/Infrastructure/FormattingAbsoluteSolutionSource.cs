@@ -1,6 +1,3 @@
-using MoneyKind4Opos.Currencies;
-using Xunit;
-
 namespace MoneyKind4OposTest.Infrastructure;
 
 public static class FormattingAbsoluteSolutionSource

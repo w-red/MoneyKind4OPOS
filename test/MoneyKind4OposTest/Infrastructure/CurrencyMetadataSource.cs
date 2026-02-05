@@ -1,6 +1,5 @@
 using MoneyKind4Opos.Codes;
 using MoneyKind4Opos.Currencies;
-using Xunit;
 
 namespace MoneyKind4OposTest.Infrastructure;
 

@@ -1,10 +1,8 @@
-using MoneyKind4Opos;
 using MoneyKind4Opos.Codes;
 using MoneyKind4Opos.Currencies.Interfaces;
 using MoneyKind4OposTest.Infrastructure;
 using Shouldly;
 using System.Reflection;
-using Xunit;
 
 namespace MoneyKind4OposTest.Currencies.Generic;
 
