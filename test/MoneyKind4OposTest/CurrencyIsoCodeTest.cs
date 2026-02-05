@@ -9,14 +9,50 @@ namespace MoneyKind4OposTest;
 public class CurrencyIsoCodeTest
 {
     [Theory]
+    // Major Currencies
     [InlineData(typeof(JpyCurrency), Iso4217.JPY, 392, 1.0)]
     [InlineData(typeof(UsdCurrency), Iso4217.USD, 840, 0.01)]
     [InlineData(typeof(EurCurrency), Iso4217.EUR, 978, 0.01)]
     [InlineData(typeof(GbpCurrency), Iso4217.GBP, 826, 0.01)]
     [InlineData(typeof(CnyCurrency), Iso4217.CNY, 156, 0.01)]
-    [InlineData(typeof(ChfCurrency), Iso4217.CHF, 756, 0.05)]
     [InlineData(typeof(InrCurrency), Iso4217.INR, 356, 0.50)]
+    [InlineData(typeof(ChfCurrency), Iso4217.CHF, 756, 0.05)]
     [InlineData(typeof(AudCurrency), Iso4217.AUD, 36, 0.05)]
+    [InlineData(typeof(CadCurrency), Iso4217.CAD, 124, 0.05)]
+    [InlineData(typeof(NokCurrency), Iso4217.NOK, 578, 1.0)]
+    [InlineData(typeof(SekCurrency), Iso4217.SEK, 752, 1.0)]
+    [InlineData(typeof(DkkCurrency), Iso4217.DKK, 208, 0.50)]
+    [InlineData(typeof(NzdCurrency), Iso4217.NZD, 554, 0.10)]
+    [InlineData(typeof(SgdCurrency), Iso4217.SGD, 702, 0.05)]
+    [InlineData(typeof(HkdCurrency), Iso4217.HKD, 344, 0.10)]
+    [InlineData(typeof(KrwCurrency), Iso4217.KRW, 410, 1.0)]
+    [InlineData(typeof(TwdCurrency), Iso4217.TWD, 158, 1.0)]
+    // High Value / Fixed Rate (Group A & B)
+    [InlineData(typeof(KwdCurrency), Iso4217.KWD, 414, 0.001)]
+    [InlineData(typeof(BhdCurrency), Iso4217.BHD, 48, 0.005)]
+    [InlineData(typeof(OmrCurrency), Iso4217.OMR, 512, 0.005)]
+    [InlineData(typeof(JodCurrency), Iso4217.JOD, 400, 0.01)]
+    [InlineData(typeof(AedCurrency), Iso4217.AED, 784, 0.25)]
+    [InlineData(typeof(QarCurrency), Iso4217.QAR, 634, 0.01)]
+    [InlineData(typeof(SarCurrency), Iso4217.SAR, 682, 0.01)]
+    [InlineData(typeof(KydCurrency), Iso4217.KYD, 136, 0.01)]
+    [InlineData(typeof(BndCurrency), Iso4217.BND, 96, 0.01)]
+    // Other Common Currencies
+    [InlineData(typeof(BrlCurrency), Iso4217.BRL, 986, 0.01)]
+    [InlineData(typeof(BynCurrency), Iso4217.BYN, 933, 0.01)]
+    [InlineData(typeof(ClpCurrency), Iso4217.CLP, 152, 1.0)]
+    [InlineData(typeof(CzkCurrency), Iso4217.CZK, 203, 1.0)]
+    [InlineData(typeof(IlsCurrency), Iso4217.ILS, 376, 0.10)]
+    [InlineData(typeof(KztCurrency), Iso4217.KZT, 398, 1.0)]
+    [InlineData(typeof(MxnCurrency), Iso4217.MXN, 484, 0.05)]
+    [InlineData(typeof(PlnCurrency), Iso4217.PLN, 985, 0.01)]
+    [InlineData(typeof(RubCurrency), Iso4217.RUB, 643, 0.01)]
+    [InlineData(typeof(UzsCurrency), Iso4217.UZS, 860, 50.0)]
+    [InlineData(typeof(ZarCurrency), Iso4217.ZAR, 710, 0.10)]
+    // Regional Unions
+    [InlineData(typeof(XafCurrency), Iso4217.XAF, 950, 1.0)]
+    [InlineData(typeof(XofCurrency), Iso4217.XOF, 952, 1.0)]
+    [InlineData(typeof(XcdCurrency), Iso4217.XCD, 951, 0.05)]
     public void Currency_ShouldHaveCorrectIsoCodeAndMinimumUnit(
         Type currencyType,
         Iso4217 expectedEnum,
@@ -24,20 +60,27 @@ public class CurrencyIsoCodeTest
         double expectedMinUnit)
     {
         // Access static abstract properties via reflection
-        var codeProp = currencyType.GetProperty(nameof(ICurrency.Code));
-        var minUnitProp = currencyType.GetProperty(nameof(ICurrency.MinimumUnit));
+        var codeProp = currencyType
+            .GetProperty(nameof(ICurrency.Code));
+        var minUnitProp = currencyType
+            .GetProperty(nameof(ICurrency.MinimumUnit));
 
-        var actualCode = (Iso4217)codeProp!.GetValue(null)!;
-        var actualMinUnit = (decimal)minUnitProp!.GetValue(null)!;
+        var actualCode = (Iso4217)codeProp!
+            .GetValue(null)!;
+        var actualMinUnit = (decimal)minUnitProp!
+            .GetValue(null)!;
 
         // Verify Enum value
-        actualCode.ShouldBe(expectedEnum);
+        actualCode
+            .ShouldBe(expectedEnum);
 
         // Verify underlying Numeric value (ISO 4217 Standard)
-        ((int)actualCode).ShouldBe(expectedNumeric);
+        ((int)actualCode)
+            .ShouldBe(expectedNumeric);
 
         // Verify Minimum Unit
-        actualMinUnit.ShouldBe((decimal)expectedMinUnit);
+        actualMinUnit
+            .ShouldBe((decimal)expectedMinUnit);
     }
 
     [Fact]

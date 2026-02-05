@@ -53,38 +53,27 @@ public class CurrencySanityTest
     [Fact]
     public void AllCurrencies_FormattingOptions_ShouldBeDefined()
     {
-        var currencyTypes =
-            typeof(ICurrency).Assembly
-            .GetTypes()
-            .Where(t => t.IsClass &&
-                !t.IsAbstract &&
-                typeof(ICurrency).IsAssignableFrom(t))
-            // Only check those that are intended to be formattable (usually all our concrete currencies)
-            .Where(t => t
-                .GetInterfaces()
-                .Any(i => i.IsGenericType &&
-                    i.GetGenericTypeDefinition() ==
-                    typeof(ICurrencyFormattable<>)))
-            .ToList();
+        var currencyTypes = GetAllCurrencyTypes();
 
         foreach (var type in currencyTypes)
         {
-            var globalProp =
-                type
+            var globalProp = type
                 .GetProperty(
                     "Global",
-                    BindingFlags.Public | BindingFlags.Static);
-            var localProp =
-                type
+                    BindingFlags.Public
+                    | BindingFlags.Static);
+            var localProp = type
                 .GetProperty(
                     "Local",
-                    BindingFlags.Public | BindingFlags.Static);
+                    BindingFlags.Public
+                    | BindingFlags.Static);
 
             globalProp
                 .ShouldNotBeNull(
                     $"Currency {type.Name} is missing 'Global' formatting options.");
             localProp
-                .ShouldNotBeNull($"Currency {type.Name} is missing 'Local' formatting options.");
+                .ShouldNotBeNull(
+                    $"Currency {type.Name} is missing 'Local' formatting options.");
 
             globalProp
                 .GetValue(null)
@@ -93,5 +82,58 @@ public class CurrencySanityTest
                 .GetValue(null)
                 .ShouldNotBeNull($"Currency {type.Name} 'Local' options are null.");
         }
+    }
+
+    /// <summary>Verification that Parse and TotalAmount work for all registered denominations for every currency.</summary>
+    [Fact]
+    public void AllCurrencies_ParseAndTotalAmount_ShouldBeConsistent()
+    {
+        var currencyTypes = GetAllCurrencyTypes();
+
+        foreach (var type in currencyTypes)
+        {
+            var coins = MoneyKind4OposTest.CurrencyTestHelper.GetCoins(type).ToList();
+            var bills = MoneyKind4OposTest.CurrencyTestHelper.GetBills(type).ToList();
+            var all = coins.Concat(bills).ToList();
+
+            if (!all.Any()) continue;
+
+            // Construct a string: coin1:1,coin2:1;bill1:1,bill2:1
+            var coinPart = string.Join(",", coins.Select(c => $"{c.Value:G29}:1"));
+            var billPart = string.Join(",", bills.Select(b => $"{b.Value:G29}:1"));
+            var input = $"{coinPart};{billPart}";
+
+            // Dynamically call MoneyKind<T>.Parse(input)
+            var moneyKindType = typeof(MoneyKind4Opos.Currencies.Interfaces.MoneyKind<>).MakeGenericType(type);
+            var parseMethod = moneyKindType.GetMethod("Parse", BindingFlags.Public | BindingFlags.Static);
+            var mk = parseMethod!.Invoke(null, [input]);
+
+            // Dynamically call mk.TotalAmount()
+            var totalAmountMethod = moneyKindType.GetMethod("TotalAmount");
+            var actualTotal = (decimal)totalAmountMethod!.Invoke(mk, null)!;
+
+            var expectedTotal = all.Sum(a => a.Value);
+            actualTotal.ShouldBe(expectedTotal, $"Currency {type.Name} failed TotalAmount verification for all denominations.");
+
+            // Verify Round-trip
+            var toCashCountsStringMethod = moneyKindType.GetMethod("ToCashCountsString", [typeof(string), typeof(string)]);
+            var output = (string)toCashCountsStringMethod!.Invoke(mk, [null, null])!;
+
+            // Verify the output can be parsed back and gives the same result
+            var mk2 = parseMethod.Invoke(null, [output]);
+            var actualTotal2 = (decimal)totalAmountMethod.Invoke(mk2, null)!;
+            actualTotal2.ShouldBe(expectedTotal, $"Currency {type.Name} failed Round-trip verification.");
+        }
+    }
+
+    private static List<Type> GetAllCurrencyTypes()
+    {
+        return [..
+            typeof(ICurrency).Assembly
+            .GetTypes()
+            .Where(t => t.IsClass &&
+                !t.IsAbstract &&
+                typeof(ICurrency).IsAssignableFrom(t))
+        ];
     }
 }
