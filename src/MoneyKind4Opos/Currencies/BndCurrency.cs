@@ -7,7 +7,7 @@ namespace MoneyKind4Opos.Currencies;
 /// <summary>Brunei Dollar Currency</summary>
 /// <remarks>
 /// <list type="bullet">
-/// <item><term>Currency</term><description><seealso href="https://www.bdcb.gov.bn/currency/circulation">BDCB - Currency in Circulation</seealso></description></item>
+/// <item><term>Bills and Coins</term><description><seealso href="https://www.bdcb.gov.bn/currency/circulation">BDCB - Currency in Circulation</seealso></description></item>
 /// </list>
 /// </remarks>
 public class BndCurrency :

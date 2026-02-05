@@ -5,7 +5,11 @@ using System.Globalization;
 namespace MoneyKind4Opos.Currencies;
 
 /// <summary>Japanese Yen Currency</summary>
-/// <seealso href="https://www.boj.or.jp/en/note_tfjgs/note/index.htm">Banknotes and Coins (Bank of Japan)</seealso>
+/// <remarks>
+/// <list type="bullet">
+/// <item><term>Bills and Coins</term><description><seealso href="https://www.boj.or.jp/en/note_tfjgs/note/index.htm">Banknotes and Coins (Bank of Japan)</seealso></description></item>
+/// </list>
+/// </remarks>
 public class JpyCurrency :
     ICurrency,
     ICashCountFormattable<JpyCurrency>,

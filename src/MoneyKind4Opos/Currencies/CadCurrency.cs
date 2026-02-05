@@ -5,7 +5,11 @@ using System.Globalization;
 namespace MoneyKind4Opos.Currencies;
 
 /// <summary>Canadian Dollar Currency</summary>
-/// <seealso href="https://www.bankofcanada.ca/banknotes/">Banknotes (Bank of Canada)</seealso>
+/// <remarks>
+/// <list type="bullet">
+/// <item><term>Bills and Coins</term><description><seealso href="https://www.bankofcanada.ca/banknotes/">Banknotes (Bank of Canada)</seealso></description></item>
+/// </list>
+/// </remarks>
 public class CadCurrency :
     ICurrency,
     ICashCountFormattable<CadCurrency>,

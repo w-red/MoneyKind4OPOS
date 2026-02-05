@@ -5,7 +5,11 @@ using System.Globalization;
 namespace MoneyKind4Opos.Currencies;
 
 /// <summary>Euro Currency</summary>
-/// <seealso href="https://www.ecb.europa.eu/euro/banknotes/html/index.en.html">Banknotes (European Central Bank)</seealso>
+/// <remarks>
+/// <list type="bullet">
+/// <item><term>Bills and Coins</term><description><seealso href="https://www.ecb.europa.eu/euro/banknotes/html/index.en.html">Banknotes (European Central Bank)</seealso></description></item>
+/// </list>
+/// </remarks>
 public class EurCurrency :
     ICurrency,
     ICashCountFormattable<EurCurrency>,

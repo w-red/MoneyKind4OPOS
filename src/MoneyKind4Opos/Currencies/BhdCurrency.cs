@@ -7,7 +7,7 @@ namespace MoneyKind4Opos.Currencies;
 /// <summary>Bahraini Dinar Currency</summary>
 /// <remarks>
 /// <list type="bullet">
-/// <item><term>Bill and Coin</term><description><seealso href="https://www.cbb.gov.bh/currency-issue/">CBB - Currency Issue</seealso></description></item>
+/// <item><term>Bills and Coins</term><description><seealso href="https://www.cbb.gov.bh/currency-issue/">CBB - Currency Issue</seealso></description></item>
 /// </list>
 /// </remarks>
 public class BhdCurrency :

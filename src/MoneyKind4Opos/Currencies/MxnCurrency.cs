@@ -7,8 +7,9 @@ namespace MoneyKind4Opos.Currencies;
 /// <summary>Mexican Peso Currency</summary>
 /// <remarks>
 /// <list type="bullet">
-/// <item><term>Banknotes Coins</term><description><seealso href="https://www.banxico.org.mx/banknotes-and-coins/currently-banknotes-and-coins.html">Banknotes and Coins - BdM</seealso></description></item>
+/// <item><term>Bills and Coins</term><description><seealso href="https://www.banxico.org.mx/banknotes-and-coins/currently-banknotes-and-coins.html">Banknotes and Coins - BdM</seealso></description></item>
 /// </list>
+/// </remarks>
 public class MxnCurrency :
     ICurrency,
     ICashCountFormattable<MxnCurrency>,

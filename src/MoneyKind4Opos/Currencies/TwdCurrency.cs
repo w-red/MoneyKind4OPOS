@@ -4,11 +4,11 @@ using System.Globalization;
 
 namespace MoneyKind4Opos.Currencies;
 
-/// <summary>Hong Kong Dollar Currency</summary>
+/// <summary>New Taiwan Dollar Currency</summary>
 /// <remarks>
 /// <list type="bullet">
-/// <item><term>Bills</term><description><seealso href="https://www.hkma.gov.hk/eng/key-functions/money/hong-kong-currency/notes/">Notes - HKMA</seealso></description></item>
-/// <item><term>Coins</term><description><seealso href="https://www.hkma.gov.hk/eng/key-functions/money/hong-kong-currency/coins/">Coins - HKMA</seealso></description></item>
+/// <item><term>Bills</term><description><seealso href="https://museum.cbc.gov.tw/web/en-us/circulation/banknote">Banknotes (Museum of CBC)</seealso></description></item>
+/// <item><term>Coins</term><description><seealso href="https://museum.cbc.gov.tw/web/en-us/circulation/currency">Coins (Museum of CBC)</seealso></description></item>
 /// </list>
 /// </remarks>
 public class TwdCurrency :

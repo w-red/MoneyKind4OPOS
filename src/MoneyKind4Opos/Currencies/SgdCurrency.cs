@@ -5,7 +5,11 @@ using System.Globalization;
 namespace MoneyKind4Opos.Currencies;
 
 /// <summary>Singapore Dollar Currency</summary>
-/// <seealso href="https://www.mas.gov.sg/currency/Singapores-Currencies">Notes and Coins (Monetary Authority of Singapore)</seealso>
+/// <remarks>
+/// <list type="bullet">
+/// <item><term>Bills and Coins</term><description><seealso href="https://www.mas.gov.sg/currency/Singapores-Currencies">Notes and Coins (Monetary Authority of Singapore)</seealso></description></item>
+/// </list>
+/// </remarks>
 public class SgdCurrency :
     ICurrency,
     ICashCountFormattable<SgdCurrency>,

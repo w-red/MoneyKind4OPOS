@@ -6,7 +6,9 @@ namespace MoneyKind4Opos.Currencies;
 
 /// <summary>Swiss Franc Currency</summary>
 /// <remarks>
-/// <seealso href="https://www.snb.ch/en/the-snb/cash/banknotes">Banknotes (Swiss National Bank)</seealso>
+/// <list type="bullet">
+/// <item><term>Bills and Coins</term><description><seealso href="https://www.snb.ch/en/the-snb/cash/banknotes">Banknotes (Swiss National Bank)</seealso></description></item>
+/// </list>
 /// </remarks>
 public class ChfCurrency :
     ICurrency,

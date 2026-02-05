@@ -7,7 +7,7 @@ namespace MoneyKind4Opos.Currencies;
 /// <summary>United Arab Emirates Dirham Currency</summary>
 /// <remarks>
 /// <list type="bullet">
-/// <item><term>Bill and Coin</term><description><seealso href="https://www.centralbank.ae/en/our-operations/currency-and-coins/circulated-currency/">CBUAE - Circulated Currency</seealso></description></item>
+/// <item><term>Bills and Coins</term><description><seealso href="https://www.centralbank.ae/en/our-operations/currency-and-coins/circulated-currency/">CBUAE - Circulated Currency</seealso></description></item>
 /// </list>
 /// </remarks>
 public class AedCurrency :
