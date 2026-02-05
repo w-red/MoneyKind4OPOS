@@ -53,6 +53,20 @@ public class CurrencyIsoCodeTest
     [InlineData(typeof(XafCurrency), Iso4217.XAF, 950, 1.0)]
     [InlineData(typeof(XofCurrency), Iso4217.XOF, 952, 1.0)]
     [InlineData(typeof(XcdCurrency), Iso4217.XCD, 951, 0.05)]
+    [InlineData(typeof(VndCurrency), Iso4217.VND, 704, 1000.0)]
+    [InlineData(typeof(IdrCurrency), Iso4217.IDR, 360, 50.0)]
+    [InlineData(typeof(ThbCurrency), Iso4217.THB, 764, 0.25)]
+    [InlineData(typeof(PhpCurrency), Iso4217.PHP, 608, 0.01)]
+    [InlineData(typeof(MyrCurrency), Iso4217.MYR, 458, 0.05)]
+    [InlineData(typeof(LakCurrency), Iso4217.LAK, 418, 500.0)]
+    [InlineData(typeof(BdtCurrency), Iso4217.BDT, 50, 1.0)]
+    [InlineData(typeof(PkrCurrency), Iso4217.PKR, 586, 1.0)]
+    [InlineData(typeof(KgsCurrency), Iso4217.KGS, 417, 1.0)]
+    [InlineData(typeof(LkrCurrency), Iso4217.LKR, 144, 1.0)]
+    [InlineData(typeof(NprCurrency), Iso4217.NPR, 524, 1.0)]
+    [InlineData(typeof(MmkCurrency), Iso4217.MMK, 104, 100.0)]
+    [InlineData(typeof(BtnCurrency), Iso4217.BTN, 64, 0.05)]
+    [InlineData(typeof(MvrCurrency), Iso4217.MVR, 462, 0.01)]
     public void Currency_ShouldHaveCorrectIsoCodeAndMinimumUnit(
         Type currencyType,
         Iso4217 expectedEnum,
