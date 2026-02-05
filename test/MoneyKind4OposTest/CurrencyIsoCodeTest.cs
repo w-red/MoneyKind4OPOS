@@ -67,6 +67,19 @@ public class CurrencyIsoCodeTest
     [InlineData(typeof(MmkCurrency), Iso4217.MMK, 104, 100.0)]
     [InlineData(typeof(BtnCurrency), Iso4217.BTN, 64, 0.05)]
     [InlineData(typeof(MvrCurrency), Iso4217.MVR, 462, 0.01)]
+    [InlineData(typeof(AfnCurrency), Iso4217.AFN, 971, 1.0)]
+    [InlineData(typeof(IrrCurrency), Iso4217.IRR, 364, 1000.0)]
+    [InlineData(typeof(MntCurrency), Iso4217.MNT, 496, 1.0)]
+    [InlineData(typeof(TjsCurrency), Iso4217.TJS, 972, 0.01)]
+    [InlineData(typeof(TmtCurrency), Iso4217.TMT, 934, 0.01)]
+    [InlineData(typeof(AznCurrency), Iso4217.AZN, 944, 0.01)]
+    [InlineData(typeof(AmdCurrency), Iso4217.AMD, 51, 10.0)]
+    [InlineData(typeof(YerCurrency), Iso4217.YER, 886, 1.0)]
+    [InlineData(typeof(IqdCurrency), Iso4217.IQD, 368, 250.0)]
+    [InlineData(typeof(GelCurrency), Iso4217.GEL, 981, 0.05)]
+    [InlineData(typeof(SypCurrency), Iso4217.SYP, 760, 1.0)]
+    [InlineData(typeof(TryCurrency), Iso4217.TRY, 949, 0.01)]
+    [InlineData(typeof(LbpCurrency), Iso4217.LBP, 422, 250.0)]
     public void Currency_ShouldHaveCorrectIsoCodeAndMinimumUnit(
         Type currencyType,
         Iso4217 expectedEnum,
