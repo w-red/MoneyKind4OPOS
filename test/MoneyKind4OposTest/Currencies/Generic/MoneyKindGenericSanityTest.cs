@@ -30,14 +30,22 @@ public class MoneyKindGenericSanityTest
         var parseMethod = methods.FirstOrDefault(m => m.Name == "Parse" && m.GetParameters().Length == 1 && m.GetParameters()[0].ParameterType == typeof(string));
         
         var totalAmountMethod = moneyKindType.GetMethod("TotalAmount", BindingFlags.Public | BindingFlags.Instance);
-        var toCashCountsStringMethod = moneyKindType.GetMethod("ToCashCountsString", BindingFlags.Public | BindingFlags.Instance, null, new[] { typeof(string), typeof(string) }, null);
+        var toCashCountsStringMethod = moneyKindType
+            .GetMethod(
+                "ToCashCountsString",
+                BindingFlags.Public
+                | BindingFlags.Instance,
+                null,
+                [typeof(string), typeof(string)],
+                null);
 
         parseMethod.ShouldNotBeNull($"{typeName}: Parse method not found");
         totalAmountMethod.ShouldNotBeNull($"{typeName}: TotalAmount method not found");
         toCashCountsStringMethod.ShouldNotBeNull($"{typeName}: ToCashCountsString method not found");
 
         // 2. Empty Parse Check
-        var emptyInstance = parseMethod.Invoke(null, new object[] { "" });
+        var emptyInstance = parseMethod.Invoke(
+            null, [""]);
         var emptyTotal = (decimal)totalAmountMethod.Invoke(emptyInstance, null)!;
         emptyTotal.ShouldBe(0m, $"{typeName}: Empty total should be 0");
 
@@ -51,7 +59,14 @@ public class MoneyKindGenericSanityTest
         var instance = Activator.CreateInstance(moneyKindType);
         
         // Use explicit indexer this[decimal, CashType] to avoid overlaps (e.g. NPR/AFN)
-        var setItemExplicitMethod = moneyKindType.GetMethod("set_Item", BindingFlags.Public | BindingFlags.Instance, null, new[] { typeof(decimal), typeof(CashType), typeof(int) }, null);
+        var setItemExplicitMethod = moneyKindType
+            .GetMethod(
+                "set_Item",
+                BindingFlags.Public
+                | BindingFlags.Instance,
+                null,
+                [typeof(decimal), typeof(CashType), typeof(int)],
+                null);
         setItemExplicitMethod.ShouldNotBeNull($"{typeName}: Explicit Indexer setter not found");
 
         decimal expectedTotal = 0m;
@@ -59,14 +74,28 @@ public class MoneyKindGenericSanityTest
         if (coins.Any())
         {
             var firstCoin = coins.First();
-            setItemExplicitMethod.Invoke(instance, new object[] { firstCoin.Value, CashType.Coin, 1 });
+            setItemExplicitMethod
+                .Invoke(
+                    instance,
+                    [
+                        firstCoin.Value,
+                        CashType.Coin,
+                        1
+                    ]);
             expectedTotal += firstCoin.Value;
         }
 
         if (bills.Any())
         {
             var lastBill = bills.OrderBy(b => b.Value).Last(); // Pick largest bill to avoid overlap with coin if possible
-            setItemExplicitMethod.Invoke(instance, new object[] { lastBill.Value, CashType.Bill, 2 }); 
+            setItemExplicitMethod
+                .Invoke(
+                    instance,
+                    [
+                        lastBill.Value,
+                        CashType.Bill,
+                        2
+                    ]); 
             expectedTotal += lastBill.Value * 2;
         }
 
@@ -77,8 +106,14 @@ public class MoneyKindGenericSanityTest
             total.ShouldBe(expectedTotal, $"{typeName}: Initial total mismatch");
 
             // Verify Round-trip
-            var serialized = (string)toCashCountsStringMethod.Invoke(instance, new object[] { null!, null! })!;
-            var reParsed = parseMethod.Invoke(null, new object[] { serialized });
+            var serialized = (string)toCashCountsStringMethod
+                .Invoke(
+                    instance, [null!, null!]
+                )!;
+            var reParsed = parseMethod
+                .Invoke(
+                    null,
+                    [serialized]);
             var reParsedTotal = (decimal)totalAmountMethod.Invoke(reParsed, null)!;
             
             reParsedTotal.ShouldBe(expectedTotal, $"{typeName}: Round-trip total mismatch (Serialized: '{serialized}')");
