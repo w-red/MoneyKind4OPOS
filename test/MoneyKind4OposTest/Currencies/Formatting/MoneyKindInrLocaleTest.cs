@@ -34,7 +34,7 @@ public class MoneyKindInrLocaleTest
     [InlineData("or-IN", "₹1,00,00,000.00")]    // Odia
     [InlineData("as-IN", "₹ 1,00,00,000.00")]   // Assamese: Absolute Solution with space
     [InlineData("kok-IN", "₹ 1,00,00,000.00")]  // Konkani: Absolute Solution with space
-    public void Inr_Culture_Absolute_Solution_Test(string cultureName, string expectedFormattedCrore)
+    public void InrCultureAbsoluteSolutionTest(string cultureName, string expectedFormattedCrore)
     {
         CultureInfo culture;
         try
@@ -65,7 +65,7 @@ public class MoneyKindInrLocaleTest
     /// the Indian Lakh/Crore grouping system.
     /// </summary>
     [Fact]
-    public void InrCurrency_Implementation_Should_Be_Consistent()
+    public void InrCurrencyImplementationShouldBeConsistent()
     {
         InrCurrency.Global.NumberFormat.CurrencyGroupSizes.ShouldBe(IndianGroupSizes);
         InrCurrency.Local.NumberFormat.CurrencyGroupSizes.ShouldBe(IndianGroupSizes);
@@ -86,7 +86,7 @@ public class MoneyKindInrLocaleTest
     [InlineData("bn-IN", "টাকা", "পয়সা")]
     [InlineData("mr-IN", "रुपये", "पैसे")]
     [InlineData("ta-IN", "ரூபாய்", "பைसा")]
-    public void Inr_DenominationLocalizedNames_Reference(string cultureName, string rupeeName, string paiseName)
+    public void InrDenominationLocalizedNamesReference(string cultureName, string rupeeName, string paiseName)
     {
         var culture = CultureInfo.GetCultureInfo(cultureName);
         culture.Name.ShouldBe(cultureName);

@@ -7,7 +7,7 @@ namespace MoneyKind4OposTest;
 public class MoneyKindAlgorithmTest
 {
     [Fact]
-    public void Add_ShouldAccumulateCounts()
+    public void AddShouldAccumulateCounts()
     {
         var inventory = new MoneyKind<JpyCurrency>();
         var deposit = new MoneyKind<JpyCurrency>();
@@ -24,7 +24,7 @@ public class MoneyKindAlgorithmTest
     }
 
     [Fact]
-    public void Subtract_ShouldReduceCounts()
+    public void SubtractShouldReduceCounts()
     {
         var inventory = new MoneyKind<JpyCurrency>();
         var dispense = new MoneyKind<JpyCurrency>();
@@ -38,7 +38,7 @@ public class MoneyKindAlgorithmTest
     }
 
     [Fact]
-    public void Subtract_InsufficientInventory_ShouldThrow()
+    public void SubtractInsufficientInventoryShouldThrow()
     {
         var inventory = new MoneyKind<JpyCurrency>();
         var dispense = new MoneyKind<JpyCurrency>();
@@ -51,7 +51,7 @@ public class MoneyKindAlgorithmTest
     }
 
     [Fact]
-    public void CalculateChange_WithSufficientInventory_ShouldUseGreedy()
+    public void CalculateChangeWithSufficientInventoryShouldUseGreedy()
     {
         var inventory = new MoneyKind<JpyCurrency>();
         inventory[1000] = 10;
@@ -68,7 +68,7 @@ public class MoneyKindAlgorithmTest
     }
 
     [Fact]
-    public void CalculateChange_WithBrokenDenomination_ShouldFallbackToLower()
+    public void CalculateChangeWithBrokenDenominationShouldFallbackToLower()
     {
         var inventory = new MoneyKind<JpyCurrency>();
         inventory[1000] = 0; // Out of 1000 yen bills
@@ -85,7 +85,7 @@ public class MoneyKindAlgorithmTest
     }
 
     [Fact]
-    public void CalculateChange_WhenImpossible_ShouldReturnWhatItCouldCalculate()
+    public void CalculateChangeWhenImpossibleShouldReturnWhatItCouldCalculate()
     {
         var inventory = new MoneyKind<JpyCurrency>();
         inventory[100] = 2; // Total 200 available
@@ -98,7 +98,7 @@ public class MoneyKindAlgorithmTest
     }
 
     [Fact]
-    public void IsPayable_ShouldReflectAccuracy()
+    public void IsPayableShouldReflectAccuracy()
     {
         var inventory = new MoneyKind<JpyCurrency>();
         inventory[1000] = 1;

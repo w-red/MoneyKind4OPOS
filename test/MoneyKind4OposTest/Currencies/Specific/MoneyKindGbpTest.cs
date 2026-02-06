@@ -9,14 +9,14 @@ namespace MoneyKind4OPOSTest;
 public class MoneyKindGbpTest
 {
     [Fact]
-    public void ToGlobalString_Gbp_ShouldFormatCorrectly()
+    public void ToGlobalStringGbpShouldFormatCorrectly()
     {
         // Global for GBP: £n.nn (Standard decimal digits = 2)
         1234.56m.ToGlobalString<GbpCurrency>().ShouldBe("£1,234.56");
     }
 
     [Fact]
-    public void Gbp_Parse_RoundTrip_ShouldBeCorrect()
+    public void GbpParseRoundTripShouldBeCorrect()
     {
         var mk = new MoneyKind<GbpCurrency>();
         mk[0.01m] = 5;  // 5 Pennies

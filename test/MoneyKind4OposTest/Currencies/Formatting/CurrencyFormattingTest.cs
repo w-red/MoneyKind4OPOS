@@ -13,7 +13,7 @@ public class CurrencyFormattingTest
     [InlineData(0.02, "2分", "¥0.02")]
     [InlineData(0.12, "1角2分", "¥0.12")]
     [InlineData(0, "0.00元", "¥0.00")]
-    public void Cny_Formatting_ShouldBeCorrect(
+    public void CnyFormattingShouldBeCorrect(
         decimal amount,
         string expectedLocal,
         string expectedGlobal)
@@ -24,7 +24,7 @@ public class CurrencyFormattingTest
 
     [Theory]
     [InlineData(1000, "1,000円", "¥1,000")]
-    public void Jpy_Formatting_ShouldBeCorrect(
+    public void JpyFormattingShouldBeCorrect(
         decimal amount,
         string expectedLocal,
         string expectedGlobal)
@@ -35,7 +35,7 @@ public class CurrencyFormattingTest
 
     [Theory]
     [InlineData(1.23, "$1.23", "$1.23")]
-    public void Usd_Formatting_ShouldBeCorrect(
+    public void UsdFormattingShouldBeCorrect(
         decimal amount,
         string expectedLocal,
         string expectedGlobal)

@@ -8,7 +8,7 @@ namespace MoneyKind4OposTest;
 public class MoneyKindChfTest
 {
     [Fact]
-    public void CalculateChange_Chf_ShouldHandleMinimumUnitOfFiveCents()
+    public void CalculateChangeChfShouldHandleMinimumUnitOfFiveCents()
     {
         // Setup: Need an amount that is not divisible by 0.05.
         // ChfCurrency.MinimumUnit is 0.05m.
@@ -33,14 +33,14 @@ public class MoneyKindChfTest
     }
 
     [Fact]
-    public void Chf_Properties_ShouldBeCorrect()
+    public void ChfPropertiesShouldBeCorrect()
     {
         ChfCurrency.Code.ShouldBe(MoneyKind4Opos.Codes.Iso4217.CHF);
         ChfCurrency.MinimumUnit.ShouldBe(0.05m);
     }
 
     [Fact]
-    public void ToCashCountsString_Chf_ShouldOutputZeroCountsForAllDenominations()
+    public void ToCashCountsStringChfShouldOutputZeroCountsForAllDenominations()
     {
         var mk = new MoneyKind<ChfCurrency>();
         mk[0.05m] = 1;

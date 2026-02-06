@@ -15,7 +15,7 @@ public class MoneyKindInrTest
     [InlineData("0.5:2,1:10;", 11)] // Coins only (50 paise * 2 + 1 * 10)
     [InlineData(";100:5,500:2", 1500)] // Bills only
     [InlineData("1:10,2:5;50:2,200:1", 320)]
-    public void Inr_Parse_And_TotalAmount_ShouldBeCorrect(
+    public void InrParseAndTotalAmountShouldBeCorrect(
         string input, decimal expectedTotal)
     {
         var mk = MoneyKind<InrCurrency>.Parse(input);
@@ -24,7 +24,7 @@ public class MoneyKindInrTest
 
     /// <summary>ToCashCountsString tests for InrCurrency.</summary>
     [Fact]
-    public void Inr_ToCashCountsString_ShouldBeCorrect()
+    public void InrToCashCountsStringShouldBeCorrect()
     {
         var mk = new MoneyKind<InrCurrency>();
 
@@ -48,7 +48,7 @@ public class MoneyKindInrTest
 
     /// <summary>Tests the Indian digit grouping (Lakh/Crore system).</summary>
     [Fact]
-    public void Inr_Grouping_ShouldFollowIndianSystem()
+    public void InrGroupingShouldFollowIndianSystem()
     {
         var amount = 123456.78m;
         var formatted = amount.ToString("N", InrCurrency.Global.NumberFormat);

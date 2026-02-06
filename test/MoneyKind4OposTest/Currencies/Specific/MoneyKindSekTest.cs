@@ -10,7 +10,7 @@ public class MoneyKindSekTest
     [Theory]
     [InlineData("1:1;20:1", 21)]
     [InlineData("10:1;1000:1", 1010)]
-    public void Sek_Parse_ShouldWork(string input, decimal expected)
+    public void SekParseShouldWork(string input, decimal expected)
     {
          var mk = MoneyKind<SekCurrency>.Parse(input);
          mk.TotalAmount().ShouldBe(expected);

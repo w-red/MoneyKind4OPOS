@@ -8,7 +8,7 @@ namespace MoneyKind4OposTest;
 public class MoneyKindFormatTest
 {
     [Fact]
-    public void ToCashCountsString_MixedInventory_ShouldFormatSeparately()
+    public void ToCashCountsStringMixedInventoryShouldFormatSeparately()
     {
         var mk = new MoneyKind<JpyCurrency>();
         mk[100] = 2;   // Coin
@@ -27,7 +27,7 @@ public class MoneyKindFormatTest
     }
 
     [Fact]
-    public void ToCashCountsString_OnlyBills_ShouldHaveEmptyCoinSectionWithZeroes()
+    public void ToCashCountsStringOnlyBillsShouldHaveEmptyCoinSectionWithZeroes()
     {
         var mk = new MoneyKind<JpyCurrency>();
         mk[10000] = 1;
@@ -41,7 +41,7 @@ public class MoneyKindFormatTest
     }
 
     [Fact]
-    public void ToCashCountsString_NegativeCounts_ShouldRepresentNegativeSigns()
+    public void ToCashCountsStringNegativeCountsShouldRepresentNegativeSigns()
     {
         var mk = new MoneyKind<JpyCurrency>();
         mk[100] = -5;
@@ -51,7 +51,7 @@ public class MoneyKindFormatTest
     }
 
     [Fact]
-    public void ToCashCountsString_ZeroCounts_ShouldIncludeZeroesForAllDenominations()
+    public void ToCashCountsStringZeroCountsShouldIncludeZeroesForAllDenominations()
     {
         var mk = new MoneyKind<JpyCurrency>();
         // All JPY denominations should be present with :0
@@ -63,7 +63,7 @@ public class MoneyKindFormatTest
     }
 
     [Fact]
-    public void ToCashCountsString_CustomFormat_ShouldApplyToValues()
+    public void ToCashCountsStringCustomFormatShouldApplyToValues()
     {
         var mk = new MoneyKind<EurCurrency>();
         mk[0.5m] = 2; // 50 cents
@@ -75,7 +75,7 @@ public class MoneyKindFormatTest
     }
 
     [Fact]
-    public void ToCashCountsString_Usd_CanProduceLeadingDotFormat()
+    public void ToCashCountsStringUsdCanProduceLeadingDotFormat()
     {
         var mk = new MoneyKind<UsdCurrency>();
         mk[0.5m] = 1;   // 50 cents

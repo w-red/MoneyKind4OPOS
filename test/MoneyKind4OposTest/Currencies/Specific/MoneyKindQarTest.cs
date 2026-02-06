@@ -10,7 +10,7 @@ public class MoneyKindQarTest
     [Theory]
     [InlineData("0.01:1;1:1", 1.01)]
     [InlineData("0.05:1,0.1:1;50:1", 50.15)]
-    public void Qar_Parse_ShouldWork(string input, decimal expected)
+    public void QarParseShouldWork(string input, decimal expected)
     {
          var mk = MoneyKind<QarCurrency>.Parse(input);
          mk.TotalAmount().ShouldBe(expected);

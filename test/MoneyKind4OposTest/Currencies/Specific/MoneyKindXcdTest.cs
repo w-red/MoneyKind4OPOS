@@ -11,14 +11,14 @@ public class MoneyKindXcdTest
     [Theory]
     [InlineData("0.05:2,1:1", 1.10)]
     [InlineData(";10:1", 10.0)]
-    public void Xcd_Parse_ShouldWork(string input, decimal expected)
+    public void XcdParseShouldWork(string input, decimal expected)
     {
          var mk = MoneyKind<XcdCurrency>.Parse(input);
          mk.TotalAmount().ShouldBe(expected);
     }
 
     [Fact]
-    public void Xcd_CurrencyInfo_ShouldBeCorrect()
+    public void XcdCurrencyInfoShouldBeCorrect()
     {
         XcdCurrency.Code.ShouldBe(Iso4217.XCD);
         XcdCurrency.MinimumUnit.ShouldBe(0.05m);

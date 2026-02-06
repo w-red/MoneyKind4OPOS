@@ -55,14 +55,14 @@ public class IMoneyKindLogicTest
     private class StubMoneyKind : MoneyKind<StubCurrency> { }
 
     [Fact]
-    public void TotalAmount_WithNoCoins_ShouldBeZero()
+    public void TotalAmountWithNoCoinsShouldBeZero()
     {
         var mk = new StubMoneyKind();
         mk.TotalAmount().ShouldBe(0m);
     }
 
     [Fact]
-    public void TotalAmount_WithCoinsAndBills_ShouldSumCorrectly()
+    public void TotalAmountWithCoinsAndBillsShouldSumCorrectly()
     {
         var mk = new StubMoneyKind();
         mk[0.5m] = 2; // 0.5 * 2 = 1.0
@@ -73,7 +73,7 @@ public class IMoneyKindLogicTest
     }
 
     [Fact]
-    public void CoinAmount_ShouldOnlySumCoins()
+    public void CoinAmountShouldOnlySumCoins()
     {
         var mk = new StubMoneyKind();
         mk[0.5m] = 2; // 0.5 * 2 = 1.0(coin)
@@ -83,7 +83,7 @@ public class IMoneyKindLogicTest
     }
 
     [Fact]
-    public void CoinAmount_WithNoBills_ShouldEqualTotalAmount()
+    public void CoinAmountWithNoBillsShouldEqualTotalAmount()
     {
         var mk = new StubMoneyKind();
         mk[1.0m, CashType.Coin] = 5;
@@ -92,7 +92,7 @@ public class IMoneyKindLogicTest
     }
 
     [Fact]
-    public void BillAmount_ShouldOnlySumBills()
+    public void BillAmountShouldOnlySumBills()
     {
         var mk = new StubMoneyKind();
         mk[0.5m] = 2;   // 1.0(coin)
@@ -102,7 +102,7 @@ public class IMoneyKindLogicTest
     }
 
     [Fact]
-    public void Parse_WithValidString_ShouldRestoreCounts()
+    public void ParseWithValidStringShouldRestoreCounts()
     {
         var mk = StubMoneyKind.Parse(".05:3,.50:2,1:10;5:20");
 
@@ -117,7 +117,7 @@ public class IMoneyKindLogicTest
     }
 
     [Fact]
-    public void Parse_WithEmptyString_ShouldReturnEmptyCounts()
+    public void ParseWithEmptyStringShouldReturnEmptyCounts()
     {
         var mk = StubMoneyKind.Parse("");
         mk.Counts
@@ -125,7 +125,7 @@ public class IMoneyKindLogicTest
     }
 
     [Fact]
-    public void Parse_WithOnlyCoins_ShouldIgnoreBills()
+    public void ParseWithOnlyCoinsShouldIgnoreBills()
     {
         var mk = StubMoneyKind.Parse("0.5:3");
 
@@ -138,7 +138,7 @@ public class IMoneyKindLogicTest
     }
 
     [Fact]
-    public void Parse_WithOnlyBills_ShouldIgnoreCoins()
+    public void ParseWithOnlyBillsShouldIgnoreCoins()
     {
         var mk = StubMoneyKind.Parse(";10:2");
 
@@ -155,14 +155,14 @@ public class IMoneyKindLogicTest
     [InlineData(".5:3", 1.5)]         // Leading dot
     [InlineData("0.5:1,invalid:9,1:1", 1.5)] // Mixed valid/invalid
     [InlineData("0.5:1;1:2", 2.5)]    // Standard mixed
-    public void Parse_VariousFormats_ShouldBeHandledGracefully(string input, decimal expectedTotal)
+    public void ParseVariousFormatsShouldBeHandledGracefully(string input, decimal expectedTotal)
     {
         var mk = StubMoneyKind.Parse(input);
         mk.TotalAmount().ShouldBe(expectedTotal);
     }
 
     [Fact]
-    public void Parse_WithUndefinedFace_ShouldIgnoreIt()
+    public void ParseWithUndefinedFaceShouldIgnoreIt()
     {
         // 999 is undefined face value
         var mk = StubMoneyKind.Parse("0.5:1,999:5;5:1");
@@ -174,7 +174,7 @@ public class IMoneyKindLogicTest
     }
 
     [Fact]
-    public void ToCashCountsString_WithEmptyCounts_ShouldReturnZeros()
+    public void ToCashCountsStringWithEmptyCountsShouldReturnZeros()
     {
         var mk = new StubMoneyKind();
         var result = mk.ToCashCountsString();
@@ -187,7 +187,7 @@ public class IMoneyKindLogicTest
     }
 
     [Fact]
-    public void ToCashCountsString_WithCounts_ShouldFormatCorrectly()
+    public void ToCashCountsStringWithCountsShouldFormatCorrectly()
     {
         var mk = new StubMoneyKind();
         mk[0.5m] = 2;
@@ -200,7 +200,7 @@ public class IMoneyKindLogicTest
     }
 
     [Fact]
-    public void ToCashCountsString_RoundTrip_ShouldPreserveData()
+    public void ToCashCountsStringRoundTripShouldPreserveData()
     {
         var original = new StubMoneyKind();
         original[1.0m] = 3;

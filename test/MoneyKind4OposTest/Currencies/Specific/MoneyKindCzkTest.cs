@@ -10,7 +10,7 @@ public class MoneyKindCzkTest
     [Theory]
     [InlineData("1:1;100:1", 101)]
     [InlineData("50:1;5000:1", 5050)]
-    public void Czk_Parse_ShouldWork(string input, decimal expected)
+    public void CzkParseShouldWork(string input, decimal expected)
     {
          var mk = MoneyKind<CzkCurrency>.Parse(input);
          mk.TotalAmount().ShouldBe(expected);

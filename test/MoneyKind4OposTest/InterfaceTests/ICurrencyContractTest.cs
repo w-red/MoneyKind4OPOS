@@ -12,7 +12,7 @@ public class ICurrencyContractTest
 
     [Theory]
     [MemberData(nameof(AllCurrencies))]
-    public void Coins_ShouldNotBeNull(Type currencyType)
+    public void CoinsShouldNotBeNull(Type currencyType)
     {
         var coins = MoneyKind4OposTest.CurrencyTestHelper.GetCoins(currencyType);
         coins.ShouldNotBeNull();
@@ -20,7 +20,7 @@ public class ICurrencyContractTest
 
     [Theory]
     [MemberData(nameof(AllCurrencies))]
-    public void Bills_ShouldNotBeNull(Type currencyType)
+    public void BillsShouldNotBeNull(Type currencyType)
     {
         var bills = MoneyKind4OposTest.CurrencyTestHelper.GetBills(currencyType);
         bills.ShouldNotBeNull();
@@ -28,7 +28,7 @@ public class ICurrencyContractTest
 
     [Theory]
     [MemberData(nameof(AllCurrencies))]
-    public void Coins_ShouldHaveUniqueValues(Type currencyType)
+    public void CoinsShouldHaveUniqueValues(Type currencyType)
     {
         var coins = MoneyKind4OposTest.CurrencyTestHelper.GetCoins(currencyType);
         var values = coins.Select(c => c.Value).ToList();
@@ -37,7 +37,7 @@ public class ICurrencyContractTest
 
     [Theory]
     [MemberData(nameof(AllCurrencies))]
-    public void Bills_ShouldHaveUniqueValues(Type currencyType)
+    public void BillsShouldHaveUniqueValues(Type currencyType)
     {
         var bills = MoneyKind4OposTest.CurrencyTestHelper.GetBills(currencyType);
         var values = bills.Select(b => b.Value).ToList();
@@ -46,7 +46,7 @@ public class ICurrencyContractTest
 
     [Theory]
     [MemberData(nameof(AllCurrencies))]
-    public void MinimumUnit_ShouldBePositive(Type currencyType)
+    public void MinimumUnitShouldBePositive(Type currencyType)
     {
         var minimumUnit = MoneyKind4OposTest.CurrencyTestHelper.GetMinimumUnit(currencyType);
         minimumUnit.ShouldBeGreaterThan(0);
@@ -54,7 +54,7 @@ public class ICurrencyContractTest
 
     [Theory]
     [MemberData(nameof(AllCurrencies))]
-    public void MinimumUnit_ShouldMatchSmallestDenomination(Type currencyType)
+    public void MinimumUnitShouldMatchSmallestDenomination(Type currencyType)
     {
         var minimumUnit = MoneyKind4OposTest.CurrencyTestHelper.GetMinimumUnit(currencyType);
         var coins = MoneyKind4OposTest.CurrencyTestHelper.GetCoins(currencyType);

@@ -8,7 +8,7 @@ namespace MoneyKind4OposTest;
 public class MoneyKindBoundaryTest
 {
     [Fact]
-    public void CalculateChange_JustEnoughInSmallDenominations_ShouldSucceed()
+    public void CalculateChangeJustEnoughInSmallDenominationsShouldSucceed()
     {
         // Case: Need 1000 yen. No 1000 yen bills. 
         // Have exactly two 500 yen coins.
@@ -23,7 +23,7 @@ public class MoneyKindBoundaryTest
     }
 
     [Fact]
-    public void CalculateChange_OneUnitShortOfTotal_ShouldFailAndIdentifyMissing()
+    public void CalculateChangeOneUnitShortOfTotalShouldFailAndIdentifyMissing()
     {
         // Case: Need 1000 yen. Have only 999 yen (missing 1 yen).
         var inventory = new MoneyKind<JpyCurrency>();
@@ -40,7 +40,7 @@ public class MoneyKindBoundaryTest
     }
 
     [Fact]
-    public void CalculateChange_BottleneckAtSmallDenomination_ShouldFail()
+    public void CalculateChangeBottleneckAtSmallDenominationShouldFail()
     {
         // Case: Need 110 yen. Have 1000 yen bill, but no 10 yen coins.
         // Total amount (1000) is enough, but breakdown is impossible.
@@ -59,7 +59,7 @@ public class MoneyKindBoundaryTest
     }
 
     [Fact]
-    public void CalculateChange_LargeAmount_JustEnough_ShouldSucceed()
+    public void CalculateChangeLargeAmountJustEnoughShouldSucceed()
     {
         // Testing with large count to ensure no integer overflow or rounding issues
         var inventory = new MoneyKind<JpyCurrency>();
@@ -72,7 +72,7 @@ public class MoneyKindBoundaryTest
     }
 
     [Fact]
-    public void CalculateChange_InsufficientDecimals_Eur_ShouldFail()
+    public void CalculateChangeInsufficientDecimalsEurShouldFail()
     {
         // Case: Need 0.05 Euro. Have only 0.02 x 2 = 0.04.
         var inventory = new MoneyKind<EurCurrency>();
@@ -87,7 +87,7 @@ public class MoneyKindBoundaryTest
     }
 
     [Fact]
-    public void CalculateChange_SameValue_ShouldPrioritizeBillsOverCoins_Cny()
+    public void CalculateChangeSameValueShouldPrioritizeBillsOverCoinsCny()
     {
         // CNY has both 1 Yuan Bill and 1 Yuan Coin.
         var inventory = new MoneyKind<CnyCurrency>();
@@ -102,7 +102,7 @@ public class MoneyKindBoundaryTest
     }
 
     [Fact]
-    public void CalculateChange_SameValue_ShouldPrioritizeBillsOverCoins_Usd()
+    public void CalculateChangeSameValueShouldPrioritizeBillsOverCoinsUsd()
     {
         // USD has both 1 Dollar Bill and 1 Dollar Coin.
         var inventory = new MoneyKind<UsdCurrency>();

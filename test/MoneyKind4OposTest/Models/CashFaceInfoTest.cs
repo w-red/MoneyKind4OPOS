@@ -6,7 +6,7 @@ namespace MoneyKind4OposTest;
 public class CashFaceInfoTest
 {
     [Fact]
-    public void LocalName_ShouldFallbackToName_WhenNotSpecified()
+    public void LocalNameShouldFallbackToNameWhenNotSpecified()
     {
         // Arrange & Act
         var face = new CashFaceInfo(100m, CashType.Coin, "100 Yen");
@@ -16,7 +16,7 @@ public class CashFaceInfoTest
     }
 
     [Fact]
-    public void LocalName_ShouldUseSpecifiedValue_WhenProvided()
+    public void LocalNameShouldUseSpecifiedValueWhenProvided()
     {
         // Arrange & Act
         var face = new CashFaceInfo(100m, CashType.Coin, "100 Yen", "百円");
@@ -26,7 +26,7 @@ public class CashFaceInfoTest
     }
 
     [Fact]
-    public void LocalName_ShouldFallbackToName_WhenExplicitlySetToNull()
+    public void LocalNameShouldFallbackToNameWhenExplicitlySetToNull()
     {
         // Arrange & Act
         var face = new CashFaceInfo(100m, CashType.Coin, "100 Yen", null);

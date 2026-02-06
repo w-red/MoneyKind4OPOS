@@ -9,7 +9,7 @@ public class CurrencySanityTest
 {
     /// <summary>Verification that all SubsidiaryUnits are defined in descending order of Ratio.</summary>
     [Fact]
-    public void AllCurrencies_SubsidiaryUnits_ShouldBeOrderedByRatioDescending()
+    public void AllCurrenciesSubsidiaryUnitsShouldBeOrderedByRatioDescending()
     {
         var currencyTypes =
             typeof(ICurrency).Assembly
@@ -51,7 +51,7 @@ public class CurrencySanityTest
 
     /// <summary>Verification that all currency formatting options (Global and Local) are defined.</summary>
     [Fact]
-    public void AllCurrencies_FormattingOptions_ShouldBeDefined()
+    public void AllCurrenciesFormattingOptionsShouldBeDefined()
     {
         var currencyTypes = GetAllCurrencyTypes();
 
@@ -86,7 +86,7 @@ public class CurrencySanityTest
 
     /// <summary>Verification that Parse and TotalAmount work for all registered denominations for every currency.</summary>
     [Fact]
-    public void AllCurrencies_ParseAndTotalAmount_ShouldBeConsistent()
+    public void AllCurrenciesParseAndTotalAmountShouldBeConsistent()
     {
         var currencyTypes = GetAllCurrencyTypes();
 

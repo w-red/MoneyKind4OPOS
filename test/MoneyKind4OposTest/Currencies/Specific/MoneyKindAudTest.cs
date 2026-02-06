@@ -15,7 +15,7 @@ public class MoneyKindAudTest
     [InlineData("0.05:10,0.1:5;", 1.0)] // Coins only
     [InlineData(";20:5,50:2", 200)]     // Bills only
     [InlineData("1:10,2:5;10:2,100:1", 140)]
-    public void Aud_Parse_And_TotalAmount_ShouldBeCorrect(
+    public void AudParseAndTotalAmountShouldBeCorrect(
         string input, decimal expectedTotal)
     {
         var mk = MoneyKind<AudCurrency>.Parse(input);
@@ -24,7 +24,7 @@ public class MoneyKindAudTest
 
     /// <summary>ToCashCountsString tests for AudCurrency.</summary>
     [Fact]
-    public void Aud_ToCashCountsString_ShouldBeCorrect()
+    public void AudToCashCountsStringShouldBeCorrect()
     {
         var mk = new MoneyKind<AudCurrency>();
 

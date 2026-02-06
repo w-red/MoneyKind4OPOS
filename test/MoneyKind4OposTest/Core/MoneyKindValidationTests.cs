@@ -18,7 +18,7 @@ public class MoneyKindValidationTests
     [InlineData(10)]
     [InlineData(50)]
     [InlineData(100)]
-    public void Aud_IsValidFaceValue_WithValidDenominations_ShouldReturnTrue(decimal faceValue)
+    public void AudIsValidFaceValueWithValidDenominationsShouldReturnTrue(decimal faceValue)
     {
         var mk = new MoneyKind<AudCurrency>();
         mk.IsValidFaceValue(faceValue).ShouldBeTrue();
@@ -31,7 +31,7 @@ public class MoneyKindValidationTests
     [InlineData(3)]
     [InlineData(25)]
     [InlineData(200)]
-    public void Aud_IsValidFaceValue_WithInvalidDenominations_ShouldReturnFalse(decimal faceValue)
+    public void AudIsValidFaceValueWithInvalidDenominationsShouldReturnFalse(decimal faceValue)
     {
         var mk = new MoneyKind<AudCurrency>();
         mk.IsValidFaceValue(faceValue).ShouldBeFalse();
@@ -44,7 +44,7 @@ public class MoneyKindValidationTests
     [InlineData(10)]
     [InlineData(1000)]
     [InlineData(int.MaxValue)]
-    public void MoneyKind_IsValidCount_WithValidCounts_ShouldReturnTrue(int count)
+    public void MoneyKindIsValidCountWithValidCountsShouldReturnTrue(int count)
     {
         var mk = new MoneyKind<AudCurrency>();
         mk.IsValidCount(count).ShouldBeTrue();
@@ -55,7 +55,7 @@ public class MoneyKindValidationTests
     [InlineData(-1)]
     [InlineData(-10)]
     [InlineData(int.MinValue)]
-    public void MoneyKind_IsValidCount_WithInvalidCounts_ShouldReturnFalse(int count)
+    public void MoneyKindIsValidCountWithInvalidCountsShouldReturnFalse(int count)
     {
         var mk = new MoneyKind<AudCurrency>();
         mk.IsValidCount(count).ShouldBeFalse();
@@ -63,7 +63,7 @@ public class MoneyKindValidationTests
 
     /// <summary>TrySetCashCount tests with valid denomination and count.</summary>
     [Fact]
-    public void Aud_TrySetCashCount_WithValidValues_ShouldSucceed()
+    public void AudTrySetCashCountWithValidValuesShouldSucceed()
     {
         var mk = new MoneyKind<AudCurrency>();
 
@@ -76,7 +76,7 @@ public class MoneyKindValidationTests
 
     /// <summary>TrySetCashCount tests with invalid denomination.</summary>
     [Fact]
-    public void Aud_TrySetCashCount_WithInvalidDenomination_ShouldFail()
+    public void AudTrySetCashCountWithInvalidDenominationShouldFail()
     {
         var mk = new MoneyKind<AudCurrency>();
 
@@ -90,7 +90,7 @@ public class MoneyKindValidationTests
 
     /// <summary>TrySetCashCount tests with negative count.</summary>
     [Fact]
-    public void MoneyKind_TrySetCashCount_WithNegativeCount_ShouldFail()
+    public void MoneyKindTrySetCashCountWithNegativeCountShouldFail()
     {
         var mk = new MoneyKind<AudCurrency>();
 
@@ -103,7 +103,7 @@ public class MoneyKindValidationTests
 
     /// <summary>TrySetCashCount with CashType parameter tests.</summary>
     [Fact]
-    public void Aud_TrySetCashCount_WithTypeParameter_WithValidValues_ShouldSucceed()
+    public void AudTrySetCashCountWithTypeParameterWithValidValuesShouldSucceed()
     {
         var mk = new MoneyKind<AudCurrency>();
 
@@ -116,7 +116,7 @@ public class MoneyKindValidationTests
 
     /// <summary>TrySetCashCount with CashType parameter and invalid type combination.</summary>
     [Fact]
-    public void Aud_TrySetCashCount_WithTypeParameter_WithInvalidType_ShouldFail()
+    public void AudTrySetCashCountWithTypeParameterWithInvalidTypeShouldFail()
     {
         var mk = new MoneyKind<AudCurrency>();
 
@@ -131,7 +131,7 @@ public class MoneyKindValidationTests
 
     /// <summary>TryValidateParse tests with valid CashCounts string.</summary>
     [Fact]
-    public void Aud_TryValidateParse_WithValidString_ShouldSucceedWithoutWarnings()
+    public void AudTryValidateParseWithValidStringShouldSucceedWithoutWarnings()
     {
         var mk = new MoneyKind<AudCurrency>();
         var cashCounts = "0.05:10,0.1:5;10:2,50:1";
@@ -144,7 +144,7 @@ public class MoneyKindValidationTests
 
     /// <summary>TryValidateParse tests with empty string.</summary>
     [Fact]
-    public void MoneyKind_TryValidateParse_WithEmptyString_ShouldSucceed()
+    public void MoneyKindTryValidateParseWithEmptyStringShouldSucceed()
     {
         var mk = new MoneyKind<AudCurrency>();
 
@@ -156,7 +156,7 @@ public class MoneyKindValidationTests
 
     /// <summary>TryValidateParse tests with invalid denomination.</summary>
     [Fact]
-    public void Aud_TryValidateParse_WithInvalidDenomination_ShouldReturnWarning()
+    public void AudTryValidateParseWithInvalidDenominationShouldReturnWarning()
     {
         var mk = new MoneyKind<AudCurrency>();
         var cashCounts = "0.05:10,99:5;10:2"; // 99 is not valid
@@ -170,7 +170,7 @@ public class MoneyKindValidationTests
 
     /// <summary>TryValidateParse tests with negative count.</summary>
     [Fact]
-    public void MoneyKind_TryValidateParse_WithNegativeCount_ShouldReturnWarning()
+    public void MoneyKindTryValidateParseWithNegativeCountShouldReturnWarning()
     {
         var mk = new MoneyKind<AudCurrency>();
         var cashCounts = "0.05:10,0.1:-5;10:2";
@@ -184,7 +184,7 @@ public class MoneyKindValidationTests
 
     /// <summary>TryValidateParse tests with malformed format.</summary>
     [Fact]
-    public void MoneyKind_TryValidateParse_WithMalformedFormat_ShouldReturnWarning()
+    public void MoneyKindTryValidateParseWithMalformedFormatShouldReturnWarning()
     {
         var mk = new MoneyKind<AudCurrency>();
         var cashCounts = "0.05-10,0.1:5;10:2"; // '-' instead of ':'
@@ -201,7 +201,7 @@ public class MoneyKindValidationTests
     [InlineData("abc:10;")]
     [InlineData("0.05:xyz;")]
     [InlineData("0.05:1.5;")]
-    public void MoneyKind_TryValidateParse_WithInvalidNumericValues_ShouldReturnWarning(string cashCounts)
+    public void MoneyKindTryValidateParseWithInvalidNumericValuesShouldReturnWarning(string cashCounts)
     {
         var mk = new MoneyKind<AudCurrency>();
 
@@ -213,7 +213,7 @@ public class MoneyKindValidationTests
 
     /// <summary>TryValidateParse tests with multiple warnings.</summary>
     [Fact]
-    public void Aud_TryValidateParse_WithMultipleIssues_ShouldReturnMultipleWarnings()
+    public void AudTryValidateParseWithMultipleIssuesShouldReturnMultipleWarnings()
     {
         var mk = new MoneyKind<AudCurrency>();
         var cashCounts = "0.05:10,99:5;200:-1,10:2"; // 99 and 200 invalid, -1 negative
@@ -226,7 +226,7 @@ public class MoneyKindValidationTests
 
     /// <summary>TrySetCashCount integration test with multiple calls.</summary>
     [Fact]
-    public void Aud_TrySetCashCount_MultipleValidCalls_ShouldSucceed()
+    public void AudTrySetCashCountMultipleValidCallsShouldSucceed()
     {
         var mk = new MoneyKind<AudCurrency>();
 
@@ -243,7 +243,7 @@ public class MoneyKindValidationTests
 
     /// <summary>TrySetCashCount idempotency test.</summary>
     [Fact]
-    public void Aud_TrySetCashCount_Idempotency_ShouldUpdateValue()
+    public void AudTrySetCashCountIdempotencyShouldUpdateValue()
     {
         var mk = new MoneyKind<AudCurrency>();
 
@@ -256,7 +256,7 @@ public class MoneyKindValidationTests
 
     /// <summary>Validation with JPY currency for international support.</summary>
     [Fact]
-    public void Jpy_IsValidFaceValue_ShouldDifferFromAud()
+    public void JpyIsValidFaceValueShouldDifferFromAud()
     {
         var audMk = new MoneyKind<AudCurrency>();
         var jpyMk = new MoneyKind<JpyCurrency>();

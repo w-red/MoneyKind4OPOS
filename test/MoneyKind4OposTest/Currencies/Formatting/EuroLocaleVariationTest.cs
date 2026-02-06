@@ -26,7 +26,7 @@ public class EuroLocaleVariationTest
     [InlineData("de-DE", SymbolPlacement.Postfix, ",", ".")]
     [InlineData("fr-FR", SymbolPlacement.Postfix, ",", " ")] // Group separator contains NBSP
     [InlineData("en-IE", SymbolPlacement.Prefix, ".", ",")]
-    public void Euro_ShouldFormatAccordingToCulture(
+    public void EuroShouldFormatAccordingToCulture(
         string culture,
         SymbolPlacement expectedPlacement,
         string expectedDecimalSeparator,
@@ -55,7 +55,7 @@ public class EuroLocaleVariationTest
     /// Uses period as group separator, comma as decimal separator, symbol postfix.
     /// </summary>
     [Fact]
-    public void Euro_GermanFormat_ShouldMatchExactly()
+    public void EuroGermanFormatShouldMatchExactly()
     {
         // Arrange
         var options = CurrencyFormattingOptions.FromIso4217(
@@ -75,7 +75,7 @@ public class EuroLocaleVariationTest
     /// Uses Narrow No-Break Space (U+202F) as group separator.
     /// </summary>
     [Fact]
-    public void Euro_FrenchFormat_ShouldMatchExactlyWithNBSP()
+    public void EuroFrenchFormatShouldMatchExactlyWithNBSP()
     {
         // Arrange
         var options = CurrencyFormattingOptions.FromIso4217(
@@ -96,7 +96,7 @@ public class EuroLocaleVariationTest
     /// Uses comma as group separator, period as decimal separator, symbol prefix.
     /// </summary>
     [Fact]
-    public void Euro_IrishFormat_ShouldMatchExactly()
+    public void EuroIrishFormatShouldMatchExactly()
     {
         // Arrange
         var options = CurrencyFormattingOptions.FromIso4217(
@@ -117,7 +117,7 @@ public class EuroLocaleVariationTest
     [Theory]
     [InlineData("de-DE", "1.234,56 €")]
     [InlineData("en-IE", "€1,234.56")]
-    public void Euro_Format_ShouldMatchExpectedString(
+    public void EuroFormatShouldMatchExpectedString(
         string culture,
         string expectedFormat)
     {
@@ -138,7 +138,7 @@ public class EuroLocaleVariationTest
     /// French format needs special handling due to NBSP, tested separately.
     /// </summary>
     [Fact]
-    public void Euro_FrenchFormat_InTheory_ShouldMatchExpectedString()
+    public void EuroFrenchFormatInTheoryShouldMatchExpectedString()
     {
         // Arrange
         var options = CurrencyFormattingOptions.FromIso4217(

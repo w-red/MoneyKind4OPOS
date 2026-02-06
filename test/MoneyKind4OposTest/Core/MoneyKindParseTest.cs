@@ -8,7 +8,7 @@ namespace MoneyKind4OposTest;
 public class MoneyKindParseTest
 {
     [Fact]
-    public void Parse_FullFormat_ShouldParseCorrectly()
+    public void ParseFullFormatShouldParseCorrectly()
     {
         // Setup: 500 yen x1, 100 yen x2 (Coins) ; 1000 yen x3 (Bills)
         var input = "500:1,100:2;1000:3";
@@ -35,7 +35,7 @@ public class MoneyKindParseTest
     }
 
     [Fact]
-    public void Parse_OnlyCoins_ShouldParseCorrectly()
+    public void ParseOnlyCoinsShouldParseCorrectly()
     {
         var input = "500:1,100:2";
         var result = MoneyKind<JpyCurrency>.Parse(input);
@@ -48,7 +48,7 @@ public class MoneyKindParseTest
     }
 
     [Fact]
-    public void Parse_OnlyBills_ShouldParseCorrectly()
+    public void ParseOnlyBillsShouldParseCorrectly()
     {
         // Leading semicolon means empty coin section
         var input = ";1000:5";
@@ -61,7 +61,7 @@ public class MoneyKindParseTest
     }
 
     [Fact]
-    public void Parse_WithWhitespace_ShouldIgnoreSpaces()
+    public void ParseWithWhitespaceShouldIgnoreSpaces()
     {
         var input = " 500 : 1 , 100 : 2 ; 1000 : 3 ";
         var result = MoneyKind<JpyCurrency>.Parse(input);
@@ -76,7 +76,7 @@ public class MoneyKindParseTest
     [InlineData("   ")]
     [InlineData(";")]
     [InlineData(";;;")]
-    public void Parse_EmptyOrInvalidStructure_ShouldReturnEmptyMoneyKind(string input)
+    public void ParseEmptyOrInvalidStructureShouldReturnEmptyMoneyKind(string input)
     {
         var result = MoneyKind<JpyCurrency>.Parse(input);
         result.TotalAmount().ShouldBe(0m);
@@ -90,14 +90,14 @@ public class MoneyKindParseTest
     [InlineData("100")]          // Missing colon
     [InlineData(":1")]           // Missing value
     [InlineData("9999:1")]       // Non-existent denomination
-    public void Parse_MalformedItems_ShouldSilentlyIgnore(string input)
+    public void ParseMalformedItemsShouldSilentlyIgnore(string input)
     {
         var result = MoneyKind<JpyCurrency>.Parse(input);
         result.TotalAmount().ShouldBe(0m);
     }
 
     [Fact]
-    public void Parse_MixedValidAndInvalid_ShouldParseOnlyValidItems()
+    public void ParseMixedValidAndInvalidShouldParseOnlyValidItems()
     {
         var input = "500:1,invalid:99,100:2;1000:5";
         var result = MoneyKind<JpyCurrency>.Parse(input);
@@ -114,7 +114,7 @@ public class MoneyKindParseTest
     /// the corresponding denominations, and that aggregate calculations such as total, coin, and bill amounts reflect
     /// these negative values appropriately.</remarks>
     [Fact]
-    public void Parse_NegativeCounts_ShouldAllowNegativeValues()
+    public void ParseNegativeCountsShouldAllowNegativeValues()
     {
         // Setup: -1 x 500 yen, -2 x 1000 yen
         var input = "500:-1;1000:-2";
@@ -130,7 +130,7 @@ public class MoneyKindParseTest
     }
 
     [Fact]
-    public void Parse_UsdSpecificFormat_ShouldHandleLeadingDot()
+    public void ParseUsdSpecificFormatShouldHandleLeadingDot()
     {
         // USD style often omits leading zero for cents: ".5" (50c), ".05" (5c)
         var input = ".5:1,.05:2";

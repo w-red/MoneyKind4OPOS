@@ -11,7 +11,7 @@ namespace MoneyKind4OposTest.Currencies;
 public class CurrencyFormattingOptionsTest
 {
     [Fact]
-    public void FromIso4217_WithJPY_ShouldReturnJapaneseFormatting()
+    public void FromIso4217WithJpyShouldReturnJapaneseFormatting()
     {
         var options =
             CurrencyFormattingOptions
@@ -23,7 +23,7 @@ public class CurrencyFormattingOptionsTest
     }
 
     [Fact]
-    public void FromIso4217_WithUSD_ShouldReturnUSFormatting()
+    public void FromIso4217WithUsdShouldReturnUSFormatting()
     {
         var options =
             CurrencyFormattingOptions
@@ -35,7 +35,7 @@ public class CurrencyFormattingOptionsTest
     }
 
     [Fact]
-    public void FromIso4217_WithEUR_ShouldReturnGermanFormattingByDefault()
+    public void FromIso4217WithEurShouldReturnGermanFormattingByDefault()
     {
         var options =
             CurrencyFormattingOptions
@@ -52,7 +52,7 @@ public class CurrencyFormattingOptionsTest
     }
 
     [Fact]
-    public void FromIso4217_WithThreeLetterSymbol_ShouldUseIsoCode()
+    public void FromIso4217WithThreeLetterSymbolShouldUseIsoCode()
     {
         var options =
             CurrencyFormattingOptions
@@ -67,7 +67,7 @@ public class CurrencyFormattingOptionsTest
     [InlineData("de-DE", ",", ".")] // German: decimal=comma, group=period
     [InlineData("fr-FR", ",", " ")] // French: decimal=comma, group=space (may be thin space)
     [InlineData("en-IE", ".", ",")] // Ireland (English): decimal=period, group=comma
-    public void FromIso4217_Euro_WithCultureOverride_ShouldRespectLocaleSettings(
+    public void FromIso4217EuroWithCultureOverrideShouldRespectLocaleSettings(
         string cultureName,
         string expectedDecimalSeparator,
         string expectedGroupSeparator)
@@ -81,7 +81,7 @@ public class CurrencyFormattingOptionsTest
     }
 
     [Fact]
-    public void FromIso4217_Euro_FrenchFormat_ShouldFormatCorrectly()
+    public void FromIso4217EuroFrenchFormatShouldFormatCorrectly()
     {
         var options =
             CurrencyFormattingOptions
@@ -101,7 +101,7 @@ public class CurrencyFormattingOptionsTest
     }
 
     [Fact]
-    public void FromIso4217_Euro_IrishFormat_ShouldHavePrefixSymbol()
+    public void FromIso4217EuroIrishFormatShouldHavePrefixSymbol()
     {
         var options =
             CurrencyFormattingOptions
@@ -117,7 +117,7 @@ public class CurrencyFormattingOptionsTest
     }
 
     [Fact]
-    public void FromIso4217_UnsupportedCode_WithoutCultureOverride_ShouldThrow()
+    public void FromIso4217UnsupportedCodeWithoutCultureOverrideShouldThrow()
     {
         // AFN (Afghani) is not in the default map
         Should.Throw<ArgumentException>(() =>
@@ -125,7 +125,7 @@ public class CurrencyFormattingOptionsTest
     }
 
     [Fact]
-    public void FromIso4217_UnsupportedCode_WithCultureOverride_ShouldWork()
+    public void FromIso4217UnsupportedCodeWithCultureOverrideShouldWork()
     {
         // Even unsupported codes work if culture is provided
         var options = CurrencyFormattingOptions.FromIso4217(Iso4217.AFN, cultureName: "ps-AF");
@@ -135,7 +135,7 @@ public class CurrencyFormattingOptionsTest
     }
 
     [Fact]
-    public void FromIso4217_CNY_ShouldReturnChineseFormatting()
+    public void FromIso4217CnyShouldReturnChineseFormatting()
     {
         var options = CurrencyFormattingOptions.FromIso4217(Iso4217.CNY);
 
@@ -148,7 +148,7 @@ public class CurrencyFormattingOptionsTest
     }
 
     [Fact]
-    public void FromIso4217_GBP_ShouldReturnBritishFormatting()
+    public void FromIso4217GbpShouldReturnBritishFormatting()
     {
         var options =
             CurrencyFormattingOptions
@@ -164,7 +164,7 @@ public class CurrencyFormattingOptionsTest
     }
 
     [Fact]
-    public void FromIso4217_CHF_ShouldUseThreeLetterCodeAsSymbol()
+    public void FromIso4217ChfShouldUseThreeLetterCodeAsSymbol()
     {
         // CHF has null Symbol in the map, so it should use code.ToString()
         var options =
@@ -185,7 +185,7 @@ public class CurrencyFormattingOptionsTest
     [InlineData("fr-CH")]
     [InlineData("it-CH")]
     [InlineData("rm-CH")]
-    public void FromIso4217_CHF_WithCultureOverride_ShouldRespectLocale(string culture)
+    public void FromIso4217ChfWithCultureOverrideShouldRespectLocale(string culture)
     {
         var options = CurrencyFormattingOptions.FromIso4217(Iso4217.CHF, cultureName: culture);
 
@@ -202,7 +202,7 @@ public class CurrencyFormattingOptionsTest
     }
 
     [Fact]
-    public void FromIso4217_CHF_GermanSwiss_ShouldFormatCorrectly()
+    public void FromIso4217ChfGermanSwissShouldFormatCorrectly()
     {
         var options = CurrencyFormattingOptions.FromIso4217(Iso4217.CHF, cultureName: "de-CH");
         var formatted = options.Format(1234.56m);
@@ -215,7 +215,7 @@ public class CurrencyFormattingOptionsTest
     }
 
     [Fact]
-    public void FromIso4217_CAD_English_ShouldUseCanadianEnglishFormatting()
+    public void FromIso4217CadEnglishShouldUseCanadianEnglishFormatting()
     {
         var options = CurrencyFormattingOptions.FromIso4217(Iso4217.CAD);
 
@@ -226,7 +226,7 @@ public class CurrencyFormattingOptionsTest
     }
 
     [Fact]
-    public void FromIso4217_CAD_French_ShouldUseCanadianFrenchFormatting()
+    public void FromIso4217CadFrenchShouldUseCanadianFrenchFormatting()
     {
         var options = CurrencyFormattingOptions.FromIso4217(Iso4217.CAD, cultureName: "fr-CA");
 
@@ -238,7 +238,7 @@ public class CurrencyFormattingOptionsTest
     }
 
     [Fact]
-    public void FromIso4217_CAD_French_ShouldFormatCorrectly()
+    public void FromIso4217CadFrenchShouldFormatCorrectly()
     {
         var options = CurrencyFormattingOptions.FromIso4217(Iso4217.CAD, cultureName: "fr-CA");
         var formatted = options.Format(1234.56m);
@@ -251,7 +251,7 @@ public class CurrencyFormattingOptionsTest
     }
 
     [Fact]
-    public void FromIso4217_KRW_ShouldUseKoreanFormatting()
+    public void FromIso4217KrwShouldUseKoreanFormatting()
     {
         var options = CurrencyFormattingOptions.FromIso4217(Iso4217.KRW);
 
@@ -262,7 +262,7 @@ public class CurrencyFormattingOptionsTest
     }
 
     [Fact]
-    public void FromIso4217_KRW_ShouldFormatWholeNumbersCorrectly()
+    public void FromIso4217KrwShouldFormatWholeNumbersCorrectly()
     {
         var options = CurrencyFormattingOptions.FromIso4217(Iso4217.KRW);
         var formatted = options.Format(1234m);
@@ -275,7 +275,7 @@ public class CurrencyFormattingOptionsTest
     }
 
     [Fact]
-    public void FromIso4217_GBP_ShouldFormatCorrectly()
+    public void FromIso4217GbpShouldFormatCorrectly()
     {
         var options = CurrencyFormattingOptions.FromIso4217(Iso4217.GBP);
         var formatted = options.Format(1234.56m);
@@ -285,7 +285,7 @@ public class CurrencyFormattingOptionsTest
     }
 
     [Fact]
-    public void FromIso4217_WithOverrideSymbol_ShouldUseCustomSymbol()
+    public void FromIso4217WithOverrideSymbolShouldUseCustomSymbol()
     {
         // CHF defaults to "CHF", but we override it with "Fr."
         var options = CurrencyFormattingOptions.FromIso4217(
@@ -297,7 +297,7 @@ public class CurrencyFormattingOptionsTest
     }
 
     [Fact]
-    public void FromIso4217_OverrideSymbol_ShouldTakePrecedenceOverThreeLetterOption()
+    public void FromIso4217OverrideSymbolShouldTakePrecedenceOverThreeLetterOption()
     {
         // overrideSymbol should be stronger than preferThreeLetterSymbol
         var options = CurrencyFormattingOptions.FromIso4217(
@@ -309,7 +309,7 @@ public class CurrencyFormattingOptionsTest
     }
 
     [Fact]
-    public void FromIso4217_OverrideSymbol_ShouldBeReflectedInFormattedString()
+    public void FromIso4217OverrideSymbolShouldBeReflectedInFormattedString()
     {
         var options = CurrencyFormattingOptions.FromIso4217(
             Iso4217.USD,

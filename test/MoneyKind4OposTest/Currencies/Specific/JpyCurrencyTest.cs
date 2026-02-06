@@ -7,14 +7,14 @@ namespace MoneyKind4OposTest.Currencies;
 public class JpyCurrencyTest
 {
     [Fact]
-    public void Property_ShouldBe_Correct()
+    public void PropertyShouldBeCorrect()
     {
         JpyCurrency.Code.ShouldBe(Iso4217.JPY);
         JpyCurrency.MinimumUnit.ShouldBe(1m);
     }
 
     [Fact]
-    public void Faces_Should_MatchExpected()
+    public void FacesShouldMatchExpected()
     {
         var coins = JpyCurrency.Coins.Select(f => f.Value).ToArray();
         coins.ShouldBe([1m, 5m, 10m, 50m, 100m, 500m]);

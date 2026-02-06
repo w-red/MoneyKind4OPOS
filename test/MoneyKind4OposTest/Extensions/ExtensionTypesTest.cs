@@ -11,7 +11,7 @@ public class ExtensionTypesTest
     [InlineData(1500, "¥1,500")]
     [InlineData(1234567, "¥1,234,567")]
     [InlineData(999, "¥999")]
-    public void Decimal_ToGlobalString_Jpy_ShouldHandleDigitGrouping(decimal value, string expected)
+    public void DecimalToGlobalStringJpyShouldHandleDigitGrouping(decimal value, string expected)
     {
         // Verified: JPY Global uses "," as GroupSeparator
         var result = value.ToGlobalString<JpyCurrency>();
@@ -21,14 +21,14 @@ public class ExtensionTypesTest
     [Theory]
     [InlineData(1500, "1,500円")]
     [InlineData(1234567, "1,234,567円")]
-    public void Decimal_ToLocalString_Jpy_ShouldHandleDigitGrouping(decimal value, string expected)
+    public void DecimalToLocalStringJpyShouldHandleDigitGrouping(decimal value, string expected)
     {
         var result = value.ToLocalString<JpyCurrency>();
         result.ShouldBe(expected);
     }
 
     [Fact]
-    public void Decimal_ToGlobalString_Eur_ShouldHandleEuropeanGrouping()
+    public void DecimalToGlobalStringEurShouldHandleEuropeanGrouping()
     {
         // EurCurrency Global: CurrencyPositivePattern = 3 (n €), GroupSeparator = ".", DecimalSeparator = ","
         decimal value = 1234.56m;
@@ -39,7 +39,7 @@ public class ExtensionTypesTest
     }
 
     [Fact]
-    public void Decimal_ToCurrencyString_ShouldUseLocalWithGrouping()
+    public void DecimalToCurrencyStringShouldUseLocalWithGrouping()
     {
         decimal value = 10000m;
         var result = value.ToCurrencyString<JpyCurrency>();

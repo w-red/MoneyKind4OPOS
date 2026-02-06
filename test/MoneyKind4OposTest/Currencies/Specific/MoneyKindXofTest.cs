@@ -10,14 +10,14 @@ public class MoneyKindXofTest
 {
     [Theory]
     [InlineData("100:1,500:2", 1100)]
-    public void Xof_Parse_ShouldWork(string input, decimal expected)
+    public void XofParseShouldWork(string input, decimal expected)
     {
          var mk = MoneyKind<XofCurrency>.Parse(input);
          mk.TotalAmount().ShouldBe(expected);
     }
     
     [Fact]
-    public void Xof_CurrencyInfo_ShouldBeCorrect()
+    public void XofCurrencyInfoShouldBeCorrect()
     {
         XofCurrency.Code.ShouldBe(Iso4217.XOF);
     }

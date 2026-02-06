@@ -10,7 +10,7 @@ public class MoneyKindClpTest
     [Theory]
     [InlineData("10:1;1000:1", 1010)]
     [InlineData("100:1;20000:1", 20100)]
-    public void Clp_Parse_ShouldWork(string input, decimal expected)
+    public void ClpParseShouldWork(string input, decimal expected)
     {
          var mk = MoneyKind<ClpCurrency>.Parse(input);
          mk.TotalAmount().ShouldBe(expected);

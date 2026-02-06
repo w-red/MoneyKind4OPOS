@@ -10,7 +10,7 @@ public class MoneyKindGenericSanityTest
 {
     [Theory]
     [MemberData(nameof(CurrencyMetadataSource.GetCurrencyMetadata), MemberType = typeof(CurrencyMetadataSource))]
-    public void MoneyKind_BasicSanity_ShouldWork(
+    public void MoneyKindBasicSanityShouldWork(
         Type currencyType,
         Iso4217 _code,
         int _numeric,

@@ -39,7 +39,7 @@ public class MockChfCurrency : ICurrency, ICashCountFormattable<MockChfCurrency>
 public class CurrencyRoundingTest
 {
     [Fact]
-    public void CalculateChange_WhenAmountIsBelowMinimumUnit_ShouldFailWithRemaining()
+    public void CalculateChangeWhenAmountIsBelowMinimumUnitShouldFailWithRemaining()
     {
         // Setup: Need to pay 0.07 (7 cents).
         // Inventory has plenty of 0.05 coins.
@@ -63,7 +63,7 @@ public class CurrencyRoundingTest
     }
 
     [Fact]
-    public void CalculateChange_WhenExactMatchPossible_ShouldSucceed()
+    public void CalculateChangeWhenExactMatchPossibleShouldSucceed()
     {
         var inventory = new MoneyKind<MockChfCurrency>();
         inventory[0.05m] = 1;

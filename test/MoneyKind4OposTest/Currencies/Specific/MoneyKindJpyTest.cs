@@ -22,7 +22,7 @@ public class MoneyKindJpyTest
     [InlineData("1:,10:;10000:1", 10000)]
     [InlineData(";10000:1", 10000)]
     [InlineData("1:10;5000:1,10000:1", 15010)]
-    public void Jpy_Parse_And_TotalAmount_ShouldBeCorrect(
+    public void JpyParseAndTotalAmountShouldBeCorrect(
         string input, decimal expectedTotal)
     {
         var mk = MoneyKind<JpyCurrency>.Parse(input);
@@ -31,7 +31,7 @@ public class MoneyKindJpyTest
 
     /// <summary>ToCashCountsString tests for JpyCurrency.</summary>
     [Fact]
-    public void Jpy_ToCashCountsString_ShouldBeCorrect()
+    public void JpyToCashCountsStringShouldBeCorrect()
     {
         var mk = new MoneyKind<JpyCurrency>();
 

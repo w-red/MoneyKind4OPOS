@@ -7,7 +7,7 @@ namespace MoneyKind4OposTest;
 public class MoneyKindDetailTest
 {
     [Fact]
-    public void CalculateChangeDetail_ExactMatch_ShouldSucceed()
+    public void CalculateChangeDetailExactMatchShouldSucceed()
     {
         var inventory = MoneyKind<JpyCurrency>.Parse("500:1,100:1;1000:1");
         var result = inventory.CalculateChangeDetail(1600m);
@@ -25,7 +25,7 @@ public class MoneyKindDetailTest
     }
 
     [Fact]
-    public void CalculateChangeDetail_Fallback_ShouldSucceedWithLowerDenominations()
+    public void CalculateChangeDetailFallbackShouldSucceedWithLowerDenominations()
     {
         var inventory = MoneyKind<JpyCurrency>.Parse("500:4;"); // 1000円札なし、500円玉のみ
         var result = inventory.CalculateChangeDetail(1000m);
@@ -37,7 +37,7 @@ public class MoneyKindDetailTest
     }
 
     [Fact]
-    public void CalculateChangeDetail_InsufficientStock_ShouldReturnPartialAndMissing()
+    public void CalculateChangeDetailInsufficientStockShouldReturnPartialAndMissing()
     {
         var inventory = MoneyKind<JpyCurrency>.Parse("500:1;"); // 500円1枚のみ
         var result = inventory.CalculateChangeDetail(1200m);
@@ -52,7 +52,7 @@ public class MoneyKindDetailTest
     }
 
     [Fact]
-    public void CalculateChangeDetail_Bottleneck_ShouldIdentifyExactlyWhatIsMissing()
+    public void CalculateChangeDetailBottleneckShouldIdentifyExactlyWhatIsMissing()
     {
         // 150円払いたいが、100円玉1枚、10円玉4枚しかない（50円玉がない）
         var inventory = MoneyKind<JpyCurrency>.Parse("100:1,10:4;");
@@ -67,7 +67,7 @@ public class MoneyKindDetailTest
     }
 
     [Fact]
-    public void CalculateChangeDetail_ZeroAmount_ShouldReturnEmptySuccess()
+    public void CalculateChangeDetailZeroAmountShouldReturnEmptySuccess()
     {
         var inventory = MoneyKind<JpyCurrency>.Parse(";1000:10");
         var result = inventory.CalculateChangeDetail(0m);
@@ -78,7 +78,7 @@ public class MoneyKindDetailTest
     }
 
     [Fact]
-    public void CalculateChangeDetail_ZeroStock_ShouldReturnAllAsMissing()
+    public void CalculateChangeDetailZeroStockShouldReturnAllAsMissing()
     {
         var inventory = new MoneyKind<JpyCurrency>(); // 在庫なし
         var result = inventory.CalculateChangeDetail(1600m);
@@ -94,7 +94,7 @@ public class MoneyKindDetailTest
     }
 
     [Fact]
-    public void CalculateChangeDetail_EurCurrency_ShouldHandleDecimals()
+    public void CalculateChangeDetailEurCurrencyShouldHandleDecimals()
     {
         var inventory = new MoneyKind<EurCurrency>(); // 在庫なし
         var result = inventory.CalculateChangeDetail(0.75m); // 0.75ユーロ（75セント）

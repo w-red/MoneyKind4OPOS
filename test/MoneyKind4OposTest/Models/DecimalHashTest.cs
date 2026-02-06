@@ -6,7 +6,7 @@ namespace MoneyKind4OposTest;
 public class DecimalHashTest
 {
     [Fact]
-    public void Decimal_HashCode_ShouldBeScaleInvariant()
+    public void DecimalHashCodeShouldBeScaleInvariant()
     {
         decimal d1 = 1.0m;
         decimal d2 = 1.00m;
@@ -34,7 +34,7 @@ public class DecimalHashTest
     }
 
     [Fact]
-    public void MoneyKind_Indexer_ShouldBeScaleInvariant()
+    public void MoneyKindIndexerShouldBeScaleInvariant()
     {
         // Using JPY as a concrete example
         var mk = new MoneyKind<MoneyKind4Opos.Currencies.JpyCurrency>();

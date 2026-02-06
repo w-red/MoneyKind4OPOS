@@ -10,7 +10,7 @@ public class CurrencyMetadataTest
 {
     [Theory]
     [MemberData(nameof(CurrencyMetadataSource.GetCurrencyMetadata), MemberType = typeof(CurrencyMetadataSource))]
-    public void Currency_ShouldHaveCorrectIsoCodeAndMinimumUnit(
+    public void CurrencyShouldHaveCorrectIsoCodeAndMinimumUnit(
         Type currencyType,
         Iso4217 expectedEnum,
         int expectedNumeric,
@@ -34,7 +34,7 @@ public class CurrencyMetadataTest
     }
 
     [Fact]
-    public void Iso4217_Enum_ShouldContainCorrectValues()
+    public void Iso4217EnumShouldContainCorrectValues()
     {
         // Direct verification of key codes as integrity check
         ((int)Iso4217.JPY).ShouldBe(392);

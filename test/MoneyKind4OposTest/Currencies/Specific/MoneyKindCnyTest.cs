@@ -9,7 +9,7 @@ namespace MoneyKind4OposTest;
 public class MoneyKindCnyTest
 {
     [Fact]
-    public void Overlap_Denominations_ShouldBeHandledSeparately()
+    public void OverlapDenominationsShouldBeHandledSeparately()
     {
         // CNY has 1.00, 0.50, 0.10 as BOTH Coin and Bill.
         // Input: 0.1:1, 0.5:1, 1:1 (coins) ; 0.1:10, 0.5:10, 1:10 (bills)
@@ -27,7 +27,7 @@ public class MoneyKindCnyTest
     }
 
     [Fact]
-    public void Undefined_Denominations_ShouldBeIgnored()
+    public void UndefinedDenominationsShouldBeIgnored()
     {
         // 999 is not a valid CNY face value
         var input = "1:1,999:10;100:1";
@@ -50,14 +50,14 @@ public class MoneyKindCnyTest
     [InlineData("1:", 0)]        // Missing count
     [InlineData(":1", 0)]        // Missing value
     [InlineData("1.0:1, ,0.5:1", 1.5)] // Empty entry between commas
-    public void Malformed_Input_ShouldNotCrash(string input, decimal expectedTotal)
+    public void MalformedInputShouldNotCrash(string input, decimal expectedTotal)
     {
         var mk = MoneyKind<CnyCurrency>.Parse(input);
         mk.TotalAmount().ShouldBe(expectedTotal);
     }
 
     [Fact]
-    public void Default_Indexer_ShouldTargetPreferredType()
+    public void DefaultIndexerShouldTargetPreferredType()
     {
         var mk = new MoneyKind<CnyCurrency>();
 
@@ -69,7 +69,7 @@ public class MoneyKindCnyTest
     }
 
     [Fact]
-    public void RoundTrip_WithOverlaps_ShouldPreserveDistinction()
+    public void RoundTripWithOverlapsShouldPreserveDistinction()
     {
         var original = new MoneyKind<CnyCurrency>();
         original[1.0m, CashType.Coin] = 2;
@@ -86,7 +86,7 @@ public class MoneyKindCnyTest
     }
 
     [Fact]
-    public void ToCashCountsString_FullFormat_ShouldBeStrictlyCorrect()
+    public void ToCashCountsStringFullFormatShouldBeStrictlyCorrect()
     {
         var mk = new MoneyKind<CnyCurrency>();
         // Set specific counts. Unset should be 0.
@@ -111,7 +111,7 @@ public class MoneyKindCnyTest
     [InlineData(1.50, "1.50元")] // Over 1 Yuan uses standard format
     [InlineData(1.00, "1.00元")]
     [InlineData(0.00, "0.00元")]
-    public void Cny_ToLocalString_ShouldFormatSubsidiaryUnits(decimal amount, string expected)
+    public void CnyToLocalStringShouldFormatSubsidiaryUnits(decimal amount, string expected)
     {
         amount.ToLocalString<CnyCurrency>().ShouldBe(expected);
     }

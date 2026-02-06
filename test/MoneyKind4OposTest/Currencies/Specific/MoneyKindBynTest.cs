@@ -11,7 +11,7 @@ public class MoneyKindBynTest
     [InlineData("0.01:1;5:1", 5.01)]
     [InlineData("2:1;500:1", 502)]
     [InlineData("0.01:1,0.02:1,0.05:1,0.1:1,0.2:1,0.5:1,1:1,2:1;5:1,10:1,20:1,50:1,100:1,200:1,500:1", 888.88)]
-    public void Byn_Parse_ShouldWork(string input, decimal expected)
+    public void BynParseShouldWork(string input, decimal expected)
     {
          var mk = MoneyKind<BynCurrency>.Parse(input);
          mk.TotalAmount().ShouldBe(expected);

@@ -55,7 +55,7 @@ public class GlobalLocaleAbsoluteSolutionTest
     [MemberData(nameof(FormattingAbsoluteSolutionSource.GetOtherMajorData), MemberType = typeof(FormattingAbsoluteSolutionSource))]
     [MemberData(nameof(FormattingAbsoluteSolutionSource.GetFrancZonesData), MemberType = typeof(FormattingAbsoluteSolutionSource))]
     [MemberData(nameof(FormattingAbsoluteSolutionSource.GetDivergentUnionsData), MemberType = typeof(FormattingAbsoluteSolutionSource))]
-    public void Global_Absolute_Solution_Test(string cultureName, string currencyCode, string expected)
+    public void GlobalAbsoluteSolutionTest(string cultureName, string currencyCode, string expected)
     {
         VerifyAbsoluteSolution(cultureName, currencyCode, expected);
     }
