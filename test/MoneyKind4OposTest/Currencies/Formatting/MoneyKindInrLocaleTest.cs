@@ -2,7 +2,7 @@ using MoneyKind4Opos.Currencies;
 using Shouldly;
 using System.Globalization;
 
-namespace MoneyKind4OposTest;
+namespace MoneyKind4OposTest.Currencies.Formatting;
 
 /// <summary>
 /// Tests for Indian Rupee (INR) formatting across various Indian locales.

@@ -2,7 +2,7 @@ using MoneyKind4Opos.Currencies;
 using MoneyKind4Opos.Currencies.Interfaces;
 using Shouldly;
 
-namespace MoneyKind4OPOSTest;
+namespace MoneyKind4OposTest.Currencies.Specific;
 
 /// <summary>MoneyKind&lt;InrCurrency&gt; tests.</summary>
 public class MoneyKindInrTest

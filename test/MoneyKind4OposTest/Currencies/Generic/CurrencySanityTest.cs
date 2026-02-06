@@ -2,7 +2,7 @@ using MoneyKind4Opos.Currencies.Interfaces;
 using Shouldly;
 using System.Reflection;
 
-namespace MoneyKind4OposTest.Currencies;
+namespace MoneyKind4OposTest.Currencies.Generic;
 
 /// <summary>Sanity tests for all currency implementations.</summary>
 public class CurrencySanityTest
@@ -104,7 +104,7 @@ public class CurrencySanityTest
             var input = $"{coinPart};{billPart}";
 
             // Dynamically call MoneyKind<T>.Parse(input)
-            var moneyKindType = typeof(MoneyKind4Opos.Currencies.Interfaces.MoneyKind<>).MakeGenericType(type);
+            var moneyKindType = typeof(MoneyKind<>).MakeGenericType(type);
             var parseMethod = moneyKindType.GetMethod("Parse", BindingFlags.Public | BindingFlags.Static);
             var mk = parseMethod!.Invoke(null, [input]);
 

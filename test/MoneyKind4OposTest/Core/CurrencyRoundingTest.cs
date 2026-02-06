@@ -3,7 +3,7 @@ using MoneyKind4Opos.Currencies.Interfaces;
 using Shouldly;
 using System.Globalization;
 
-namespace MoneyKind4OposTest;
+namespace MoneyKind4OposTest.Core;
 
 /// <summary>
 /// A test-only currency to simulate Swiss Franc (CHF) like rounding issues.

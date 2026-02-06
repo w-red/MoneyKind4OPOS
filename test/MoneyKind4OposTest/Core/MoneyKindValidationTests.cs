@@ -2,7 +2,7 @@
 using MoneyKind4Opos.Currencies.Interfaces;
 using Shouldly;
 
-namespace MoneyKind4OposTest;
+namespace MoneyKind4OposTest.Core;
 
 /// <summary>Validation tests for MoneyKind ICashCountValidatable implementation.</summary>
 public class MoneyKindValidationTests

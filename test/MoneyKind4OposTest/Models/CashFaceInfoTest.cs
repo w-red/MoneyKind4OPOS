@@ -1,7 +1,7 @@
 using MoneyKind4Opos.Currencies.Interfaces;
 using Shouldly;
 
-namespace MoneyKind4OposTest;
+namespace MoneyKind4OposTest.Models;
 
 public class CashFaceInfoTest
 {

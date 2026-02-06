@@ -2,7 +2,7 @@ using MoneyKind4Opos.Currencies;
 using MoneyKind4Opos.Currencies.Interfaces;
 using Shouldly;
 
-namespace MoneyKind4OposTest;
+namespace MoneyKind4OposTest.Core;
 
 /// <summary>Boundary tests for change calculation logic (Greedy algorithm).</summary>
 public class MoneyKindBoundaryTest

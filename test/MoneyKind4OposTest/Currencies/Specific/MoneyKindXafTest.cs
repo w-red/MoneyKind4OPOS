@@ -3,7 +3,7 @@ using MoneyKind4Opos.Currencies.Interfaces;
 using MoneyKind4Opos.Codes;
 using Shouldly;
 
-namespace MoneyKind4OPOSTest;
+namespace MoneyKind4OposTest.Currencies.Specific;
 
 /// <summary>MoneyKind&lt;XafCurrency&gt; tests.</summary>
 public class MoneyKindXafTest

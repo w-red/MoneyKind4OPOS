@@ -2,7 +2,7 @@ using MoneyKind4Opos.Codes;
 using MoneyKind4Opos.Currencies.Interfaces;
 using Shouldly;
 
-namespace MoneyKind4OposTest.Currencies;
+namespace MoneyKind4OposTest.Currencies.Formatting;
 
 /// <summary>
 /// Tests for CurrencyFormattingOptions.FromIso4217 factory method

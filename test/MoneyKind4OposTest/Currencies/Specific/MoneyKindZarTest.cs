@@ -3,7 +3,7 @@ using MoneyKind4Opos.Currencies.Interfaces;
 using MoneyKind4Opos.Codes;
 using Shouldly;
 
-namespace MoneyKind4OposTest;
+namespace MoneyKind4OposTest.Currencies.Specific;
 
 /// <summary>MoneyKind&lt;ZarCurrency&gt; tests.</summary>
 public class MoneyKindZarTest

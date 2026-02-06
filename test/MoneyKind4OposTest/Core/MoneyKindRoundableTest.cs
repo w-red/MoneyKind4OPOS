@@ -2,7 +2,7 @@ using MoneyKind4Opos.Currencies;
 using MoneyKind4Opos.Currencies.Interfaces;
 using Shouldly;
 
-namespace MoneyKind4OposTest;
+namespace MoneyKind4OposTest.Core;
 
 /// <summary>Tests for MoneyKind IMoneyKindRoundable implementation.</summary>
 public class MoneyKindRoundableTest

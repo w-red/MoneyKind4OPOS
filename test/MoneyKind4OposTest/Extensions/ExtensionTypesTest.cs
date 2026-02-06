@@ -2,7 +2,7 @@ using MoneyKind4Opos.Currencies;
 using MoneyKind4Opos.Extensions;
 using Shouldly;
 
-namespace MoneyKind4OposTest;
+namespace MoneyKind4OposTest.Extensions;
 
 /// <summary>Tests for C# 14 Extension Types defined in CurrencyExtensions.</summary>
 public class ExtensionTypesTest

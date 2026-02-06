@@ -2,7 +2,7 @@ using MoneyKind4Opos.Currencies;
 using MoneyKind4Opos.Currencies.Interfaces;
 using Shouldly;
 
-namespace MoneyKind4OposTest;
+namespace MoneyKind4OposTest.Currencies.Formatting;
 
 /// <summary>Tests for MoneyKind.ToCashCountsString.</summary>
 public class MoneyKindFormatTest

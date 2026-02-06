@@ -3,7 +3,7 @@ using MoneyKind4Opos.Currencies.Interfaces;
 using MoneyKind4Opos.Extensions;
 using Shouldly;
 
-namespace MoneyKind4OPOSTest;
+namespace MoneyKind4OposTest.Currencies.Specific;
 
 /// <summary>Tests for MoneyKind with GbpCurrency (British Pound).</summary>
 public class MoneyKindGbpTest

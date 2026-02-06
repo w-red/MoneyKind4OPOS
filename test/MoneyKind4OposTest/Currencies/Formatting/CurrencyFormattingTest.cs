@@ -2,7 +2,7 @@ using MoneyKind4Opos.Currencies;
 using MoneyKind4Opos.Extensions;
 using Shouldly;
 
-namespace MoneyKind4OposTest.Currencies;
+namespace MoneyKind4OposTest.Currencies.Formatting;
 
 /// <summary>Tests for currency formatting logic (ToLocalString / ToGlobalString).</summary>
 public class CurrencyFormattingTest
