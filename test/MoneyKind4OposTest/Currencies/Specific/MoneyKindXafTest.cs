@@ -8,6 +8,7 @@ namespace MoneyKind4OposTest.Currencies.Specific;
 /// <summary>MoneyKind&lt;XafCurrency&gt; tests.</summary>
 public class MoneyKindXafTest
 {
+    /// <summary>Verifies that XAF cash-count strings are parsed and total amounts calculated correctly.</summary>
     [Theory]
     [InlineData("500:2;1000:1", 2000)]
     public void XafParseShouldWork(string input, decimal expected)

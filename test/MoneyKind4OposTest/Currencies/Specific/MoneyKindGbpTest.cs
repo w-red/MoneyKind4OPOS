@@ -8,6 +8,7 @@ namespace MoneyKind4OposTest.Currencies.Specific;
 /// <summary>Tests for MoneyKind with GbpCurrency (British Pound).</summary>
 public class MoneyKindGbpTest
 {
+    /// <summary>Verifies that GBP amounts are correctly formatted into global strings with the pound symbol.</summary>
     [Fact]
     public void ToGlobalStringGbpShouldFormatCorrectly()
     {
@@ -15,6 +16,7 @@ public class MoneyKindGbpTest
         1234.56m.ToGlobalString<GbpCurrency>().ShouldBe("£1,234.56");
     }
 
+    /// <summary>Verifies that GBP MoneyKind instances can be correctly serialized and restored via cash-count strings.</summary>
     [Fact]
     public void GbpParseRoundTripShouldBeCorrect()
     {

@@ -8,6 +8,7 @@ namespace MoneyKind4OposTest.Currencies.Specific;
 /// <summary>Tests for MoneyKind with CnyCurrency (Complex case with overlaps).</summary>
 public class MoneyKindCnyTest
 {
+    /// <summary>Verifies that denominations with overlapping numeric values (like both coin and bill variants) are handled separately.</summary>
     [Fact]
     public void OverlapDenominationsShouldBeHandledSeparately()
     {
@@ -26,6 +27,7 @@ public class MoneyKindCnyTest
         mk.TotalAmount().ShouldBe(17.6m);
     }
 
+    /// <summary>Verifies that denominations not defined in the CNY currency implementation are ignored during parsing and setting.</summary>
     [Fact]
     public void UndefinedDenominationsShouldBeIgnored()
     {
@@ -44,6 +46,7 @@ public class MoneyKindCnyTest
         mk.TotalAmount().ShouldBe(101.0m); // No change
     }
 
+    /// <summary>Verifies that various malformed input strings do not cause crashes during parsing.</summary>
     [Theory]
     [InlineData("1:abc", 0)]     // Invalid count
     [InlineData("abc:1", 0)]     // Invalid value
@@ -56,6 +59,7 @@ public class MoneyKindCnyTest
         mk.TotalAmount().ShouldBe(expectedTotal);
     }
 
+    /// <summary>Verifies that the default indexer targets the preferred CashType (usually Coin) when a numeric value overlaps.</summary>
     [Fact]
     public void DefaultIndexerShouldTargetPreferredType()
     {
@@ -68,6 +72,7 @@ public class MoneyKindCnyTest
         mk[1.0m, CashType.Bill].ShouldBe(0);
     }
 
+    /// <summary>Verifies that round-trip serialization preserves the distinction between overlapping coin and bill denominations.</summary>
     [Fact]
     public void RoundTripWithOverlapsShouldPreserveDistinction()
     {
@@ -85,6 +90,7 @@ public class MoneyKindCnyTest
         restored.TotalAmount().ShouldBe(5.0m);
     }
 
+    /// <summary>Verifies that the ToCashCountsString accurately reflects the internal state of all CNY denominations.</summary>
     [Fact]
     public void ToCashCountsStringFullFormatShouldBeStrictlyCorrect()
     {
@@ -104,6 +110,7 @@ public class MoneyKindCnyTest
         result.ShouldBe(expected);
     }
 
+    /// <summary>Verifies that Chinese Yuan amounts under 1 Yuan are correctly formatted into subsidiary units (Jiao/Fen).</summary>
     [Theory]
     [InlineData(0.12, "1角2分")]
     [InlineData(0.50, "5角")]

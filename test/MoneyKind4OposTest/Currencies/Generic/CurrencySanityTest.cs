@@ -126,6 +126,7 @@ public class CurrencySanityTest
         }
     }
 
+    /// <summary>Reflection helper to get all concrete currency implementation types in the assembly.</summary>
     private static List<Type> GetAllCurrencyTypes()
     {
         return [..

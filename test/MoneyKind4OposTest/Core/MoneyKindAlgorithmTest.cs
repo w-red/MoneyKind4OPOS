@@ -4,8 +4,10 @@ using Shouldly;
 
 namespace MoneyKind4OposTest.Core;
 
+/// <summary>Tests for core MoneyKind algorithms including addition, subtraction, and greedy change calculation.</summary>
 public class MoneyKindAlgorithmTest
 {
+    /// <summary>Verifies that adding one MoneyKind to another correctly accumulates denomination counts.</summary>
     [Fact]
     public void AddShouldAccumulateCounts()
     {
@@ -23,6 +25,7 @@ public class MoneyKindAlgorithmTest
         inventory.TotalAmount().ShouldBe(8500m);
     }
 
+    /// <summary>Verifies that subtracting one MoneyKind from another correctly reduces denomination counts.</summary>
     [Fact]
     public void SubtractShouldReduceCounts()
     {
@@ -37,6 +40,7 @@ public class MoneyKindAlgorithmTest
         inventory[1000].ShouldBe(7);
     }
 
+    /// <summary>Verifies that subtracting more than available inventory throws an InvalidOperationException.</summary>
     [Fact]
     public void SubtractInsufficientInventoryShouldThrow()
     {
@@ -50,6 +54,7 @@ public class MoneyKindAlgorithmTest
             inventory.Subtract(dispense));
     }
 
+    /// <summary>Verifies that the greedy algorithm is used when sufficient inventory exists for all denominations.</summary>
     [Fact]
     public void CalculateChangeWithSufficientInventoryShouldUseGreedy()
     {
@@ -67,6 +72,7 @@ public class MoneyKindAlgorithmTest
         change.TotalAmount().ShouldBe(1600m);
     }
 
+    /// <summary>Verifies that the algorithm falls back to lower denominations when a higher denomination is unavailable.</summary>
     [Fact]
     public void CalculateChangeWithBrokenDenominationShouldFallbackToLower()
     {
@@ -84,6 +90,7 @@ public class MoneyKindAlgorithmTest
         change.TotalAmount().ShouldBe(1200m);
     }
 
+    /// <summary>Verifies that the algorithm returns the maximum possible payable amount when the exact amount cannot be matched.</summary>
     [Fact]
     public void CalculateChangeWhenImpossibleShouldReturnWhatItCouldCalculate()
     {
@@ -97,6 +104,7 @@ public class MoneyKindAlgorithmTest
         change.TotalAmount().ShouldBe(200m);
     }
 
+    /// <summary>Verifies the IsPayable method reflects whether an exact amount can be formed from the inventory.</summary>
     [Fact]
     public void IsPayableShouldReflectAccuracy()
     {

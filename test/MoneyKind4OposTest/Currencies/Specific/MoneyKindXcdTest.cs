@@ -8,6 +8,7 @@ namespace MoneyKind4OposTest.Currencies.Specific;
 /// <summary>MoneyKind&lt;XcdCurrency&gt; tests.</summary>
 public class MoneyKindXcdTest
 {
+    /// <summary>Verifies that XCD cash-count strings are parsed and total amounts calculated correctly.</summary>
     [Theory]
     [InlineData("0.05:2,1:1", 1.10)]
     [InlineData(";10:1", 10.0)]

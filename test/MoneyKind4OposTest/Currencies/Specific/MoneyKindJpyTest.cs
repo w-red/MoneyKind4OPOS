@@ -7,7 +7,7 @@ namespace MoneyKind4OposTest.Currencies.Specific;
 /// <summary>MoneyKind&lt;JpyCurrency&gt; tests.</summary>
 public class MoneyKindJpyTest
 {
-    /// <summary>Parse and TotalAmount tests for JpyCurrency.</summary>
+    /// <summary>Verifies that JPY cash-count strings are parsed and total amounts calculated correctly.</summary>
     [Theory]
     [InlineData("", 0)]
     [InlineData(";", 0)]

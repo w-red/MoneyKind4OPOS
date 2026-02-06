@@ -8,6 +8,7 @@ namespace MoneyKind4OposTest.Currencies.Specific;
 /// <summary>MoneyKind&lt;NzdCurrency&gt; tests.</summary>
 public class MoneyKindNzdTest
 {
+    /// <summary>Verifies that NZD cash-count strings are parsed and total amounts calculated correctly.</summary>
     [Theory]
     [InlineData("0.1:10,1:5", 6.0)]
     [InlineData(";20:1", 20.0)]

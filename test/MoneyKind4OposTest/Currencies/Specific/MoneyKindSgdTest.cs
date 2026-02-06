@@ -8,6 +8,7 @@ namespace MoneyKind4OposTest.Currencies.Specific;
 /// <summary>MoneyKind&lt;SgdCurrency&gt; tests.</summary>
 public class MoneyKindSgdTest
 {
+    /// <summary>Verifies that SGD cash-count strings are parsed and total amounts calculated correctly.</summary>
     [Theory]
     [InlineData("0.05:1;5:1", 5.05)]
     [InlineData(";50:1,100:1,1000:1", 1150.0)]

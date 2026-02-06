@@ -7,6 +7,7 @@ namespace MoneyKind4OposTest.Currencies.Specific;
 /// <summary>MoneyKind&lt;KztCurrency&gt; tests.</summary>
 public class MoneyKindKztTest
 {
+    /// <summary>Verifies that KZT cash-count strings are parsed and total amounts calculated correctly.</summary>
     [Theory]
     [InlineData("1:1;200:1", 201)]
     [InlineData("200:1;200:1", 400)]

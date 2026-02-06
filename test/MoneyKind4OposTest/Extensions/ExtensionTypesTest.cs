@@ -7,6 +7,7 @@ namespace MoneyKind4OposTest.Extensions;
 /// <summary>Tests for C# 14 Extension Types defined in CurrencyExtensions.</summary>
 public class ExtensionTypesTest
 {
+    /// <summary>Verifies that JPY global string formatting correctly applies digit grouping for large amounts.</summary>
     [Theory]
     [InlineData(1500, "¥1,500")]
     [InlineData(1234567, "¥1,234,567")]
@@ -18,6 +19,7 @@ public class ExtensionTypesTest
         result.ShouldBe(expected);
     }
 
+    /// <summary>Verifies that JPY local string formatting correctly applies digit grouping for large amounts.</summary>
     [Theory]
     [InlineData(1500, "1,500円")]
     [InlineData(1234567, "1,234,567円")]
@@ -27,6 +29,7 @@ public class ExtensionTypesTest
         result.ShouldBe(expected);
     }
 
+    /// <summary>Verifies that EUR global formatting correctly implements the European style digit grouping (period as separator).</summary>
     [Fact]
     public void DecimalToGlobalStringEurShouldHandleEuropeanGrouping()
     {
@@ -38,6 +41,7 @@ public class ExtensionTypesTest
         result.ShouldBe("1.234,56 €");
     }
 
+    /// <summary>Verifies that the generic ToCurrencyString extension correctly aliases the local formatting rules.</summary>
     [Fact]
     public void DecimalToCurrencyStringShouldUseLocalWithGrouping()
     {

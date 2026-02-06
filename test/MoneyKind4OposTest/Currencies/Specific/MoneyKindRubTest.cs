@@ -7,6 +7,7 @@ namespace MoneyKind4OposTest.Currencies.Specific;
 /// <summary>MoneyKind&lt;RubCurrency&gt; tests.</summary>
 public class MoneyKindRubTest
 {
+    /// <summary>Verifies that RUB cash-count strings are parsed and total amounts calculated correctly.</summary>
     [Theory]
     [InlineData("0.01:1;5:1", 5.01)]
     [InlineData("10:1;5000:1", 5010)]

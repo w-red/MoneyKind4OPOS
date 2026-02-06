@@ -7,6 +7,7 @@ namespace MoneyKind4OposTest.Currencies.Formatting;
 /// <summary>Tests for currency formatting logic (ToLocalString / ToGlobalString).</summary>
 public class CurrencyFormattingTest
 {
+    /// <summary>Verifies formatting logic for Chinese Yuan (CNY) in both local and global styles.</summary>
     [Theory]
     [InlineData(12.34, "12.34元", "¥12.34")]
     [InlineData(0.50, "5角", "¥0.50")]
@@ -22,6 +23,7 @@ public class CurrencyFormattingTest
         amount.ToGlobalString<CnyCurrency>().ShouldBe(expectedGlobal);
     }
 
+    /// <summary>Verifies formatting logic for Japanese Yen (JPY) in both local and global styles.</summary>
     [Theory]
     [InlineData(1000, "1,000円", "¥1,000")]
     public void JpyFormattingShouldBeCorrect(
@@ -33,6 +35,7 @@ public class CurrencyFormattingTest
         amount.ToGlobalString<JpyCurrency>().ShouldBe(expectedGlobal);
     }
 
+    /// <summary>Verifies formatting logic for US Dollar (USD) in both local and global styles.</summary>
     [Theory]
     [InlineData(1.23, "$1.23", "$1.23")]
     public void UsdFormattingShouldBeCorrect(

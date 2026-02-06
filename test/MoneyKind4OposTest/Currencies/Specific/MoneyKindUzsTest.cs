@@ -7,6 +7,7 @@ namespace MoneyKind4OposTest.Currencies.Specific;
 /// <summary>MoneyKind&lt;UzsCurrency&gt; tests.</summary>
 public class MoneyKindUzsTest
 {
+    /// <summary>Verifies that UZS cash-count strings are parsed and total amounts calculated correctly.</summary>
     [Theory]
     [InlineData("50:1;1000:1", 1050)]
     [InlineData("1000:1;1000:1", 2000)]

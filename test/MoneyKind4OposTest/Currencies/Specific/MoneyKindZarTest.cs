@@ -8,6 +8,7 @@ namespace MoneyKind4OposTest.Currencies.Specific;
 /// <summary>MoneyKind&lt;ZarCurrency&gt; tests.</summary>
 public class MoneyKindZarTest
 {
+    /// <summary>Verifies that ZAR cash-count strings are parsed and total amounts calculated correctly.</summary>
     [Theory]
     [InlineData("0.1:5,1:2", 2.5)]
     [InlineData(";10:1", 10.0)]

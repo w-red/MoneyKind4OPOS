@@ -54,6 +54,7 @@ public class IMoneyKindLogicTest
 
     private class StubMoneyKind : MoneyKind<StubCurrency> { }
 
+    /// <summary>Verifies that the total amount is zero for a newly initialized MoneyKind instance.</summary>
     [Fact]
     public void TotalAmountWithNoCoinsShouldBeZero()
     {
@@ -61,6 +62,7 @@ public class IMoneyKindLogicTest
         mk.TotalAmount().ShouldBe(0m);
     }
 
+    /// <summary>Verifies that the total amount correctly sums all coins and bills across various denominations.</summary>
     [Fact]
     public void TotalAmountWithCoinsAndBillsShouldSumCorrectly()
     {
@@ -72,6 +74,7 @@ public class IMoneyKindLogicTest
         mk.TotalAmount().ShouldBe(9.0m);
     }
 
+    /// <summary>Verifies that CoinAmount returns only the sum of coins, excluding bills.</summary>
     [Fact]
     public void CoinAmountShouldOnlySumCoins()
     {
@@ -82,6 +85,7 @@ public class IMoneyKindLogicTest
         mk.CoinAmount().ShouldBe(1.0m);
     }
 
+    /// <summary>Verifies that CoinAmount equals total amount when no bills are present in the inventory.</summary>
     [Fact]
     public void CoinAmountWithNoBillsShouldEqualTotalAmount()
     {
@@ -91,6 +95,7 @@ public class IMoneyKindLogicTest
         mk.CoinAmount().ShouldBe(mk.TotalAmount());
     }
 
+    /// <summary>Verifies that BillAmount returns only the sum of bills, excluding coins.</summary>
     [Fact]
     public void BillAmountShouldOnlySumBills()
     {
@@ -101,6 +106,7 @@ public class IMoneyKindLogicTest
         mk.BillAmount().ShouldBe(20.0m);
     }
 
+    /// <summary>Verifies that Parse correctly restores denomination counts from a valid cash-count string.</summary>
     [Fact]
     public void ParseWithValidStringShouldRestoreCounts()
     {
@@ -116,6 +122,7 @@ public class IMoneyKindLogicTest
         mk[5.0m, CashType.Bill].ShouldBe(20);
     }
 
+    /// <summary>Verifies that Parse returns an empty MoneyKind instance when given an empty string.</summary>
     [Fact]
     public void ParseWithEmptyStringShouldReturnEmptyCounts()
     {
@@ -124,6 +131,7 @@ public class IMoneyKindLogicTest
             .Count(w => w.Value > 0).ShouldBe(0);
     }
 
+    /// <summary>Verifies that Parse correctly processes strings containing only coin definitions.</summary>
     [Fact]
     public void ParseWithOnlyCoinsShouldIgnoreBills()
     {
@@ -137,6 +145,7 @@ public class IMoneyKindLogicTest
         mk.TotalAmount().ShouldBe(1.5m);
     }
 
+    /// <summary>Verifies that Parse correctly processes strings containing only bill definitions.</summary>
     [Fact]
     public void ParseWithOnlyBillsShouldIgnoreCoins()
     {
@@ -149,6 +158,7 @@ public class IMoneyKindLogicTest
         mk.TotalAmount().ShouldBe(20.0m);
     }
 
+    /// <summary>Verifies parsing accuracy across various legacy, whitespace-heavy, or mixed string formats.</summary>
     [Theory]
     [InlineData("0.5:1,0.5:2", 1.0)]   // Last one wins in current implementation (0.5:2 = 1.0 total)
     [InlineData(" 0.5 : 2 ", 1.0)]    // Whitespace handling
@@ -161,6 +171,7 @@ public class IMoneyKindLogicTest
         mk.TotalAmount().ShouldBe(expectedTotal);
     }
 
+    /// <summary>Verifies that the parser ignores face values that are not defined in the currency implementation.</summary>
     [Fact]
     public void ParseWithUndefinedFaceShouldIgnoreIt()
     {
@@ -173,6 +184,7 @@ public class IMoneyKindLogicTest
         mk.TotalAmount().ShouldBe(5.5m);
     }
 
+    /// <summary>Verifies that ToCashCountsString produces a valid string with zero counts when inventory is empty.</summary>
     [Fact]
     public void ToCashCountsStringWithEmptyCountsShouldReturnZeros()
     {
@@ -186,6 +198,7 @@ public class IMoneyKindLogicTest
         result.ShouldContain(";");
     }
 
+    /// <summary>Verifies that ToCashCountsString correctly encodes inventory counts into the standard string format.</summary>
     [Fact]
     public void ToCashCountsStringWithCountsShouldFormatCorrectly()
     {
@@ -199,6 +212,7 @@ public class IMoneyKindLogicTest
         result.ShouldContain("5:1");
     }
 
+    /// <summary>Verifies that data remains consistent after a serialization (ToCashCountsString) and deserialization (Parse) round-trip.</summary>
     [Fact]
     public void ToCashCountsStringRoundTripShouldPreserveData()
     {

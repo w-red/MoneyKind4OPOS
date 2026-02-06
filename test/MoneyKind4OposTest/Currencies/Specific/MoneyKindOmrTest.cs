@@ -7,6 +7,7 @@ namespace MoneyKind4OposTest.Currencies.Specific;
 /// <summary>MoneyKind&lt;OmrCurrency&gt; tests.</summary>
 public class MoneyKindOmrTest
 {
+    /// <summary>Verifies that OMR cash-count strings are parsed and total amounts calculated correctly.</summary>
     [Theory]
     [InlineData("0.005:1;1:1", 1.005)]
     [InlineData("0.050:1;0.100:1,50:1", 50.150)]

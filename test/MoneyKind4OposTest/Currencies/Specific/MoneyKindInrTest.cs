@@ -7,7 +7,7 @@ namespace MoneyKind4OposTest.Currencies.Specific;
 /// <summary>MoneyKind&lt;InrCurrency&gt; tests.</summary>
 public class MoneyKindInrTest
 {
-    /// <summary>Parse and TotalAmount tests for InrCurrency.</summary>
+    /// <summary>Verifies that INR cash-count strings are parsed and total amounts calculated correctly.</summary>
     [Theory]
     [InlineData("", 0)]
     [InlineData(";", 0)]
@@ -22,7 +22,7 @@ public class MoneyKindInrTest
         mk.TotalAmount().ShouldBe(expectedTotal);
     }
 
-    /// <summary>ToCashCountsString tests for InrCurrency.</summary>
+    /// <summary>Verifies that an INR MoneyKind instance is correctly serialized to a cash-count string.</summary>
     [Fact]
     public void InrToCashCountsStringShouldBeCorrect()
     {
@@ -46,7 +46,7 @@ public class MoneyKindInrTest
         result.ShouldContain(";");
     }
 
-    /// <summary>Tests the Indian digit grouping (Lakh/Crore system).</summary>
+    /// <summary>Verifies that currency formatting for INR correctly applies the Indian digit grouping (Lakh/Crore) system.</summary>
     [Fact]
     public void InrGroupingShouldFollowIndianSystem()
     {

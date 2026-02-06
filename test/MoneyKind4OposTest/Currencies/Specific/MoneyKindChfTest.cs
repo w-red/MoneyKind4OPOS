@@ -7,6 +7,7 @@ namespace MoneyKind4OposTest.Currencies.Specific;
 /// <summary>MoneyKind&lt;ChfCurrency&gt; tests.</summary>
 public class MoneyKindChfTest
 {
+    /// <summary>Verifies that the change calculation logic respects the 0.05 minimum unit of CHF.</summary>
     [Fact]
     public void CalculateChangeChfShouldHandleMinimumUnitOfFiveCents()
     {
@@ -32,6 +33,7 @@ public class MoneyKindChfTest
         result.RemainingAmount.ShouldBe(0.02m);
     }
 
+    /// <summary>Verifies the basic code and minimum unit properties for CHF.</summary>
     [Fact]
     public void ChfPropertiesShouldBeCorrect()
     {
@@ -39,6 +41,7 @@ public class MoneyKindChfTest
         ChfCurrency.MinimumUnit.ShouldBe(0.05m);
     }
 
+    /// <summary>Verifies that CHF MoneyKind instances are correctly serialized into cash-count strings.</summary>
     [Fact]
     public void ToCashCountsStringChfShouldOutputZeroCountsForAllDenominations()
     {

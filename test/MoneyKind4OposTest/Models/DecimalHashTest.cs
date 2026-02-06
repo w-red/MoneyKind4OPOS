@@ -3,8 +3,10 @@ using Shouldly;
 
 namespace MoneyKind4OposTest.Models;
 
+/// <summary>Tests for decimal hash code behavior and scale invariance in indexing.</summary>
 public class DecimalHashTest
 {
+    /// <summary>Verifies that decimal hash codes are invariant across different scales in .NET 10.</summary>
     [Fact]
     public void DecimalHashCodeShouldBeScaleInvariant()
     {
@@ -33,6 +35,7 @@ public class DecimalHashTest
         dict.ContainsKey(1.0m).ShouldBeTrue("Dictionary failed to find 1.0m when 1.00m was the key.");
     }
 
+    /// <summary>Verifies that MoneyKind indexers handle numerical equality correctly regardless of decimal scale.</summary>
     [Fact]
     public void MoneyKindIndexerShouldBeScaleInvariant()
     {

@@ -14,6 +14,7 @@ namespace MoneyKind4OposTest.Currencies.Formatting;
 /// </summary>
 public class GlobalLocaleAbsoluteSolutionTest
 {
+    /// <summary>Helper method to verify the formatted global string for a specific currency and culture.</summary>
     private static void VerifyAbsoluteSolution(string cultureName, string currencyCode, string expected)
     {
         CultureInfo culture;
@@ -48,6 +49,7 @@ public class GlobalLocaleAbsoluteSolutionTest
         result.ShouldBe(expected);
     }
 
+    /// <summary>Verifies that each currency is formatted correctly according to its globally expected "Absolute Solution" in various locales.</summary>
     [Theory]
     [MemberData(nameof(FormattingAbsoluteSolutionSource.GetEurUnionData), MemberType = typeof(FormattingAbsoluteSolutionSource))]
     [MemberData(nameof(FormattingAbsoluteSolutionSource.GetGbpUnionData), MemberType = typeof(FormattingAbsoluteSolutionSource))]

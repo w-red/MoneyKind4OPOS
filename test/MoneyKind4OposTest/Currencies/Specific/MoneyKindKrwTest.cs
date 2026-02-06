@@ -7,6 +7,7 @@ namespace MoneyKind4OposTest.Currencies.Specific;
 /// <summary>MoneyKind&lt;KrwCurrency&gt; tests.</summary>
 public class MoneyKindKrwTest
 {
+    /// <summary>Verifies that KRW cash-count strings are parsed and total amounts calculated correctly.</summary>
     [Theory]
     [InlineData("1:1;1000:1", 1001)]
     [InlineData("500:1;50000:1", 50500)]

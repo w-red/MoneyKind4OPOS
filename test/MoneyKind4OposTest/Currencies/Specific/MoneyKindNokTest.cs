@@ -8,6 +8,7 @@ namespace MoneyKind4OposTest.Currencies.Specific;
 /// <summary>MoneyKind&lt;NokCurrency&gt; tests.</summary>
 public class MoneyKindNokTest
 {
+    /// <summary>Verifies that NOK cash-count strings are parsed and total amounts calculated correctly.</summary>
     [Theory]
     [InlineData("1:1;50:1", 51.0)]
     [InlineData(";500:1,1000:1", 1500.0)]

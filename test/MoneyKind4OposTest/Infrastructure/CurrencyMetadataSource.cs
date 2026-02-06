@@ -86,6 +86,15 @@ public static class CurrencyMetadataSource
         data.Add(typeof(TryCurrency), Iso4217.TRY, 949, 0.01);
         data.Add(typeof(LbpCurrency), Iso4217.LBP, 422, 250.0);
 
+        // Balkan & Eastern Europe
+        data.Add(typeof(AllCurrency), Iso4217.ALL, 8, 1.0);
+        data.Add(typeof(UahCurrency), Iso4217.UAH, 980, 0.10);
+        data.Add(typeof(MkdCurrency), Iso4217.MKD, 807, 1.0);
+        data.Add(typeof(RsdCurrency), Iso4217.RSD, 941, 1.0);
+        data.Add(typeof(BamCurrency), Iso4217.BAM, 977, 0.05);
+        data.Add(typeof(MdlCurrency), Iso4217.MDL, 498, 0.01);
+        data.Add(typeof(RonCurrency), Iso4217.RON, 946, 0.01);
+
         return data;
     }
 }

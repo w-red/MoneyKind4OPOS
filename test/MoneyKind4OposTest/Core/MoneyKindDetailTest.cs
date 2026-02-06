@@ -4,8 +4,10 @@ using Shouldly;
 
 namespace MoneyKind4OposTest.Core;
 
+/// <summary>Tests for the MoveKind.CalculateChangeDetail method, verifying detailed change reports.</summary>
 public class MoneyKindDetailTest
 {
+    /// <summary>Verifies that an exact match in inventory results in a successful detailed change report.</summary>
     [Fact]
     public void CalculateChangeDetailExactMatchShouldSucceed()
     {
@@ -24,6 +26,7 @@ public class MoneyKindDetailTest
         result.MissingChange.Counts.Values.Sum().ShouldBe(0); // 足りないものは無し
     }
 
+    /// <summary>Verifies that the detailed calculation correctly falls back to lower denominations when needed.</summary>
     [Fact]
     public void CalculateChangeDetailFallbackShouldSucceedWithLowerDenominations()
     {
@@ -36,6 +39,7 @@ public class MoneyKindDetailTest
         result.RemainingAmount.ShouldBe(0m);
     }
 
+    /// <summary>Verifies that partial payments and the specific missing denominations are accurately reported when stock is low.</summary>
     [Fact]
     public void CalculateChangeDetailInsufficientStockShouldReturnPartialAndMissing()
     {
@@ -51,6 +55,7 @@ public class MoneyKindDetailTest
         result.MissingChange[100].ShouldBe(2);
     }
 
+    /// <summary>Verifies that the report identifies the exact missing denomination when a breakdown bottleneck occurs.</summary>
     [Fact]
     public void CalculateChangeDetailBottleneckShouldIdentifyExactlyWhatIsMissing()
     {
@@ -66,6 +71,7 @@ public class MoneyKindDetailTest
         result.MissingChange[10].ShouldBe(1);
     }
 
+    /// <summary>Verifies that requesting zero change results in a successful empty report.</summary>
     [Fact]
     public void CalculateChangeDetailZeroAmountShouldReturnEmptySuccess()
     {
@@ -77,6 +83,7 @@ public class MoneyKindDetailTest
         result.RemainingAmount.ShouldBe(0m);
     }
 
+    /// <summary>Verifies that if inventory is empty, the entire amount is reported as missing in the ideal denomination breakdown.</summary>
     [Fact]
     public void CalculateChangeDetailZeroStockShouldReturnAllAsMissing()
     {
@@ -93,6 +100,7 @@ public class MoneyKindDetailTest
         result.MissingChange[100].ShouldBe(1);
     }
 
+    /// <summary>Verifies that currencies with sub-unit decimals like EUR are handled correctly in detailed reports.</summary>
     [Fact]
     public void CalculateChangeDetailEurCurrencyShouldHandleDecimals()
     {

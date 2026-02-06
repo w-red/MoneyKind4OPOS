@@ -8,6 +8,7 @@ namespace MoneyKind4OposTest.Currencies.Generic;
 
 public class MoneyKindGenericSanityTest
 {
+    /// <summary>Verifies basic parsing, total calculation, and serialization round-trip for every currency implementation.</summary>
     [Theory]
     [MemberData(nameof(CurrencyMetadataSource.GetCurrencyMetadata), MemberType = typeof(CurrencyMetadataSource))]
     public void MoneyKindBasicSanityShouldWork(

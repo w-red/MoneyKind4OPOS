@@ -36,8 +36,10 @@ public class MockChfCurrency : ICurrency, ICashCountFormattable<MockChfCurrency>
     public static CurrencyFormattingOptions Local => Global;
 }
 
+/// <summary>Tests for currency rounding logic, including edge cases with minimum units.</summary>
 public class CurrencyRoundingTest
 {
+    /// <summary>Verifies that change calculation fails when the remaining amount is below the minimum unit.</summary>
     [Fact]
     public void CalculateChangeWhenAmountIsBelowMinimumUnitShouldFailWithRemaining()
     {
@@ -62,6 +64,7 @@ public class CurrencyRoundingTest
         result.MissingChange.TotalAmount().ShouldBe(0m);
     }
 
+    /// <summary>Verifies that change calculation succeeds when an exact match for the amount is possible.</summary>
     [Fact]
     public void CalculateChangeWhenExactMatchPossibleShouldSucceed()
     {

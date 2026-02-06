@@ -22,6 +22,7 @@ public class EuroLocaleVariationTest
     /// - fr-FR (French): 1 234,56 € (NBSP as group separator, comma as decimal, symbol postfix)
     /// - en-IE (Irish English): €1,234.56 (comma as group separator, period as decimal, symbol prefix)
     /// </summary>
+    /// <summary>Verifies that Euro formatting options correctly adapt to various cultural locales.</summary>
     [Theory]
     [InlineData("de-DE", SymbolPlacement.Postfix, ",", ".")]
     [InlineData("fr-FR", SymbolPlacement.Postfix, ",", " ")] // Group separator contains NBSP
@@ -54,6 +55,7 @@ public class EuroLocaleVariationTest
     /// German Euro format: 1.234,56 €
     /// Uses period as group separator, comma as decimal separator, symbol postfix.
     /// </summary>
+    /// <summary>Verifies that the German locale (de-DE) produces the exact expected Euro string format.</summary>
     [Fact]
     public void EuroGermanFormatShouldMatchExactly()
     {
@@ -74,6 +76,7 @@ public class EuroLocaleVariationTest
     /// French Euro format: 1 234,56 €
     /// Uses Narrow No-Break Space (U+202F) as group separator.
     /// </summary>
+    /// <summary>Verifies that the French locale (fr-FR) produces the exact expected Euro string format, including NBSP.</summary>
     [Fact]
     public void EuroFrenchFormatShouldMatchExactlyWithNBSP()
     {
@@ -95,6 +98,7 @@ public class EuroLocaleVariationTest
     /// Irish/English Euro format: €1,234.56
     /// Uses comma as group separator, period as decimal separator, symbol prefix.
     /// </summary>
+    /// <summary>Verifies that the Irish locale (en-IE) produces the exact expected Euro string format.</summary>
     [Fact]
     public void EuroIrishFormatShouldMatchExactly()
     {
@@ -114,6 +118,7 @@ public class EuroLocaleVariationTest
     /// <summary>
     /// Parameterized test for exact string matching across multiple locales.
     /// </summary>
+    /// <summary>Verifies exact string matching for Euro formatting across multiple specified locales.</summary>
     [Theory]
     [InlineData("de-DE", "1.234,56 €")]
     [InlineData("en-IE", "€1,234.56")]
@@ -137,6 +142,7 @@ public class EuroLocaleVariationTest
     /// <summary>
     /// French format needs special handling due to NBSP, tested separately.
     /// </summary>
+    /// <summary>Verifies that the French locale formatting exactly matches the expected string with Narrow No-Break Space.</summary>
     [Fact]
     public void EuroFrenchFormatInTheoryShouldMatchExpectedString()
     {

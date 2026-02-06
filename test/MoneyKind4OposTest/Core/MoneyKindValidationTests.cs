@@ -7,7 +7,7 @@ namespace MoneyKind4OposTest.Core;
 /// <summary>Validation tests for MoneyKind ICashCountValidatable implementation.</summary>
 public class MoneyKindValidationTests
 {
-    /// <summary>IsValidFaceValue tests with valid denominations.</summary>
+    /// <summary>Verifies that IsValidFaceValue correctly identifies valid AUD denominations.</summary>
     [Theory]
     [InlineData(0.05)]
     [InlineData(0.1)]
@@ -24,7 +24,7 @@ public class MoneyKindValidationTests
         mk.IsValidFaceValue(faceValue).ShouldBeTrue();
     }
 
-    /// <summary>IsValidFaceValue tests with invalid denominations.</summary>
+    /// <summary>Verifies that IsValidFaceValue correctly identifies invalid AUD denominations.</summary>
     [Theory]
     [InlineData(0.03)]
     [InlineData(0.07)]
@@ -37,7 +37,7 @@ public class MoneyKindValidationTests
         mk.IsValidFaceValue(faceValue).ShouldBeFalse();
     }
 
-    /// <summary>IsValidCount tests with valid counts.</summary>
+    /// <summary>Verifies that IsValidCount correctly identifies valid inventory counts (non-negative).</summary>
     [Theory]
     [InlineData(0)]
     [InlineData(1)]
@@ -50,7 +50,7 @@ public class MoneyKindValidationTests
         mk.IsValidCount(count).ShouldBeTrue();
     }
 
-    /// <summary>IsValidCount tests with invalid counts.</summary>
+    /// <summary>Verifies that IsValidCount correctly identifies invalid inventory counts (negative).</summary>
     [Theory]
     [InlineData(-1)]
     [InlineData(-10)]
@@ -61,7 +61,7 @@ public class MoneyKindValidationTests
         mk.IsValidCount(count).ShouldBeFalse();
     }
 
-    /// <summary>TrySetCashCount tests with valid denomination and count.</summary>
+    /// <summary>Verifies that TrySetCashCount succeeds when given a valid denomination and count.</summary>
     [Fact]
     public void AudTrySetCashCountWithValidValuesShouldSucceed()
     {
@@ -74,7 +74,7 @@ public class MoneyKindValidationTests
         mk[100m].ShouldBe(5);
     }
 
-    /// <summary>TrySetCashCount tests with invalid denomination.</summary>
+    /// <summary>Verifies that TrySetCashCount fails when given a denomination not supported by the currency.</summary>
     [Fact]
     public void AudTrySetCashCountWithInvalidDenominationShouldFail()
     {
@@ -88,7 +88,7 @@ public class MoneyKindValidationTests
         error.ShouldContain("AUD");
     }
 
-    /// <summary>TrySetCashCount tests with negative count.</summary>
+    /// <summary>Verifies that TrySetCashCount fails when given a negative count.</summary>
     [Fact]
     public void MoneyKindTrySetCashCountWithNegativeCountShouldFail()
     {
@@ -101,7 +101,7 @@ public class MoneyKindValidationTests
         error.ShouldContain("-5");
     }
 
-    /// <summary>TrySetCashCount with CashType parameter tests.</summary>
+    /// <summary>Verifies that TrySetCashCount with an explicit CashType parameter succeeds for valid inputs.</summary>
     [Fact]
     public void AudTrySetCashCountWithTypeParameterWithValidValuesShouldSucceed()
     {
@@ -114,7 +114,7 @@ public class MoneyKindValidationTests
         mk[10m, CashType.Bill].ShouldBe(3);
     }
 
-    /// <summary>TrySetCashCount with CashType parameter and invalid type combination.</summary>
+    /// <summary>Verifies that TrySetCashCount fails when the specified CashType does not match the denomination.</summary>
     [Fact]
     public void AudTrySetCashCountWithTypeParameterWithInvalidTypeShouldFail()
     {
@@ -129,7 +129,7 @@ public class MoneyKindValidationTests
         error.ShouldContain(CashType.Coin.ToString());
     }
 
-    /// <summary>TryValidateParse tests with valid CashCounts string.</summary>
+    /// <summary>Verifies that TryValidateParse identifies a well-formed string as valid without warnings.</summary>
     [Fact]
     public void AudTryValidateParseWithValidStringShouldSucceedWithoutWarnings()
     {
@@ -142,7 +142,7 @@ public class MoneyKindValidationTests
         warnings.ShouldBeEmpty();
     }
 
-    /// <summary>TryValidateParse tests with empty string.</summary>
+    /// <summary>Verifies that TryValidateParse handles an empty string as valid.</summary>
     [Fact]
     public void MoneyKindTryValidateParseWithEmptyStringShouldSucceed()
     {
@@ -154,7 +154,7 @@ public class MoneyKindValidationTests
         warnings.ShouldBeEmpty();
     }
 
-    /// <summary>TryValidateParse tests with invalid denomination.</summary>
+    /// <summary>Verifies that TryValidateParse generates a warning when an invalid denomination is encountered.</summary>
     [Fact]
     public void AudTryValidateParseWithInvalidDenominationShouldReturnWarning()
     {
@@ -168,7 +168,7 @@ public class MoneyKindValidationTests
         warnings.ShouldContain(w => w.Contains("99"));
     }
 
-    /// <summary>TryValidateParse tests with negative count.</summary>
+    /// <summary>Verifies that TryValidateParse generates a warning when a negative count is encountered.</summary>
     [Fact]
     public void MoneyKindTryValidateParseWithNegativeCountShouldReturnWarning()
     {
@@ -182,7 +182,7 @@ public class MoneyKindValidationTests
         warnings.ShouldContain(w => w.Contains("-5"));
     }
 
-    /// <summary>TryValidateParse tests with malformed format.</summary>
+    /// <summary>Verifies that TryValidateParse generates a warning for malformed string formats.</summary>
     [Fact]
     public void MoneyKindTryValidateParseWithMalformedFormatShouldReturnWarning()
     {
@@ -196,7 +196,7 @@ public class MoneyKindValidationTests
         warnings.ShouldContain(w => w.Contains("Invalid format"));
     }
 
-    /// <summary>TryValidateParse tests with invalid numeric values.</summary>
+    /// <summary>Verifies that TryValidateParse generates warnings for invalid numeric values in the input string.</summary>
     [Theory]
     [InlineData("abc:10;")]
     [InlineData("0.05:xyz;")]
@@ -211,7 +211,7 @@ public class MoneyKindValidationTests
         warnings.ShouldNotBeEmpty();
     }
 
-    /// <summary>TryValidateParse tests with multiple warnings.</summary>
+    /// <summary>Verifies that TryValidateParse can return multiple warnings for a single input string.</summary>
     [Fact]
     public void AudTryValidateParseWithMultipleIssuesShouldReturnMultipleWarnings()
     {
@@ -224,7 +224,7 @@ public class MoneyKindValidationTests
         warnings.Count.ShouldBeGreaterThanOrEqualTo(3);
     }
 
-    /// <summary>TrySetCashCount integration test with multiple calls.</summary>
+    /// <summary>Verifies that multiple successful calls to TrySetCashCount correctly update the inventory.</summary>
     [Fact]
     public void AudTrySetCashCountMultipleValidCallsShouldSucceed()
     {
@@ -241,7 +241,7 @@ public class MoneyKindValidationTests
         mk[100m].ShouldBe(2);
     }
 
-    /// <summary>TrySetCashCount idempotency test.</summary>
+    /// <summary>Verifies that TrySetCashCount is idempotent or correctly updates existing counts.</summary>
     [Fact]
     public void AudTrySetCashCountIdempotencyShouldUpdateValue()
     {
@@ -254,7 +254,7 @@ public class MoneyKindValidationTests
         mk[100m].ShouldBe(10);
     }
 
-    /// <summary>Validation with JPY currency for international support.</summary>
+    /// <summary>Verifies that validation logic correctly distinguishes between different currency denomination sets.</summary>
     [Fact]
     public void JpyIsValidFaceValueShouldDifferFromAud()
     {

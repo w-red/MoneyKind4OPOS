@@ -7,6 +7,7 @@ namespace MoneyKind4OposTest.Currencies.Specific;
 /// <summary>MoneyKind&lt;HkdCurrency&gt; tests.</summary>
 public class MoneyKindHkdTest
 {
+    /// <summary>Verifies that HKD cash-count strings are parsed and total amounts calculated correctly.</summary>
     [Theory]
     [InlineData("0.1:1,10:1;10:1", 20.1)]
     [InlineData("10:1;1000:1", 1010)]

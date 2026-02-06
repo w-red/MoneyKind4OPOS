@@ -7,6 +7,7 @@ namespace MoneyKind4OposTest.Currencies.Specific;
 /// <summary>MoneyKind&lt;IlsCurrency&gt; tests.</summary>
 public class MoneyKindIlsTest
 {
+    /// <summary>Verifies that ILS cash-count strings are parsed and total amounts calculated correctly.</summary>
     [Theory]
     [InlineData("0.1:1;20:1", 20.1)]
     [InlineData("10:1;200:1", 210.0)]

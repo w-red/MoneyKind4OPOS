@@ -10,6 +10,7 @@ public class ICurrencyContractTest
         .CurrencyTestHelper
         .GetAllCurrencyTypesAsXUnitData();
 
+    /// <summary>Verifies that Coins property is not null for any ICurrency implementation.</summary>
     [Theory]
     [MemberData(nameof(AllCurrencies))]
     public void CoinsShouldNotBeNull(Type currencyType)
@@ -18,6 +19,7 @@ public class ICurrencyContractTest
         coins.ShouldNotBeNull();
     }
 
+    /// <summary>Verifies that Bills property is not null for any ICurrency implementation.</summary>
     [Theory]
     [MemberData(nameof(AllCurrencies))]
     public void BillsShouldNotBeNull(Type currencyType)
@@ -26,6 +28,7 @@ public class ICurrencyContractTest
         bills.ShouldNotBeNull();
     }
 
+    /// <summary>Verifies that all defined coins for a currency have unique numeric values.</summary>
     [Theory]
     [MemberData(nameof(AllCurrencies))]
     public void CoinsShouldHaveUniqueValues(Type currencyType)
@@ -35,6 +38,7 @@ public class ICurrencyContractTest
         values.ShouldBeUnique();
     }
 
+    /// <summary>Verifies that all defined bills for a currency have unique numeric values.</summary>
     [Theory]
     [MemberData(nameof(AllCurrencies))]
     public void BillsShouldHaveUniqueValues(Type currencyType)
@@ -44,6 +48,7 @@ public class ICurrencyContractTest
         values.ShouldBeUnique();
     }
 
+    /// <summary>Verifies that the minimum unit of any currency is a positive value.</summary>
     [Theory]
     [MemberData(nameof(AllCurrencies))]
     public void MinimumUnitShouldBePositive(Type currencyType)
@@ -52,6 +57,7 @@ public class ICurrencyContractTest
         minimumUnit.ShouldBeGreaterThan(0);
     }
 
+    /// <summary>Verifies that the declared minimum unit matches the value of the smallest available denomination.</summary>
     [Theory]
     [MemberData(nameof(AllCurrencies))]
     public void MinimumUnitShouldMatchSmallestDenomination(Type currencyType)

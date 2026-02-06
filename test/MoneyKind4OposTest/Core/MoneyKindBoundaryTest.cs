@@ -7,6 +7,7 @@ namespace MoneyKind4OposTest.Core;
 /// <summary>Boundary tests for change calculation logic (Greedy algorithm).</summary>
 public class MoneyKindBoundaryTest
 {
+    /// <summary>Verifies that exact change can be paid using smaller denominations when a larger one is missing.</summary>
     [Fact]
     public void CalculateChangeJustEnoughInSmallDenominationsShouldSucceed()
     {
@@ -22,6 +23,7 @@ public class MoneyKindBoundaryTest
         result.RemainingAmount.ShouldBe(0m);
     }
 
+    /// <summary>Verifies that change calculation fails and identifies the missing amount when inventory is slightly insufficient.</summary>
     [Fact]
     public void CalculateChangeOneUnitShortOfTotalShouldFailAndIdentifyMissing()
     {
@@ -39,6 +41,7 @@ public class MoneyKindBoundaryTest
         result.MissingChange[1, CashType.Coin].ShouldBe(1);
     }
 
+    /// <summary>Verifies failure when the total inventory amount is enough but the breakdown cannot match the requested sum.</summary>
     [Fact]
     public void CalculateChangeBottleneckAtSmallDenominationShouldFail()
     {
@@ -58,6 +61,7 @@ public class MoneyKindBoundaryTest
         result.MissingChange[10].ShouldBe(1);
     }
 
+    /// <summary>Verifies that large inventory counts and amounts are handled without overflow or precision issues.</summary>
     [Fact]
     public void CalculateChangeLargeAmountJustEnoughShouldSucceed()
     {
@@ -71,6 +75,7 @@ public class MoneyKindBoundaryTest
         result.PayableChange[10000].ShouldBe(100);
     }
 
+    /// <summary>Verifies that partial payment and missing decimal amounts are correctly identified for currencies with decimals like EUR.</summary>
     [Fact]
     public void CalculateChangeInsufficientDecimalsEurShouldFail()
     {
@@ -86,6 +91,7 @@ public class MoneyKindBoundaryTest
         result.MissingChange[0.01m].ShouldBe(1);
     }
 
+    /// <summary>Verifies that denominations with shared face values prioritize bills over coins in CNY.</summary>
     [Fact]
     public void CalculateChangeSameValueShouldPrioritizeBillsOverCoinsCny()
     {
@@ -101,6 +107,7 @@ public class MoneyKindBoundaryTest
         result[1.0m, CashType.Coin].ShouldBe(0);
     }
 
+    /// <summary>Verifies that denominations with shared face values prioritize bills over coins in USD.</summary>
     [Fact]
     public void CalculateChangeSameValueShouldPrioritizeBillsOverCoinsUsd()
     {

@@ -7,6 +7,7 @@ namespace MoneyKind4OposTest.Core;
 /// <summary>Tests for MoneyKind. Parse and related parsing logic.</summary>
 public class MoneyKindParseTest
 {
+    /// <summary>Verifies that the standard comma and semicolon separated format is parsed correctly into coins and bills.</summary>
     [Fact]
     public void ParseFullFormatShouldParseCorrectly()
     {
@@ -34,6 +35,7 @@ public class MoneyKindParseTest
         result.TotalAmount().ShouldBe(3700m);
     }
 
+    /// <summary>Verifies that parsing a string with only coins results in correctly populated coin counts and zero bill amounts.</summary>
     [Fact]
     public void ParseOnlyCoinsShouldParseCorrectly()
     {
@@ -47,6 +49,7 @@ public class MoneyKindParseTest
         result[1000, CashType.Bill].ShouldBe(0);
     }
 
+    /// <summary>Verifies that parsing a string with only bills results in correctly populated bill counts and zero coin amounts.</summary>
     [Fact]
     public void ParseOnlyBillsShouldParseCorrectly()
     {
@@ -60,6 +63,7 @@ public class MoneyKindParseTest
         result[1000, CashType.Bill].ShouldBe(5);
     }
 
+    /// <summary>Verifies that leading or trailing whitespace around delimiters does not affect parsing accuracy.</summary>
     [Fact]
     public void ParseWithWhitespaceShouldIgnoreSpaces()
     {
@@ -71,6 +75,7 @@ public class MoneyKindParseTest
         result[500, CashType.Coin].ShouldBe(1);
     }
 
+    /// <summary>Verifies that empty or structural-only strings result in an empty MoneyKind instance.</summary>
     [Theory]
     [InlineData("")]
     [InlineData("   ")]
@@ -84,6 +89,7 @@ public class MoneyKindParseTest
         result.BillAmount().ShouldBe(0m);
     }
 
+    /// <summary>Verifies that invalid numeric values or unrecognized denominations are ignored during parsing.</summary>
     [Theory]
     [InlineData("abc:1")]        // Invalid value
     [InlineData("100:abc")]      // Invalid count
@@ -96,6 +102,7 @@ public class MoneyKindParseTest
         result.TotalAmount().ShouldBe(0m);
     }
 
+    /// <summary>Verifies that the parser extracts all valid items from a string containing mixed valid and invalid entries.</summary>
     [Fact]
     public void ParseMixedValidAndInvalidShouldParseOnlyValidItems()
     {
@@ -129,6 +136,7 @@ public class MoneyKindParseTest
         result.BillAmount().ShouldBe(-2000m);
     }
 
+    /// <summary>Verifies that the USD-specific leading dot format (e.g., .5 for 0.5) is correctly parsed.</summary>
     [Fact]
     public void ParseUsdSpecificFormatShouldHandleLeadingDot()
     {

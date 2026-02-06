@@ -10,6 +10,7 @@ namespace MoneyKind4OposTest.Currencies.Formatting;
 /// </summary>
 public class CurrencyFormattingOptionsTest
 {
+    /// <summary>Verifies that FromIso4217 correctly initializes JPY formatting options (yen symbol, 0 decimals).</summary>
     [Fact]
     public void FromIso4217WithJpyShouldReturnJapaneseFormatting()
     {
@@ -22,6 +23,7 @@ public class CurrencyFormattingOptionsTest
         options.DisplayFormat.Placement.ShouldBe(SymbolPlacement.Prefix);
     }
 
+    /// <summary>Verifies that FromIso4217 correctly initializes USD formatting options (dollar symbol, 2 decimals).</summary>
     [Fact]
     public void FromIso4217WithUsdShouldReturnUSFormatting()
     {
@@ -34,6 +36,7 @@ public class CurrencyFormattingOptionsTest
         options.DisplayFormat.Placement.ShouldBe(SymbolPlacement.Prefix);
     }
 
+    /// <summary>Verifies that FromIso4217 defaults to German style for EUR (postfix symbol, comma decimal).</summary>
     [Fact]
     public void FromIso4217WithEurShouldReturnGermanFormattingByDefault()
     {
@@ -51,6 +54,7 @@ public class CurrencyFormattingOptionsTest
         options.NumberFormat.CurrencyGroupSeparator.ShouldBe(".");
     }
 
+    /// <summary>Verifies that the factory method uses the 3-letter ISO code as the symbol when requested.</summary>
     [Fact]
     public void FromIso4217WithThreeLetterSymbolShouldUseIsoCode()
     {
@@ -63,6 +67,7 @@ public class CurrencyFormattingOptionsTest
         options.Symbol.ShouldBe("EUR");
     }
 
+    /// <summary>Verifies that culture-specific overrides for rounding and separators are respected for EUR.</summary>
     [Theory]
     [InlineData("de-DE", ",", ".")] // German: decimal=comma, group=period
     [InlineData("fr-FR", ",", " ")] // French: decimal=comma, group=space (may be thin space)
@@ -80,6 +85,7 @@ public class CurrencyFormattingOptionsTest
         options.NumberFormat.CurrencyGroupSeparator.ShouldContain(expectedGroupSeparator.Trim());
     }
 
+    /// <summary>Verifies that the French regional format for Euro is correctly applied during string formatting.</summary>
     [Fact]
     public void FromIso4217EuroFrenchFormatShouldFormatCorrectly()
     {
@@ -100,6 +106,7 @@ public class CurrencyFormattingOptionsTest
         result.TrimEnd().ShouldEndWith("€");
     }
 
+    /// <summary>Verifies that the Irish regional format correctly places the Euro symbol as a prefix.</summary>
     [Fact]
     public void FromIso4217EuroIrishFormatShouldHavePrefixSymbol()
     {
@@ -116,6 +123,7 @@ public class CurrencyFormattingOptionsTest
             .ShouldBe(SymbolPlacement.Prefix);
     }
 
+    /// <summary>Verifies that requesting an unsupported ISO code without a culture override throws an ArgumentException.</summary>
     [Fact]
     public void FromIso4217UnsupportedCodeWithoutCultureOverrideShouldThrow()
     {
@@ -124,6 +132,7 @@ public class CurrencyFormattingOptionsTest
             CurrencyFormattingOptions.FromIso4217(Iso4217.AFN));
     }
 
+    /// <summary>Verifies that unsupported ISO codes can still be formatted if a specific culture name is provided.</summary>
     [Fact]
     public void FromIso4217UnsupportedCodeWithCultureOverrideShouldWork()
     {
@@ -134,6 +143,7 @@ public class CurrencyFormattingOptionsTest
         options.Symbol.ShouldBe("AFN");
     }
 
+    /// <summary>Verifies that FromIso4217 correctly initializes CNY formatting options.</summary>
     [Fact]
     public void FromIso4217CnyShouldReturnChineseFormatting()
     {
@@ -147,6 +157,7 @@ public class CurrencyFormattingOptionsTest
             .ShouldBe(2);
     }
 
+    /// <summary>Verifies that FromIso4217 correctly initializes GBP formatting options.</summary>
     [Fact]
     public void FromIso4217GbpShouldReturnBritishFormatting()
     {
@@ -163,6 +174,7 @@ public class CurrencyFormattingOptionsTest
             .ShouldBe(SymbolPlacement.Prefix);
     }
 
+    /// <summary>Verifies that FromIso4217 uses the 3-letter code by default for currencies without a known symbol like CHF.</summary>
     [Fact]
     public void FromIso4217ChfShouldUseThreeLetterCodeAsSymbol()
     {
@@ -180,6 +192,7 @@ public class CurrencyFormattingOptionsTest
             .ShouldBe(2);
     }
 
+    /// <summary>Verifies that Swiss regional variations for CHF are correctly respected.</summary>
     [Theory]
     [InlineData("de-CH")]
     [InlineData("fr-CH")]
@@ -201,6 +214,7 @@ public class CurrencyFormattingOptionsTest
         options.NumberFormat.CurrencyDecimalDigits.ShouldBe(2);
     }
 
+    /// <summary>Verifies the exact formatting output for Swiss German CHF.</summary>
     [Fact]
     public void FromIso4217ChfGermanSwissShouldFormatCorrectly()
     {
@@ -214,6 +228,7 @@ public class CurrencyFormattingOptionsTest
         formatted.ShouldContain("CHF");
     }
 
+    /// <summary>Verifies the default English-Canadian formatting for CAD.</summary>
     [Fact]
     public void FromIso4217CadEnglishShouldUseCanadianEnglishFormatting()
     {
@@ -225,6 +240,7 @@ public class CurrencyFormattingOptionsTest
         options.NumberFormat.CurrencyGroupSeparator.ShouldBe(",");
     }
 
+    /// <summary>Verifies the French-Canadian decimal and group separators for CAD.</summary>
     [Fact]
     public void FromIso4217CadFrenchShouldUseCanadianFrenchFormatting()
     {
@@ -237,6 +253,7 @@ public class CurrencyFormattingOptionsTest
         options.NumberFormat.CurrencyGroupSeparator.ShouldContain(" ".Trim());
     }
 
+    /// <summary>Verifies the exact formatting output for French-Canadian CAD.</summary>
     [Fact]
     public void FromIso4217CadFrenchShouldFormatCorrectly()
     {
@@ -250,6 +267,7 @@ public class CurrencyFormattingOptionsTest
         formatted.ShouldContain("$");
     }
 
+    /// <summary>Verifies that FromIso4217 correctly initializes KRW formatting options (no decimals).</summary>
     [Fact]
     public void FromIso4217KrwShouldUseKoreanFormatting()
     {
@@ -261,6 +279,7 @@ public class CurrencyFormattingOptionsTest
         options.NumberFormat.CurrencyDecimalDigits.ShouldBe(0);
     }
 
+    /// <summary>Verifies that KRW is formatted as a whole number without decimal points.</summary>
     [Fact]
     public void FromIso4217KrwShouldFormatWholeNumbersCorrectly()
     {
@@ -274,6 +293,7 @@ public class CurrencyFormattingOptionsTest
         formatted.ShouldNotContain("."); // No decimal point for whole currency
     }
 
+    /// <summary>Verifies the exact formatting output for British GBP.</summary>
     [Fact]
     public void FromIso4217GbpShouldFormatCorrectly()
     {
@@ -284,6 +304,7 @@ public class CurrencyFormattingOptionsTest
         formatted.ShouldBe("£1,234.56");
     }
 
+    /// <summary>Verifies that a custom symbol override is applied correctly.</summary>
     [Fact]
     public void FromIso4217WithOverrideSymbolShouldUseCustomSymbol()
     {
@@ -296,6 +317,7 @@ public class CurrencyFormattingOptionsTest
         options.Format(100m).ShouldContain("Fr.");
     }
 
+    /// <summary>Verifies that the custom symbol override takes precedence over the preferThreeLetterSymbol option.</summary>
     [Fact]
     public void FromIso4217OverrideSymbolShouldTakePrecedenceOverThreeLetterOption()
     {
@@ -308,6 +330,7 @@ public class CurrencyFormattingOptionsTest
         options.Symbol.ShouldBe("EURO");
     }
 
+    /// <summary>Verifies that the custom symbol override is correctly reflected in the final formatted string.</summary>
     [Fact]
     public void FromIso4217OverrideSymbolShouldBeReflectedInFormattedString()
     {

@@ -7,7 +7,7 @@ namespace MoneyKind4OposTest.Currencies.Specific;
 /// <summary>MoneyKind&lt;AudCurrency&gt; tests.</summary>
 public class MoneyKindAudTest
 {
-    /// <summary>Parse and TotalAmount tests for AudCurrency.</summary>
+    /// <summary>Verifies that AUD cash-count strings are parsed and total amounts calculated correctly.</summary>
     [Theory]
     [InlineData("", 0)]
     [InlineData(";", 0)]
@@ -22,7 +22,7 @@ public class MoneyKindAudTest
         mk.TotalAmount().ShouldBe(expectedTotal);
     }
 
-    /// <summary>ToCashCountsString tests for AudCurrency.</summary>
+    /// <summary>Verifies that an AUD MoneyKind instance is correctly serialized to a cash-count string.</summary>
     [Fact]
     public void AudToCashCountsStringShouldBeCorrect()
     {

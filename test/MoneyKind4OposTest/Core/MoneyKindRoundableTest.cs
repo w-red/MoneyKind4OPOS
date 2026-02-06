@@ -7,7 +7,7 @@ namespace MoneyKind4OposTest.Core;
 /// <summary>Tests for MoneyKind IMoneyKindRoundable implementation.</summary>
 public class MoneyKindRoundableTest
 {
-    /// <summary>RoundToMinimumUnit tests with AUD (MinimumUnit = 0.05).</summary>
+    /// <summary>Verifies that AUD amounts are rounded correctly to the nearest 0.05 using the ToEven midpoint rounding mode.</summary>
     [Theory]
     [InlineData(100.00, MidpointRounding.ToEven, 100.00)]
     [InlineData(100.01, MidpointRounding.ToEven, 100.00)]
@@ -26,7 +26,7 @@ public class MoneyKindRoundableTest
         result.ShouldBe(expected);
     }
 
-    /// <summary>Negative value tests for standard Rounding with AUD.</summary>
+    /// <summary>Verifies that negative AUD amounts are rounded correctly using various midpoint rounding modes.</summary>
     [Theory]
     [InlineData(-100.01, MidpointRounding.AwayFromZero, -100.00)] // -2000.2 -> -2000 (Nearest)
     [InlineData(-100.04, MidpointRounding.ToZero, -100.00)]      // -2000.8 -> -2000 (ToZero)
@@ -39,7 +39,7 @@ public class MoneyKindRoundableTest
         result.ShouldBe(expected);
     }
 
-    /// <summary>RoundToMinimumUnit tests with AwayFromZero mode.</summary>
+    /// <summary>Verifies that AUD amounts are rounded correctly to the nearest 0.05 using the AwayFromZero midpoint rounding mode.</summary>
     [Theory]
     [InlineData(100.01, 100.00)] // 2000.2 -> 2000 (Nearest)
     [InlineData(100.02, 100.00)]
@@ -56,7 +56,7 @@ public class MoneyKindRoundableTest
         result.ShouldBe(expected);
     }
 
-    /// <summary>RoundToMinimumUnit tests with TowardZero mode.</summary>
+    /// <summary>Verifies that AUD amounts are rounded down to the nearest 0.05 using the ToZero (toward zero) midpoint rounding mode.</summary>
     [Theory]
     [InlineData(100.04, 100.00)]
     [InlineData(100.075, 100.05)]
@@ -71,7 +71,7 @@ public class MoneyKindRoundableTest
         result.ShouldBe(expected);
     }
 
-    /// <summary>RoundToMinimumUnit tests with JPY (MinimumUnit = 1).</summary>
+    /// <summary>Verifies that JPY amounts (MinimumUnit=1) are rounded correctly from fractional inputs.</summary>
     [Theory]
     [InlineData(1000.00, MidpointRounding.ToEven, 1000.00)]
     [InlineData(1000.5, MidpointRounding.AwayFromZero, 1001.00)]
@@ -91,7 +91,7 @@ public class MoneyKindRoundableTest
         result.ShouldBe(expected);
     }
 
-    /// <summary>Standard integer-scale Rounding tests using JPY.</summary>
+    /// <summary>Verifies standard integer ROUNDing behavior for JPY across positive and negative values.</summary>
     [Theory]
     [InlineData(-1.2, MidpointRounding.AwayFromZero, -1.0)]
     [InlineData(-1.8, MidpointRounding.ToZero, -1.0)]
@@ -107,7 +107,7 @@ public class MoneyKindRoundableTest
         result.ShouldBe(expected);
     }
 
-    /// <summary>RoundToMinimumUnit with default rounding mode (ToEven).</summary>
+    /// <summary>Verifies that RoundToMinimumUnit uses Banker's Rounding (ToEven) as the default behavior.</summary>
     [Fact]
     public void AudRoundToMinimumUnitWithDefaultModeShouldUseToEven()
     {
@@ -119,7 +119,7 @@ public class MoneyKindRoundableTest
         result.ShouldBe(100.00m); // ToEven: rounds to nearest even
     }
 
-    /// <summary>IsRoundedToMinimumUnit tests with valid amounts.</summary>
+    /// <summary>Verifies that IsRoundedToMinimumUnit returns true for amounts that are multipes of the currency's minimum unit.</summary>
     [Theory]
     [InlineData(100.00)]
     [InlineData(100.05)]
@@ -135,7 +135,7 @@ public class MoneyKindRoundableTest
         result.ShouldBeTrue();
     }
 
-    /// <summary>IsRoundedToMinimumUnit tests with invalid amounts.</summary>
+    /// <summary>Verifies that IsRoundedToMinimumUnit returns false for amounts that are not multiples of the currency's minimum unit.</summary>
     [Theory]
     [InlineData(100.01)]
     [InlineData(100.02)]
@@ -152,7 +152,7 @@ public class MoneyKindRoundableTest
         result.ShouldBeFalse();
     }
 
-    /// <summary>IsRoundedToMinimumUnit tests with JPY (MinimumUnit = 1).</summary>
+    /// <summary>Verifies IsRoundedToMinimumUnit logic for JPY, where minimum unit is 1.</summary>
     [Theory]
     [InlineData(1000.00, true)]
     [InlineData(1000.5, false)]
@@ -168,7 +168,7 @@ public class MoneyKindRoundableTest
         result.ShouldBe(expected);
     }
 
-    /// <summary>RoundToMinimumUnit with negative amounts.</summary>
+    /// <summary>Verifies that negative amounts are correctly rounded toward zero for AUD.</summary>
     [Fact]
     public void AudRoundToMinimumUnitWithNegativeAmountShouldRound()
     {
@@ -181,7 +181,7 @@ public class MoneyKindRoundableTest
         result.ShouldBe(-100.00m);
     }
 
-    /// <summary>RoundToMinimumUnit with zero amount.</summary>
+    /// <summary>Verifies that zero remains zero after rounding to the minimum unit.</summary>
     [Fact]
     public void AudRoundToMinimumUnitWithZeroShouldReturnZero()
     {
@@ -192,7 +192,7 @@ public class MoneyKindRoundableTest
         result.ShouldBe(0m);
     }
 
-    /// <summary>RoundToMinimumUnit idempotency test.</summary>
+    /// <summary>Verifies that rounding a value that is already rounded has no further effect (idempotency).</summary>
     [Fact]
     public void AudRoundToMinimumUnitIdempotencyRoundingTwiceShouldYieldSameResult()
     {
@@ -204,7 +204,7 @@ public class MoneyKindRoundableTest
         rounded1.ShouldBe(rounded2);
     }
 
-    /// <summary>Integration test: Validate rounded amount.</summary>
+    /// <summary>Verifies the integration between RoundToMinimumUnit and IsRoundedToMinimumUnit.</summary>
     [Fact]
     public void AudRoundThenValidateShouldSucceed()
     {
@@ -217,7 +217,7 @@ public class MoneyKindRoundableTest
         isValid.ShouldBeTrue();
     }
 
-    /// <summary>Integration test: Multiple rounding modes comparison.</summary>
+    /// <summary>Compares various midpoint rounding modes against the same input value for AUD.</summary>
     [Fact]
     public void AudCompareRoundingModesWithMidpointValue()
     {

@@ -7,6 +7,7 @@ namespace MoneyKind4OposTest.Currencies.Specific;
 /// <summary>MoneyKind&lt;KydCurrency&gt; tests.</summary>
 public class MoneyKindKydTest
 {
+    /// <summary>Verifies that KYD cash-count strings are parsed and total amounts calculated correctly.</summary>
     [Theory]
     [InlineData("0.01:1;1:1", 1.01)]
     [InlineData("0.25:1;100:1", 100.25)]
