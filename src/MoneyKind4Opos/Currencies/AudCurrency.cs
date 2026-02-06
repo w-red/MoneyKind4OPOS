@@ -20,39 +20,13 @@ public class AudCurrency :
     /// <inheritdoc/>
     public static decimal MinimumUnit => 0.05m;
 
-    /// <summary>Global number format.</summary>
-    private static readonly NumberFormatInfo _globalNfi = new()
-    {
-        CurrencySymbol = "AUD",
-        CurrencyPositivePattern = 0,
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 2,
-    };
-
-    /// <summary>Local number format.</summary>
-    private static readonly NumberFormatInfo _localNfi = new()
-    {
-        CurrencySymbol = "A$",
-        CurrencyPositivePattern = 1,
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 2,
-    };
+    /// <inheritdoc/>
+    public static CurrencyFormattingOptions Global { get; } =
+        CurrencyFormattingOptions.Create("AUD", "$n");
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Global { get; } = new(
-        Symbol: "AUD",
-        NumberFormat: _globalNfi,
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
-
-    /// <inheritdoc/>
-    public static CurrencyFormattingOptions Local { get; } = new(
-        Symbol: "A$",
-        NumberFormat: _localNfi,
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
+    public static CurrencyFormattingOptions Local { get; } =
+        CurrencyFormattingOptions.Create("A$", "$n");
 
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits =>

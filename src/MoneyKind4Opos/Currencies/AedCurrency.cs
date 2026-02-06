@@ -26,22 +26,9 @@ public class AedCurrency :
         new SubsidiaryUnit("Fils", null, 0.01m),
     ];
 
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "Dirham",
-        CurrencyPositivePattern = 3, // n $
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 2,
-    };
-
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Global { get; } =
-        new(
-            Symbol: "Dirham",
-            NumberFormat: _nfi,
-            DisplayFormat: new(SymbolPlacement.Postfix)
-        );
+        CurrencyFormattingOptions.Create("Dirham", "n $");
 
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Local => Global;

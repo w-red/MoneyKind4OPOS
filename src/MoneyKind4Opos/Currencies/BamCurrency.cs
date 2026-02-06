@@ -26,22 +26,9 @@ public class BamCurrency :
         new SubsidiaryUnit("Fening", null, 0.01m),
     ];
 
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "KM",
-        CurrencyPositivePattern = 3, // n $
-        CurrencyGroupSeparator = ".",
-        CurrencyDecimalSeparator = ",",
-        CurrencyDecimalDigits = 2,
-    };
-
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Global { get; } =
-        new(
-            Symbol: "KM",
-            NumberFormat: _nfi,
-            DisplayFormat: new(SymbolPlacement.Postfix)
-        );
+        CurrencyFormattingOptions.Create("KM", "n $", decimalSep: ",", groupSep: ".");
 
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Local => Global;

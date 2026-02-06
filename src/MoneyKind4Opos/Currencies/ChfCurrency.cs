@@ -20,39 +20,12 @@ public class ChfCurrency :
     /// <inheritdoc/>
     public static decimal MinimumUnit => 0.05m;
 
-    /// <summary>Global number format.</summary>
-    private static readonly NumberFormatInfo _globalNfi = new()
-    {
-        CurrencySymbol = "CHF",
-        CurrencyPositivePattern = 0,
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 2,
-    };
-
-    /// <summary>Local number format.</summary>
-    private static readonly NumberFormatInfo _localNfi = new()
-    {
-        CurrencySymbol = "CHF",
-        CurrencyPositivePattern = 1,
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 2,
-    };
+    /// <inheritdoc/>
+    public static CurrencyFormattingOptions Global { get; } =
+        CurrencyFormattingOptions.Create("CHF", "n$");
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Global { get; } = new(
-        Symbol: "CHF",
-        NumberFormat: _globalNfi,
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
-
-    /// <inheritdoc/>
-    public static CurrencyFormattingOptions Local { get; } = new(
-        Symbol: "CHF",
-        NumberFormat: _localNfi,
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
+    public static CurrencyFormattingOptions Local => Global;
 
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits => _subsidiaryUnits;

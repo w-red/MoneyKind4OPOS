@@ -26,22 +26,9 @@ public class OmrCurrency :
         new SubsidiaryUnit("Baisa", null, 0.001m),
     ];
 
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "Rials",
-        CurrencyPositivePattern = 3, // n $
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 2,
-    };
-
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Global { get; } =
-        new(
-            Symbol: "Rials",
-            NumberFormat: _nfi,
-            DisplayFormat: new(SymbolPlacement.Postfix)
-        );
+        CurrencyFormattingOptions.Create("Rials", "n $", decimalDigits: 2);
 
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Local => Global;

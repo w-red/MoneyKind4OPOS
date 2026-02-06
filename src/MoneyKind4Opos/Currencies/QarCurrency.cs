@@ -27,22 +27,9 @@ public class QarCurrency :
         new SubsidiaryUnit("Dirham", null, 0.01m),
     ];
 
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "QR",
-        CurrencyPositivePattern = 3, // n $
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 2,
-    };
-
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Global { get; } =
-        new(
-            Symbol: "QR",
-            NumberFormat: _nfi,
-            DisplayFormat: new(SymbolPlacement.Postfix)
-        );
+        CurrencyFormattingOptions.Create("QR", "n $", decimalDigits: 2);
 
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Local => Global;

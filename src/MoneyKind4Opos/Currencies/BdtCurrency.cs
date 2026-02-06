@@ -15,41 +15,18 @@ public class BdtCurrency :
     ICashCountFormattable<BdtCurrency>,
     ICurrencyFormattable<BdtCurrency>
 {
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "৳",
-        CurrencyPositivePattern = 0, // $n
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 2,
-    };
-
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.BDT;
-
     /// <inheritdoc/>
     public static decimal MinimumUnit => 1m;
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Global { get; } = new(
-        Symbol: "BDT",
-        NumberFormat: new NumberFormatInfo
-        {
-            CurrencySymbol = "BDT",
-            CurrencyPositivePattern = 0,
-            CurrencyGroupSeparator = ",",
-            CurrencyDecimalSeparator = ".",
-            CurrencyDecimalDigits = 2
-        },
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
+    public static CurrencyFormattingOptions Global { get; } =
+        CurrencyFormattingOptions.Create("BDT", "$n", groupSizes: [3, 2]);
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Local { get; } = new(
-        Symbol: "৳",
-        NumberFormat: _nfi,
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
+    public static CurrencyFormattingOptions Local { get; } =
+        CurrencyFormattingOptions.Create("৳", "$n", groupSizes: [3, 2]);
 
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits =>

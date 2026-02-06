@@ -10,42 +10,19 @@ public class ZarCurrency :
     ICashCountFormattable<ZarCurrency>,
     ICurrencyFormattable<ZarCurrency>
 {
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "R",
-        CurrencyGroupSeparator = ",", // Officially space in SA, but often comma in international contexts. Sticking to comma for now or checking locale? SA uses space. Let's use space.
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 2,
-        NumberGroupSeparator = " ",
-        NumberDecimalSeparator = "." 
-    };
-    // Note: South Africa uses space as thousands separator and dot or comma as decimal.
-    // Let's use space for group, dot for decimal based on common IT usage, but verify later with Tests if needed.
-
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.ZAR;
+
     /// <inheritdoc/>
     public static decimal MinimumUnit => 0.10m;
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Global { get; } = new(
-        Symbol: "ZAR",
-        NumberFormat: new NumberFormatInfo 
-        { 
-            CurrencySymbol = "ZAR", 
-            CurrencyGroupSeparator = ",", 
-            CurrencyDecimalSeparator = ".",
-            CurrencyDecimalDigits = 2
-        },
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
+    public static CurrencyFormattingOptions Global { get; } =
+        CurrencyFormattingOptions.Create("ZAR", "$n", groupSep: " ");
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Local { get; } = new(
-        Symbol: "R",
-        NumberFormat: _nfi,
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
+    public static CurrencyFormattingOptions Local { get; } =
+        CurrencyFormattingOptions.Create("R", "$n", groupSep: " ");
 
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits => [];

@@ -15,40 +15,18 @@ public class AmdCurrency :
     ICashCountFormattable<AmdCurrency>,
     ICurrencyFormattable<AmdCurrency>
 {
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "֏",
-        CurrencyPositivePattern = 2, // $ n
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 0,
-    };
-
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.AMD;
-
     /// <inheritdoc/>
     public static decimal MinimumUnit => 10.0m;
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Global { get; } = new(
-        Symbol: "AMD",
-        NumberFormat: new NumberFormatInfo
-        {
-            CurrencySymbol = "AMD",
-            CurrencyGroupSeparator = ",",
-            CurrencyDecimalSeparator = ".",
-            CurrencyDecimalDigits = 0
-        },
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
+    public static CurrencyFormattingOptions Global { get; } =
+        CurrencyFormattingOptions.Create("AMD", "$n", decimalDigits: 2);
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Local { get; } = new(
-        Symbol: "֏",
-        NumberFormat: _nfi,
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
+    public static CurrencyFormattingOptions Local { get; } =
+        CurrencyFormattingOptions.Create("֏", "$ n", decimalDigits: 2);
 
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits =>

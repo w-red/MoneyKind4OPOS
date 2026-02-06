@@ -15,40 +15,18 @@ public class MvrCurrency :
     ICashCountFormattable<MvrCurrency>,
     ICurrencyFormattable<MvrCurrency>
 {
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "Rf",
-        CurrencyPositivePattern = 2, // $ n
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 2,
-    };
-
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.MVR;
-
     /// <inheritdoc/>
     public static decimal MinimumUnit => 0.01m;
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Global { get; } = new(
-        Symbol: "MVR",
-        NumberFormat: new NumberFormatInfo
-        {
-            CurrencySymbol = "MVR",
-            CurrencyGroupSeparator = ",",
-            CurrencyDecimalSeparator = ".",
-            CurrencyDecimalDigits = 2
-        },
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
+    public static CurrencyFormattingOptions Global { get; } =
+        CurrencyFormattingOptions.Create("MVR", "$ n");
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Local { get; } = new(
-        Symbol: "Rf",
-        NumberFormat: _nfi,
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
+    public static CurrencyFormattingOptions Local { get; } =
+        CurrencyFormattingOptions.Create("Rf", "$ n");
 
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits =>

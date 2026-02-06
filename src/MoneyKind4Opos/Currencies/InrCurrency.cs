@@ -15,52 +15,17 @@ public class InrCurrency :
     ICashCountFormattable<InrCurrency>,
     ICurrencyFormattable<InrCurrency>
 {
-    private static readonly NumberFormatInfo _globalNfi = new()
-    {
-        CurrencySymbol = "₹",
-        CurrencyPositivePattern = 0, // $n
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 2,
-        CurrencyGroupSizes = [3, 2],
-        NumberGroupSeparator = ",",
-        NumberDecimalSeparator = ".",
-        NumberDecimalDigits = 2,
-        NumberGroupSizes = [3, 2],
-    };
-
-    private static readonly NumberFormatInfo _localNfi = new()
-    {
-        CurrencySymbol = "₹",
-        CurrencyPositivePattern = 0, // $n
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 2,
-        CurrencyGroupSizes = [3, 2],
-        NumberGroupSeparator = ",",
-        NumberDecimalSeparator = ".",
-        NumberDecimalDigits = 2,
-        NumberGroupSizes = [3, 2],
-    };
-
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.INR;
     /// <inheritdoc/>
     public static decimal MinimumUnit => 0.50m;
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Global { get; } = new(
-        Symbol: "₹",
-        NumberFormat: _globalNfi,
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
+    public static CurrencyFormattingOptions Global { get; } =
+        CurrencyFormattingOptions.Create("₹", "$n", groupSizes: [3, 2]);
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Local { get; } = new(
-        Symbol: "₹",
-        NumberFormat: _localNfi,
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
+    public static CurrencyFormattingOptions Local => Global;
 
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits => [];

@@ -15,15 +15,6 @@ public class YerCurrency :
     ICashCountFormattable<YerCurrency>,
     ICurrencyFormattable<YerCurrency>
 {
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "﷼",
-        CurrencyPositivePattern = 2, // $ n
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 2,
-    };
-
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.YER;
 
@@ -31,24 +22,12 @@ public class YerCurrency :
     public static decimal MinimumUnit => 1.0m;
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Global { get; } = new(
-        Symbol: "YER",
-        NumberFormat: new NumberFormatInfo
-        {
-            CurrencySymbol = "YER",
-            CurrencyGroupSeparator = ",",
-            CurrencyDecimalSeparator = ".",
-            CurrencyDecimalDigits = 2
-        },
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
+    public static CurrencyFormattingOptions Global { get; } =
+        CurrencyFormattingOptions.Create("YER", "n $", decimalDigits: 0);
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Local { get; } = new(
-        Symbol: "﷼",
-        NumberFormat: _nfi,
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
+    public static CurrencyFormattingOptions Local { get; } =
+        CurrencyFormattingOptions.Create("﷼", "$ n");
 
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits =>

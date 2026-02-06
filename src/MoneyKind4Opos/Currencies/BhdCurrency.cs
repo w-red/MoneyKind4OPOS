@@ -26,22 +26,9 @@ public class BhdCurrency :
         new SubsidiaryUnit("Fils", null, 0.001m),
     ];
 
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "BD",
-        CurrencyPositivePattern = 2, // $ n
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 3,
-    };
-
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Global { get; } =
-        new(
-            Symbol: "BD",
-            NumberFormat: _nfi,
-            DisplayFormat: new(SymbolPlacement.Prefix)
-        );
+        CurrencyFormattingOptions.Create("BD", "$ n", decimalDigits: 3);
 
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Local => Global;

@@ -16,38 +16,19 @@ public class TwdCurrency :
     ICashCountFormattable<TwdCurrency>,
     ICurrencyFormattable<TwdCurrency>
 {
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "$",
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 0,
-    };
-
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.TWD;
+
     /// <inheritdoc/>
     public static decimal MinimumUnit => 1m;
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Global { get; } = new(
-        Symbol: "TW$",
-        NumberFormat: new NumberFormatInfo 
-        { 
-            CurrencySymbol = "TW$", 
-            CurrencyGroupSeparator = ",", 
-            CurrencyDecimalSeparator = ".", 
-            CurrencyDecimalDigits = 0 
-        },
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
+    public static CurrencyFormattingOptions Global { get; } =
+        CurrencyFormattingOptions.Create("TW$", "$n", decimalDigits: 2);
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Local { get; } = new(
-        Symbol: "$",
-        NumberFormat: _nfi,
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
+    public static CurrencyFormattingOptions Local { get; } =
+        CurrencyFormattingOptions.Create("$", "$n", decimalDigits: 2);
 
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits =>

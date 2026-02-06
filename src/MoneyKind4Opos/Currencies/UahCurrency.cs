@@ -26,22 +26,9 @@ public class UahCurrency :
         new SubsidiaryUnit("Kopiyka", null, 0.01m),
     ];
 
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "₴",
-        CurrencyPositivePattern = 3, // n $
-        CurrencyGroupSeparator = " ",
-        CurrencyDecimalSeparator = ",",
-        CurrencyDecimalDigits = 2,
-    };
-
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Global { get; } =
-        new(
-            Symbol: "₴",
-            NumberFormat: _nfi,
-            DisplayFormat: new(SymbolPlacement.Postfix)
-        );
+        CurrencyFormattingOptions.Create("₴", "n $", decimalSep: ",", groupSep: " ");
 
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Local => Global;

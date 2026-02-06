@@ -16,38 +16,17 @@ public class DkkCurrency :
     ICashCountFormattable<DkkCurrency>,
     ICurrencyFormattable<DkkCurrency>
 {
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "Kr",
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 1,
-    };
-
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.DKK;
     /// <inheritdoc/>
     public static decimal MinimumUnit => 0.5m;
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Global { get; } = new(
-        Symbol: "Kr",
-        NumberFormat: new NumberFormatInfo 
-        { 
-            CurrencySymbol = "Kr", 
-            CurrencyGroupSeparator = ",", 
-            CurrencyDecimalSeparator = ".", 
-            CurrencyDecimalDigits = 1
-        },
-        DisplayFormat: new(SymbolPlacement.Postfix)
-    );
+    public static CurrencyFormattingOptions Global { get; } =
+        CurrencyFormattingOptions.Create("Kr", "n $", decimalDigits: 1);
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Local { get; } = new(
-        Symbol: "Kr",
-        NumberFormat: _nfi,
-        DisplayFormat: new(SymbolPlacement.Postfix)
-    );
+    public static CurrencyFormattingOptions Local => Global;
 
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits =>

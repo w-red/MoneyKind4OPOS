@@ -16,38 +16,19 @@ public class SekCurrency :
     ICashCountFormattable<SekCurrency>,
     ICurrencyFormattable<SekCurrency>
 {
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "kr",
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 0,
-    };
-
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.SEK;
+
     /// <inheritdoc/>
     public static decimal MinimumUnit => 1m;
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Global { get; } = new(
-        Symbol: "kr",
-        NumberFormat: new NumberFormatInfo
-        {
-            CurrencySymbol = "kr",
-            CurrencyGroupSeparator = ",",
-            CurrencyDecimalSeparator = ".",
-            CurrencyDecimalDigits = 0
-        },
-        DisplayFormat: new(SymbolPlacement.Postfix)
-    );
+    public static CurrencyFormattingOptions Global { get; } =
+        CurrencyFormattingOptions.Create("kr", "n $", decimalDigits: 2);
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Local { get; } = new(
-        Symbol: "kr",
-        NumberFormat: _nfi,
-        DisplayFormat: new(SymbolPlacement.Postfix)
-    );
+    public static CurrencyFormattingOptions Local { get; } =
+        CurrencyFormattingOptions.Create("kr", "n $", decimalDigits: 2);
 
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits =>

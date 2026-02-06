@@ -15,26 +15,14 @@ public class EurCurrency :
     ICashCountFormattable<EurCurrency>,
     ICurrencyFormattable<EurCurrency>
 {
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "€",
-        CurrencyPositivePattern = 3, // n €
-        CurrencyGroupSeparator = ".",
-        CurrencyDecimalSeparator = ",",
-        CurrencyDecimalDigits = 2,
-    };
-
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.EUR;
     /// <inheritdoc/>
     public static decimal MinimumUnit => 0.01m;
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Global { get; } = new(
-        Symbol: "€",
-        NumberFormat: _nfi,
-        DisplayFormat: new(SymbolPlacement.Postfix)
-    );
+    public static CurrencyFormattingOptions Global { get; } = 
+        CurrencyFormattingOptions.Create("€", "n $", decimalSep: ",", groupSep: ".");
 
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Local => Global;

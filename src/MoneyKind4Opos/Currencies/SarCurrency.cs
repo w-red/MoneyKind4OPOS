@@ -26,22 +26,9 @@ public class SarCurrency :
         new SubsidiaryUnit("Halala", null, 0.01m),
     ];
 
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "Rials",
-        CurrencyPositivePattern = 1, // $ n
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 2,
-    };
-
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Global { get; } =
-        new(
-            Symbol: "SR",
-            NumberFormat: _nfi,
-            DisplayFormat: new(SymbolPlacement.Prefix)
-        );
+        CurrencyFormattingOptions.Create("SR", "$ n", decimalDigits: 2);
 
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Local => Global;

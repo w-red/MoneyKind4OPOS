@@ -26,22 +26,9 @@ public class RsdCurrency :
         new SubsidiaryUnit("Para", null, 0.01m),
     ];
 
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "din.",
-        CurrencyPositivePattern = 3, // n $
-        CurrencyGroupSeparator = ".",
-        CurrencyDecimalSeparator = ",",
-        CurrencyDecimalDigits = 2,
-    };
-
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Global { get; } =
-        new(
-            Symbol: "din.",
-            NumberFormat: _nfi,
-            DisplayFormat: new(SymbolPlacement.Postfix)
-        );
+        CurrencyFormattingOptions.Create("din.", "n $", decimalSep: ",", groupSep: ".");
 
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Local => Global;

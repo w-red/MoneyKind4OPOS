@@ -15,40 +15,18 @@ public class IqdCurrency :
     ICashCountFormattable<IqdCurrency>,
     ICurrencyFormattable<IqdCurrency>
 {
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "د.ع",
-        CurrencyPositivePattern = 2, // $ n
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 0,
-    };
-
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.IQD;
-
     /// <inheritdoc/>
     public static decimal MinimumUnit => 250.0m;
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Global { get; } = new(
-        Symbol: "IQD",
-        NumberFormat: new NumberFormatInfo
-        {
-            CurrencySymbol = "IQD",
-            CurrencyGroupSeparator = ",",
-            CurrencyDecimalSeparator = ".",
-            CurrencyDecimalDigits = 0
-        },
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
+    public static CurrencyFormattingOptions Global { get; } =
+        CurrencyFormattingOptions.Create("IQD", "n $", decimalDigits: 0);
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Local { get; } = new(
-        Symbol: "د.ع",
-        NumberFormat: _nfi,
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
+    public static CurrencyFormattingOptions Local { get; } =
+        CurrencyFormattingOptions.Create("د.ع", "$ n", decimalDigits: 0);
 
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits =>

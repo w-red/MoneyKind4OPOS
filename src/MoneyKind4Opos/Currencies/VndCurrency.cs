@@ -15,15 +15,6 @@ public class VndCurrency :
     ICashCountFormattable<VndCurrency>,
     ICurrencyFormattable<VndCurrency>
 {
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "₫",
-        CurrencyPositivePattern = 3, // n $
-        CurrencyGroupSeparator = ".",
-        CurrencyDecimalSeparator = ",",
-        CurrencyDecimalDigits = 0,
-    };
-
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.VND;
 
@@ -31,25 +22,12 @@ public class VndCurrency :
     public static decimal MinimumUnit => 1000m;
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Global { get; } = new(
-        Symbol: "VND",
-        NumberFormat: new NumberFormatInfo
-        {
-            CurrencySymbol = "VND",
-            CurrencyPositivePattern = 3,
-            CurrencyGroupSeparator = ".",
-            CurrencyDecimalSeparator = ",",
-            CurrencyDecimalDigits = 0
-        },
-        DisplayFormat: new(SymbolPlacement.Postfix)
-    );
+    public static CurrencyFormattingOptions Global { get; } =
+        CurrencyFormattingOptions.Create("VND", "n $", decimalDigits: 0, groupSep: ".");
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Local { get; } = new(
-        Symbol: "₫",
-        NumberFormat: _nfi,
-        DisplayFormat: new(SymbolPlacement.Postfix)
-    );
+    public static CurrencyFormattingOptions Local { get; } =
+        CurrencyFormattingOptions.Create("₫", "n $", decimalDigits: 0, groupSep: ".");
 
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits =>

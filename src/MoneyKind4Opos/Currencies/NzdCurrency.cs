@@ -10,38 +10,18 @@ public class NzdCurrency :
     ICashCountFormattable<NzdCurrency>,
     ICurrencyFormattable<NzdCurrency>
 {
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "$",
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 2,
-    };
-
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.NZD;
     /// <inheritdoc/>
     public static decimal MinimumUnit => 0.10m;
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Global { get; } = new(
-        Symbol: "NZ$",
-        NumberFormat: new NumberFormatInfo 
-        { 
-            CurrencySymbol = "NZ$", 
-            CurrencyGroupSeparator = ",", 
-            CurrencyDecimalSeparator = ".", 
-            CurrencyDecimalDigits = 2 
-        },
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
+    public static CurrencyFormattingOptions Global { get; } =
+        CurrencyFormattingOptions.Create("NZ$", "$n");
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Local { get; } = new(
-        Symbol: "$",
-        NumberFormat: _nfi,
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
+    public static CurrencyFormattingOptions Local { get; } =
+        CurrencyFormattingOptions.Create("$", "$n");
 
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits => [];

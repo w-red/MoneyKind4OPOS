@@ -10,26 +10,14 @@ public class UsdCurrency :
     ICashCountFormattable<UsdCurrency>,
     ICurrencyFormattable<UsdCurrency>
 {
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "$",
-        CurrencyPositivePattern = 0, // $n
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 2,
-    };
-
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.USD;
     /// <inheritdoc/>
     public static decimal MinimumUnit => 0.01m;
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Global { get; } = new(
-        Symbol: "$",
-        NumberFormat: _nfi,
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
+    public static CurrencyFormattingOptions Global { get; } =
+        CurrencyFormattingOptions.Create("$", "$n");
 
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Local => Global;

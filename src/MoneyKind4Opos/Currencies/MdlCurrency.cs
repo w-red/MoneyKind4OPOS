@@ -26,22 +26,9 @@ public class MdlCurrency :
         new SubsidiaryUnit("Ban", null, 0.01m),
     ];
 
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "L",
-        CurrencyPositivePattern = 3, // n $
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 2,
-    };
-
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Global { get; } =
-        new(
-            Symbol: "L",
-            NumberFormat: _nfi,
-            DisplayFormat: new(SymbolPlacement.Postfix)
-        );
+        CurrencyFormattingOptions.Create("L", "n $");
 
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Local => Global;

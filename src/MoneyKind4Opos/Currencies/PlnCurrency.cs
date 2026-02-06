@@ -16,38 +16,19 @@ public class PlnCurrency :
     ICashCountFormattable<PlnCurrency>,
     ICurrencyFormattable<PlnCurrency>
 {
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "zł",
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 2,
-    };
-
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.PLN;
+
     /// <inheritdoc/>
     public static decimal MinimumUnit => 0.01m;
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Global { get; } = new(
-        Symbol: "zł",
-        NumberFormat: new NumberFormatInfo
-        {
-            CurrencySymbol = "zł",
-            CurrencyGroupSeparator = ",", 
-            CurrencyDecimalSeparator = ".", 
-            CurrencyDecimalDigits = 2 
-        },
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
+    public static CurrencyFormattingOptions Global { get; } =
+        CurrencyFormattingOptions.Create("zł", "$n");
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Local { get; } = new(
-        Symbol: "zł",
-        NumberFormat: _nfi,
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
+    public static CurrencyFormattingOptions Local { get; } =
+        CurrencyFormattingOptions.Create("zł", "$n");
 
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits =>

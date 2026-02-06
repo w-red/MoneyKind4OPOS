@@ -15,42 +15,18 @@ public class JpyCurrency :
     ICashCountFormattable<JpyCurrency>,
     ICurrencyFormattable<JpyCurrency>
 {
-    private static readonly NumberFormatInfo _globalNfi = new()
-    {
-        CurrencySymbol = "¥",
-        CurrencyPositivePattern = 0, // $n
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 0,
-    };
-
-    private static readonly NumberFormatInfo _localNfi = new()
-    {
-        CurrencySymbol = "円",
-        CurrencyPositivePattern = 1, // n$
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 0,
-    };
-
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.JPY;
     /// <inheritdoc/>
     public static decimal MinimumUnit => 1m;
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Global { get; } = new(
-        Symbol: "¥",
-        NumberFormat: _globalNfi,
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
+    public static CurrencyFormattingOptions Global { get; } =
+        CurrencyFormattingOptions.Create("¥", "$n", decimalDigits: 0);
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Local { get; } = new(
-        Symbol: "円",
-        NumberFormat: _localNfi,
-        DisplayFormat: new(SymbolPlacement.Postfix)
-    );
+    public static CurrencyFormattingOptions Local { get; } =
+        CurrencyFormattingOptions.Create("円", "n$", decimalDigits: 0);
 
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits => [];

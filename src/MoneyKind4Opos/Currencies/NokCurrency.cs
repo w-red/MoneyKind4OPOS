@@ -11,38 +11,18 @@ public class NokCurrency :
     ICashCountFormattable<NokCurrency>,
     ICurrencyFormattable<NokCurrency>
 {
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "kr",
-        CurrencyGroupSeparator = " ",
-        CurrencyDecimalSeparator = ",",
-        CurrencyDecimalDigits = 2,
-    };
-
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.NOK;
     /// <inheritdoc/>
     public static decimal MinimumUnit => 1m;
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Global { get; } = new(
-        Symbol: "NOK",
-        NumberFormat: new NumberFormatInfo 
-        { 
-            CurrencySymbol = "NOK", 
-            CurrencyGroupSeparator = " ", 
-            CurrencyDecimalSeparator = ",", 
-            CurrencyDecimalDigits = 2 
-        },
-        DisplayFormat: new(SymbolPlacement.Postfix)
-    );
+    public static CurrencyFormattingOptions Global { get; } =
+        CurrencyFormattingOptions.Create("NOK", "n $", groupSep: " ", decimalSep: ",");
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Local { get; } = new(
-        Symbol: "kr",
-        NumberFormat: _nfi,
-        DisplayFormat: new(SymbolPlacement.Postfix)
-    );
+    public static CurrencyFormattingOptions Local { get; } =
+        CurrencyFormattingOptions.Create("kr", "n $", groupSep: " ", decimalSep: ",");
 
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits => [];

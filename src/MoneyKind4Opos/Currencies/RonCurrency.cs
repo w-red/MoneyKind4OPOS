@@ -26,22 +26,9 @@ public class RonCurrency :
         new SubsidiaryUnit("Ban", null, 0.01m),
     ];
 
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "lei",
-        CurrencyPositivePattern = 3, // n $
-        CurrencyGroupSeparator = ".",
-        CurrencyDecimalSeparator = ",",
-        CurrencyDecimalDigits = 2,
-    };
-
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Global { get; } =
-        new(
-            Symbol: "lei",
-            NumberFormat: _nfi,
-            DisplayFormat: new(SymbolPlacement.Postfix)
-        );
+        CurrencyFormattingOptions.Create("lei", "n $", decimalSep: ",", groupSep: ".");
 
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Local => Global;

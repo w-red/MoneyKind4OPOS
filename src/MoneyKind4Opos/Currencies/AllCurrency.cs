@@ -26,22 +26,9 @@ public class AllCurrency :
         new SubsidiaryUnit("Qindarkë", null, 0.01m),
     ];
 
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "L",
-        CurrencyPositivePattern = 0, // $n
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 0,
-    };
-
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Global { get; } =
-        new(
-            Symbol: "L",
-            NumberFormat: _nfi,
-            DisplayFormat: new(SymbolPlacement.Prefix)
-        );
+        CurrencyFormattingOptions.Create("L", "$n", decimalDigits: 0);
 
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Local => Global;

@@ -27,22 +27,9 @@ public class KwdCurrency :
         new SubsidiaryUnit("Fils", null, 0.001m),
     ];
 
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "Dinars",
-        CurrencyPositivePattern = 3, // n $
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 3,
-    };
-
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Global { get; } =
-        new(
-            Symbol: "Dinars",
-            NumberFormat: _nfi,
-            DisplayFormat: new(SymbolPlacement.Postfix)
-        );
+        CurrencyFormattingOptions.Create("Dinars", "n $", decimalDigits: 3);
 
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Local => Global;

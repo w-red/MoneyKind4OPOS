@@ -11,40 +11,19 @@ public class XafCurrency :
     ICashCountFormattable<XafCurrency>,
     ICurrencyFormattable<XafCurrency>
 {
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "FCFA",
-        CurrencyGroupSeparator = " ",
-        CurrencyDecimalSeparator = ",",
-        CurrencyDecimalDigits = 0,
-        NumberGroupSeparator = " ",
-        NumberDecimalSeparator = ",",
-    };
-
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.XAF;
+
     /// <inheritdoc/>
     public static decimal MinimumUnit => 1m;
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Global { get; } = new(
-        Symbol: "XAF",
-        NumberFormat: new NumberFormatInfo 
-        { 
-            CurrencySymbol = "XAF", 
-            CurrencyGroupSeparator = " ", 
-            CurrencyDecimalSeparator = ",", 
-            CurrencyDecimalDigits = 0 
-        },
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
+    public static CurrencyFormattingOptions Global { get; } =
+        CurrencyFormattingOptions.Create("XAF", "n $", decimalDigits: 0, groupSep: " ");
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Local { get; } = new(
-        Symbol: "FCFA",
-        NumberFormat: _nfi,
-        DisplayFormat: new(SymbolPlacement.Postfix)
-    );
+    public static CurrencyFormattingOptions Local { get; } =
+        CurrencyFormattingOptions.Create("FCFA", "n $", decimalDigits: 0, groupSep: " ");
 
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits => [];

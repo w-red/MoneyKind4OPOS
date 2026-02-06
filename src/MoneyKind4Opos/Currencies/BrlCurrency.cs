@@ -28,22 +28,9 @@ public class BrlCurrency :
         new SubsidiaryUnit("Centavo", "¢", 0.010m),
     ];
 
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "R$",
-        CurrencyPositivePattern = 1, // $ n
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 2,
-    };
-
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Global { get; } =
-        new(
-            Symbol: "R$",
-            NumberFormat: _nfi,
-            DisplayFormat: new(SymbolPlacement.Prefix)
-        );
+        CurrencyFormattingOptions.Create("R$", "n$");
 
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Local => Global;

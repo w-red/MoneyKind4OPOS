@@ -46,6 +46,60 @@ public record CurrencyFormattingOptions(
         { Iso4217.TRY, ("tr-TR", "₺") },
     };
 
+    /// <summary>Creates a <see cref="CurrencyFormattingOptions"/> instance with specified formatting parameters.</summary>
+    /// <param name="symbol">Currency symbol (e.g. "$", "¥").</param>
+    /// <param name="pattern">Positive pattern: "$n", "n$", "$ n", or "n $".</param>
+    /// <param name="decimalDigits">Number of decimal digits.</param>
+    /// <param name="decimalSep">Decimal separator.</param>
+    /// <param name="groupSep">Group separator.</param>
+    /// <param name="groupSizes">Digit grouping sizes. Default is [3].</param>
+    /// <param name="decimalZeroReplacement">Replacement for fractional part if it's zero.</param>
+    /// <returns>A configured <see cref="CurrencyFormattingOptions"/> instance.</returns>
+    public static CurrencyFormattingOptions Create(
+        string symbol,
+        string pattern = "$n",
+        int decimalDigits = 2,
+        string decimalSep = ".",
+        string groupSep = ",",
+        int[]? groupSizes = null,
+        string? decimalZeroReplacement = null)
+    {
+        var nfi = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
+        nfi.CurrencySymbol = symbol;
+        nfi.CurrencyDecimalDigits = decimalDigits;
+        nfi.CurrencyDecimalSeparator = decimalSep;
+        nfi.CurrencyGroupSeparator = groupSep;
+        if (groupSizes != null)
+        {
+            nfi.CurrencyGroupSizes = groupSizes;
+            nfi.NumberGroupSizes = groupSizes;
+        }
+        nfi.NumberDecimalDigits = decimalDigits;
+        nfi.NumberDecimalSeparator = decimalSep;
+        nfi.NumberGroupSeparator = groupSep;
+
+        nfi.CurrencyPositivePattern = pattern switch
+        {
+            "$n" => 0,
+            "n$" => 1,
+            "$ n" => 2,
+            "n $" => 3,
+            _ => 0
+        };
+
+        return new CurrencyFormattingOptions(
+            Symbol: symbol,
+            NumberFormat: nfi,
+            DisplayFormat: new CurrencyDisplayFormat(
+                Placement: GetPlacement(nfi),
+                HasSpace: pattern.Contains(' '),
+                DecimalZeroReplacement: decimalZeroReplacement,
+                GroupSeparator: groupSep,
+                DecimalSeparator: decimalSep
+            )
+        );
+    }
+
     /// <summary>Creates a <see cref="CurrencyFormattingOptions"/> instance from an ISO 4217 currency code.</summary>
     /// <param name="code">The ISO 4217 currency code.</param>
     /// <param name="cultureName">Optional culture name override (e.g., "fr-FR" for French Euro formatting).</param>
@@ -98,11 +152,15 @@ public record CurrencyFormattingOptions(
                 : symbol
             );
 
-        // Determine symbol placement based on CurrencyPositivePattern
         return new CurrencyFormattingOptions(
             Symbol: nfi.CurrencySymbol,
             NumberFormat: nfi,
-            DisplayFormat: new CurrencyDisplayFormat(GetPlacement(nfi))
+            DisplayFormat: new CurrencyDisplayFormat(
+                Placement: GetPlacement(nfi),
+                HasSpace: nfi.CurrencyPositivePattern is 2 or 3,
+                GroupSeparator: nfi.CurrencyGroupSeparator,
+                DecimalSeparator: nfi.CurrencyDecimalSeparator
+            )
         );
     }
 
@@ -158,16 +216,24 @@ public record CurrencyFormattingOptions(
             NumberFormat = nfi,
             DisplayFormat = DisplayFormat with
             {
-                Placement = GetPlacement(nfi)
+                Placement = GetPlacement(nfi),
+                HasSpace = nfi.CurrencyPositivePattern is 2 or 3,
+                GroupSeparator = nfi.CurrencyGroupSeparator,
+                DecimalSeparator = nfi.CurrencyDecimalSeparator
             }
         };
     }
 
     /// <summary>Apply currency identity to the specified number format.</summary>
+    /// <remarks>
+    /// Only applies currency-specific settings (symbol, decimal digits, group sizes).
+    /// Separators are intentionally NOT overwritten to respect culture-specific formatting.
+    /// </remarks>
     private void ApplyIdentity(NumberFormatInfo target)
     {
         target.CurrencySymbol = NumberFormat.CurrencySymbol;
         target.CurrencyDecimalDigits = NumberFormat.CurrencyDecimalDigits;
+        target.CurrencyGroupSizes = NumberFormat.CurrencyGroupSizes;
     }
 
     /// <summary>Determines symbol placement from NumberFormatInfo pattern.</summary>

@@ -16,38 +16,17 @@ public class IlsCurrency :
     ICashCountFormattable<IlsCurrency>,
     ICurrencyFormattable<IlsCurrency>
 {
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "₪",
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 1,
-    };
-
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.ILS;
     /// <inheritdoc/>
     public static decimal MinimumUnit => 0.1m;
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Global { get; } = new(
-        Symbol: "₪",
-        NumberFormat: new NumberFormatInfo 
-        { 
-            CurrencySymbol = "₪", 
-            CurrencyGroupSeparator = ",", 
-            CurrencyDecimalSeparator = ".", 
-            CurrencyDecimalDigits = 1 
-        },
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
+    public static CurrencyFormattingOptions Global { get; } =
+        CurrencyFormattingOptions.Create("₪", "$n", decimalDigits: 2);
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Local { get; } = new(
-        Symbol: "₪",
-        NumberFormat: _nfi,
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
+    public static CurrencyFormattingOptions Local => Global;
 
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits =>

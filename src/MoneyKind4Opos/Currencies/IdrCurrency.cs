@@ -15,41 +15,18 @@ public class IdrCurrency :
     ICashCountFormattable<IdrCurrency>,
     ICurrencyFormattable<IdrCurrency>
 {
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "Rp",
-        CurrencyPositivePattern = 2, // $ n
-        CurrencyGroupSeparator = ".",
-        CurrencyDecimalSeparator = ",",
-        CurrencyDecimalDigits = 0,
-    };
-
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.IDR;
-
     /// <inheritdoc/>
     public static decimal MinimumUnit => 50m;
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Global { get; } = new(
-        Symbol: "IDR",
-        NumberFormat: new NumberFormatInfo
-        {
-            CurrencySymbol = "IDR",
-            CurrencyPositivePattern = 2,
-            CurrencyGroupSeparator = ".",
-            CurrencyDecimalSeparator = ",",
-            CurrencyDecimalDigits = 0
-        },
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
+    public static CurrencyFormattingOptions Global { get; } =
+        CurrencyFormattingOptions.Create("IDR", "$n", decimalDigits: 2, groupSep: ".");
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Local { get; } = new(
-        Symbol: "Rp",
-        NumberFormat: _nfi,
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
+    public static CurrencyFormattingOptions Local { get; } =
+        CurrencyFormattingOptions.Create("Rp", "$n", decimalDigits: 2, groupSep: ".");
 
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits =>

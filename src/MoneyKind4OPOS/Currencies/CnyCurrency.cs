@@ -15,39 +15,18 @@ public class CnyCurrency :
     /// <inheritdoc/>
     public static decimal MinimumUnit => 0.01m;
 
-    /// <summary>Global number format.</summary>
-    private static readonly NumberFormatInfo _globalNfi = new()
-    {
-        CurrencySymbol = "¥",
-        CurrencyPositivePattern = 0,
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 2,
-    };
+    /// <inheritdoc/>
+    public static CurrencyFormattingOptions Global { get; } =
+        CurrencyFormattingOptions.Create("¥", "$n");
 
-    /// <summary>Local number format.</summary>
-    private static readonly NumberFormatInfo _localNfi = new()
-    {
-        CurrencySymbol = "元",
-        CurrencyPositivePattern = 1,
-        CurrencyGroupSeparator = ",",
-        CurrencyDecimalSeparator = ".",
-        CurrencyDecimalDigits = 2,
-    };
+    private static readonly NumberFormatInfo _localNfi = 
+        CurrencyFormattingOptions.Create("元", "n$").NumberFormat;
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Global { get; } = new(
-        Symbol: "¥",
-        NumberFormat: _globalNfi,
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
-
-    /// <inheritdoc/>
-    public static CurrencyFormattingOptions Local { get; } = new(
-        Symbol: "元",
-        NumberFormat: _localNfi,
-        DisplayFormat: new(SymbolPlacement.Postfix),
-        CustomFormatter: amount =>
+    public static CurrencyFormattingOptions Local { get; } =
+        CurrencyFormattingOptions.Create("元", "n$") with
+        {
+            CustomFormatter = amount =>
         {
             // Special formatting for amounts less than 1 Yuan
             if (amount is > 0 and < 1.0m)
@@ -77,7 +56,7 @@ public class CnyCurrency :
             // normal formatting for 1 Yuan and above, or 0 Yuan, or tiny values
             return amount.ToString("C", _localNfi);
         }
-    );
+    };
 
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits => _subsidiaryUnits;

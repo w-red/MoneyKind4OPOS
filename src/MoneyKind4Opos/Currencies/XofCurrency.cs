@@ -11,40 +11,19 @@ public class XofCurrency :
     ICashCountFormattable<XofCurrency>,
     ICurrencyFormattable<XofCurrency>
 {
-    private static readonly NumberFormatInfo _nfi = new()
-    {
-        CurrencySymbol = "CFA",
-        CurrencyGroupSeparator = " ", // French speaking countries often use space
-        CurrencyDecimalSeparator = ",",
-        CurrencyDecimalDigits = 0,
-        NumberGroupSeparator = " ",
-        NumberDecimalSeparator = ",",
-    };
-
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.XOF;
+
     /// <inheritdoc/>
     public static decimal MinimumUnit => 1m;
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Global { get; } = new(
-        Symbol: "XOF",
-        NumberFormat: new NumberFormatInfo 
-        { 
-            CurrencySymbol = "XOF", 
-            CurrencyGroupSeparator = " ", 
-            CurrencyDecimalSeparator = ",", 
-            CurrencyDecimalDigits = 0 
-        },
-        DisplayFormat: new(SymbolPlacement.Prefix)
-    );
+    public static CurrencyFormattingOptions Global { get; } =
+        CurrencyFormattingOptions.Create("XOF", "n $", decimalDigits: 0, groupSep: " ");
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Local { get; } = new(
-        Symbol: "CFA",
-        NumberFormat: _nfi,
-        DisplayFormat: new(SymbolPlacement.Postfix) // 100 CFA
-    );
+    public static CurrencyFormattingOptions Local { get; } =
+        CurrencyFormattingOptions.Create("CFA", "n $", decimalDigits: 0, groupSep: " ");
 
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits => [];
