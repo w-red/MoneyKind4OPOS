@@ -316,4 +316,60 @@ public static class FormattingAbsoluteSolutionSource
         };
         return data;
     }
+    public static TheoryData<string, string, string> GetAfricaPhase1Data()
+    {
+        var data = new TheoryData<string, string, string>
+        {
+            { "en-EG", "EGP", "E£1,234,567.89" },
+            { "en-MR", "MRU", "UM1,234,567.89" },
+            { "pt-CV", "CVE", $"1{Uni.NBSP}234{Uni.NBSP}567$89 Esc" },
+            { "fr-GN", "GNF", "1\u202F234\u202F568 FG" },
+            { "en-GH", "GHS", "GH\u20B51,234,567.89" },
+            { "en-GM", "GMD", "D1,234,567.89" },
+            { "en-NG", "NGN", "\u20A61,234,567.89" },
+            { "en-SL", "SLE", "Le1,234,567.89" },
+            { "en-LR", "LRD", "L$1,234,567.89" },
+            { "fr-DZ", "DZD", "1\u202F234\u202F567,89 DA" },
+            { "fr-MA", "MAD", "1.234.567,89 DH" },
+            { "en-LY", "LYD", "LD1,234,567.890" },
+            { "fr-TN", "TND", "1\u202F234\u202F567,890 DT" }
+        };
+        return data;
+    }
+
+    public static TheoryData<string, string, string> GetAfricaPhase2Data()
+    {
+        var data = new TheoryData<string, string, string>
+        {
+            { "en-UG", "UGX", "USh1,234,568" },
+            { "sw-TZ", "TZS", "TSh 1,234,567.89" },
+            { "fr-BI", "BIF", $"1{Uni.NNBSP}234{Uni.NNBSP}568{Uni.Space}FBu" },
+            { "fr-DJ", "DJF", $"1{Uni.NNBSP}234{Uni.NNBSP}568{Uni.Space}Fdj" },
+            { "am-ET", "ETB", "ብር1,234,567.89" },
+            { "ar-SD", "SDG", $"1\u066C234\u066C567\u066B89{Uni.Space}\u062C.\u0633." }, // Pattern n $ (standard space)
+            { "fr-KM", "KMF", $"1{Uni.NNBSP}234{Uni.NNBSP}568{Uni.Space}CF" },
+            { "en-MU", "MUR", "Rs1,234,567.89" }
+        };
+        return data;
+    }
+
+    public static TheoryData<string, string, string> GetAfricaPhase3Data()
+    {
+        var data = new TheoryData<string, string, string>
+        {
+            { "pt-AO", "AOA", $"1{Uni.NBSP}234{Uni.NBSP}567,89{Uni.Space}Kz" },
+            { "fr-CD", "CDF", $"1{Uni.NNBSP}234{Uni.NNBSP}567,89{Uni.Space}FC" },
+            { "en-ZM", "ZMW", "K1,234,567.89" },
+            { "en-ZW", "ZWG", "US$1,234,567.89" },
+            { "pt-ST", "STN", $"1{Uni.NBSP}234{Uni.NBSP}567,89{Uni.Space}Db" },
+            { "en-NA", "NAD", "$1,234,567.89" },
+            { "en-BW", "BWP", "P1,234,567.89" },
+            { "fr-MG", "MGA", $"1{Uni.NNBSP}234{Uni.NNBSP}568{Uni.Space}Ar" },
+            { "en-MW", "MWK", "MK1,234,567.89" },
+            { "pt-MZ", "MZN", $"1{Uni.NBSP}234{Uni.NBSP}567,89{Uni.Space}MTn" },
+            { "en-SZ", "SZL", "E1,234,567.89" },
+            { "en-LS", "LSL", "R1,234,567.89" }
+        };
+        return data;
+    }
 }

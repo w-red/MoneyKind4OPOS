@@ -131,7 +131,49 @@ public static class CurrencyMetadataSource
             { typeof(TopCurrency), Iso4217.TOP, 776, 0.01 },
             { typeof(VuvCurrency), Iso4217.VUV, 548, 5.0 },
             { typeof(FjdCurrency), Iso4217.FJD, 242, 0.05 },
-            { typeof(XpfCurrency), Iso4217.XPF, 953, 1.0 }
+            { typeof(XpfCurrency), Iso4217.XPF, 953, 1.0 },
+            // Africa (North & West)
+            { typeof(EgpCurrency), Iso4217.EGP, 818, 0.05 },
+            { typeof(MruCurrency), Iso4217.MRU, 929, 0.20 },
+            { typeof(CveCurrency), Iso4217.CVE, 132, 1.0 },
+            { typeof(GnfCurrency), Iso4217.GNF, 324, 1.0 },
+            { typeof(GhsCurrency), Iso4217.GHS, 936, 0.01 },
+            { typeof(GmdCurrency), Iso4217.GMD, 270, 0.01 },
+            { typeof(NgnCurrency), Iso4217.NGN, 566, 0.50 },
+            { typeof(SleCurrency), Iso4217.SLE, 925, 0.01 },
+            { typeof(LrdCurrency), Iso4217.LRD, 430, 0.05 },
+            { typeof(DzdCurrency), Iso4217.DZD, 12, 1.0 },
+            { typeof(MadCurrency), Iso4217.MAD, 504, 0.10 },
+            { typeof(LydCurrency), Iso4217.LYD, 434, 0.050 },
+            { typeof(TndCurrency), Iso4217.TND, 788, 0.010 },
+            // Africa Phase 2
+            { typeof(UgxCurrency), Iso4217.UGX, 800, 1.0 },
+            { typeof(KesCurrency), Iso4217.KES, 404, 1.0 },
+            { typeof(TzsCurrency), Iso4217.TZS, 834, 50.0 },
+            { typeof(RwfCurrency), Iso4217.RWF, 646, 1.0 },
+            { typeof(BifCurrency), Iso4217.BIF, 108, 1.0 },
+            { typeof(DjfCurrency), Iso4217.DJF, 262, 1.0 },
+            { typeof(ErnCurrency), Iso4217.ERN, 232, 0.01 },
+            { typeof(EtbCurrency), Iso4217.ETB, 230, 0.01 },
+            { typeof(SosCurrency), Iso4217.SOS, 706, 1000.0 },
+            { typeof(SspCurrency), Iso4217.SSP, 728, 0.10 },
+            { typeof(SdgCurrency), Iso4217.SDG, 938, 0.01 },
+            { typeof(KmfCurrency), Iso4217.KMF, 174, 1.0 },
+            { typeof(ScrCurrency), Iso4217.SCR, 690, 0.01 },
+            { typeof(MurCurrency), Iso4217.MUR, 480, 0.05 },
+            // Africa Phase 3
+            { typeof(AoaCurrency), Iso4217.AOA, 973, 1.0 },
+            { typeof(CdfCurrency), Iso4217.CDF, 976, 50.0 },
+            { typeof(ZmwCurrency), Iso4217.ZMW, 967, 0.05 },
+            { typeof(ZwgCurrency), Iso4217.ZWG, 924, 0.01 },
+            { typeof(StnCurrency), Iso4217.STN, 930, 0.10 },
+            { typeof(NadCurrency), Iso4217.NAD, 516, 0.05 },
+            { typeof(BwpCurrency), Iso4217.BWP, 72, 0.05 },
+            { typeof(MgaCurrency), Iso4217.MGA, 969, 1.0 }, // 1 Ariary = 5 Iraimbilanja
+            { typeof(MwkCurrency), Iso4217.MWK, 454, 1.0 },
+            { typeof(MznCurrency), Iso4217.MZN, 943, 0.01 },
+            { typeof(SzlCurrency), Iso4217.SZL, 748, 0.10 },
+            { typeof(LslCurrency), Iso4217.LSL, 426, 0.10 }
         };
 
         return data;

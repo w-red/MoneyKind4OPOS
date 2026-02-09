@@ -143,8 +143,50 @@ public class GlobalLocaleAbsoluteSolutionTest
             "XCG" => 1234567.89m.ToGlobalString<XcgCurrency>(culture),
             "BMD" => 1234567.89m.ToGlobalString<BmdCurrency>(culture),
             "AWG" => 1234567.89m.ToGlobalString<AwgCurrency>(culture),
+            // Africa (North & West)
+            "EGP" => 1234567.89m.ToGlobalString<EgpCurrency>(culture),
+            "MRU" => 1234567.89m.ToGlobalString<MruCurrency>(culture),
+            "CVE" => 1234567.89m.ToGlobalString<CveCurrency>(culture),
+            "GNF" => 1234567.89m.ToGlobalString<GnfCurrency>(culture),
+            "GHS" => 1234567.89m.ToGlobalString<GhsCurrency>(culture),
+            "GMD" => 1234567.89m.ToGlobalString<GmdCurrency>(culture),
+            "NGN" => 1234567.89m.ToGlobalString<NgnCurrency>(culture),
+            "SLE" => 1234567.89m.ToGlobalString<SleCurrency>(culture),
+            "LRD" => 1234567.89m.ToGlobalString<LrdCurrency>(culture),
+            "DZD" => 1234567.89m.ToGlobalString<DzdCurrency>(culture),
+            "MAD" => 1234567.89m.ToGlobalString<MadCurrency>(culture),
+            "LYD" => 1234567.89m.ToGlobalString<LydCurrency>(culture),
+            "TND" => 1234567.89m.ToGlobalString<TndCurrency>(culture),
             // South America - Venezuela
             "VED" => 1234567.89m.ToGlobalString<VedCurrency>(culture),
+            // Africa Phase 2
+            "UGX" => 1234567.89m.ToGlobalString<UgxCurrency>(culture),
+            "KES" => 1234567.89m.ToGlobalString<KesCurrency>(culture),
+            "TZS" => 1234567.89m.ToGlobalString<TzsCurrency>(culture),
+            "RWF" => 1234567.89m.ToGlobalString<RwfCurrency>(culture),
+            "BIF" => 1234567.89m.ToGlobalString<BifCurrency>(culture),
+            "DJF" => 1234567.89m.ToGlobalString<DjfCurrency>(culture),
+            "ERN" => 1234567.89m.ToGlobalString<ErnCurrency>(culture),
+            "ETB" => 1234567.89m.ToGlobalString<EtbCurrency>(culture),
+            "SOS" => 1234567.89m.ToGlobalString<SosCurrency>(culture),
+            "SSP" => 1234567.89m.ToGlobalString<SspCurrency>(culture),
+            "SDG" => 1234567.89m.ToGlobalString<SdgCurrency>(culture),
+            "KMF" => 1234567.89m.ToGlobalString<KmfCurrency>(culture),
+            "SCR" => 1234567.89m.ToGlobalString<ScrCurrency>(culture),
+            "MUR" => 1234567.89m.ToGlobalString<MurCurrency>(culture),
+            // Africa Phase 3
+            "AOA" => 1234567.89m.ToGlobalString<AoaCurrency>(culture),
+            "CDF" => 1234567.89m.ToGlobalString<CdfCurrency>(culture),
+            "ZMW" => 1234567.89m.ToGlobalString<ZmwCurrency>(culture),
+            "ZWG" => 1234567.89m.ToGlobalString<ZwgCurrency>(culture),
+            "STN" => 1234567.89m.ToGlobalString<StnCurrency>(culture),
+            "NAD" => 1234567.89m.ToGlobalString<NadCurrency>(culture),
+            "BWP" => 1234567.89m.ToGlobalString<BwpCurrency>(culture),
+            "MGA" => 1234567.89m.ToGlobalString<MgaCurrency>(culture),
+            "MWK" => 1234567.89m.ToGlobalString<MwkCurrency>(culture),
+            "MZN" => 1234567.89m.ToGlobalString<MznCurrency>(culture),
+            "SZL" => 1234567.89m.ToGlobalString<SzlCurrency>(culture),
+            "LSL" => 1234567.89m.ToGlobalString<LslCurrency>(culture),
             _ => throw new ArgumentException($"Unsupported currency: {currencyCode}")
         };
         }
@@ -170,6 +212,9 @@ public class GlobalLocaleAbsoluteSolutionTest
     [MemberData(nameof(FormattingAbsoluteSolutionSource.GetCaribbeanData), MemberType = typeof(FormattingAbsoluteSolutionSource))]
     [MemberData(nameof(FormattingAbsoluteSolutionSource.GetEuropeanData), MemberType = typeof(FormattingAbsoluteSolutionSource))]
     [MemberData(nameof(FormattingAbsoluteSolutionSource.GetOceaniaData), MemberType = typeof(FormattingAbsoluteSolutionSource))]
+    [MemberData(nameof(FormattingAbsoluteSolutionSource.GetAfricaPhase1Data), MemberType = typeof(FormattingAbsoluteSolutionSource))]
+    [MemberData(nameof(FormattingAbsoluteSolutionSource.GetAfricaPhase2Data), MemberType = typeof(FormattingAbsoluteSolutionSource))]
+    [MemberData(nameof(FormattingAbsoluteSolutionSource.GetAfricaPhase3Data), MemberType = typeof(FormattingAbsoluteSolutionSource))]
     public void GlobalAbsoluteSolutionTest(string cultureName, string currencyCode, string expected)
     {
         VerifyAbsoluteSolution(cultureName, currencyCode, expected);
