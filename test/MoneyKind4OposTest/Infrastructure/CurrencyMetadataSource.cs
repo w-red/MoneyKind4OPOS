@@ -123,7 +123,15 @@ public static class CurrencyMetadataSource
             { typeof(ShpCurrency), Iso4217.SHP, 654, 0.01 },
             { typeof(GgpCurrency), Iso4217.GGP, 831, 0.01 },
             { typeof(JepCurrency), Iso4217.JEP, 832, 0.01 },
-            { typeof(ImpCurrency), Iso4217.IMP, 833, 0.01 }
+            { typeof(ImpCurrency), Iso4217.IMP, 833, 0.01 },
+            // Oceania
+            { typeof(PgkCurrency), Iso4217.PGK, 598, 0.05 },
+            { typeof(SbdCurrency), Iso4217.SBD, 90, 0.10 },
+            { typeof(WstCurrency), Iso4217.WST, 882, 0.10 },
+            { typeof(TopCurrency), Iso4217.TOP, 776, 0.01 },
+            { typeof(VuvCurrency), Iso4217.VUV, 548, 5.0 },
+            { typeof(FjdCurrency), Iso4217.FJD, 242, 0.05 },
+            { typeof(XpfCurrency), Iso4217.XPF, 953, 1.0 }
         };
 
         return data;

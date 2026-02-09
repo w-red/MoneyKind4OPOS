@@ -116,6 +116,17 @@ public class GlobalLocaleAbsoluteSolutionTest
             "GGP" => 1234567.89m.ToGlobalString<GgpCurrency>(culture),
             "JEP" => 1234567.89m.ToGlobalString<JepCurrency>(culture),
             "IMP" => 1234567.89m.ToGlobalString<ImpCurrency>(culture),
+            // Oceania
+            "PGK" => 1234567.89m.ToGlobalString<PgkCurrency>(culture),
+            "SBD" => 1234567.89m.ToGlobalString<SbdCurrency>(culture),
+            // WST defaults to Global "WS$"
+            "WST" => 1234567.89m.ToGlobalString<WstCurrency>(culture),
+            "TOP" when culture.Name == "to-TO" => 1234567.89m.ToLocalString<TopCurrency>(culture),
+            "TOP" => 1234567.89m.ToGlobalString<TopCurrency>(culture),
+            "VUV" when culture.Name == "fr-VU" => 1234567.89m.ToLocalString<VuvCurrency>(culture),
+            "VUV" => 1234567.89m.ToGlobalString<VuvCurrency>(culture),
+            "FJD" => 1234567.89m.ToGlobalString<FjdCurrency>(culture),
+            "XPF" => 1234567.89m.ToGlobalString<XpfCurrency>(culture),
             "CRC" => 1234567.89m.ToGlobalString<CrcCurrency>(culture),
             "NIO" => 1234567.89m.ToGlobalString<NioCurrency>(culture),
             "BZD" => 1234567.89m.ToGlobalString<BzdCurrency>(culture),
@@ -158,6 +169,7 @@ public class GlobalLocaleAbsoluteSolutionTest
     [MemberData(nameof(FormattingAbsoluteSolutionSource.GetCentralAmericanData), MemberType = typeof(FormattingAbsoluteSolutionSource))]
     [MemberData(nameof(FormattingAbsoluteSolutionSource.GetCaribbeanData), MemberType = typeof(FormattingAbsoluteSolutionSource))]
     [MemberData(nameof(FormattingAbsoluteSolutionSource.GetEuropeanData), MemberType = typeof(FormattingAbsoluteSolutionSource))]
+    [MemberData(nameof(FormattingAbsoluteSolutionSource.GetOceaniaData), MemberType = typeof(FormattingAbsoluteSolutionSource))]
     public void GlobalAbsoluteSolutionTest(string cultureName, string currencyCode, string expected)
     {
         VerifyAbsoluteSolution(cultureName, currencyCode, expected);

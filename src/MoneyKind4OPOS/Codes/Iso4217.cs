@@ -46,6 +46,8 @@ public enum Iso4217
     BZD = 84,
     /// <summary>CFA Franc BCEAO</summary>
     XOF = 952,
+    /// <summary>CFP Franc</summary>
+    XPF = 953,
     /// <summary>Bermudian Dollar</summary>
     BMD = 60,
     /// <summary>Indian Rupee</summary>

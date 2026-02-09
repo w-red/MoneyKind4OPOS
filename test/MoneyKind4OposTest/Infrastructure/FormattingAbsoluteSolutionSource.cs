@@ -299,4 +299,21 @@ public static class FormattingAbsoluteSolutionSource
         };
         return data;
     }
+
+    public static TheoryData<string, string, string> GetOceaniaData()
+    {
+        var data = new TheoryData<string, string, string>
+        {
+            { "en-PG", "PGK", "K1,234,567.89" },
+            { "en-SB", "SBD", "$1,234,567.89" },
+            { "sm", "WST", "WS$1,234,567.89" },
+            { "to-TO", "TOP", "T$ 1,234,567.89" },
+            { "en-TO", "TOP", "T$1,234,567.89" },
+            { "en-VU", "VUV", "VT1,234,568" },
+            { "fr-VU", "VUV", $"1\u202F234\u202F568 VT" },
+            { "en-FJ", "FJD", "FJ$1,234,567.89" },
+            { "fr-PF", "XPF", $"1\u202F234\u202F568 FCFP" }
+        };
+        return data;
+    }
 }
