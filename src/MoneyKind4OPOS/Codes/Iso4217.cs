@@ -174,6 +174,8 @@ public enum Iso4217
     LBP = 422,
     /// <summary>Loti</summary>
     LSL = 426,
+    /// <summary>Lilangeni</summary>
+    SZL = 748,
     /// <summary>Rand</summary>
     ZAR = 710,
     /// <summary>Liberian Dollar</summary>
