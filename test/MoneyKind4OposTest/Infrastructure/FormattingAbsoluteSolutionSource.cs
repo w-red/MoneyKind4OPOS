@@ -209,9 +209,29 @@ public static class FormattingAbsoluteSolutionSource
             { "en-CA", "CAD", $"C$1,234,567.89" },
             { "fr-CA", "CAD", $"1{Uni.NBSP}234{Uni.NBSP}567,89{Uni.Space}C$" },
             { "ka-GE", "GEL", $"1{Uni.NBSP}234{Uni.NBSP}567,89{Uni.Space}GEL" },
-            { "be-BY", "BYN", $"1{Uni.NBSP}234{Uni.NBSP}567,89{Uni.Space}Br" }
+            { "be-BY", "BYN", $"1{Uni.NBSP}234{Uni.NBSP}567,89{Uni.Space}Br" },
+            { "hu-HU", "HUF", $"1{Uni.NBSP}234{Uni.NBSP}568{Uni.Space}Ft" },
+            { "km-KH", "KHR", "1.234.568៛" },
+            { "zh-MO", "MOP", "P1,234,567.89" },
+            { "ko-KP", "KPW", "₩1,234,568" }
         };
 
+        return data;
+    }
+
+    public static TheoryData<string, string, string> GetSouthAmericanData()
+    {
+        var data = new TheoryData<string, string, string>
+        {
+            { "es-AR", "ARS", $"ARS{Uni.Space}1.234.567,89" },
+            { "es-UY", "UYU", $"UYU{Uni.Space}1.234.568" },
+            { "en-GY", "GYD", $"G$1,234,568" }, // Rounded
+            { "es-CO", "COP", $"COP{Uni.Space}1.234.567,89" },
+            { "nl-SR", "SRD", $"SRD{Uni.Space}1.234.567,89" },
+            { "es-PY", "PYG", $"PYG{Uni.Space}1.234.568" }, // Rounded
+            { "es-PE", "PEN", $"PEN{Uni.Space}1,234,567.89" },
+            { "es-BO", "BOB", $"BOB1.234.567,89" }
+        };
         return data;
     }
 }

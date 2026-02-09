@@ -17,7 +17,7 @@ public class KpwCurrency :
     /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.KPW;
     /// <inheritdoc/>
-    public static decimal MinimumUnit => 1m;
+    public static decimal MinimumUnit => 5m;
 
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Global { get; } =

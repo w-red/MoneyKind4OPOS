@@ -21,11 +21,11 @@ public class KhrCurrency :
 
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Global { get; } =
-        CurrencyFormattingOptions.Create("៛", "$n", decimalDigits: 0);
+        CurrencyFormattingOptions.Create("៛", "n$", decimalDigits: 0, groupSep: ".");
 
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Local { get; } =
-        CurrencyFormattingOptions.Create("៛", "$n", decimalDigits: 0);
+        CurrencyFormattingOptions.Create("៛", "n$", decimalDigits: 0, groupSep: ".");
 
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits => [];

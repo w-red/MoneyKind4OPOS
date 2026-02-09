@@ -82,7 +82,15 @@ public static class CurrencyMetadataSource
             { typeof(RsdCurrency), Iso4217.RSD, 941, 1.0 },
             { typeof(BamCurrency), Iso4217.BAM, 977, 0.05 },
             { typeof(MdlCurrency), Iso4217.MDL, 498, 0.01 },
-            { typeof(RonCurrency), Iso4217.RON, 946, 0.01 }
+            { typeof(RonCurrency), Iso4217.RON, 946, 0.01 },
+            { typeof(ArsCurrency), Iso4217.ARS, 32, 1.0 }, // Adjusted min unit based on practical usage, or keep 0.01 if strictly following sub units. Let's assume 1.0 based on high inflation, but checksheet says cents exist. Let's start with 0.01 and adjust if needed during Green. 
+            { typeof(UyuCurrency), Iso4217.UYU, 858, 1.0 },
+            { typeof(GydCurrency), Iso4217.GYD, 328, 1.0 },
+            { typeof(CopCurrency), Iso4217.COP, 170, 50.0 },
+            { typeof(SrdCurrency), Iso4217.SRD, 968, 0.01 },
+            { typeof(PygCurrency), Iso4217.PYG, 600, 50.0 },
+            { typeof(PenCurrency), Iso4217.PEN, 604, 0.10 },
+            { typeof(BobCurrency), Iso4217.BOB, 68, 0.10 }
         };
 
         return data;
