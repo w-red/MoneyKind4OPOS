@@ -19,19 +19,17 @@ public class FormattingDiscoveryTest
         {
             var culture = new CultureInfo(cultureName);
             var amount = 1234567.89m;
-            var formatted = amount.ToString("C", culture);
-            
-            // あえて失敗させることで、テスト結果から実際の値を取得する
-            formatted.ShouldBe("DISCOVERY_REQUIRED");
+            // Shouldlyの巨大な差分出力を避け、簡潔に結果を表示する
+            throw new Exception($"RESULT [{currencyCode}]: {amount.ToString("C", culture)}");
         }
         catch (CultureNotFoundException)
         {
             // OSでサポートされていないロケールの場合
-            $"CULTURE_NOT_SUPPORTED: {cultureName}".ShouldBe("DISCOVERY_REQUIRED");
+            throw new Exception($"RESULT: CULTURE_NOT_SUPPORTED");
         }
-        catch (Exception ex)
+        catch (Exception ex) when (!ex.Message.StartsWith("RESULT:"))
         {
-            $"ERROR: {ex.Message}".ShouldBe("DISCOVERY_REQUIRED");
+            throw new Exception($"RESULT: ERROR: {ex.Message}");
         }
     }
 }

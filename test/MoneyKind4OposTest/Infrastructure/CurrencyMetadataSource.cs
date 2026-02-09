@@ -90,7 +90,18 @@ public static class CurrencyMetadataSource
             { typeof(SrdCurrency), Iso4217.SRD, 968, 0.01 },
             { typeof(PygCurrency), Iso4217.PYG, 600, 50.0 },
             { typeof(PenCurrency), Iso4217.PEN, 604, 0.10 },
-            { typeof(BobCurrency), Iso4217.BOB, 68, 0.10 }
+            { typeof(BobCurrency), Iso4217.BOB, 68, 0.10 },
+            { typeof(HufCurrency), Iso4217.HUF, 348, 5.0 },
+            { typeof(KhrCurrency), Iso4217.KHR, 116, 50.0 },
+            { typeof(MopCurrency), Iso4217.MOP, 446, 0.10 },
+            { typeof(KpwCurrency), Iso4217.KPW, 408, 5.0 },
+            { typeof(GtqCurrency), Iso4217.GTQ, 320, 0.01 },
+            { typeof(CrcCurrency), Iso4217.CRC, 188, 5.0 },
+            { typeof(NioCurrency), Iso4217.NIO, 558, 0.01 },
+            { typeof(BzdCurrency), Iso4217.BZD, 84, 0.01 },
+            { typeof(HnlCurrency), Iso4217.HNL, 340, 0.05 },
+            { typeof(PabCurrency), Iso4217.PAB, 590, 0.01 },
+            { typeof(UsdTimorLesteCurrency), Iso4217.USD, 840, 0.01 }
         };
 
         return data;

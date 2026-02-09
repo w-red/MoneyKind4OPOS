@@ -50,8 +50,8 @@ public class MoneyKindGenericSanityTest
         emptyTotal.ShouldBe(0m, $"{typeName}: Empty total should be 0");
 
         // 3. ToCashCountsString & Round-trip Consistency
-        var coinsProp = currencyType.GetProperty("Coins", BindingFlags.Public | BindingFlags.Static);
-        var billsProp = currencyType.GetProperty("Bills", BindingFlags.Public | BindingFlags.Static);
+        var coinsProp = currencyType.GetProperty("Coins", BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy);
+        var billsProp = currencyType.GetProperty("Bills", BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy);
         
         var coins = (IEnumerable<CashFaceInfo>)coinsProp!.GetValue(null)!;
         var bills = (IEnumerable<CashFaceInfo>)billsProp!.GetValue(null)!;

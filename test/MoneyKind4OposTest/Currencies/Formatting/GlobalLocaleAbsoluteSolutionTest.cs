@@ -31,6 +31,8 @@ public class GlobalLocaleAbsoluteSolutionTest
         {
             "EUR" => 1234567.89m.ToGlobalString<EurCurrency>(culture),
             "GBP" => 1234567.89m.ToGlobalString<GbpCurrency>(culture),
+            "USD" when culture.Name == "pt-TL" => 1234567.89m.ToGlobalString<UsdTimorLesteCurrency>(culture),
+            "USD" when culture.Name == "tet-TL" => 1234567.89m.ToLocalString<UsdTimorLesteCurrency>(culture),
             "USD" => 1234567.89m.ToGlobalString<UsdCurrency>(culture),
             "JPY" => 1234567.89m.ToGlobalString<JpyCurrency>(culture),
             "CNY" => 1234567.89m.ToGlobalString<CnyCurrency>(culture),
@@ -98,7 +100,9 @@ public class GlobalLocaleAbsoluteSolutionTest
             "GTQ" => 1234567.89m.ToGlobalString<GtqCurrency>(culture),
             "CRC" => 1234567.89m.ToGlobalString<CrcCurrency>(culture),
             "NIO" => 1234567.89m.ToGlobalString<NioCurrency>(culture),
-            
+            "BZD" => 1234567.89m.ToGlobalString<BzdCurrency>(culture),
+            "HNL" => 1234567.89m.ToGlobalString<HnlCurrency>(culture),
+            "PAB" => 1234567.89m.ToGlobalString<PabCurrency>(culture),
             _ => throw new ArgumentException($"Unsupported currency: {currencyCode}")
         };
 

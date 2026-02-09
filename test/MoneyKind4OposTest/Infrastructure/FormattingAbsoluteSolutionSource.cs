@@ -84,7 +84,6 @@ public static class FormattingAbsoluteSolutionSource
             { "nl-BQ", "USD", $"${Uni.Space}1.234.567,89" },
             { "es-EC", "USD", "$1.234.567,89" },
             { "es-PA", "USD", "$1,234,567.89" },
-            { "pt-TL", "USD", $"1{Uni.NBSP}234{Uni.NBSP}567,89{Uni.Space}$" },
             { "en-ZW", "USD", "$1,234,567.89" },
             { "es-SV", "USD", "$1,234,567.89" }
         };
@@ -242,7 +241,12 @@ public static class FormattingAbsoluteSolutionSource
         {
             { "es-GT", "GTQ", $"Q1,234,567.89" },
             { "es-CR", "CRC", $"{Uni.Colon}1{Uni.NBSP}234{Uni.NBSP}567,89" },
-            { "es-NI", "NIO", $"C$1,234,567.89" }
+            { "es-NI", "NIO", $"C$1,234,567.89" },
+            { "en-BZ", "BZD", $"$1,234,567.89" },
+            { "es-HN", "HNL", $"L1,234,567.89" },
+            { "es-PA", "PAB", $"B/.1,234,567.89" },
+            { "pt-TL", "USD", $"1{Uni.NBSP}234{Uni.NBSP}567,89{Uni.Space}US$" },
+            { "tet-TL", "USD", $"$1,234,567.89" }
         };
         return data;
     }

@@ -10,11 +10,6 @@ public static class FormattingDiscoverySource
         var data = new TheoryData<string, string>
         {
             // ここに新しく調査したいロケールを追加していく
-            { "es-PA", "PAB" }, // パナマ
-            { "en-BZ", "BZD" }, // ベリーズ
-            { "es-HN", "HNL" }, // ホンジュラス
-            { "pt-TL", "USD" }, // 東ティモール (ポルトガル語)
-            { "tet-TL", "USD" }, // 東ティモール (テトゥン語)
         };
         return data;
     }
