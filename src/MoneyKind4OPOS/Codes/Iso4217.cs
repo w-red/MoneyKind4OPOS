@@ -66,7 +66,8 @@ public enum Iso4217
     BRL = 986,
     /// <summary>Brunei Dollar</summary>
     BND = 96,
-    /// <summary>Bulgarian Lev</summary>
+    /// <summary>Bulgarian Lev (Obsolete: Bulgaria has adopted the Euro)</summary>
+    [Obsolete("Bulgaria has adopted the Euro (EUR). at 2025-12-31")]
     BGN = 975,
     /// <summary>Burundi Franc</summary>
     BIF = 108,

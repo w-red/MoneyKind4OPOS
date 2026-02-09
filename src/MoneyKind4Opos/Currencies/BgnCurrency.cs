@@ -10,6 +10,7 @@ namespace MoneyKind4Opos.Currencies;
 /// <item><term>Coins</term><description><seealso href="https://www.bnb.bg/NotesAndCoins/NACCoins/CoinsInCirculation/index.htm">BNB</seealso></description></item>
 /// </list>
 /// </remarks>
+[Obsolete("Bulgaria has adopted the Euro (EUR) as of 2026. at 2025-12-31.")]
 public class BgnCurrency :
     ICurrency,
     ICashCountFormattable<BgnCurrency>,
