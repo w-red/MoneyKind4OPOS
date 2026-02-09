@@ -83,6 +83,19 @@ public class GlobalLocaleAbsoluteSolutionTest
             "VND" => 1234567.89m.ToGlobalString<VndCurrency>(culture),
             "YER" => 1234567.89m.ToGlobalString<YerCurrency>(culture),
             
+            "ARS" => 1234567.89m.ToGlobalString<ArsCurrency>(culture),
+            "UYU" => 1234567.89m.ToGlobalString<UyuCurrency>(culture),
+            "GYD" => 1234567.89m.ToGlobalString<GydCurrency>(culture),
+            "COP" => 1234567.89m.ToGlobalString<CopCurrency>(culture),
+            "SRD" => 1234567.89m.ToGlobalString<SrdCurrency>(culture),
+            "PYG" => 1234567.89m.ToGlobalString<PygCurrency>(culture),
+            "PEN" => 1234567.89m.ToGlobalString<PenCurrency>(culture),
+            "BOB" => 1234567.89m.ToGlobalString<BobCurrency>(culture),
+            "HUF" => 1234567.89m.ToGlobalString<HufCurrency>(culture),
+            "KHR" => 1234567.89m.ToGlobalString<KhrCurrency>(culture),
+            "MOP" => 1234567.89m.ToGlobalString<MopCurrency>(culture),
+            "KPW" => 1234567.89m.ToGlobalString<KpwCurrency>(culture),
+            
             _ => throw new ArgumentException($"Unsupported currency: {currencyCode}")
         };
 
@@ -98,6 +111,7 @@ public class GlobalLocaleAbsoluteSolutionTest
     [MemberData(nameof(FormattingAbsoluteSolutionSource.GetFrancZonesData), MemberType = typeof(FormattingAbsoluteSolutionSource))]
     [MemberData(nameof(FormattingAbsoluteSolutionSource.GetDivergentUnionsData), MemberType = typeof(FormattingAbsoluteSolutionSource))]
     [MemberData(nameof(FormattingAbsoluteSolutionSource.GetBatch2And3Data), MemberType = typeof(FormattingAbsoluteSolutionSource))]
+    [MemberData(nameof(FormattingAbsoluteSolutionSource.GetSouthAmericanData), MemberType = typeof(FormattingAbsoluteSolutionSource))]
     public void GlobalAbsoluteSolutionTest(string cultureName, string currencyCode, string expected)
     {
         VerifyAbsoluteSolution(cultureName, currencyCode, expected);
