@@ -311,5 +311,15 @@ public enum Iso4217
     /// <summary>Zambian Kwacha</summary>
     ZMW = 967,
     /// <summary>Zimbabwe Gold</summary>
-    ZWG = 924
+    ZWG = 924,
+
+    // ---- Provisional codes (not yet in official ISO 4217 List One) ----
+
+    /// <summary>Bolívar Digital (Provisional - pending ISO 4217 registration)</summary>
+    /// <remarks>Venezuela introduced the "Bolívar Digital" in 2021. ISO 4217 still uses VES (928) officially.</remarks>
+    VED = 926,
+
+    /// <summary>Caribbean Guilder (Provisional - pending ISO 4217 registration)</summary>
+    /// <remarks>Introduced March 31, 2025 replacing ANG. Code 532 may be reused from former ANG.</remarks>
+    XCG = 532
 }

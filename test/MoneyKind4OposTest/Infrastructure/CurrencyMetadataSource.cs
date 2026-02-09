@@ -101,7 +101,20 @@ public static class CurrencyMetadataSource
             { typeof(BzdCurrency), Iso4217.BZD, 84, 0.01 },
             { typeof(HnlCurrency), Iso4217.HNL, 340, 0.05 },
             { typeof(PabCurrency), Iso4217.PAB, 590, 0.01 },
-            { typeof(UsdTimorLesteCurrency), Iso4217.USD, 840, 0.01 }
+            { typeof(UsdTimorLesteCurrency), Iso4217.USD, 840, 0.01 },
+            // Caribbean
+            { typeof(CupCurrency), Iso4217.CUP, 192, 0.01 },
+            { typeof(JmdCurrency), Iso4217.JMD, 388, 1.0 },
+            { typeof(DopCurrency), Iso4217.DOP, 214, 1.0 },
+            { typeof(TtdCurrency), Iso4217.TTD, 780, 0.10 },
+            { typeof(HtgCurrency), Iso4217.HTG, 332, 0.05 },
+            { typeof(BsdCurrency), Iso4217.BSD, 44, 0.01 },
+            { typeof(BbdCurrency), Iso4217.BBD, 52, 0.05 },
+            { typeof(XcgCurrency), Iso4217.XCG, 532, 0.01 },
+            { typeof(BmdCurrency), Iso4217.BMD, 60, 0.01 },
+            { typeof(AwgCurrency), Iso4217.AWG, 533, 0.05 },
+            // South America
+            { typeof(VedCurrency), Iso4217.VED, 926, 5.0 }
         };
 
         return data;
