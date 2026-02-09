@@ -321,5 +321,17 @@ public enum Iso4217
 
     /// <summary>Caribbean Guilder (Provisional - pending ISO 4217 registration)</summary>
     /// <remarks>Introduced March 31, 2025 replacing ANG. Code 532 may be reused from former ANG.</remarks>
-    XCG = 532
+    XCG = 532,
+
+    // ---- Non-official codes (UK Crown Dependencies - pegged to GBP) ----
+
+    /// <summary>Guernsey Pound (Non-ISO, pegged 1:1 to GBP)</summary>
+    /// <remarks>Not in official ISO 4217 list. Uses informal code GGP.</remarks>
+    GGP = 831,
+    /// <summary>Jersey Pound (Non-ISO, pegged 1:1 to GBP)</summary>
+    /// <remarks>Not in official ISO 4217 list. Uses informal code JEP.</remarks>
+    JEP = 832,
+    /// <summary>Isle of Man Pound (Non-ISO, pegged 1:1 to GBP)</summary>
+    /// <remarks>Not in official ISO 4217 list. Uses informal code IMP.</remarks>
+    IMP = 833
 }
