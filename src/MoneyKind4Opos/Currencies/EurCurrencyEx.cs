@@ -1,8 +1,6 @@
 using MoneyKind4Opos.Codes;
 using MoneyKind4Opos.Currencies.Interfaces;
 using System.Globalization;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace MoneyKind4Opos.Currencies;
 

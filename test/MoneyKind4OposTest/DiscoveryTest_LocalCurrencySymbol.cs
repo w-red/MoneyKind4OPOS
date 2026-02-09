@@ -1,6 +1,5 @@
 using System.Globalization;
 using System.Text;
-using Xunit;
 
 namespace MoneyKind4OposTest;
 
@@ -20,7 +19,7 @@ public class LocalCurrencySymbolDiscoveryTest
     /// Phase 1対象: 主要通貨（G7+、アジア）のOS標準を調査
     /// </summary>
     [Fact]
-    public void Discover_Phase1_MajorCurrencies()
+    public void DiscoverPhase1MajorCurrencies()
     {
         var targets = new (string CultureName, string IsoCode, string ExpectedLocalName)[]
         {
@@ -58,7 +57,7 @@ public class LocalCurrencySymbolDiscoveryTest
     /// Phase 2対象: 欧州・中東・中央アジア通貨のOS標準を調査
     /// </summary>
     [Fact]
-    public void Discover_Phase2_EuropeanAndMiddleEast()
+    public void DiscoverPhase2EuropeanAndMiddleEast()
     {
         var targets = new (string CultureName, string IsoCode)[]
         {
@@ -109,7 +108,7 @@ public class LocalCurrencySymbolDiscoveryTest
     /// Phase 3対象: アフリカ・オセアニア・カリブ海通貨のOS標準を調査
     /// </summary>
     [Fact]
-    public void Discover_Phase3_AfricaOceaniaCaribbean()
+    public void DiscoverPhase3AfricaOceaniaCaribbean()
     {
         var targets = new (string CultureName, string IsoCode)[]
         {
@@ -175,7 +174,7 @@ public class LocalCurrencySymbolDiscoveryTest
     /// 全通貨について、登録されているCultureInfoからCurrencySymbolを網羅的に調査
     /// </summary>
     [Fact]
-    public void Discover_AllCultures_CurrencySymbols()
+    public void DiscoverAllCulturesCurrencySymbols()
     {
         _output.AppendLine("# All Cultures - Currency Symbol Discovery");
         _output.AppendLine("");

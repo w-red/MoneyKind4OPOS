@@ -1,5 +1,3 @@
-using Xunit;
-
 namespace MoneyKind4OposTest.Infrastructure;
 
 /// <summary>探索対象のロケールと通貨コードを定義するクラス</summary>

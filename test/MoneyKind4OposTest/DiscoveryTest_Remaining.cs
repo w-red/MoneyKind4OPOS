@@ -1,7 +1,5 @@
 using System.Globalization;
 using MoneyKind4OposTest.Infrastructure;
-using Shouldly;
-using Xunit;
 
 namespace MoneyKind4OposTest;
 
