@@ -275,4 +275,28 @@ public static class FormattingAbsoluteSolutionSource
         };
         return data;
     }
+
+    /// <summary>Europe and UK Territory currencies for absolute solution testing.</summary>
+    /// <remarks>
+    /// Expected values verified via FormattingDiscoveryTest on 2026-02-09.
+    /// BGN uses NBSP. ISK uses integer rounding. FO uses kr without dot.
+    /// UK territories default to GBP-like format (£1,234,567.89).
+    /// </remarks>
+    public static TheoryData<string, string, string> GetEuropeanData()
+    {
+        var data = new TheoryData<string, string, string>
+        {
+            { "bg-BG", "BGN", $"1{Uni.NBSP}234{Uni.NBSP}567,89{Uni.Space}лв." },
+            { "fo-FO", "DKK", "1.234.567,89 kr" },
+            { "is-IS", "ISK", "1.234.568 kr." },
+            
+            { "en-GI", "GIP", $"{Uni.Pound}1,234,567.89" },
+            { "en-FK", "FKP", $"{Uni.Pound}1,234,567.89" },
+            { "en-SH", "SHP", $"{Uni.Pound}1,234,567.89" },
+            { "en-GG", "GGP", $"{Uni.Pound}1,234,567.89" },
+            { "en-JE", "JEP", $"{Uni.Pound}1,234,567.89" },
+            { "en-IM", "IMP", $"{Uni.Pound}1,234,567.89" }
+        };
+        return data;
+    }
 }

@@ -114,7 +114,16 @@ public static class CurrencyMetadataSource
             { typeof(BmdCurrency), Iso4217.BMD, 60, 0.01 },
             { typeof(AwgCurrency), Iso4217.AWG, 533, 0.05 },
             // South America
-            { typeof(VedCurrency), Iso4217.VED, 926, 5.0 }
+            { typeof(VedCurrency), Iso4217.VED, 926, 5.0 },
+            // Europe & UK Territories
+            { typeof(IskCurrency), Iso4217.ISK, 352, 1.0 },
+            { typeof(BgnCurrency), Iso4217.BGN, 975, 0.01 },
+            { typeof(GipCurrency), Iso4217.GIP, 292, 0.01 },
+            { typeof(FkpCurrency), Iso4217.FKP, 238, 0.01 },
+            { typeof(ShpCurrency), Iso4217.SHP, 654, 0.01 },
+            { typeof(GgpCurrency), Iso4217.GGP, 831, 0.01 },
+            { typeof(JepCurrency), Iso4217.JEP, 832, 0.01 },
+            { typeof(ImpCurrency), Iso4217.IMP, 833, 0.01 }
         };
 
         return data;

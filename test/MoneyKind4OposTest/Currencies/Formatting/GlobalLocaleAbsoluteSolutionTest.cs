@@ -27,7 +27,13 @@ public class GlobalLocaleAbsoluteSolutionTest
             return;
         }
 
-        string result = currencyCode switch
+
+        var originalCulture = CultureInfo.CurrentCulture;
+        CultureInfo.CurrentCulture = culture;
+        string result;
+        try
+        {
+            result = currencyCode switch
         {
             "EUR" => 1234567.89m.ToGlobalString<EurCurrency>(culture),
             "GBP" => 1234567.89m.ToGlobalString<GbpCurrency>(culture),
@@ -98,6 +104,18 @@ public class GlobalLocaleAbsoluteSolutionTest
             "MOP" => 1234567.89m.ToGlobalString<MopCurrency>(culture),
             "KPW" => 1234567.89m.ToGlobalString<KpwCurrency>(culture),
             "GTQ" => 1234567.89m.ToGlobalString<GtqCurrency>(culture),
+
+            // Europe & UK
+            "BGN" => 1234567.89m.ToGlobalString<BgnCurrency>(culture),
+            "DKK" when culture.Name == "fo-FO" => 1234567.89m.ToLocalString<DkkCurrency>(culture),
+            "DKK" => 1234567.89m.ToGlobalString<DkkCurrency>(culture),
+            "ISK" => 1234567.89m.ToGlobalString<IskCurrency>(culture),
+            "GIP" => 1234567.89m.ToGlobalString<GipCurrency>(culture),
+            "FKP" => 1234567.89m.ToGlobalString<FkpCurrency>(culture),
+            "SHP" => 1234567.89m.ToGlobalString<ShpCurrency>(culture),
+            "GGP" => 1234567.89m.ToGlobalString<GgpCurrency>(culture),
+            "JEP" => 1234567.89m.ToGlobalString<JepCurrency>(culture),
+            "IMP" => 1234567.89m.ToGlobalString<ImpCurrency>(culture),
             "CRC" => 1234567.89m.ToGlobalString<CrcCurrency>(culture),
             "NIO" => 1234567.89m.ToGlobalString<NioCurrency>(culture),
             "BZD" => 1234567.89m.ToGlobalString<BzdCurrency>(culture),
@@ -118,6 +136,11 @@ public class GlobalLocaleAbsoluteSolutionTest
             "VED" => 1234567.89m.ToGlobalString<VedCurrency>(culture),
             _ => throw new ArgumentException($"Unsupported currency: {currencyCode}")
         };
+        }
+        finally
+        {
+            CultureInfo.CurrentCulture = originalCulture;
+        }
 
         result.ShouldBe(expected, $"Failed for culture: {cultureName}");
     }
@@ -134,6 +157,7 @@ public class GlobalLocaleAbsoluteSolutionTest
     [MemberData(nameof(FormattingAbsoluteSolutionSource.GetSouthAmericanData), MemberType = typeof(FormattingAbsoluteSolutionSource))]
     [MemberData(nameof(FormattingAbsoluteSolutionSource.GetCentralAmericanData), MemberType = typeof(FormattingAbsoluteSolutionSource))]
     [MemberData(nameof(FormattingAbsoluteSolutionSource.GetCaribbeanData), MemberType = typeof(FormattingAbsoluteSolutionSource))]
+    [MemberData(nameof(FormattingAbsoluteSolutionSource.GetEuropeanData), MemberType = typeof(FormattingAbsoluteSolutionSource))]
     public void GlobalAbsoluteSolutionTest(string cultureName, string currencyCode, string expected)
     {
         VerifyAbsoluteSolution(cultureName, currencyCode, expected);

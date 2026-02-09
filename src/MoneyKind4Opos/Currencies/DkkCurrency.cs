@@ -26,7 +26,10 @@ public class DkkCurrency :
         CurrencyFormattingOptions.Create("Kr", "n $", decimalDigits: 1);
 
     /// <inheritdoc/>
-    public static CurrencyFormattingOptions Local => Global;
+    public static CurrencyFormattingOptions Local =>
+        CultureInfo.CurrentCulture.Name == "fo-FO"
+            ? CurrencyFormattingOptions.Create("kr", "n $", decimalDigits: 2, groupSep: ".", decimalSep: ",")
+            : Global;
 
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits =>
