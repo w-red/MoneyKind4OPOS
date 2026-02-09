@@ -21,10 +21,18 @@ public static class CurrencyTestHelper
     /// <summary>Gets the static property value of the specified type and property name.</summary>
     private static T GetStaticProperty<T>(Type type, string propertyName)
     {
-        var prop = type.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Static);
-        return prop == null
-            ? throw new ArgumentException($"Property {propertyName} not found on {type.Name}")
-            : (T)prop.GetValue(null)!;
+        var currentType = type;
+        while (currentType != null && currentType != typeof(object))
+        {
+            var prop = currentType.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy);
+            if (prop != null)
+            {
+                return (T)prop.GetValue(null)!;
+            }
+            currentType = currentType.BaseType;
+        }
+
+        throw new ArgumentException($"Property {propertyName} not found on {type.Name} or its base types.");
     }
 
     /// <summary>Gets all concrete currency types in the assembly for DataDriven testing.</summary>

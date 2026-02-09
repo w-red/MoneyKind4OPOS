@@ -18,7 +18,20 @@ public class UsdTimorLesteCurrency :
     ICashCountFormattable<UsdTimorLesteCurrency>,
     ICurrencyFormattable<UsdTimorLesteCurrency>
 {
-    // Note: Code (USD), MinimumUnit (0.01), and Bills (USD) are inherited from UsdCurrency.
+    // Explicitly redefine or delegate static members to ensure they are visible to reflection
+    // and satisfy the static abstract interface requirements on this specific type.
+
+    /// <inheritdoc/>
+    public new static Iso4217 Code => UsdCurrency.Code;
+
+    /// <inheritdoc/>
+    public new static decimal MinimumUnit => UsdCurrency.MinimumUnit;
+
+    /// <inheritdoc/>
+    public new static bool IsZeroPadding => UsdCurrency.IsZeroPadding;
+
+    /// <inheritdoc/>
+    public new static IEnumerable<CashFaceInfo> Bills => UsdCurrency.Bills;
 
     /// <inheritdoc/>
     public new static CurrencyFormattingOptions Global { get; } =
@@ -45,6 +58,4 @@ public class UsdTimorLesteCurrency :
         new(1.00m, CashType.Coin, "100 Centavos", "100c"), 
         new(2.00m, CashType.Coin, "200 Centavos", "200c"),
     ];
-
-    // Bills are inherited from UsdCurrency (1, 2, 5, 10, 20, 50, 100).
 }

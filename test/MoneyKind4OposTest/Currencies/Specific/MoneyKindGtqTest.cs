@@ -10,7 +10,7 @@ public class MoneyKindGtqTest
     /// <summary>Verifies that GTQ cash-count strings are parsed and total amounts calculated correctly.</summary>
     [Theory]
     [InlineData("", 0)]
-    [InlineData("0.01:1,0.05:1,0.1:1,0.25:1,0.5:1,1:1;1:1,5:1,10:1,20:1,50:1,100:1,200:1", 388.92)]
+    [InlineData("0.01:1,0.05:1,0.1:1,0.25:1,0.5:1,1:1;1:1,5:1,10:1,20:1,50:1,100:1,200:1", 387.91)]
     public void GtqParseAndTotalAmountShouldBeCorrect(string input, decimal expectedTotal)
     {
         var mk = MoneyKind<GtqCurrency>.Parse(input);
