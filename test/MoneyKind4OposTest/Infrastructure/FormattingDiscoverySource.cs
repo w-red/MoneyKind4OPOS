@@ -9,7 +9,8 @@ public static class FormattingDiscoverySource
     {
         var data = new TheoryData<string, string>
         {
-            // ここに新しく調査したいロケールを追加していく
+            // 探索完了後はここを空にする
+            // 新しい通貨を追加する際にここにロケールと通貨コードを追加してテストを実行する
         };
         return data;
     }

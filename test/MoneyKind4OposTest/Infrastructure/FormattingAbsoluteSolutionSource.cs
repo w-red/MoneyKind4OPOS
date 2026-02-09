@@ -250,4 +250,29 @@ public static class FormattingAbsoluteSolutionSource
         };
         return data;
     }
+
+    /// <summary>Caribbean and Venezuela currencies for absolute solution testing.</summary>
+    /// <remarks>
+    /// Expected values verified via FormattingDiscoveryTest on 2026-02-09.
+    /// </remarks>
+    public static TheoryData<string, string, string> GetCaribbeanData()
+    {
+        var data = new TheoryData<string, string, string>
+        {
+            // Caribbean
+            { "es-CU", "CUP", "$1,234,567.89" },
+            { "en-JM", "JMD", "$1,234,567.89" },
+            { "es-DO", "DOP", "RD$1,234,567.89" },
+            { "en-TT", "TTD", "$1,234,567.89" },
+            { "fr-HT", "HTG", $"1{Uni.NNBSP}234{Uni.NNBSP}567,89{Uni.Space}G" },
+            { "en-BS", "BSD", "$1,234,567.89" },
+            { "en-BB", "BBD", "$1,234,567.89" },
+            { "nl-CW", "XCG", $"NAf.{Uni.Space}1.234.567,89" }, // OS uses ANG format (XCG not yet registered)
+            { "en-BM", "BMD", "$1,234,567.89" },
+            { "nl-AW", "AWG", $"Afl.{Uni.Space}1.234.567,89" },
+            // South America - Venezuela  
+            { "es-VE", "VED", "Bs.S1.234.567,89" } // OS uses VES format (VED not yet registered)
+        };
+        return data;
+    }
 }
