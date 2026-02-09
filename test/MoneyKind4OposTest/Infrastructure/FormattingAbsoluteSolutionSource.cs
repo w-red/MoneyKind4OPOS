@@ -12,6 +12,7 @@ public static class FormattingAbsoluteSolutionSource
         public const string Pound = "\u00A3";       // Pound Symbol
         public const string Euro = "\u20AC";        // Euro Symbol
         public const string Rupee = "\u20B9";       // Rupee Symbol
+        public const string Colon = "\u20A1";       // Colon Symbol (Costa Rica)
     }
 
     public static TheoryData<string, string, string> GetEurUnionData()
@@ -231,6 +232,17 @@ public static class FormattingAbsoluteSolutionSource
             { "es-PY", "PYG", $"PYG{Uni.Space}1.234.568" }, // Rounded
             { "es-PE", "PEN", $"PEN{Uni.Space}1,234,567.89" },
             { "es-BO", "BOB", $"BOB1.234.567,89" }
+        };
+        return data;
+    }
+
+    public static TheoryData<string, string, string> GetCentralAmericanData()
+    {
+        var data = new TheoryData<string, string, string>
+        {
+            { "es-GT", "GTQ", $"Q1,234,567.89" },
+            { "es-CR", "CRC", $"{Uni.Colon}1{Uni.NBSP}234{Uni.NBSP}567,89" },
+            { "es-NI", "NIO", $"C$1,234,567.89" }
         };
         return data;
     }

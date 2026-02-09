@@ -95,6 +95,9 @@ public class GlobalLocaleAbsoluteSolutionTest
             "KHR" => 1234567.89m.ToGlobalString<KhrCurrency>(culture),
             "MOP" => 1234567.89m.ToGlobalString<MopCurrency>(culture),
             "KPW" => 1234567.89m.ToGlobalString<KpwCurrency>(culture),
+            "GTQ" => 1234567.89m.ToGlobalString<GtqCurrency>(culture),
+            "CRC" => 1234567.89m.ToGlobalString<CrcCurrency>(culture),
+            "NIO" => 1234567.89m.ToGlobalString<NioCurrency>(culture),
             
             _ => throw new ArgumentException($"Unsupported currency: {currencyCode}")
         };
@@ -112,6 +115,7 @@ public class GlobalLocaleAbsoluteSolutionTest
     [MemberData(nameof(FormattingAbsoluteSolutionSource.GetDivergentUnionsData), MemberType = typeof(FormattingAbsoluteSolutionSource))]
     [MemberData(nameof(FormattingAbsoluteSolutionSource.GetBatch2And3Data), MemberType = typeof(FormattingAbsoluteSolutionSource))]
     [MemberData(nameof(FormattingAbsoluteSolutionSource.GetSouthAmericanData), MemberType = typeof(FormattingAbsoluteSolutionSource))]
+    [MemberData(nameof(FormattingAbsoluteSolutionSource.GetCentralAmericanData), MemberType = typeof(FormattingAbsoluteSolutionSource))]
     public void GlobalAbsoluteSolutionTest(string cultureName, string currencyCode, string expected)
     {
         VerifyAbsoluteSolution(cultureName, currencyCode, expected);
