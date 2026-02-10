@@ -316,11 +316,12 @@ public class MoneyKind<TCurrency>
             {
                 if (faceLookup.TryGetValue(faceValue, out var face))
                 {
-                    counts[face] = count;
+                    counts[face] += count;
                 }
                 else
                 {
-                    unrecognizedCounts[faceValue] = count;
+                    unrecognizedCounts.TryGetValue(faceValue, out var currentUnrecognized);
+                    unrecognizedCounts[faceValue] = currentUnrecognized + count;
                     warnings.Add($"Unknown denomination: {faceValue} (Count: {count})");
                 }
             }
