@@ -4,30 +4,30 @@ using System.Text;
 namespace MoneyKind4OposTest;
 
 /// <summary>
-/// 各通貨のOS標準「現地通貨記号（CurrencySymbol）」と詳細情報を調査するためのユーティリティテスト。
-/// Phase 1: 主要通貨のLocal現地名の修正に必要なOS標準フォーマットを特定する。
+/// Utility test for investigating the OS standard "CurrencySymbol" and detailed information for each currency.
+/// Phase 1: Identifies the OS standard formats necessary for localizing major currency names.
 /// </summary>
 /// <remarks>
-/// このテストは実際に値を検証するものではなく、調査結果を例外メッセージとして出力します。
-/// 結果は Researched/LocalCurrencySymbol_Discovery.md に記録してください。
+/// This test does not verify values but outputs discovery results as exception messages.
+/// Record results in Researched/LocalCurrencySymbol_Discovery.md.
 /// </remarks>
 public class LocalCurrencySymbolDiscoveryTest
 {
     private readonly StringBuilder _output = new();
 
     /// <summary>
-    /// Phase 1対象: 主要通貨（G7+、アジア）のOS標準を調査
+    /// Phase 1: Investigate OS standards for major currencies (G7+, Asia).
     /// </summary>
     [Fact]
     public void DiscoverPhase1MajorCurrencies()
     {
         var targets = new (string CultureName, string IsoCode, string ExpectedLocalName)[]
         {
-            // 既に正しく実装されている通貨（確認用）
+            // Currencies already correctly implemented (for verification)
             ("ja-JP", "JPY", "円"),
             ("zh-CN", "CNY", "元?"),
             
-            // Phase 1 調査対象
+            // Phase 1 investigation targets
             ("ko-KR", "KRW", "원?"),
             ("th-TH", "THB", "บาท?"),
             ("vi-VN", "VND", "đồng?"),
@@ -41,7 +41,7 @@ public class LocalCurrencySymbolDiscoveryTest
 
         _output.AppendLine("# Local Currency Symbol Discovery - Phase 1");
         _output.AppendLine("");
-        _output.AppendLine("| Culture | ISO | OS CurrencySymbol | サンプル出力 | DecimalDigits | Pattern |");
+        _output.AppendLine("| Culture | ISO | OS CurrencySymbol | Sample Output | DecimalDigits | Pattern |");
         _output.AppendLine("| :--- | :--- | :--- | :--- | :---: | :--- |");
 
         foreach (var (cultureName, isoCode, expectedLocalName) in targets)
@@ -49,19 +49,19 @@ public class LocalCurrencySymbolDiscoveryTest
             DiscoverAndOutput(cultureName, isoCode);
         }
 
-        // 調査結果を例外として出力
+        // Output discovery results as an exception
         throw new Exception($"DISCOVERY RESULT:\n{_output}");
     }
 
     /// <summary>
-    /// Phase 2対象: 欧州・中東・中央アジア通貨のOS標準を調査
+    /// Phase 2: Investigate OS standards for European, Middle Eastern, and Central Asian currencies.
     /// </summary>
     [Fact]
     public void DiscoverPhase2EuropeanAndMiddleEast()
     {
         var targets = new (string CultureName, string IsoCode)[]
         {
-            // 欧州
+            // Europe
             ("cs-CZ", "CZK"),
             ("hu-HU", "HUF"),
             ("ro-RO", "RON"),
@@ -69,7 +69,7 @@ public class LocalCurrencySymbolDiscoveryTest
             ("sr-Latn-RS", "RSD"),
             ("be-BY", "BYN"),
             
-            // 中東
+            // Middle East
             ("ar-SA", "SAR"),
             ("ar-AE", "AED"),
             ("ar-KW", "KWD"),
@@ -79,7 +79,7 @@ public class LocalCurrencySymbolDiscoveryTest
             ("ar-JO", "JOD"),
             ("fa-IR", "IRR"),
             
-            // 中央アジア
+            // Central Asia
             ("kk-KZ", "KZT"),
             ("uz-Latn-UZ", "UZS"),
             ("ky-KG", "KGS"),
@@ -100,19 +100,19 @@ public class LocalCurrencySymbolDiscoveryTest
             DiscoverAndOutput(cultureName, isoCode);
         }
 
-        // 調査結果を例外として出力
+        // Output discovery results as an exception
         throw new Exception($"DISCOVERY RESULT:\n{_output}");
     }
 
     /// <summary>
-    /// Phase 3対象: アフリカ・オセアニア・カリブ海通貨のOS標準を調査
+    /// Phase 3: Investigate OS standards for African, Oceanian, and Caribbean currencies.
     /// </summary>
     [Fact]
     public void DiscoverPhase3AfricaOceaniaCaribbean()
     {
         var targets = new (string CultureName, string IsoCode)[]
         {
-            // アフリカ
+            // Africa
             ("en-EG", "EGP"),
             ("en-NG", "NGN"),
             ("en-GH", "GHS"),
@@ -128,7 +128,7 @@ public class LocalCurrencySymbolDiscoveryTest
             ("fr-DZ", "DZD"),
             ("fr-TN", "TND"),
             
-            // オセアニア
+            // Oceania
             ("en-FJ", "FJD"),
             ("en-PG", "PGK"),
             ("en-SB", "SBD"),
@@ -137,7 +137,7 @@ public class LocalCurrencySymbolDiscoveryTest
             ("sm", "WST"),
             ("fr-PF", "XPF"),
             
-            // カリブ海
+            // Caribbean
             ("en-JM", "JMD"),
             ("es-CU", "CUP"),
             ("fr-HT", "HTG"),
@@ -147,7 +147,7 @@ public class LocalCurrencySymbolDiscoveryTest
             ("es-DO", "DOP"),
             ("en-AG", "XCD"),
             
-            // 南米
+            // South America
             ("pt-BR", "BRL"),
             ("es-AR", "ARS"),
             ("es-CL", "CLP"),
@@ -166,12 +166,44 @@ public class LocalCurrencySymbolDiscoveryTest
             DiscoverAndOutput(cultureName, isoCode);
         }
 
-        // 調査結果を例外として出力
+        // Output discovery results as an exception
         throw new Exception($"DISCOVERY RESULT:\n{_output}");
     }
 
     /// <summary>
-    /// 全通貨について、登録されているCultureInfoからCurrencySymbolを網羅的に調査
+    /// Phase 4: Investigate OS standards for Central American and Mexican currencies.
+    /// </summary>
+    [Fact]
+    public void DiscoverPhase4CentralAmericaAndMexico()
+    {
+        var targets = new (string CultureName, string IsoCode)[]
+        {
+            ("es-MX", "MXN"),
+            ("es-GT", "GTQ"),
+            ("es-CR", "CRC"),
+            ("es-NI", "NIO"),
+            ("es-HN", "HNL"),
+            ("es-SV", "USD"), // El Salvador uses USD
+            ("en-BZ", "BZD"),
+            ("es-PA", "PAB"),
+        };
+
+        _output.AppendLine("# Local Currency Symbol Discovery - Phase 4");
+        _output.AppendLine("");
+        _output.AppendLine("| Culture | ISO | OS CurrencySymbol | Sample Output | DecimalDigits | Pattern |");
+        _output.AppendLine("| :--- | :--- | :--- | :--- | :---: | :--- |");
+
+        foreach (var (cultureName, isoCode) in targets)
+        {
+            DiscoverAndOutput(cultureName, isoCode);
+        }
+
+        // Output discovery results as an exception
+        throw new Exception($"DISCOVERY RESULT:\n{_output}");
+    }
+
+    /// <summary>
+    /// Exhaustively investigate CurrencySymbols for all currencies from registered CultureInfo.
     /// </summary>
     [Fact]
     public void DiscoverAllCulturesCurrencySymbols()
@@ -191,7 +223,7 @@ public class LocalCurrencySymbolDiscoveryTest
                 var region = new RegionInfo(culture.Name);
                 var key = $"{region.ISOCurrencySymbol}_{culture.TwoLetterISOLanguageName}";
                 
-                // 同じ通貨コード+言語の重複を除外（代表的なものだけ表示）
+                // Exclude duplicates of the same currency code and language (show only representatives).
                 if (seen.Contains(key)) continue;
                 seen.Add(key);
 
@@ -248,7 +280,7 @@ public class LocalCurrencySymbolDiscoveryTest
 
     private static string EscapeMarkdown(string text)
     {
-        // Markdownで問題になる文字をエスケープ
+        // Escape characters that cause issues in Markdown.
         return text
             .Replace("|", "\\|")
             .Replace("\u00A0", "NBSP")
