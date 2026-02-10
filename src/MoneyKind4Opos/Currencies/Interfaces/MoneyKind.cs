@@ -66,6 +66,7 @@ public class MoneyKind<TCurrency>
     public IDictionary<decimal, int> UnrecognizedCounts { get; } =
         new Dictionary<decimal, int>();
 
+    /// <summary>Internal list of warnings encountered during parsing.</summary>
     private readonly List<string> _parseWarnings = [];
 
     /// <inheritdoc/>

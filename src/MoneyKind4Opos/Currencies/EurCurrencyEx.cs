@@ -14,12 +14,17 @@ public class EurCurrencyEx :
     ICurrencyFormattable<EurCurrencyEx>
 {
     // Required by ICurrency through interfaces
+    /// <inheritdoc/>
     public static new Iso4217 Code => EurCurrency.Code;
+    /// <inheritdoc/>
     public static new decimal MinimumUnit => EurCurrency.MinimumUnit;
+    /// <inheritdoc/>
     public static new IEnumerable<ISubsidiaryUnit> SubsidiaryUnits => EurCurrency.SubsidiaryUnits;
 
     // Required by ICurrencyFormattable<EurCurrencyEx>
+    /// <inheritdoc/>
     public static new CurrencyFormattingOptions Global => EurCurrency.Global;
+    /// <inheritdoc/>
     public static new bool IsZeroPadding => EurCurrency.IsZeroPadding;
 
     // Locally used labels for "Euro" and "Cent" in various languages

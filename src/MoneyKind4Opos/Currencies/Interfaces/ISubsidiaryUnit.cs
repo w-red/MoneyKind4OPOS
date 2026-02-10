@@ -15,6 +15,9 @@ public interface ISubsidiaryUnit
 }
 
 /// <summary>Implementation of ISubsidiaryUnit.</summary>
+/// <param name="Name">Unit name.</param>
+/// <param name="Symbol">Unit symbol.</param>
+/// <param name="Ratio">Ratio to base unit.</param>
 public record SubsidiaryUnit(
     string Name,
     string? Symbol,

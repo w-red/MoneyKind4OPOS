@@ -14,12 +14,17 @@ public class SgdCurrencyEx :
     ICurrencyFormattable<SgdCurrencyEx>
 {
     // Required by ICurrency interfaces
+    /// <inheritdoc/>
     public static new Iso4217 Code => SgdCurrency.Code;
+    /// <inheritdoc/>
     public static new decimal MinimumUnit => SgdCurrency.MinimumUnit;
+    /// <inheritdoc/>
     public static new bool IsZeroPadding => SgdCurrency.IsZeroPadding;
+    /// <inheritdoc/>
     public static new IEnumerable<ISubsidiaryUnit> SubsidiaryUnits => SgdCurrency.SubsidiaryUnits;
 
     // Required by ICurrencyFormattable<SgdCurrencyEx>
+    /// <inheritdoc/>
     public static new CurrencyFormattingOptions Global => SgdCurrency.Global;
 
     // Multi-language definitions for Singapore Dollar

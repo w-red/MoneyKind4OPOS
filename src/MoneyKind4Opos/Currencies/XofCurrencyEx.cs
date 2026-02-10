@@ -14,12 +14,17 @@ public class XofCurrencyEx :
     ICurrencyFormattable<XofCurrencyEx>
 {
     // Required by ICurrency interfaces
+    /// <inheritdoc/>
     public static new Iso4217 Code => XofCurrency.Code;
+    /// <inheritdoc/>
     public static new decimal MinimumUnit => XofCurrency.MinimumUnit;
+    /// <inheritdoc/>
     public static new bool IsZeroPadding => XofCurrency.IsZeroPadding;
+    /// <inheritdoc/>
     public static new IEnumerable<ISubsidiaryUnit> SubsidiaryUnits => XofCurrency.SubsidiaryUnits;
 
     // Required by ICurrencyFormattable<XofCurrencyEx>
+    /// <inheritdoc/>
     public static new CurrencyFormattingOptions Global => XofCurrency.Global;
 
     // Multi-language definitions for West African CFA Franc

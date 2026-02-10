@@ -11,28 +11,35 @@ namespace MoneyKind4OposTest.Core;
 /// </summary>
 public class MockChfCurrency : ICurrency, ICashCountFormattable<MockChfCurrency>, ICurrencyFormattable<MockChfCurrency>
 {
+    /// <inheritdoc/>
     public static Iso4217 Code => Iso4217.CHF;
+    /// <inheritdoc/>
     public static decimal MinimumUnit => 0.05m; // 5 cents is the smallest physical coin
+    /// <inheritdoc/>
     public static bool IsZeroPadding => false;
 
+    /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins => [
         new(0.05m, CashType.Coin, "5 Rappen", "5c"),
         new(0.10m, CashType.Coin, "10 Rappen", "10c"),
         new(0.20m, CashType.Coin, "20 Rappen", "20c")
     ];
 
+    /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Bills => [
         new(10.00m, CashType.Bill, "10 Francs", "10Fr")
     ];
 
+    /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits => [];
 
-    // Formatting stubs for test
+    /// <inheritdoc/>
     public static CurrencyFormattingOptions Global { get; } = new(
         Symbol: "Fr.",
         NumberFormat: NumberFormatInfo.InvariantInfo,
         DisplayFormat: new(SymbolPlacement.Prefix));
 
+    /// <inheritdoc/>
     public static CurrencyFormattingOptions Local => Global;
 }
 

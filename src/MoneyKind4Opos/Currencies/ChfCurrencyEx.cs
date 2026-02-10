@@ -14,11 +14,15 @@ public class ChfCurrencyEx :
     ICurrencyFormattable<ChfCurrencyEx>
 {
     // Required by ICurrency interfaces
+    /// <inheritdoc/>
     public static new Iso4217 Code => ChfCurrency.Code;
+    /// <inheritdoc/>
     public static new decimal MinimumUnit => ChfCurrency.MinimumUnit;
+    /// <inheritdoc/>
     public static new bool IsZeroPadding => ChfCurrency.IsZeroPadding;
 
     // Required by ICurrencyFormattable<ChfCurrencyEx>
+    /// <inheritdoc/>
     public static new CurrencyFormattingOptions Global => ChfCurrency.Global;
 
     // Multi-language definitions for Switzerland

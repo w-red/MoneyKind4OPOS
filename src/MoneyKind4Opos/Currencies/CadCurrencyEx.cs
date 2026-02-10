@@ -14,12 +14,17 @@ public class CadCurrencyEx :
     ICurrencyFormattable<CadCurrencyEx>
 {
     // Required by ICurrency interfaces
+    /// <inheritdoc/>
     public static new Iso4217 Code => CadCurrency.Code;
+    /// <inheritdoc/>
     public static new decimal MinimumUnit => CadCurrency.MinimumUnit;
+    /// <inheritdoc/>
     public static new bool IsZeroPadding => CadCurrency.IsZeroPadding;
+    /// <inheritdoc/>
     public static new IEnumerable<ISubsidiaryUnit> SubsidiaryUnits => CadCurrency.SubsidiaryUnits;
 
     // Required by ICurrencyFormattable<CadCurrencyEx>
+    /// <inheritdoc/>
     public static new CurrencyFormattingOptions Global => CadCurrency.Global;
 
     // Multi-language definitions for Canadian Dollar

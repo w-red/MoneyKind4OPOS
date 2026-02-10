@@ -9,6 +9,9 @@ namespace MoneyKind4OposTest;
 /// </summary>
 public class FormattingDiscoveryTest
 {
+    /// <summary>Discovers and outputs the OS standard currency format for a given culture and currency.</summary>
+    /// <param name="cultureName">Target culture name.</param>
+    /// <param name="currencyCode">Target currency ISO code.</param>
     [Theory]
     [MemberData(nameof(FormattingDiscoverySource.GetDiscoveryData), MemberType = typeof(FormattingDiscoverySource))]
     public void DiscoverFormats(string cultureName, string currencyCode)

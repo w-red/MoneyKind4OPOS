@@ -13,6 +13,8 @@ public interface ICashCountFormattable<TSelf> : ICurrency
 
     /// <summary>Formats cash counts into a string.</summary>
     /// <param name="counts">The cash counts.</param>
+    /// <param name="coinFormat">The format for coin face values.</param>
+    /// <param name="billFormat">The format for bill face values.</param>
     /// <returns>The formatted cash counts string.</returns>
     public static virtual string ToCashCountsString(
         IDictionary<CashFaceInfo, int> counts,

@@ -14,12 +14,17 @@ public class XafCurrencyEx :
     ICurrencyFormattable<XafCurrencyEx>
 {
     // Required by ICurrency interfaces
+    /// <inheritdoc/>
     public static new Iso4217 Code => XafCurrency.Code;
+    /// <inheritdoc/>
     public static new decimal MinimumUnit => XafCurrency.MinimumUnit;
+    /// <inheritdoc/>
     public static new bool IsZeroPadding => XafCurrency.IsZeroPadding;
+    /// <inheritdoc/>
     public static new IEnumerable<ISubsidiaryUnit> SubsidiaryUnits => XafCurrency.SubsidiaryUnits;
 
     // Required by ICurrencyFormattable<XafCurrencyEx>
+    /// <inheritdoc/>
     public static new CurrencyFormattingOptions Global => XafCurrency.Global;
 
     // Multi-language definitions for Central African CFA Franc

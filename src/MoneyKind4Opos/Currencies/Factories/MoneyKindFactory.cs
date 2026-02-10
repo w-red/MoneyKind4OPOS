@@ -54,10 +54,17 @@ public static class MoneyKindFactory
     }
 
     /// <summary>Creates a MoneyKind instance with generic type parameter.</summary>
+    /// <typeparam name="TCurrency">The currency type.</typeparam>
+    /// <param name="currencyCashList">Cash denominations supported by the device.</param>
+    /// <param name="warnings">Warning messages for unsupported denominations.</param>
+    /// <returns>A MoneyKind instance.</returns>
     public static MoneyKind<TCurrency> CreateFromOpos<TCurrency>(
         string currencyCashList,
         out List<string> warnings)
-        where TCurrency : ICurrency, ICashCountFormattable<TCurrency>, ICurrencyFormattable<TCurrency>
+        where TCurrency :
+        ICurrency,
+        ICashCountFormattable<TCurrency>,
+        ICurrencyFormattable<TCurrency>
     {
         var (coins, bills) = ParseCurrencyCashList(currencyCashList);
         var mk = new MoneyKind<TCurrency>();
@@ -114,6 +121,8 @@ public static class MoneyKindFactory
     }
 
     /// <summary>Retrieves the currency type for the given ISO 4217 code.</summary>
+    /// <param name="currencyCode">The ISO 4217 currency code.</param>
+    /// <returns>The Type of the currency if found; otherwise, null.</returns>
     private static Type? GetCurrencyType(string currencyCode)
     {
         var cache = _currencyTypeCache.Value;
@@ -122,16 +131,9 @@ public static class MoneyKindFactory
             ? type : null;
     }
 
-    /// <summary>
-    /// Parses the CurrencyCashList string into coin and bill denominations.
-    /// </summary>
-    /// <returns>
-    /// A tuple containing:
-    /// <list type="bullet">
-    /// <item>coins<term></term><description>List of coin denominations</description></item>
-    /// <item>bills<term></term><description>List of bill denominations</description></item>
-    /// </list>
-    /// </returns>
+    /// <summary>Parses the CurrencyCashList string into coin and bill denominations.</summary>
+    /// <param name="currencyCashList">The CurrencyCashList string.</param>
+    /// <returns>A tuple containing lists of coin and bill denominations.</returns>
     private static (List<decimal> coins, List<decimal> bills) ParseCurrencyCashList(
         string currencyCashList)
     {
@@ -154,10 +156,7 @@ public static class MoneyKindFactory
         };
     }
 
-    /// <summary>
-    /// Parses a denomination section string into a list of decimal values using LINQ.
-    /// Filters out values that cannot be parsed as decimals.
-    /// </summary>
+    /// <summary>Parses a denomination section string into a list of decimal values. Filters out values that cannot be parsed as decimals.</summary>
     /// <param name="section">The section string containing comma-separated values.</param>
     /// <returns>List of successfully parsed decimal values.</returns>
     private static List<decimal> ParseDenominationSection(string section) =>
@@ -170,6 +169,11 @@ public static class MoneyKindFactory
             .Select(x => x.value)];
 
     /// <summary>Creates a MoneyKind instance using reflection.</summary>
+    /// <param name="currencyType">The Type of the currency.</param>
+    /// <param name="coins">List of coin denominations.</param>
+    /// <param name="bills">List of bill denominations.</param>
+    /// <param name="warnings">Output list of warnings.</param>
+    /// <returns>A MoneyKind instance as an object.</returns>
     private static object CreateMoneyKindInstance(
         Type currencyType,
         List<decimal> coins,
@@ -210,7 +214,10 @@ public static class MoneyKindFactory
     }
 
     /// <summary>Validates denominations against supported faces and initializes counts.</summary>
-    /// <param name="warnings">Unsupported denominations generate warnings.</param>
+    /// <param name="moneyKindInstance">The MoneyKind instance to initialize.</param>
+    /// <param name="coins">List of coin denominations.</param>
+    /// <param name="bills">List of bill denominations.</param>
+    /// <param name="warnings">Output list of warnings.</param>
     private static void ValidateAndInitializeFromDenominations(
         object moneyKindInstance,
         List<decimal> coins,

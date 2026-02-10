@@ -4,8 +4,10 @@ using Shouldly;
 
 namespace MoneyKind4OposTest.Core;
 
+/// <summary>Tests for the robust parsing logic of MoneyKind.</summary>
 public class MoneyKindParsingTest
 {
+    /// <summary>Verify that standard OPOS cashCounts strings are parsed correctly.</summary>
     [Fact]
     public void Parse_StandardOposFormat_ShouldSucceed()
     {
@@ -21,6 +23,7 @@ public class MoneyKindParsingTest
         result.TotalAmount().ShouldBe(12560m);
     }
 
+    /// <summary>Verify that parsing is resilient to numerical variations like .5 or 1.0.</summary>
     [Fact]
     public void Parse_NumericalVariations_ShouldBeResilient()
     {
@@ -33,6 +36,7 @@ public class MoneyKindParsingTest
         result.TotalAmount().ShouldBe(10m);
     }
 
+    /// <summary>Verify that parsing ignores extra whitespace and noise around separators.</summary>
     [Fact]
     public void Parse_WhitespaceAndNoise_ShouldBeResilient()
     {
@@ -44,6 +48,7 @@ public class MoneyKindParsingTest
         result[1000].ShouldBe(2);
     }
 
+    /// <summary>Verify that extra sections beyond Coins;Bills are ignored gracefully.</summary>
     [Fact]
     public void Parse_ExtraSections_ShouldIgnoreThem()
     {
@@ -56,6 +61,7 @@ public class MoneyKindParsingTest
         result.TotalAmount().ShouldBe(1010m);
     }
 
+    /// <summary>Verify that missing bill sections are handled correctly.</summary>
     [Fact]
     public void Parse_MissingBillSection_ShouldParseCoinsOnly()
     {
@@ -67,6 +73,7 @@ public class MoneyKindParsingTest
         result.BillAmount().ShouldBe(0m);
     }
 
+    /// <summary>Verify that malformed or empty items within a section are skipped without breaking the parse.</summary>
     [Fact]
     public void Parse_EmptyOrMalformedItems_ShouldSkipThemGracefully()
     {
@@ -79,6 +86,7 @@ public class MoneyKindParsingTest
         result[10].ShouldBe(0);
     }
 
+    /// <summary>Verify that unknown denominations are tracked in UnrecognizedCounts and reported in ParseMessage.</summary>
     [Fact]
     public void Parse_UnknownDenominations_ShouldBeTrackedInUnrecognizedCounts()
     {
@@ -96,6 +104,7 @@ public class MoneyKindParsingTest
         result.ParseMessage.ShouldContain("Unknown denomination: 999");
     }
 
+    /// <summary>Verify that malformed data is correctly reported in ParseMessage.</summary>
     [Fact]
     public void Parse_MalformedData_ShouldPopulateParseMessage()
     {
