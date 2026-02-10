@@ -62,6 +62,15 @@ public class MoneyKind<TCurrency>
     public IDictionary<CashFaceInfo, int> Counts { get; } =
         new Dictionary<CashFaceInfo, int>();
 
+    /// <inheritdoc/>
+    public IDictionary<decimal, int> UnrecognizedCounts { get; } =
+        new Dictionary<decimal, int>();
+
+    private readonly List<string> _parseWarnings = [];
+
+    /// <inheritdoc/>
+    public string ParseMessage => string.Join("; ", _parseWarnings);
+
     /// <summary>Initializes a new instance of the <see cref="MoneyKind{TCurrency}"/> class.</summary>
     public MoneyKind()
     {
@@ -122,26 +131,29 @@ public class MoneyKind<TCurrency>
     public static MoneyKind<TCurrency> Parse(string cashCounts)
     {
         var ret = new MoneyKind<TCurrency>();
-        var sections = cashCounts.Split(';');
-
-        switch (sections)
+        if (string.IsNullOrWhiteSpace(cashCounts))
         {
-        case [var coinSec, var billSec, ..]:
-            ParseSection(
-                coinSec,
-                _coinFaceLookup,
-                ret.Counts);
-            ParseSection(
-                billSec,
-                _billFaceLookup,
-                ret.Counts);
-            break;
-        case [var coinSec]:
-            ParseSection(
-                coinSec,
-                _coinFaceLookup,
-                ret.Counts);
-            break;
+            return ret;
+        }
+
+        ReadOnlySpan<char> span = cashCounts.AsSpan();
+        int sectionIndex = 0;
+
+        foreach (var range in span.Split(';'))
+        {
+            var section = span[range];
+            if (sectionIndex == 0)
+            {
+                // Coins section
+                ParseSection(section, _coinFaceLookup, ret.Counts, ret.UnrecognizedCounts, ret._parseWarnings);
+            }
+            else if (sectionIndex == 1)
+            {
+                // Bills section
+                ParseSection(section, _billFaceLookup, ret.Counts, ret.UnrecognizedCounts, ret._parseWarnings);
+            }
+            // Ignore extra sections for robustness
+            sectionIndex++;
         }
 
         return ret;
@@ -274,32 +286,47 @@ public class MoneyKind<TCurrency>
 
     /// <summary>Parse face section.</summary>
     protected static void ParseSection(
-        string sec,
+        ReadOnlySpan<char> section,
         IReadOnlyDictionary<decimal, CashFaceInfo> faceLookup,
-        IDictionary<CashFaceInfo, int> counts)
+        IDictionary<CashFaceInfo, int> counts,
+        IDictionary<decimal, int> unrecognizedCounts,
+        List<string> warnings)
     {
-        var query = sec
-            .Split(',',
-                StringSplitOptions.RemoveEmptyEntries
-                | StringSplitOptions.TrimEntries)
-            .Select(s => s.Split(':'))
-            .Select(parts =>
-                parts is [var vs, var cs]
-                && decimal.TryParse(vs, out var v)
-                && int.TryParse(cs, out var c)
-                ? (IsSucess: true, Value: v, Count: c)
-                : (IsSucess: false, Value: 0m, Count: 0))
-            .Select(svc =>
-                svc.IsSucess
-                && faceLookup.TryGetValue(svc.Value, out var face)
-                ? (Face: face, svc.Count)
-                : (Face: null, Count: 0))
-            .Where(w => w.Face is not null)
-            .Select(s => (Face: s.Face!, s.Count));
+        if (section.IsWhiteSpace()) return;
 
-        foreach (var (face, count) in query)
+        foreach (var range in section.Split(','))
         {
-            counts[face] = count;
+            var item = section[range];
+            var trimmedItem = item.Trim();
+            if (trimmedItem.IsEmpty) continue;
+
+            int colonIndex = trimmedItem.IndexOf(':');
+            if (colonIndex < 0)
+            {
+                warnings.Add($"Invalid format: '{trimmedItem.ToString()}'");
+                continue;
+            }
+
+            var faceSpan = trimmedItem[..colonIndex].Trim();
+            var countSpan = trimmedItem[(colonIndex + 1)..].Trim();
+
+            if (decimal.TryParse(faceSpan, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out var faceValue) &&
+                int.TryParse(countSpan, System.Globalization.NumberStyles.Integer, System.Globalization.CultureInfo.InvariantCulture, out var count))
+            {
+                if (faceLookup.TryGetValue(faceValue, out var face))
+                {
+                    counts[face] = count;
+                }
+                else
+                {
+                    unrecognizedCounts[faceValue] = count;
+                    warnings.Add($"Unknown denomination: {faceValue} (Count: {count})");
+                }
+            }
+            else
+            {
+                warnings.Add($"Malformed item: '{trimmedItem.ToString()}'");
+            }
         }
     }
 
@@ -370,23 +397,26 @@ public class MoneyKind<TCurrency>
     {
         warnings = [];
 
-        if (string.IsNullOrEmpty(cashCounts))
+        if (string.IsNullOrWhiteSpace(cashCounts))
         {
             return true; // Empty string is valid (all zero counts)
         }
 
-        var sections = cashCounts.Split(';');
+        ReadOnlySpan<char> span = cashCounts.AsSpan();
+        int sectionIndex = 0;
 
-        // Validate coin section if present
-        if (sections.Length > 0 && !string.IsNullOrEmpty(sections[0]))
+        foreach (var range in span.Split(';'))
         {
-            ValidateSection(sections[0], _coinFaceLookup, warnings);
-        }
-
-        // Validate bill section if present
-        if (sections.Length > 1 && !string.IsNullOrEmpty(sections[1]))
-        {
-            ValidateSection(sections[1], _billFaceLookup, warnings);
+            var section = span[range];
+            if (sectionIndex == 0 && !section.IsWhiteSpace())
+            {
+                ValidateSection(section, _coinFaceLookup, warnings);
+            }
+            else if (sectionIndex == 1 && !section.IsWhiteSpace())
+            {
+                ValidateSection(section, _billFaceLookup, warnings);
+            }
+            sectionIndex++;
         }
 
         return true; // Always returns true (warnings are collected, not errors)
@@ -394,42 +424,46 @@ public class MoneyKind<TCurrency>
 
     /// <summary>Validates a section of the CashCounts string and collects warnings.</summary>
     protected static void ValidateSection(
-        string section,
-        Dictionary<decimal, CashFaceInfo> faceLookup,
+        ReadOnlySpan<char> section,
+        IReadOnlyDictionary<decimal, CashFaceInfo> faceLookup,
         List<string> warnings)
     {
-        foreach (var item in section.Split(','))
+        foreach (var range in section.Split(','))
         {
-            if (string.IsNullOrWhiteSpace(item))
-                continue;
+            var item = section[range];
+            var trimmedItem = item.Trim();
+            if (trimmedItem.IsEmpty) continue;
 
-            var parts = item.Split(':');
-            if (parts.Length != 2)
+            int colonIndex = trimmedItem.IndexOf(':');
+            if (colonIndex < 0)
             {
-                warnings.Add($"Invalid format for item '{item}'. Expected 'value:count'.");
-                continue;
-            }
-
-            if (!decimal.TryParse(parts[0], out var faceValue))
-            {
-                warnings.Add($"Invalid face value '{parts[0]}' in item '{item}'.");
+                warnings.Add($"Invalid format for item '{trimmedItem.ToString()}'. Expected 'value:count'.");
                 continue;
             }
 
-            if (!int.TryParse(parts[1], out var count))
+            var faceSpan = trimmedItem[..colonIndex].Trim();
+            var countSpan = trimmedItem[(colonIndex + 1)..].Trim();
+
+            if (!decimal.TryParse(faceSpan, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out var faceValue))
             {
-                warnings.Add($"Invalid count '{parts[1]}' in item '{item}'.");
+                warnings.Add($"Invalid face value '{faceSpan.ToString()}' in item '{trimmedItem.ToString()}'.");
+                continue;
+            }
+
+            if (!int.TryParse(countSpan, System.Globalization.NumberStyles.Integer, System.Globalization.CultureInfo.InvariantCulture, out var count))
+            {
+                warnings.Add($"Invalid count '{countSpan.ToString()}' in item '{trimmedItem.ToString()}'.");
                 continue;
             }
 
             if (!faceLookup.ContainsKey(faceValue))
             {
-                warnings.Add($"Face value {faceValue} is not a valid denomination for {TCurrency.Code}.");
+                warnings.Add($"Face value {faceValue} is not a valid denomination.");
             }
 
             if (count < 0)
             {
-                warnings.Add($"Count {count} in item '{item}' must be greater than or equal to 0.");
+                warnings.Add($"Count {count} in item '{trimmedItem.ToString()}' must be greater than or equal to 0.");
             }
         }
     }
