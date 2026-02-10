@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Text;
 
 namespace MoneyKind4OposTest;
+#if MONEYKIND_DISCOVERY
 
 /// <summary>
 /// Utility test for investigating the OS standard "CurrencySymbol" and detailed information for each currency.
@@ -287,3 +288,4 @@ public class LocalCurrencySymbolDiscoveryTest
             .Replace("\u202F", "NNBSP");
     }
 }
+#endif

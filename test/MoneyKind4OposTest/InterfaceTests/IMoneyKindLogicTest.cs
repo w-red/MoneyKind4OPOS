@@ -160,7 +160,7 @@ public class IMoneyKindLogicTest
 
     /// <summary>Verifies parsing accuracy across various legacy, whitespace-heavy, or mixed string formats.</summary>
     [Theory]
-    [InlineData("0.5:1,0.5:2", 1.0)]   // Last one wins in current implementation (0.5:2 = 1.0 total)
+    [InlineData("0.5:1,0.5:2", 1.5)]   // Summed in current implementation (0.5:1 + 0.5:2 = 1.5 total)
     [InlineData(" 0.5 : 2 ", 1.0)]    // Whitespace handling
     [InlineData(".5:3", 1.5)]         // Leading dot
     [InlineData("0.5:1,invalid:9,1:1", 1.5)] // Mixed valid/invalid

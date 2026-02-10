@@ -173,7 +173,8 @@ public static class CurrencyMetadataSource
             { typeof(MwkCurrency), Iso4217.MWK, 454, 1.0 },
             { typeof(MznCurrency), Iso4217.MZN, 943, 0.01 },
             { typeof(SzlCurrency), Iso4217.SZL, 748, 0.10 },
-            { typeof(LslCurrency), Iso4217.LSL, 426, 0.10 }
+            { typeof(LslCurrency), Iso4217.LSL, 426, 0.10 },
+            { typeof(SlsCurrency), Iso4217.SLS, 899, 100.0 }
         };
 
         return data;

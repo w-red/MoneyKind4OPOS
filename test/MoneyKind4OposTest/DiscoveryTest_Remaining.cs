@@ -2,6 +2,7 @@ using System.Globalization;
 using MoneyKind4OposTest.Infrastructure;
 
 namespace MoneyKind4OposTest;
+#if MONEYKIND_DISCOVERY
 
 /// <summary>
 /// Utility test for identifying the OS standard format (absolute solution) when implementing a new currency.
@@ -34,3 +35,4 @@ public class FormattingDiscoveryTest
         }
     }
 }
+#endif

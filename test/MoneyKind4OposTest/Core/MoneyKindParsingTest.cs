@@ -9,7 +9,7 @@ public class MoneyKindParsingTest
 {
     /// <summary>Verify that standard OPOS cashCounts strings are parsed correctly.</summary>
     [Fact]
-    public void Parse_StandardOposFormat_ShouldSucceed()
+    public void ParseStandardOposFormatShouldSucceed()
     {
         // JPY: Coins(1, 5, 10, 50, 100, 500); Bills(1000, 2000, 5000, 10000)
         var input = "1:10,10:5,500:1;1000:2,10000:1";
@@ -25,7 +25,7 @@ public class MoneyKindParsingTest
 
     /// <summary>Verify that parsing is resilient to numerical variations like .5 or 1.0.</summary>
     [Fact]
-    public void Parse_NumericalVariations_ShouldBeResilient()
+    public void ParseNumericalVariationsShouldBeResilient()
     {
         // .5 as 0.5, 1.0 as 1
         var input = ".5:10,1.0:5";
@@ -38,7 +38,7 @@ public class MoneyKindParsingTest
 
     /// <summary>Verify that parsing ignores extra whitespace and noise around separators.</summary>
     [Fact]
-    public void Parse_WhitespaceAndNoise_ShouldBeResilient()
+    public void ParseWhitespaceAndNoiseShouldBeResilient()
     {
         var input = " 1 : 10 ,  10 : 5 ; 1000 : 2 ";
         var result = MoneyKind<JpyCurrency>.Parse(input);
@@ -50,7 +50,7 @@ public class MoneyKindParsingTest
 
     /// <summary>Verify that extra sections beyond Coins;Bills are ignored gracefully.</summary>
     [Fact]
-    public void Parse_ExtraSections_ShouldIgnoreThem()
+    public void ParseExtraSectionsShouldIgnoreThem()
     {
         // OPOS standard is Coins;Bills. Some drivers might append extra info.
         var input = "1:10;1000:1;ExtraData:999";
@@ -63,7 +63,7 @@ public class MoneyKindParsingTest
 
     /// <summary>Verify that missing bill sections are handled correctly.</summary>
     [Fact]
-    public void Parse_MissingBillSection_ShouldParseCoinsOnly()
+    public void ParseMissingBillSectionShouldParseCoinsOnly()
     {
         var input = "1:10,10:5";
         var result = MoneyKind<JpyCurrency>.Parse(input);
@@ -75,7 +75,7 @@ public class MoneyKindParsingTest
 
     /// <summary>Verify that malformed or empty items within a section are skipped without breaking the parse.</summary>
     [Fact]
-    public void Parse_EmptyOrMalformedItems_ShouldSkipThemGracefully()
+    public void ParseEmptyOrMalformedItemsShouldSkipThemGracefully()
     {
         var input = "1:10,,10:invalid,; ,1000:2";
         var result = MoneyKind<JpyCurrency>.Parse(input);
@@ -88,7 +88,7 @@ public class MoneyKindParsingTest
 
     /// <summary>Verify that unknown denominations are tracked in UnrecognizedCounts and reported in ParseMessage.</summary>
     [Fact]
-    public void Parse_UnknownDenominations_ShouldBeTrackedInUnrecognizedCounts()
+    public void ParseUnknownDenominationsShouldBeTrackedInUnrecognizedCounts()
     {
         // 999 is not a JPY denomination
         var input = "1:10,999:5;1000:1";
@@ -106,12 +106,36 @@ public class MoneyKindParsingTest
 
     /// <summary>Verify that malformed data is correctly reported in ParseMessage.</summary>
     [Fact]
-    public void Parse_MalformedData_ShouldPopulateParseMessage()
+    public void ParseMalformedDataShouldPopulateParseMessage()
     {
         var input = "1:10,abc:5;1000:invalid";
         var result = MoneyKind<JpyCurrency>.Parse(input);
 
         result.ParseMessage.ShouldContain("Malformed item: 'abc:5'");
         result.ParseMessage.ShouldContain("Malformed item: '1000:invalid'");
+    }
+
+    /// <summary>Verify that duplicate denominations within the input are summed correctly.</summary>
+    [Fact]
+    public void ParseDuplicateDenominationsShouldSumCorrectly()
+    {
+        // 1:10 and 1:5 should sum to 1:15
+        var input = "1:10,1:5;1000:2,1000:1";
+        var result = MoneyKind<JpyCurrency>.Parse(input);
+
+        result[1].ShouldBe(15);
+        result[1000].ShouldBe(3);
+        result.TotalAmount().ShouldBe(3015m);
+    }
+
+    /// <summary>Verify that duplicate unknown denominations are also summed correctly.</summary>
+    [Fact]
+    public void ParseDuplicateUnknownDenominationsShouldSumCorrectly()
+    {
+        // 999:5 and 999:10 should sum to 999:15
+        var input = "999:5,999:10";
+        var result = MoneyKind<JpyCurrency>.Parse(input);
+
+        result.UnrecognizedCounts[999m].ShouldBe(15);
     }
 }
