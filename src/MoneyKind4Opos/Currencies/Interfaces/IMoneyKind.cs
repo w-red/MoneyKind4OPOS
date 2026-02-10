@@ -15,6 +15,17 @@ public interface IMoneyKind<TCurrency, TSelf>
     /// </remarks>
     IDictionary<CashFaceInfo, int> Counts { get; }
 
+    /// <summary>Denominations found during parsing that are not defined in the currency metadata.</summary>
+    /// <remarks>
+    /// <list type="bullet">
+    /// <item><description>Key: Face value as <see cref="decimal"/></description></item>
+    /// <item><description>Value: Count</description></item></list>
+    /// </remarks>
+    IDictionary<decimal, int> UnrecognizedCounts { get; }
+
+    /// <summary>Summary message of the parsing process (e.g., warning about unrecognized denominations).</summary>
+    string ParseMessage { get; }
+
     /// <summary>Access count by face value (auto-detect type).</summary>
     /// <param name="faceValue">Face value</param>
     /// <returns>Count</returns>
