@@ -338,5 +338,9 @@ public enum Iso4217
     JEP = 832,
     /// <summary>Isle of Man Pound (Non-ISO, pegged 1:1 to GBP)</summary>
     /// <remarks>Not in official ISO 4217 list. Uses informal code IMP.</remarks>
-    IMP = 833
+    IMP = 833,
+
+    /// <summary>Somaliland Shilling (Non-ISO, unrecognized state)</summary>
+    /// <remarks>Not in official ISO 4217 list. Uses informal code SLS.</remarks>
+    SLS = 899
 }
