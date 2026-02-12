@@ -44,9 +44,9 @@ public class JpyCurrency :
     public static IEnumerable<CashFaceInfo> Bills =>
     [
         new(1000m, CashType.Bill, "1000 Yen Bill", "千円札"),
-        new(2000m, CashType.Bill, "2000 Yen Bill", "二千円札"),
+        new(2000m, CashType.Bill, "2000 Yen Bill", "二千円札", Usage: CashUsagePolicy.NonRecyclable),
         new(5000m, CashType.Bill, "5000 Yen Bill", "五千円札"),
-        new(10000m, CashType.Bill, "10000 Yen Bill", "一万円札"),
+        new(10000m, CashType.Bill, "10000 Yen Bill", "一万円札", Usage: CashUsagePolicy.CollectionOnly),
     ];
 
     /// <inheritdoc/>

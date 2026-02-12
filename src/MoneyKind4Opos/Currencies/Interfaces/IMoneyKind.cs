@@ -76,15 +76,16 @@ public interface IMoneyKind<TCurrency, TSelf>
     void Subtract(TSelf other);
 
     /// <summary>Is payable?</summary>
-    /// <param name="amount">Amount to check</param>
-    bool IsPayable(decimal amount);
+    /// <param name="onlyRecyclable">If true, only use recyclable denominations for calculation.</param>
+    bool IsPayable(decimal amount, bool onlyRecyclable = true);
 
-    /// <summary>Calculate change for the given amount.</summary>
-    /// <returns>Change as <see cref="IMoneyKind{TCurrency, TSelf}"/></returns>
-    TSelf CalculateChange(decimal amount);
-
-    /// <summary>Calculate change details for the given amount.</summary>
     /// <param name="amount">Amount to calculate</param>
+    /// <param name="onlyRecyclable">If true, only use recyclable denominations for calculation.</param>
+    /// <returns>Change as <see cref="IMoneyKind{TCurrency, TSelf}"/></returns>
+    TSelf CalculateChange(decimal amount, bool onlyRecyclable = true);
+
+    /// <param name="amount">Amount to calculate</param>
+    /// <param name="onlyRecyclable">If true, only use recyclable denominations for calculation.</param>
     /// <returns>Calculation result with payable change, remaining amount, and missing kinds.</returns>
-    ChangeCalculationResult<TCurrency, TSelf> CalculateChangeDetail(decimal amount);
+    ChangeCalculationResult<TCurrency, TSelf> CalculateChangeDetail(decimal amount, bool onlyRecyclable = true);
 }

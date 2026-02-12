@@ -41,12 +41,12 @@ public class UsdCurrency :
     public static IEnumerable<CashFaceInfo> Bills =>
     [
         new(1.00m, CashType.Bill, "1 Dollar Bill", "One Dollar Bill"),
-        new(2.00m, CashType.Bill, "2 Dollar Bill", "Two Dollar Bill"),
+        new(2.00m, CashType.Bill, "2 Dollar Bill", "Two Dollar Bill", Usage: CashUsagePolicy.NonRecyclable),
         new(5.00m, CashType.Bill, "5 Dollar Bill", "Five Dollar Bill"),
         new(10.00m, CashType.Bill, "10 Dollar Bill", "Ten Dollar Bill"),
         new(20.00m, CashType.Bill, "20 Dollar Bill", "Twenty Dollar Bill"),
         new(50.00m, CashType.Bill, "50 Dollar Bill", "Fifty Dollar Bill"),
-        new(100.00m, CashType.Bill, "100 Dollar Bill", "One Hundred Dollar Bill"),
+        new(100.00m, CashType.Bill, "100 Dollar Bill", "One Hundred Dollar Bill", Usage: CashUsagePolicy.CollectionOnly),
     ];
 
     /// <inheritdoc/>

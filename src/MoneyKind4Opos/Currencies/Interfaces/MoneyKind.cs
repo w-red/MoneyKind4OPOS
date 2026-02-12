@@ -215,30 +215,30 @@ public class MoneyKind<TCurrency>
     }
 
     /// <inheritdoc/>
-    public bool IsPayable(decimal amount)
+    public bool IsPayable(decimal amount, bool onlyRecyclable = true)
     {
-        return CalculateChangeDetail(amount).IsSucceed;
+        return CalculateChangeDetail(amount, onlyRecyclable).IsSucceed;
     }
 
     /// <inheritdoc/>
-    public MoneyKind<TCurrency> CalculateChange(decimal amount)
+    public MoneyKind<TCurrency> CalculateChange(decimal amount, bool onlyRecyclable = true)
     {
-        return CalculateChangeDetail(amount).PayableChange;
+        return CalculateChangeDetail(amount, onlyRecyclable).PayableChange;
     }
 
     /// <inheritdoc/>
     public ChangeCalculationResult<TCurrency, MoneyKind<TCurrency>>
-        CalculateChangeDetail(decimal amount)
+        CalculateChangeDetail(decimal amount, bool onlyRecyclable = true)
     {
         // Pass 1: Calculate what can be paid given the current inventory
         var payable =
-            Calculate(amount, useInventory: true);
+            Calculate(amount, useInventory: true, onlyRecyclable: onlyRecyclable);
         var remaining =
             amount - payable.TotalAmount();
 
         // Pass 2: Calculate the ideal breakdown for the remaining (missing) amount
         var missing =
-            Calculate(remaining, useInventory: false);
+            Calculate(remaining, useInventory: false, onlyRecyclable: onlyRecyclable);
 
         return new ChangeCalculationResult<TCurrency, MoneyKind<TCurrency>>
         {
@@ -254,7 +254,8 @@ public class MoneyKind<TCurrency>
     /// <item><term>true</term>uses current inventory to limit available denominations.</item>
     /// <item><term>false</term>assumes infinite stock.</item>
     /// </list></param>
-    protected MoneyKind<TCurrency> Calculate(decimal amount, bool useInventory)
+    /// <param name="onlyRecyclable">If true, only use standard recyclable denominations.</param>
+    protected MoneyKind<TCurrency> Calculate(decimal amount, bool useInventory, bool onlyRecyclable)
     {
         var ret = new MoneyKind<TCurrency>();
         var remaining = amount;
@@ -266,6 +267,11 @@ public class MoneyKind<TCurrency>
 
         foreach (var face in _allDescendingFaces)
         {
+            if (onlyRecyclable && face.Usage != CashUsagePolicy.Standard)
+            {
+                continue;
+            }
+
             var neededCount = (int)(remaining / face.Value);
             if (neededCount > 0)
             {
