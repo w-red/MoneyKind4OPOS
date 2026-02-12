@@ -35,7 +35,7 @@ public class AllCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(1.0m, CashType.Coin, "1 Lek Coin", "1 Lek"),
+        new(1.0m, CashType.Coin, "1 Lek Coin", "1 Lek", Usage: CashUsagePolicy.NonRecyclable),
         new(5.0m, CashType.Coin, "5 Lekë Coin", "5 Lekë"),
         new(10.0m, CashType.Coin, "10 Lekë Coin", "10 Lekë"),
         new(20.0m, CashType.Coin, "20 Lekë Coin", "20 Lekë"),

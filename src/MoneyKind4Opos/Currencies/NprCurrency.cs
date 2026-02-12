@@ -60,16 +60,16 @@ public class NprCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(1m, CashType.Coin, "1 Rupee Coin", "Rs 1"),
-        new(2m, CashType.Coin, "2 Rupees Coin", "Rs 2"),
+        new(1m, CashType.Coin, "1 Rupee Coin", "Rs 1", Usage: CashUsagePolicy.NonRecyclable),
+        new(2m, CashType.Coin, "2 Rupees Coin", "Rs 2", Usage: CashUsagePolicy.NonRecyclable),
         new(5m, CashType.Coin, "5 Rupees Coin", "Rs 5"),
     ];
 
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Bills =>
     [
-        new(1m, CashType.Bill, "1 Rupee Bill", "Rs 1"),
-        new(2m, CashType.Bill, "2 Rupees Bill", "Rs 2"),
+        new(1m, CashType.Bill, "1 Rupee Bill", "Rs 1", Usage: CashUsagePolicy.NonRecyclable),
+        new(2m, CashType.Bill, "2 Rupees Bill", "Rs 2", Usage: CashUsagePolicy.NonRecyclable),
         new(5m, CashType.Bill, "5 Rupees Bill", "Rs 5"),
         new(10m, CashType.Bill, "10 Rupees Bill", "Rs 10"),
         new(20m, CashType.Bill, "20 Rupees Bill", "Rs 20"),

@@ -31,11 +31,11 @@ public sealed class UgxCurrency : ICurrency, ICashCountFormattable<UgxCurrency>,
         new CashFaceInfo(2m, CashType.Coin, "2 Shilling Coin", "2 Shilling coin"),
         new CashFaceInfo(5m, CashType.Coin, "5 Shilling Coin", "5 Shilling coin"),
         new CashFaceInfo(10m, CashType.Coin, "10 Shilling Coin", "10 Shilling coin"),
-        new CashFaceInfo(50m, CashType.Coin, "50 Shilling Coin", "50 Shilling coin"),
-        new CashFaceInfo(100m, CashType.Coin, "100 Shilling Coin", "100 Shilling coin"),
-        new CashFaceInfo(200m, CashType.Coin, "200 Shilling Coin", "200 Shilling coin"),
-        new CashFaceInfo(500m, CashType.Coin, "500 Shilling Coin", "500 Shilling coin"),
-        new CashFaceInfo(1000m, CashType.Coin, "1000 Shilling Coin", "1000 Shilling coin")
+        new CashFaceInfo(50m, CashType.Coin, "50 Shilling Coin", "50 Shilling coin", Usage: CashUsagePolicy.NonRecyclable),
+        new CashFaceInfo(100m, CashType.Coin, "100 Shilling Coin", "100 Shilling coin", Usage: CashUsagePolicy.NonRecyclable),
+        new CashFaceInfo(200m, CashType.Coin, "200 Shilling Coin", "200 Shilling coin", Usage: CashUsagePolicy.NonRecyclable),
+        new CashFaceInfo(500m, CashType.Coin, "500 Shilling Coin", "500 Shilling coin", Usage: CashUsagePolicy.NonRecyclable),
+        new CashFaceInfo(1000m, CashType.Coin, "1000 Shilling Coin", "1000 Shilling coin", Usage: CashUsagePolicy.NonRecyclable)
     ];
 
     /// <inheritdoc/>

@@ -44,6 +44,7 @@ public class GipCurrency :
         new(0.50m, CashType.Coin, "50 Pence", "50p"),
         new(1.00m, CashType.Coin, "1 Pound", "£1"),
         new(2.00m, CashType.Coin, "2 Pounds", "£2"),
+        new(5.00m, CashType.Coin, "5 Pounds", "£5", Usage: CashUsagePolicy.NonRecyclable),
     ];
 
     /// <inheritdoc/>

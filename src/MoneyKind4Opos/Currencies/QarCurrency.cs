@@ -36,9 +36,9 @@ public class QarCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(0.01m, CashType.Coin, "1 Dirham Coin", "1d"),
-        new(0.05m, CashType.Coin, "5 Dirham Coin", "5d"),
-        new(0.10m, CashType.Coin, "10 Dirham Coin", "10d"),
+        new(0.01m, CashType.Coin, "1 Dirham Coin", "1d", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.05m, CashType.Coin, "5 Dirham Coin", "5d", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.10m, CashType.Coin, "10 Dirham Coin", "10d", Usage: CashUsagePolicy.NonRecyclable),
         new(0.25m, CashType.Coin, "25 Dirham Coin", "25d"),
         new(0.50m, CashType.Coin, "50 Dirham Coin", "50d"),
     ];

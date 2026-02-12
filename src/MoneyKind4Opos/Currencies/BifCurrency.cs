@@ -27,9 +27,9 @@ public sealed class BifCurrency : ICurrency, ICashCountFormattable<BifCurrency>,
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new CashFaceInfo(1m, CashType.Coin, "1 Franc Coin", "Igiceri c'Ifranga 1"),
-        new CashFaceInfo(5m, CashType.Coin, "5 Franc Coin", "Igiceri c'Amafaranga 5"),
-        new CashFaceInfo(10m, CashType.Coin, "10 Franc Coin", "Igiceri c'Amafaranga 10"),
+        new CashFaceInfo(1m, CashType.Coin, "1 Franc Coin", "Igiceri c'Ifranga 1", Usage: CashUsagePolicy.NonRecyclable),
+        new CashFaceInfo(5m, CashType.Coin, "5 Franc Coin", "Igiceri c'Amafaranga 5", Usage: CashUsagePolicy.NonRecyclable),
+        new CashFaceInfo(10m, CashType.Coin, "10 Franc Coin", "Igiceri c'Amafaranga 10", Usage: CashUsagePolicy.NonRecyclable),
         new CashFaceInfo(50m, CashType.Coin, "50 Franc Coin", "Igiceri c'Amafaranga 50")
     ];
 

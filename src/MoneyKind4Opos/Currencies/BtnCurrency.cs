@@ -36,11 +36,11 @@ public class BtnCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(0.05m, CashType.Coin, "5 Chertum Coin", "5 Ch."),
-        new(0.10m, CashType.Coin, "10 Chertum Coin", "10 Ch."),
-        new(0.20m, CashType.Coin, "20 Chertum Coin", "20 Ch."),
-        new(0.25m, CashType.Coin, "25 Chertum Coin", "25 Ch."),
-        new(0.50m, CashType.Coin, "50 Chertum Coin", "50 Ch."),
+        new(0.05m, CashType.Coin, "5 Chertum Coin", "5 Ch.", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.10m, CashType.Coin, "10 Chertum Coin", "10 Ch.", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.20m, CashType.Coin, "20 Chertum Coin", "20 Ch.", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.25m, CashType.Coin, "25 Chertum Coin", "25 Ch.", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.50m, CashType.Coin, "50 Chertum Coin", "50 Ch.", Usage: CashUsagePolicy.NonRecyclable),
         new(1m, CashType.Coin, "1 Ngultrum Coin", "Nu. 1"),
     ];
 

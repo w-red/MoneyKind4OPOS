@@ -30,11 +30,11 @@ public sealed class SdgCurrency : ICurrency, ICashCountFormattable<SdgCurrency>,
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new CashFaceInfo(0.01m, CashType.Coin, "1 Piastre Coin", "1 piastre"),
-        new CashFaceInfo(0.05m, CashType.Coin, "5 Piastre Coin", "5 piastres"),
-        new CashFaceInfo(0.10m, CashType.Coin, "10 Piastre Coin", "10 piastres"),
-        new CashFaceInfo(0.20m, CashType.Coin, "20 Piastre Coin", "20 piastres"),
-        new CashFaceInfo(0.50m, CashType.Coin, "50 Piastre Coin", "50 piastres"),
+        new CashFaceInfo(0.01m, CashType.Coin, "1 Piastre Coin", "1 piastre", Usage: CashUsagePolicy.NonRecyclable),
+        new CashFaceInfo(0.05m, CashType.Coin, "5 Piastre Coin", "5 piastres", Usage: CashUsagePolicy.NonRecyclable),
+        new CashFaceInfo(0.10m, CashType.Coin, "10 Piastre Coin", "10 piastres", Usage: CashUsagePolicy.NonRecyclable),
+        new CashFaceInfo(0.20m, CashType.Coin, "20 Piastre Coin", "20 piastres", Usage: CashUsagePolicy.NonRecyclable),
+        new CashFaceInfo(0.50m, CashType.Coin, "50 Piastre Coin", "50 piastres", Usage: CashUsagePolicy.NonRecyclable),
         new CashFaceInfo(1.00m, CashType.Coin, "1 Pound Coin", "1 Pound")
     ];
 

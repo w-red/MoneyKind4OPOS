@@ -49,7 +49,8 @@ public class SgdCurrency :
         new(10m, CashType.Bill, "10 Dollars", "$10"),
         new(50m, CashType.Bill, "50 Dollars", "$50"),
         new(100m, CashType.Bill, "100 Dollars", "$100"),
-        new(1000m, CashType.Bill, "1000 Dollars", "$1000"),
+        new(1000m, CashType.Bill, "1000 Dollars", "$1000", Usage: CashUsagePolicy.CollectionOnly),
+        new(10000m, CashType.Bill, "10000 Dollars", "$10000", Usage: CashUsagePolicy.CollectionOnly),
     ];
 
     /// <inheritdoc/>

@@ -36,11 +36,11 @@ public class SleCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(0.01m, CashType.Coin, "1 Cent", "1c"),
-        new(0.05m, CashType.Coin, "5 Cents", "5c"),
-        new(0.10m, CashType.Coin, "10 Cents", "10c"),
-        new(0.25m, CashType.Coin, "25 Cents", "25c"),
-        new(0.50m, CashType.Coin, "50 Cents", "50c"),
+        new(0.01m, CashType.Coin, "1 Cent", "1c", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.05m, CashType.Coin, "5 Cents", "5c", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.10m, CashType.Coin, "10 Cents", "10c", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.25m, CashType.Coin, "25 Cents", "25c", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.50m, CashType.Coin, "50 Cents", "50c", Usage: CashUsagePolicy.NonRecyclable),
     ];
 
     /// <inheritdoc/>

@@ -30,14 +30,14 @@ public class XafCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(1m, CashType.Coin, "1 Franc", "1 FCFA"),
-        new(2m, CashType.Coin, "2 Francs", "2 FCFA"),
-        new(5m, CashType.Coin, "5 Francs", "5 FCFA"),
-        new(10m, CashType.Coin, "10 Francs", "10 FCFA"),
-        new(25m, CashType.Coin, "25 Francs", "25 FCFA"),
+        new(1m, CashType.Coin, "1 Franc", "1 FCFA", Usage: CashUsagePolicy.NonRecyclable),
+        new(2m, CashType.Coin, "2 Francs", "2 FCFA", Usage: CashUsagePolicy.NonRecyclable),
+        new(5m, CashType.Coin, "5 Francs", "5 FCFA", Usage: CashUsagePolicy.NonRecyclable),
+        new(10m, CashType.Coin, "10 Francs", "10 FCFA", Usage: CashUsagePolicy.NonRecyclable),
+        new(25m, CashType.Coin, "25 Francs", "25 FCFA", Usage: CashUsagePolicy.NonRecyclable),
         new(50m, CashType.Coin, "50 Francs", "50 FCFA"),
         new(100m, CashType.Coin, "100 Francs", "100 FCFA"),
-        new(200m, CashType.Coin, "200 Francs", "200 FCFA"),
+        new(200m, CashType.Coin, "200 Francs", "200 FCFA", Usage: CashUsagePolicy.NonRecyclable),
         new(500m, CashType.Coin, "500 Francs", "500 FCFA"),
     ];
 
@@ -48,7 +48,7 @@ public class XafCurrency :
         new(1000m, CashType.Bill, "1000 Francs", "1000 FCFA"),
         new(2000m, CashType.Bill, "2000 Francs", "2000 FCFA"),
         new(5000m, CashType.Bill, "5000 Francs", "5000 FCFA"),
-        new(10000m, CashType.Bill, "10000 Francs", "10000 FCFA"),
+        new(10000m, CashType.Bill, "10000 Francs", "10000 FCFA", Usage: CashUsagePolicy.CollectionOnly),
     ];
 
     /// <inheritdoc/>

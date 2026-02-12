@@ -19,7 +19,7 @@ public class TwdCurrency :
     public static Iso4217 Code => Iso4217.TWD;
 
     /// <inheritdoc/>
-    public static decimal MinimumUnit => 1m;
+    public static decimal MinimumUnit => 0.5m;
 
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Global { get; } =
@@ -38,6 +38,7 @@ public class TwdCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
+        new(0.50m, CashType.Coin, "0.5 Dollar Coin", "$0.5", Usage: CashUsagePolicy.NonRecyclable),
         new(1.00m, CashType.Coin, "1 Dollar Coin", "$1"),
         new(5.00m, CashType.Coin, "5 Dollar Coin", "$5"),
         new(10.00m, CashType.Coin, "10 Dollar Coin", "$10"),
@@ -52,7 +53,7 @@ public class TwdCurrency :
         new(200m, CashType.Bill, "200 Dollar Bill", "$200"),
         new(500m, CashType.Bill, "500 Dollar Bill", "$500"),
         new(1000m, CashType.Bill, "1000 Dollar Bill", "$1000"),
-        new(2000m, CashType.Bill, "2000 Dollar Bill", "$2000"),
+        new(2000m, CashType.Bill, "2000 Dollar Bill", "$2000", Usage: CashUsagePolicy.CollectionOnly),
     ];
 
     /// <inheritdoc/>

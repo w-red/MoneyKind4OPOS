@@ -59,8 +59,8 @@ public class LbpCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(250m, CashType.Coin, "250 Pound Coin", "250 LL"),
-        new(500m, CashType.Coin, "500 Pound Coin", "500 LL"),
+        new(250m, CashType.Coin, "250 Pound Coin", "250 LL", Usage: CashUsagePolicy.NonRecyclable),
+        new(500m, CashType.Coin, "500 Pound Coin", "500 LL", Usage: CashUsagePolicy.NonRecyclable),
     ];
 
     /// <inheritdoc/>

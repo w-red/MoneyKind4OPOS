@@ -59,9 +59,9 @@ public class IrrCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(1000m, CashType.Coin, "1,000 Rials Coin", "1,000 ﷼"),
-        new(2000m, CashType.Coin, "2,000 Rials Coin", "2,000 ﷼"),
-        new(5000m, CashType.Coin, "5,000 Rials Coin", "5,000 ﷼"),
+        new(1000m, CashType.Coin, "1,000 Rials Coin", "1,000 ﷼", Usage: CashUsagePolicy.NonRecyclable),
+        new(2000m, CashType.Coin, "2,000 Rials Coin", "2,000 ﷼", Usage: CashUsagePolicy.NonRecyclable),
+        new(5000m, CashType.Coin, "5,000 Rials Coin", "5,000 ﷼", Usage: CashUsagePolicy.NonRecyclable),
     ];
 
     /// <inheritdoc/>

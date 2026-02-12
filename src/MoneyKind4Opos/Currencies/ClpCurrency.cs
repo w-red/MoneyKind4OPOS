@@ -58,8 +58,8 @@ public class ClpCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(1m, CashType.Coin, "$ 1 Coin", "$ 1"),
-        new(5m, CashType.Coin, "$ 5 Coin", "$ 5"),
+        new(1m, CashType.Coin, "$ 1 Coin", "$ 1", Usage: CashUsagePolicy.NonRecyclable),
+        new(5m, CashType.Coin, "$ 5 Coin", "$ 5", Usage: CashUsagePolicy.NonRecyclable),
         new(10m, CashType.Coin, "$ 10 Coin", "$ 10"),
         new(50m, CashType.Coin, "$ 50 Coin", "$ 50"),
         new(100m, CashType.Coin, "$ 100 Coin", "$ 100"),
@@ -73,7 +73,7 @@ public class ClpCurrency :
         new(2000m, CashType.Bill, "$ 2000 Bill", "$ 2000"),
         new(5000m, CashType.Bill, "$ 5000 Bill", "$ 5000"),
         new(10000m, CashType.Bill, "$ 10000 Bill", "$ 10000"),
-        new(20000m, CashType.Bill, "$ 20000 Bill", "$ 20000"),
+        new(20000m, CashType.Bill, "$ 20000 Bill", "$ 20000", Usage: CashUsagePolicy.CollectionOnly),
     ];
 
     /// <inheritdoc/>

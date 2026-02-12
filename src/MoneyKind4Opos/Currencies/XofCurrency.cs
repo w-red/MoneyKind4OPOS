@@ -30,10 +30,10 @@ public class XofCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(1m, CashType.Coin, "1 Franc", "1 CFA"),
-        new(5m, CashType.Coin, "5 Francs", "5 CFA"),
-        new(10m, CashType.Coin, "10 Francs", "10 CFA"),
-        new(25m, CashType.Coin, "25 Francs", "25 CFA"),
+        new(1m, CashType.Coin, "1 Franc", "1 CFA", Usage: CashUsagePolicy.NonRecyclable),
+        new(5m, CashType.Coin, "5 Francs", "5 CFA", Usage: CashUsagePolicy.NonRecyclable),
+        new(10m, CashType.Coin, "10 Francs", "10 CFA", Usage: CashUsagePolicy.NonRecyclable),
+        new(25m, CashType.Coin, "25 Francs", "25 CFA", Usage: CashUsagePolicy.NonRecyclable),
         new(50m, CashType.Coin, "50 Francs", "50 CFA"),
         new(100m, CashType.Coin, "100 Francs", "100 CFA"),
         new(200m, CashType.Coin, "200 Francs", "200 CFA"),
@@ -47,7 +47,7 @@ public class XofCurrency :
         new(1000m, CashType.Bill, "1000 Francs", "1000 CFA"),
         new(2000m, CashType.Bill, "2000 Francs", "2000 CFA"),
         new(5000m, CashType.Bill, "5000 Francs", "5000 CFA"),
-        new(10000m, CashType.Bill, "10000 Francs", "10000 CFA"),
+        new(10000m, CashType.Bill, "10000 Francs", "10000 CFA", Usage: CashUsagePolicy.CollectionOnly),
     ];
 
     /// <inheritdoc/>

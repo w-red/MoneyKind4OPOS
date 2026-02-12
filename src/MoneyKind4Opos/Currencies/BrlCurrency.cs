@@ -37,7 +37,7 @@ public class BrlCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(0.01m, CashType.Coin, "1 ¢ Coin", "1¢"),
+        new(0.01m, CashType.Coin, "1 ¢ Coin", "1¢", Usage: CashUsagePolicy.NonRecyclable),
         new(0.05m, CashType.Coin, "5 ¢ Coin", "5¢"),
         new(0.1m, CashType.Coin, "10 ¢ Coin", "10¢"),
         new(0.25m, CashType.Coin, "25 ¢ Coin", "25¢"),
@@ -47,14 +47,14 @@ public class BrlCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Bills =>
     [
-        new(1.0m, CashType.Bill, "R$ 1 Bill", "R$ 1"),
+        new(1.0m, CashType.Bill, "R$ 1 Bill", "R$ 1", Usage: CashUsagePolicy.NonRecyclable),
         new(2.0m, CashType.Bill, "R$ 2 Bill", "R$ 2"),
         new(5.0m, CashType.Bill, "R$ 5 Bill", "R$ 5"),
         new(10.0m, CashType.Bill, "R$ 10 Bill", "R$ 10"),
         new(20.0m, CashType.Bill, "R$ 20 Bill", "R$ 20"),
         new(50.0m, CashType.Bill, "R$ 50 Bill", "R$ 50"),
         new(100.0m, CashType.Bill, "R$ 100 Bill", "R$ 100"),
-        new(200.0m, CashType.Bill, "R$ 200 Bill", "R$ 200"),
+        new(200.0m, CashType.Bill, "R$ 200 Bill", "R$ 200", Usage: CashUsagePolicy.CollectionOnly),
     ];
 
     /// <inheritdoc/>

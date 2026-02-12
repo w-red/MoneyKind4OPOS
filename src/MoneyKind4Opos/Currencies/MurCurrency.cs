@@ -30,9 +30,9 @@ public sealed class MurCurrency : ICurrency, ICashCountFormattable<MurCurrency>,
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new CashFaceInfo(0.05m, CashType.Coin, "5 Cent Coin", "5 cents"),
-        new CashFaceInfo(0.20m, CashType.Coin, "20 Cent Coin", "20 cents"),
-        new CashFaceInfo(0.50m, CashType.Coin, "50 Cent Coin", "50 cents"),
+        new CashFaceInfo(0.05m, CashType.Coin, "5 Cent Coin", "5 cents", Usage: CashUsagePolicy.NonRecyclable),
+        new CashFaceInfo(0.20m, CashType.Coin, "20 Cent Coin", "20 cents", Usage: CashUsagePolicy.NonRecyclable),
+        new CashFaceInfo(0.50m, CashType.Coin, "50 Cent Coin", "50 cents", Usage: CashUsagePolicy.NonRecyclable),
         new CashFaceInfo(1m, CashType.Coin, "1 Rupee Coin", "1 Rupee"),
         new CashFaceInfo(5m, CashType.Coin, "5 Rupee Coin", "5 Rupees"),
         new CashFaceInfo(10m, CashType.Coin, "10 Rupee Coin", "10 Rupees"),

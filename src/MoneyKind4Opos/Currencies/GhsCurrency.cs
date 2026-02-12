@@ -36,7 +36,7 @@ public class GhsCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(0.01m, CashType.Coin, "1 Pesewa", "1p"),
+        new(0.01m, CashType.Coin, "1 Pesewa", "1p", Usage: CashUsagePolicy.NonRecyclable),
         new(0.05m, CashType.Coin, "5 Pesewas", "5p"),
         new(0.10m, CashType.Coin, "10 Pesewas", "10p"),
         new(0.20m, CashType.Coin, "20 Pesewas", "20p"),

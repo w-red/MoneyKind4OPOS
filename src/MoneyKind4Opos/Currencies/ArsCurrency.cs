@@ -54,7 +54,7 @@ public class ArsCurrency :
         new(1000.0m, CashType.Bill, "1000 Pesos Bill", "$1000"),
         new(2000.0m, CashType.Bill, "2000 Pesos Bill", "$2000"),
         new(10000.0m, CashType.Bill, "10000 Pesos Bill", "$10000"),
-        new(20000.0m, CashType.Bill, "20000 Pesos Bill", "$20000"),
+        new(20000.0m, CashType.Bill, "20000 Pesos Bill", "$20000", Usage: CashUsagePolicy.CollectionOnly),
     ];
 
     /// <inheritdoc/>

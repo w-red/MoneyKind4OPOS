@@ -38,8 +38,8 @@ public class UzsCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(50m, CashType.Coin, "50 Soʻm Coin", "50 Soʻm"),
-        new(100m, CashType.Coin, "100 Soʻm Coin", "100 Soʻm"),
+        new(50m, CashType.Coin, "50 Soʻm Coin", "50 Soʻm", Usage: CashUsagePolicy.NonRecyclable),
+        new(100m, CashType.Coin, "100 Soʻm Coin", "100 Soʻm", Usage: CashUsagePolicy.NonRecyclable),
         new(200m, CashType.Coin, "200 Soʻm Coin", "200 Soʻm"),
         new(500m, CashType.Coin, "500 Soʻm Coin", "500 Soʻm"),
         new(1000m, CashType.Coin, "1000 Soʻm Coin", "1000 Soʻm"),

@@ -37,12 +37,12 @@ public class TjsCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(0.01m, CashType.Coin, "1 Diram Coin", "0.01 SM"),
-        new(0.05m, CashType.Coin, "5 Diram Coin", "0.05 SM"),
-        new(0.10m, CashType.Coin, "10 Diram Coin", "0.10 SM"),
-        new(0.20m, CashType.Coin, "20 Diram Coin", "0.20 SM"),
-        new(0.25m, CashType.Coin, "25 Diram Coin", "0.25 SM"),
-        new(0.50m, CashType.Coin, "50 Diram Coin", "0.50 SM"),
+        new(0.01m, CashType.Coin, "1 Diram Coin", "0.01 SM", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.05m, CashType.Coin, "5 Diram Coin", "0.05 SM", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.10m, CashType.Coin, "10 Diram Coin", "0.10 SM", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.20m, CashType.Coin, "20 Diram Coin", "0.20 SM", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.25m, CashType.Coin, "25 Diram Coin", "0.25 SM", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.50m, CashType.Coin, "50 Diram Coin", "0.50 SM", Usage: CashUsagePolicy.NonRecyclable),
         new(1m, CashType.Coin, "1 Somoni Coin", "1 SM"),
         new(3m, CashType.Coin, "3 Somoni Coin", "3 SM"),
         new(5m, CashType.Coin, "5 Somoni Coin", "5 SM"),

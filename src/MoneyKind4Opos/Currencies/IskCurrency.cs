@@ -37,10 +37,10 @@ public class IskCurrency :
     public static IEnumerable<CashFaceInfo> Coins =>
     [
         new(1m, CashType.Coin, "1 Króna", "1 kr"),
-        new(5m, CashType.Coin, "5 Krónur", "5 kr"),
-        new(10m, CashType.Coin, "10 Krónur", "10 kr"),
-        new(50m, CashType.Coin, "50 Krónur", "50 kr"),
-        new(100m, CashType.Coin, "100 Krónur", "100 kr"),
+        new(5m, CashType.Coin, "5 Krónur", "5 kr", Usage: CashUsagePolicy.NonRecyclable),
+        new(10m, CashType.Coin, "10 Krónur", "10 kr", Usage: CashUsagePolicy.NonRecyclable),
+        new(50m, CashType.Coin, "50 Krónur", "50 kr", Usage: CashUsagePolicy.NonRecyclable),
+        new(100m, CashType.Coin, "100 Krónur", "100 kr", Usage: CashUsagePolicy.NonRecyclable),
     ];
 
     /// <inheritdoc/>
@@ -50,7 +50,7 @@ public class IskCurrency :
         new(1000m, CashType.Bill, "1000 Krónur", "1000 kr"),
         new(2000m, CashType.Bill, "2000 Krónur", "2000 kr"),
         new(5000m, CashType.Bill, "5000 Krónur", "5000 kr"),
-        new(10000m, CashType.Bill, "10000 Krónur", "10000 kr"),
+        new(10000m, CashType.Bill, "10000 Krónur", "10000 kr", Usage: CashUsagePolicy.CollectionOnly),
     ];
 
     /// <inheritdoc/>

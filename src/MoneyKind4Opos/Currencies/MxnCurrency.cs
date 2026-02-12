@@ -36,9 +36,9 @@ public class MxnCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(0.05m, CashType.Coin, "5¢ Coin", "5¢"),
-        new(0.1m, CashType.Coin, "10¢ Coin", "10¢"),
-        new(0.2m, CashType.Coin, "20¢ Coin", "20¢"),
+        new(0.05m, CashType.Coin, "5¢ Coin", "5¢", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.1m, CashType.Coin, "10¢ Coin", "10¢", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.2m, CashType.Coin, "20¢ Coin", "20¢", Usage: CashUsagePolicy.NonRecyclable),
         new(0.5m, CashType.Coin, "50¢ Coin", "50¢"),
         new(1m, CashType.Coin, "$ 1 Coin", "$ 1"),
         new(2m, CashType.Coin, "$ 2 Coin", "$ 2"),

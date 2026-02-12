@@ -36,8 +36,8 @@ public class KwdCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(0.001m, CashType.Coin, "1 fils Coin", "1f"),
-        new(0.005m, CashType.Coin, "5 fils Coin", "5f"),
+        new(0.001m, CashType.Coin, "1 fils Coin", "1f", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.005m, CashType.Coin, "5 fils Coin", "5f", Usage: CashUsagePolicy.NonRecyclable),
         new(0.01m, CashType.Coin, "10 fils Coin", "10f"),
         new(0.02m, CashType.Coin, "20 fils Coin", "20f"),
         new(0.05m, CashType.Coin, "50 fils Coin", "50f"),

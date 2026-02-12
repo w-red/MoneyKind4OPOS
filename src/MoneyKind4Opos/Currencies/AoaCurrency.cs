@@ -38,8 +38,8 @@ public sealed class AoaCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(1m, CashType.Coin, "1 Kwanza Coin", "1 Kwanza"),
-        new(5m, CashType.Coin, "5 Kwanza Coin", "5 Kwanzas"),
+        new(1m, CashType.Coin, "1 Kwanza Coin", "1 Kwanza", Usage: CashUsagePolicy.NonRecyclable),
+        new(5m, CashType.Coin, "5 Kwanza Coin", "5 Kwanzas", Usage: CashUsagePolicy.NonRecyclable),
         new(10m, CashType.Coin, "10 Kwanza Coin", "10 Kwanzas"),
         new(20m, CashType.Coin, "20 Kwanza Coin", "20 Kwanzas"),
         new(50m, CashType.Coin, "50 Kwanza Coin", "50 Kwanzas"),

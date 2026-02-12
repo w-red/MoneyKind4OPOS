@@ -32,8 +32,8 @@ public class InrCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(0.5m, CashType.Coin, "50 Paise", "50パイサ"),
-        new(1m, CashType.Coin, "1 Rupee Coin", "1ルピー硬貨"),
+        new(0.5m, CashType.Coin, "50 Paise", "50パイサ", Usage: CashUsagePolicy.NonRecyclable),
+        new(1m, CashType.Coin, "1 Rupee Coin", "1ルピー硬貨", Usage: CashUsagePolicy.NonRecyclable),
         new(2m, CashType.Coin, "2 Rupees Coin", "2ルピー硬貨"),
         new(5m, CashType.Coin, "5 Rupees Coin", "5ルピー硬貨"),
         new(10m, CashType.Coin, "10 Rupees Coin", "10ルピー硬貨"),

@@ -45,10 +45,10 @@ public class UahCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Bills =>
     [
-        new(1.0m, CashType.Bill, "1 Hryvnia Bill", "1₴"),
-        new(2.0m, CashType.Bill, "2 Hryvni Bill", "2₴"),
-        new(5.0m, CashType.Bill, "5 Hryvень Bill", "5₴"),
-        new(10.0m, CashType.Bill, "10 Hryvень Bill", "10₴"),
+        new(1.0m, CashType.Bill, "1 Hryvnia Bill", "1₴", Usage: CashUsagePolicy.NonRecyclable),
+        new(2.0m, CashType.Bill, "2 Hryvni Bill", "2₴", Usage: CashUsagePolicy.NonRecyclable),
+        new(5.0m, CashType.Bill, "5 Hryvень Bill", "5₴", Usage: CashUsagePolicy.NonRecyclable),
+        new(10.0m, CashType.Bill, "10 Hryvень Bill", "10₴", Usage: CashUsagePolicy.NonRecyclable),
         new(20.0m, CashType.Bill, "20 Hryvень Bill", "20₴"),
         new(50.0m, CashType.Bill, "50 Hryvень Bill", "50₴"),
         new(100.0m, CashType.Bill, "100 Hryvень Bill", "100₴"),

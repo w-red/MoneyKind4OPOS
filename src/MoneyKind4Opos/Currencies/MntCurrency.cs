@@ -37,11 +37,11 @@ public class MntCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(20m, CashType.Coin, "20 Tugrik Coin", "20 ₮"),
-        new(50m, CashType.Coin, "50 Tugrik Coin", "50 ₮"),
-        new(100m, CashType.Coin, "100 Tugrik Coin", "100 ₮"),
-        new(200m, CashType.Coin, "200 Tugrik Coin", "200 ₮"),
-        new(500m, CashType.Coin, "500 Tugrik Coin", "500 ₮"),
+        new(20m, CashType.Coin, "20 Tugrik Coin", "20 ₮", Usage: CashUsagePolicy.NonRecyclable),
+        new(50m, CashType.Coin, "50 Tugrik Coin", "50 ₮", Usage: CashUsagePolicy.NonRecyclable),
+        new(100m, CashType.Coin, "100 Tugrik Coin", "100 ₮", Usage: CashUsagePolicy.NonRecyclable),
+        new(200m, CashType.Coin, "200 Tugrik Coin", "200 ₮", Usage: CashUsagePolicy.NonRecyclable),
+        new(500m, CashType.Coin, "500 Tugrik Coin", "500 ₮", Usage: CashUsagePolicy.NonRecyclable),
     ];
 
     /// <inheritdoc/>

@@ -33,7 +33,7 @@ public class HufCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(5m, CashType.Coin, "5 Forint Coin", "5 Ft-os érme"),
+        new(5m, CashType.Coin, "5 Forint Coin", "5 Ft-os érme", Usage: CashUsagePolicy.NonRecyclable),
         new(10m, CashType.Coin, "10 Forint Coin", "10 Ft-os érme"),
         new(20m, CashType.Coin, "20 Forint Coin", "20 Ft-os érme"),
         new(50m, CashType.Coin, "50 Forint Coin", "50 Ft-os érme"),

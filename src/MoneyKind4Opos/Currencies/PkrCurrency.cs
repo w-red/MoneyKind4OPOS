@@ -37,8 +37,8 @@ public class PkrCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(1m, CashType.Coin, "1 Rupee Coin", "1 Rs."),
-        new(2m, CashType.Coin, "2 Rupees Coin", "2 Rs."),
+        new(1m, CashType.Coin, "1 Rupee Coin", "1 Rs.", Usage: CashUsagePolicy.NonRecyclable),
+        new(2m, CashType.Coin, "2 Rupees Coin", "2 Rs.", Usage: CashUsagePolicy.NonRecyclable),
         new(5m, CashType.Coin, "5 Rupees Coin", "5 Rs."),
         new(10m, CashType.Coin, "10 Rupees Coin", "10 Rs."),
     ];

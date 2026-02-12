@@ -36,8 +36,8 @@ public class MadCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(0.10m, CashType.Coin, "10 Santimat", "10c"),
-        new(0.20m, CashType.Coin, "20 Santimat", "20c"),
+        new(0.10m, CashType.Coin, "10 Santimat", "10c", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.20m, CashType.Coin, "20 Santimat", "20c", Usage: CashUsagePolicy.NonRecyclable),
         new(0.50m, CashType.Coin, "1/2 Dirham", "1/2DH"),
         new(1m, CashType.Coin, "1 Dirham", "1DH"),
         new(2m, CashType.Coin, "2 Dirhams", "2DH"),

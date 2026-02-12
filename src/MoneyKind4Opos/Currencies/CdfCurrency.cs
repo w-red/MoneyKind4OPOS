@@ -41,9 +41,9 @@ public sealed class CdfCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Bills =>
     [
-        new(50m, CashType.Bill, "50 Franc Bill", "50 FC"),
-        new(100m, CashType.Bill, "100 Franc Bill", "100 FC"),
-        new(200m, CashType.Bill, "200 Franc Bill", "200 FC"),
+        new(50m, CashType.Bill, "50 Franc Bill", "50 FC", Usage: CashUsagePolicy.NonRecyclable),
+        new(100m, CashType.Bill, "100 Franc Bill", "100 FC", Usage: CashUsagePolicy.NonRecyclable),
+        new(200m, CashType.Bill, "200 Franc Bill", "200 FC", Usage: CashUsagePolicy.NonRecyclable),
         new(500m, CashType.Bill, "500 Franc Bill", "500 FC"),
         new(1000m, CashType.Bill, "1000 Franc Bill", "1000 FC"),
         new(5000m, CashType.Bill, "5000 Franc Bill", "5000 FC"),

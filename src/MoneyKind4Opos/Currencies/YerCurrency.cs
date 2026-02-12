@@ -37,10 +37,10 @@ public class YerCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(1m, CashType.Coin, "1 Rial Coin", "1 ﷼"),
-        new(5m, CashType.Coin, "5 Rial Coin", "5 ﷼"),
-        new(10m, CashType.Coin, "10 Rial Coin", "10 ﷼"),
-        new(20m, CashType.Coin, "20 Rial Coin", "20 ﷼"),
+        new(1m, CashType.Coin, "1 Rial Coin", "1 ﷼", Usage: CashUsagePolicy.NonRecyclable),
+        new(5m, CashType.Coin, "5 Rial Coin", "5 ﷼", Usage: CashUsagePolicy.NonRecyclable),
+        new(10m, CashType.Coin, "10 Rial Coin", "10 ﷼", Usage: CashUsagePolicy.NonRecyclable),
+        new(20m, CashType.Coin, "20 Rial Coin", "20 ﷼", Usage: CashUsagePolicy.NonRecyclable),
     ];
 
     /// <inheritdoc/>

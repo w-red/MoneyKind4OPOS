@@ -22,6 +22,6 @@ public class MoneyKindZarTest
     public void ZarCurrencyInfoShouldBeCorrect()
     {
         ZarCurrency.Code.ShouldBe(Iso4217.ZAR);
-        ZarCurrency.MinimumUnit.ShouldBe(0.10m);
+        ZarCurrency.MinimumUnit.ShouldBe(0.05m);
     }
 }

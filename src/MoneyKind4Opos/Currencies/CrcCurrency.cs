@@ -33,7 +33,7 @@ public class CrcCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(5m, CashType.Coin, "5 Colones", "\u20A15"),
+        new(5m, CashType.Coin, "5 Colones", "\u20A15", Usage: CashUsagePolicy.NonRecyclable),
         new(10m, CashType.Coin, "10 Colones", "\u20A110"),
         new(25m, CashType.Coin, "25 Colones", "\u20A125"),
         new(50m, CashType.Coin, "50 Colones", "\u20A150"),

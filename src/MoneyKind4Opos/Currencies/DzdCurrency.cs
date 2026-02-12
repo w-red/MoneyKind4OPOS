@@ -36,8 +36,8 @@ public class DzdCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(1m, CashType.Coin, "1 Dinar", "1DA"),
-        new(2m, CashType.Coin, "2 Dinars", "2DA"),
+        new(1m, CashType.Coin, "1 Dinar", "1DA", Usage: CashUsagePolicy.NonRecyclable),
+        new(2m, CashType.Coin, "2 Dinars", "2DA", Usage: CashUsagePolicy.NonRecyclable),
         new(5m, CashType.Coin, "5 Dinars", "5DA"),
         new(10m, CashType.Coin, "10 Dinars", "10DA"),
         new(20m, CashType.Coin, "20 Dinars", "20DA"),

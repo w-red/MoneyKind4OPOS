@@ -71,9 +71,9 @@ public class CnyCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(0.01m, CashType.Coin, "1 Fen Coin", "1分硬币"),
-        new(0.02m, CashType.Coin, "2 Fen Coin", "2分硬币"),
-        new(0.05m, CashType.Coin, "5 Fen Coin", "5分硬币"),
+        new(0.01m, CashType.Coin, "1 Fen Coin", "1分硬币", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.02m, CashType.Coin, "2 Fen Coin", "2分硬币", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.05m, CashType.Coin, "5 Fen Coin", "5分硬币", Usage: CashUsagePolicy.NonRecyclable),
         new(0.10m, CashType.Coin, "1 Jiao Coin", "1角硬币"),
         new(0.20m, CashType.Coin, "2 Jiao Coin", "2角硬币"),
         new(0.50m, CashType.Coin, "5 Jiao Coin", "5角硬币"),
@@ -89,7 +89,7 @@ public class CnyCurrency :
         new(10.00m, CashType.Bill, "10 Yuan Bill", "10元券"),
         new(20.00m, CashType.Bill, "20 Yuan Bill", "20元券"),
         new(50.00m, CashType.Bill, "50 Yuan Bill", "50元券"),
-        new(100.00m, CashType.Bill, "100 Yuan Bill", "100元券"),
+        new(100.00m, CashType.Bill, "100 Yuan Bill", "100元券", Usage: CashUsagePolicy.CollectionOnly),
     ];
 
     /// <inheritdoc/>

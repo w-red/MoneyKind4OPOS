@@ -18,7 +18,7 @@ public class VndCurrency :
     public static Iso4217 Code => Iso4217.VND;
 
     /// <inheritdoc/>
-    public static decimal MinimumUnit => 1000m;
+    public static decimal MinimumUnit => 100m;
 
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Global { get; } =
@@ -35,11 +35,21 @@ public class VndCurrency :
     ];
 
     /// <inheritdoc/>
-    public static IEnumerable<CashFaceInfo> Coins => [];
+    public static IEnumerable<CashFaceInfo> Coins =>
+    [
+        new(200m, CashType.Coin, "200 ₫", "200 đồng", Usage: CashUsagePolicy.NonRecyclable),
+        new(500m, CashType.Coin, "500 ₫", "500 đồng", Usage: CashUsagePolicy.NonRecyclable),
+        new(1000m, CashType.Coin, "1000 ₫", "1000 đồng", Usage: CashUsagePolicy.NonRecyclable),
+        new(2000m, CashType.Coin, "2000 ₫", "2000 đồng", Usage: CashUsagePolicy.NonRecyclable),
+        new(5000m, CashType.Coin, "5000 ₫", "5000 đồng", Usage: CashUsagePolicy.NonRecyclable),
+    ];
 
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Bills =>
     [
+        new(100m, CashType.Bill, "100 ₫", "100 đồng", Usage: CashUsagePolicy.NonRecyclable),
+        new(200m, CashType.Bill, "200 ₫", "200 đồng", Usage: CashUsagePolicy.NonRecyclable),
+        new(500m, CashType.Bill, "500 ₫", "500 đồng", Usage: CashUsagePolicy.NonRecyclable),
         new(1000m, CashType.Bill, "1.000 ₫", "Một nghìn đồng"),
         new(2000m, CashType.Bill, "2.000 ₫", "Hai nghìn đồng"),
         new(5000m, CashType.Bill, "5.000 ₫", "Năm nghìn đồng"),
@@ -48,7 +58,7 @@ public class VndCurrency :
         new(50000m, CashType.Bill, "50.000 ₫", "Năm mươi nghìn đồng"),
         new(100000m, CashType.Bill, "100.000 ₫", "Một trăm nghìn đồng"),
         new(200000m, CashType.Bill, "200.000 ₫", "Hai trăm nghìn đồng"),
-        new(500000m, CashType.Bill, "500.000 ₫", "Năm trăm nghìn đồng"),
+        new(500000m, CashType.Bill, "500.000 ₫", "Năm trăm nghìn đồng", Usage: CashUsagePolicy.CollectionOnly),
     ];
 
     /// <inheritdoc/>

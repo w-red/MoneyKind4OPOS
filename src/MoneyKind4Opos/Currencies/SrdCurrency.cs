@@ -36,10 +36,10 @@ public class SrdCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(0.01m, CashType.Coin, "1 Cent Coin", "1 cent"),
-        new(0.05m, CashType.Coin, "5 Cents Coin", "5 cents"),
-        new(0.10m, CashType.Coin, "10 Cents Coin", "10 cents"),
-        new(0.25m, CashType.Coin, "25 Cents Coin", "25 cents"),
+        new(0.01m, CashType.Coin, "1 Cent Coin", "1 cent", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.05m, CashType.Coin, "5 Cents Coin", "5 cents", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.10m, CashType.Coin, "10 Cents Coin", "10 cents", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.25m, CashType.Coin, "25 Cents Coin", "25 cents", Usage: CashUsagePolicy.NonRecyclable),
         new(1.00m, CashType.Coin, "100 Cents Coin", "100 cents"), // or 1 Dollar
         new(2.50m, CashType.Coin, "250 Cents Coin", "250 cents"), // or 2 1/2 Dollars
     ];

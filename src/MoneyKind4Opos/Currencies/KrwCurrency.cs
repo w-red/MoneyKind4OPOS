@@ -37,8 +37,8 @@ public class KrwCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(1m, CashType.Coin, "₩ 1 Coin", "₩ 1"),
-        new(5m, CashType.Coin, "₩ 5 Coin", "₩ 5"),
+        new(1m, CashType.Coin, "₩ 1 Coin", "₩ 1", Usage: CashUsagePolicy.NonRecyclable),
+        new(5m, CashType.Coin, "₩ 5 Coin", "₩ 5", Usage: CashUsagePolicy.NonRecyclable),
         new(10m, CashType.Coin, "₩ 10 Coin", "₩ 10"),
         new(50m, CashType.Coin, "₩ 50 Coin", "₩ 50"),
         new(100m, CashType.Coin, "₩ 100 Coin", "₩ 100"),
@@ -51,7 +51,7 @@ public class KrwCurrency :
         new(1000m, CashType.Bill, "₩ 1000 Bill", "₩ 1000"),
         new(5000m, CashType.Bill, "₩ 5000 Bill", "₩ 5000"),
         new(10000m, CashType.Bill, "₩ 10000 Bill", "₩ 10000"),
-        new(50000m, CashType.Bill, "₩ 50000 Bill", "₩ 50000"),
+        new(50000m, CashType.Bill, "₩ 50000 Bill", "₩ 50000", Usage: CashUsagePolicy.CollectionOnly),
     ];
 
     /// <inheritdoc/>

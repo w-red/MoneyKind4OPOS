@@ -36,10 +36,10 @@ public class EgpCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(0.05m, CashType.Coin, "5 Piastres", "5pt"),
-        new(0.10m, CashType.Coin, "10 Piastres", "10pt"),
-        new(0.20m, CashType.Coin, "20 Piastres", "20pt"),
-        new(0.25m, CashType.Coin, "25 Piastres", "25pt"),
+        new(0.05m, CashType.Coin, "5 Piastres", "5pt", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.10m, CashType.Coin, "10 Piastres", "10pt", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.20m, CashType.Coin, "20 Piastres", "20pt", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.25m, CashType.Coin, "25 Piastres", "25pt", Usage: CashUsagePolicy.NonRecyclable),
         new(0.50m, CashType.Coin, "50 Piastres", "50pt"),
         new(1m, CashType.Coin, "1 Pound", "£1"),
     ];

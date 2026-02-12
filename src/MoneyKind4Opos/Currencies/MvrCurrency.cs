@@ -36,11 +36,11 @@ public class MvrCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(0.01m, CashType.Coin, "1 Laari Coin", "1 L"),
-        new(0.05m, CashType.Coin, "5 Laari Coin", "5 L"),
-        new(0.10m, CashType.Coin, "10 Laari Coin", "10 L"),
-        new(0.25m, CashType.Coin, "25 Laari Coin", "25 L"),
-        new(0.50m, CashType.Coin, "50 Laari Coin", "50 L"),
+        new(0.01m, CashType.Coin, "1 Laari Coin", "1 L", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.05m, CashType.Coin, "5 Laari Coin", "5 L", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.10m, CashType.Coin, "10 Laari Coin", "10 L", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.25m, CashType.Coin, "25 Laari Coin", "25 L", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.50m, CashType.Coin, "50 Laari Coin", "50 L", Usage: CashUsagePolicy.NonRecyclable),
         new(1m, CashType.Coin, "1 Rufiyaa Coin", "Rf 1"),
         new(2m, CashType.Coin, "2 Rufiyaa Coin", "Rf 2"),
     ];

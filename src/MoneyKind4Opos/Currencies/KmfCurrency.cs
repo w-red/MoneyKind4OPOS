@@ -27,10 +27,10 @@ public sealed class KmfCurrency : ICurrency, ICashCountFormattable<KmfCurrency>,
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new CashFaceInfo(1m, CashType.Coin, "1 Franc Coin", "1 Franc"),
-        new CashFaceInfo(2m, CashType.Coin, "2 Franc Coin", "2 Francs"),
-        new CashFaceInfo(5m, CashType.Coin, "5 Franc Coin", "5 Francs"),
-        new CashFaceInfo(10m, CashType.Coin, "10 Franc Coin", "10 Francs"),
+        new CashFaceInfo(1m, CashType.Coin, "1 Franc Coin", "1 Franc", Usage: CashUsagePolicy.NonRecyclable),
+        new CashFaceInfo(2m, CashType.Coin, "2 Franc Coin", "2 Francs", Usage: CashUsagePolicy.NonRecyclable),
+        new CashFaceInfo(5m, CashType.Coin, "5 Franc Coin", "5 Francs", Usage: CashUsagePolicy.NonRecyclable),
+        new CashFaceInfo(10m, CashType.Coin, "10 Franc Coin", "10 Francs", Usage: CashUsagePolicy.NonRecyclable),
         new CashFaceInfo(25m, CashType.Coin, "25 Franc Coin", "25 Francs"),
         new CashFaceInfo(50m, CashType.Coin, "50 Franc Coin", "50 Francs"),
         new CashFaceInfo(100m, CashType.Coin, "100 Franc Coin", "100 Francs")

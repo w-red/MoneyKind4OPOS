@@ -39,7 +39,7 @@ public class MopCurrency :
         new(1m, CashType.Coin, "1 Pataca Coin", "壹圓"),
         new(2m, CashType.Coin, "2 Patacas Coin", "貳圓"),
         new(5m, CashType.Coin, "5 Patacas Coin", "伍圓"),
-        new(10m, CashType.Coin, "10 Patacas Coin", "拾圓"),
+        new(10m, CashType.Coin, "10 Patacas Coin", "拾圓", Usage: CashUsagePolicy.NonRecyclable),
     ];
 
     /// <inheritdoc/>

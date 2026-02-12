@@ -41,7 +41,7 @@ public class LkrCurrency :
         new(2m, CashType.Coin, "2 Rupees Coin", "Rs. 2"),
         new(5m, CashType.Coin, "5 Rupees Coin", "Rs. 5"),
         new(10m, CashType.Coin, "10 Rupees Coin", "Rs. 10"),
-        new(20m, CashType.Coin, "20 Rupees Coin", "Rs. 20"),
+        new(20m, CashType.Coin, "20 Rupees Coin", "Rs. 20", Usage: CashUsagePolicy.NonRecyclable),
     ];
 
     /// <inheritdoc/>

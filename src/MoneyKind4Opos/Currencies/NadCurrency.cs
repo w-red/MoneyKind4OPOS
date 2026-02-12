@@ -38,7 +38,7 @@ public sealed class NadCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(0.05m, CashType.Coin, "5 Cent Coin", "5c"),
+        new(0.05m, CashType.Coin, "5 Cent Coin", "5c", Usage: CashUsagePolicy.NonRecyclable),
         new(0.10m, CashType.Coin, "10 Cent Coin", "10c"),
         new(0.50m, CashType.Coin, "50 Cent Coin", "50c"),
         new(1m, CashType.Coin, "1 Dollar Coin", "$1"),

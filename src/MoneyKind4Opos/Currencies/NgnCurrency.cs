@@ -36,9 +36,9 @@ public class NgnCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(0.50m, CashType.Coin, "50 Kobo", "50k"),
-        new(1m, CashType.Coin, "1 Naira", "\u20A61"),
-        new(2m, CashType.Coin, "2 Naira", "\u20A62"),
+        new(0.50m, CashType.Coin, "50 Kobo", "50k", Usage: CashUsagePolicy.NonRecyclable),
+        new(1m, CashType.Coin, "1 Naira", "\u20A61", Usage: CashUsagePolicy.NonRecyclable),
+        new(2m, CashType.Coin, "2 Naira", "\u20A62", Usage: CashUsagePolicy.NonRecyclable),
     ];
 
     /// <inheritdoc/>

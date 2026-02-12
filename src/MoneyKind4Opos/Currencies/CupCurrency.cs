@@ -36,10 +36,10 @@ public class CupCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(0.01m, CashType.Coin, "1 Centavo", "1¢"),
-        new(0.02m, CashType.Coin, "2 Centavos", "2¢"),
-        new(0.05m, CashType.Coin, "5 Centavos", "5¢"),
-        new(0.20m, CashType.Coin, "20 Centavos", "20¢"),
+        new(0.01m, CashType.Coin, "1 Centavo", "1¢", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.02m, CashType.Coin, "2 Centavos", "2¢", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.05m, CashType.Coin, "5 Centavos", "5¢", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.20m, CashType.Coin, "20 Centavos", "20¢", Usage: CashUsagePolicy.NonRecyclable),
         new(1.00m, CashType.Coin, "1 Peso", "$1"),
         new(3.00m, CashType.Coin, "3 Pesos", "$3"),
         new(5.00m, CashType.Coin, "5 Pesos", "$5"),

@@ -36,8 +36,8 @@ public class TndCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(0.010m, CashType.Coin, "10 Milim", "10m"),
-        new(0.020m, CashType.Coin, "20 Milim", "20m"),
+        new(0.010m, CashType.Coin, "10 Milim", "10m", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.020m, CashType.Coin, "20 Milim", "20m", Usage: CashUsagePolicy.NonRecyclable),
         new(0.050m, CashType.Coin, "50 Milim", "50m"),
         new(0.100m, CashType.Coin, "100 Milim", "100m"),
         new(0.200m, CashType.Coin, "200 Milim", "200m"),

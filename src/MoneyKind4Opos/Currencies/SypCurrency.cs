@@ -37,11 +37,11 @@ public class SypCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(1m, CashType.Coin, "1 Pound Coin", "1 LS"),
-        new(2m, CashType.Coin, "2 Pound Coin", "2 LS"),
-        new(5m, CashType.Coin, "5 Pound Coin", "5 LS"),
-        new(10m, CashType.Coin, "10 Pound Coin", "10 LS"),
-        new(25m, CashType.Coin, "25 Pound Coin", "25 LS"),
+        new(1m, CashType.Coin, "1 Pound Coin", "1 LS", Usage: CashUsagePolicy.NonRecyclable),
+        new(2m, CashType.Coin, "2 Pound Coin", "2 LS", Usage: CashUsagePolicy.NonRecyclable),
+        new(5m, CashType.Coin, "5 Pound Coin", "5 LS", Usage: CashUsagePolicy.NonRecyclable),
+        new(10m, CashType.Coin, "10 Pound Coin", "10 LS", Usage: CashUsagePolicy.NonRecyclable),
+        new(25m, CashType.Coin, "25 Pound Coin", "25 LS", Usage: CashUsagePolicy.NonRecyclable),
         new(50m, CashType.Coin, "50 Pound Coin", "50 LS"),
     ];
 

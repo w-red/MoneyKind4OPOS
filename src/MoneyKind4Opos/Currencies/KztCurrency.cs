@@ -35,12 +35,12 @@ public class KztCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(1m, CashType.Coin, "1 ₸ Coin", "1 ₸"),
-        new(2m, CashType.Coin, "2 ₸ Coin", "2 ₸"),
-        new(5m, CashType.Coin, "5 ₸ Coin", "5 ₸"),
-        new(10m, CashType.Coin, "10 ₸ Coin", "10 ₸"),
-        new(20m, CashType.Coin, "20 ₸ Coin", "20 ₸"),
-        new(50m, CashType.Coin, "50 ₸ Coin", "50 ₸"),
+        new(1m, CashType.Coin, "1 ₸ Coin", "1 ₸", Usage: CashUsagePolicy.NonRecyclable),
+        new(2m, CashType.Coin, "2 ₸ Coin", "2 ₸", Usage: CashUsagePolicy.NonRecyclable),
+        new(5m, CashType.Coin, "5 ₸ Coin", "5 ₸", Usage: CashUsagePolicy.NonRecyclable),
+        new(10m, CashType.Coin, "10 ₸ Coin", "10 ₸", Usage: CashUsagePolicy.NonRecyclable),
+        new(20m, CashType.Coin, "20 ₸ Coin", "20 ₸", Usage: CashUsagePolicy.NonRecyclable),
+        new(50m, CashType.Coin, "50 ₸ Coin", "50 ₸", Usage: CashUsagePolicy.NonRecyclable),
         new(100m, CashType.Coin, "100 ₸ Coin", "100 ₸"),
         new(200m, CashType.Coin, "200 ₸ Coin", "200 ₸"),
     ];

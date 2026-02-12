@@ -37,7 +37,7 @@ public class TryCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(0.01m, CashType.Coin, "1 Kurus Coin", "0.01 ₺"),
+        new(0.01m, CashType.Coin, "1 Kurus Coin", "0.01 ₺", Usage: CashUsagePolicy.NonRecyclable),
         new(0.05m, CashType.Coin, "5 Kurus Coin", "0.05 ₺"),
         new(0.10m, CashType.Coin, "10 Kurus Coin", "0.10 ₺"),
         new(0.25m, CashType.Coin, "25 Kurus Coin", "0.25 ₺"),
@@ -53,7 +53,7 @@ public class TryCurrency :
         new(20m, CashType.Bill, "20 Lira Bill", "20 ₺"),
         new(50m, CashType.Bill, "50 Lira Bill", "50 ₺"),
         new(100m, CashType.Bill, "100 Lira Bill", "100 ₺"),
-        new(200m, CashType.Bill, "200 Lira Bill", "200 ₺"),
+        new(200m, CashType.Bill, "200 Lira Bill", "200 ₺", Usage: CashUsagePolicy.CollectionOnly),
     ];
 
     /// <inheritdoc/>

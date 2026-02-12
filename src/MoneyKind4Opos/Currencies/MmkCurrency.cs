@@ -69,7 +69,7 @@ public class MmkCurrency :
         new(1000m, CashType.Bill, "1000 Kyats Bill", "K 1000"),
         new(5000m, CashType.Bill, "5000 Kyats Bill", "K 5000"),
         new(10000m, CashType.Bill, "10000 Kyats Bill", "K 10000"),
-        new(20000m, CashType.Bill, "20000 Kyats Bill", "K 20000"),
+        new(20000m, CashType.Bill, "20000 Kyats Bill", "K 20000", Usage: CashUsagePolicy.CollectionOnly),
     ];
 
     /// <inheritdoc/>

@@ -35,11 +35,11 @@ public class MdlCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(0.01m, CashType.Coin, "1 Ban Coin", "1 ban"),
-        new(0.05m, CashType.Coin, "5 Bani Coin", "5 bani"),
-        new(0.10m, CashType.Coin, "10 Bani Coin", "10 bani"),
-        new(0.25m, CashType.Coin, "25 Bani Coin", "25 bani"),
-        new(0.50m, CashType.Coin, "50 Bani Coin", "50 bani"),
+        new(0.01m, CashType.Coin, "1 Ban Coin", "1 ban", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.05m, CashType.Coin, "5 Bani Coin", "5 bani", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.10m, CashType.Coin, "10 Bani Coin", "10 bani", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.25m, CashType.Coin, "25 Bani Coin", "25 bani", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.50m, CashType.Coin, "50 Bani Coin", "50 bani", Usage: CashUsagePolicy.NonRecyclable),
         new(1.0m, CashType.Coin, "1 Leu Coin", "1 leu"),
         new(2.0m, CashType.Coin, "2 Lei Coin", "2 lei"),
         new(5.0m, CashType.Coin, "5 Lei Coin", "5 lei"),
@@ -48,9 +48,9 @@ public class MdlCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Bills =>
     [
-        new(1.0m, CashType.Bill, "1 Leu Bill", "1 leu"),
-        new(5.0m, CashType.Bill, "5 Lei Bill", "5 lei"),
-        new(10.0m, CashType.Bill, "10 Lei Bill", "10 lei"),
+        new(1.0m, CashType.Bill, "1 Leu Bill", "1 leu", Usage: CashUsagePolicy.NonRecyclable),
+        new(5.0m, CashType.Bill, "5 Lei Bill", "5 lei", Usage: CashUsagePolicy.NonRecyclable),
+        new(10.0m, CashType.Bill, "10 Lei Bill", "10 lei", Usage: CashUsagePolicy.NonRecyclable),
         new(20.0m, CashType.Bill, "20 Lei Bill", "20 lei"),
         new(50.0m, CashType.Bill, "50 Lei Bill", "50 lei"),
         new(100.0m, CashType.Bill, "100 Lei Bill", "100 lei"),

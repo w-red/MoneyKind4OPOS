@@ -40,7 +40,7 @@ public class BhdCurrency :
         new(0.025m, CashType.Coin, "25 Fils Coin", "25f"),
         new(0.05m, CashType.Coin, "50 Fils Coin", "50f"),
         new(0.1m, CashType.Coin, "100 Fils Coin", "100f"),
-        new(0.5m, CashType.Coin, "500 Fils Coin", "500f"),
+        new(0.5m, CashType.Coin, "500 Fils Coin", "500f", Usage: CashUsagePolicy.NonRecyclable),
     ];
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Bills =>

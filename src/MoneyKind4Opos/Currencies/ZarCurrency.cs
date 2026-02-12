@@ -13,7 +13,7 @@ public class ZarCurrency :
     public static Iso4217 Code => Iso4217.ZAR;
 
     /// <inheritdoc/>
-    public static decimal MinimumUnit => 0.10m;
+    public static decimal MinimumUnit => 0.05m;
 
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Global { get; } =
@@ -29,6 +29,7 @@ public class ZarCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
+        new(0.05m, CashType.Coin, "5 Cents", "5c", Usage: CashUsagePolicy.NonRecyclable),
         new(0.10m, CashType.Coin, "10 Cents", "10c"),
         new(0.20m, CashType.Coin, "20 Cents", "20c"),
         new(0.50m, CashType.Coin, "50 Cents", "50c"),
@@ -44,7 +45,7 @@ public class ZarCurrency :
         new(20m, CashType.Bill, "20 Rands", "R20"),
         new(50m, CashType.Bill, "50 Rands", "R50"),
         new(100m, CashType.Bill, "100 Rands", "R100"),
-        new(200m, CashType.Bill, "200 Rands", "R200"),
+        new(200m, CashType.Bill, "200 Rands", "R200", Usage: CashUsagePolicy.CollectionOnly),
     ];
 
     /// <inheritdoc/>

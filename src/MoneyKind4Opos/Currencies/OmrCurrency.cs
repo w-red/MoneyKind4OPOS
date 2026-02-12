@@ -35,10 +35,10 @@ public class OmrCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(0.005m, CashType.Coin, "5 Baisa Coin", "5b"),
-        new(0.01m, CashType.Coin, "10 Baisa Coin", "10b"),
-        new(0.025m, CashType.Coin, "25 Baisa Coin", "25b"),
-        new(0.05m, CashType.Coin, "50 Baisa Coin", "50b"),
+        new(0.005m, CashType.Coin, "5 Baisa Coin", "5b", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.01m, CashType.Coin, "10 Baisa Coin", "10b", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.025m, CashType.Coin, "25 Baisa Coin", "25b", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.05m, CashType.Coin, "50 Baisa Coin", "50b", Usage: CashUsagePolicy.NonRecyclable),
     ];
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Bills =>

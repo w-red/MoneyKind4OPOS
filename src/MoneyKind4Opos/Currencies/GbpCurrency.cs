@@ -43,6 +43,7 @@ public class GbpCurrency :
         new(0.50m, CashType.Coin, "50 Pence Coin", "50p"),
         new(1.00m, CashType.Coin, "1 Pound Coin", "£1"),
         new(2.00m, CashType.Coin, "2 Pounds Coin", "£2"),
+        new(5.00m, CashType.Coin, "5 Pounds Coin", "£5", Usage: CashUsagePolicy.NonRecyclable),
     ];
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Bills =>
@@ -51,7 +52,7 @@ public class GbpCurrency :
         new(10.00m, CashType.Bill, "10 Pounds Bill", "£10"),
         new(20.00m, CashType.Bill, "20 Pounds Bill", "£20"),
         new(50.00m, CashType.Bill, "50 Pounds Bill", "£50"),
-        new(100.00m, CashType.Bill, "100 Pounds Bill", "£100"),
+        new(100.00m, CashType.Bill, "100 Pounds Bill", "£100", Usage: CashUsagePolicy.CollectionOnly),
     ];
 
     /// <inheritdoc/>

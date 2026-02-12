@@ -69,7 +69,7 @@ public class MoneyKindBoundaryTest
         var inventory = new MoneyKind<JpyCurrency>();
         inventory[10000] = 100; // 1,000,000 yen
 
-        var result = inventory.CalculateChangeDetail(1000000m);
+        var result = inventory.CalculateChangeDetail(1000000m, onlyRecyclable: false);
 
         result.IsSucceed.ShouldBeTrue();
         result.PayableChange[10000].ShouldBe(100);
@@ -83,7 +83,7 @@ public class MoneyKindBoundaryTest
         var inventory = new MoneyKind<EurCurrency>();
         inventory[0.02m] = 2;
 
-        var result = inventory.CalculateChangeDetail(0.05m);
+        var result = inventory.CalculateChangeDetail(0.05m, onlyRecyclable: false);
 
         result.IsSucceed.ShouldBeFalse();
         result.PayableChange.TotalAmount().ShouldBe(0.04m);

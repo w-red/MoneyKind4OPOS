@@ -38,9 +38,9 @@ public sealed class MznCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(0.01m, CashType.Coin, "1 Centavo Coin", "1 centavo"),
-        new(0.05m, CashType.Coin, "5 Centavo Coin", "5 centavos"),
-        new(0.10m, CashType.Coin, "10 Centavo Coin", "10 centavos"),
+        new(0.01m, CashType.Coin, "1 Centavo Coin", "1 centavo", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.05m, CashType.Coin, "5 Centavo Coin", "5 centavos", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.10m, CashType.Coin, "10 Centavo Coin", "10 centavos", Usage: CashUsagePolicy.NonRecyclable),
         new(0.20m, CashType.Coin, "20 Centavo Coin", "20 centavos"),
         new(0.50m, CashType.Coin, "50 Centavo Coin", "50 centavos"),
         new(1m, CashType.Coin, "1 Metical Coin", "1 metical"),

@@ -35,11 +35,11 @@ public class SarCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(0.01m, CashType.Coin, "1 Halala Coin", "1h"),
-        new(0.05m, CashType.Coin, "5 Halala Coin", "5h"),
-        new(0.10m, CashType.Coin, "10 Halala Coin", "10h"),
-        new(0.25m, CashType.Coin, "25 Halala Coin", "25h"),
-        new(0.50m, CashType.Coin, "50 Halala Coin", "50h"),
+        new(0.01m, CashType.Coin, "1 Halala Coin", "1h", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.05m, CashType.Coin, "5 Halala Coin", "5h", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.10m, CashType.Coin, "10 Halala Coin", "10h", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.25m, CashType.Coin, "25 Halala Coin", "25h", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.50m, CashType.Coin, "50 Halala Coin", "50h", Usage: CashUsagePolicy.NonRecyclable),
         new(1.00m, CashType.Coin, "1 Riyal Coin", "SR 1"),
         new(2.00m, CashType.Coin, "2 Riyal Coin", "SR 2"),
     ];

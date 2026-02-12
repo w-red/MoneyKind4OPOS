@@ -19,7 +19,7 @@ public class ThbCurrency :
     public static Iso4217 Code => Iso4217.THB;
 
     /// <inheritdoc/>
-    public static decimal MinimumUnit => 0.25m;
+    public static decimal MinimumUnit => 0.01m;
 
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Global { get; } =
@@ -38,6 +38,9 @@ public class ThbCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
+        new(0.01m, CashType.Coin, "1 Satang Coin", "1 สตางค์", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.05m, CashType.Coin, "5 Satang Coin", "5 สตางค์", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.10m, CashType.Coin, "10 Satang Coin", "10 สตางค์", Usage: CashUsagePolicy.NonRecyclable),
         new(0.25m, CashType.Coin, "25 Satang Coin", "25 สตางค์"),
         new(0.50m, CashType.Coin, "50 Satang Coin", "50 สตางค์"),
         new(1m, CashType.Coin, "1 Baht Coin", "1 บาท"),
@@ -53,7 +56,7 @@ public class ThbCurrency :
         new(50m, CashType.Bill, "50 Bahts Bill", "50 บาท"),
         new(100m, CashType.Bill, "100 Bahts Bill", "100 บาท"),
         new(500m, CashType.Bill, "500 Bahts Bill", "500 บาท"),
-        new(1000m, CashType.Bill, "1000 Bahts Bill", "1000 บาท"),
+        new(1000m, CashType.Bill, "1000 Bahts Bill", "1000 บาท", Usage: CashUsagePolicy.CollectionOnly),
     ];
 
     /// <inheritdoc/>

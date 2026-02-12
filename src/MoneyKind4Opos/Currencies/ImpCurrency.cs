@@ -56,6 +56,7 @@ public class ImpCurrency :
         new(10m, CashType.Bill, "10 Pounds", "£10"),
         new(20m, CashType.Bill, "20 Pounds", "£20"),
         new(50m, CashType.Bill, "50 Pounds", "£50"),
+        new(100m, CashType.Bill, "100 Pounds", "£100", Usage: CashUsagePolicy.CollectionOnly),
     ];
 
     /// <inheritdoc/>

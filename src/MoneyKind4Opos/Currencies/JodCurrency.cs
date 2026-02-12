@@ -51,7 +51,7 @@ public class JodCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(0.01m, CashType.Coin, "1 Piastre Coin", "1p"),
+        new(0.01m, CashType.Coin, "1 Piastre Coin", "1p", Usage: CashUsagePolicy.NonRecyclable),
         new(0.05m, CashType.Coin, "5 Piastres Coin", "5p"),
         new(0.1m, CashType.Coin, "10 Piastres Coin", "10p"),
         new(0.25m, CashType.Coin, "1/4 JD Coin", "1/4 JD"),

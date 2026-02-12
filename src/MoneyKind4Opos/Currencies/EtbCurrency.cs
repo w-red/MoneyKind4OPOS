@@ -30,11 +30,11 @@ public sealed class EtbCurrency : ICurrency, ICashCountFormattable<EtbCurrency>,
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new CashFaceInfo(0.01m, CashType.Coin, "1 Santim Coin", "1 Santim"),
-        new CashFaceInfo(0.05m, CashType.Coin, "5 Santim Coin", "5 Santim"),
-        new CashFaceInfo(0.10m, CashType.Coin, "10 Santim Coin", "10 Santim"),
-        new CashFaceInfo(0.25m, CashType.Coin, "25 Santim Coin", "25 Santim"),
-        new CashFaceInfo(0.50m, CashType.Coin, "50 Santim Coin", "50 Santim")
+        new CashFaceInfo(0.01m, CashType.Coin, "1 Santim Coin", "1 Santim", Usage: CashUsagePolicy.NonRecyclable),
+        new CashFaceInfo(0.05m, CashType.Coin, "5 Santim Coin", "5 Santim", Usage: CashUsagePolicy.NonRecyclable),
+        new CashFaceInfo(0.10m, CashType.Coin, "10 Santim Coin", "10 Santim", Usage: CashUsagePolicy.NonRecyclable),
+        new CashFaceInfo(0.25m, CashType.Coin, "25 Santim Coin", "25 Santim", Usage: CashUsagePolicy.NonRecyclable),
+        new CashFaceInfo(0.50m, CashType.Coin, "50 Santim Coin", "50 Santim", Usage: CashUsagePolicy.NonRecyclable)
     ];
 
     /// <inheritdoc/>

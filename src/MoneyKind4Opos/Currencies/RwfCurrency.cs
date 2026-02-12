@@ -27,11 +27,11 @@ public sealed class RwfCurrency : ICurrency, ICashCountFormattable<RwfCurrency>,
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new CashFaceInfo(1m, CashType.Coin, "1 Franc Coin", "Igiceri cy'Ifranga 1"),
-        new CashFaceInfo(5m, CashType.Coin, "5 Franc Coin", "Igiceri cy'Amafaranga 5"),
-        new CashFaceInfo(10m, CashType.Coin, "10 Franc Coin", "Igiceri cy'Amafaranga 10"),
-        new CashFaceInfo(20m, CashType.Coin, "20 Franc Coin", "Igiceri cy'Amafaranga 20"),
-        new CashFaceInfo(50m, CashType.Coin, "50 Franc Coin", "Igiceri cy'Amafaranga 50"),
+        new CashFaceInfo(1m, CashType.Coin, "1 Franc Coin", "Igiceri cy'Ifranga 1", Usage: CashUsagePolicy.NonRecyclable),
+        new CashFaceInfo(5m, CashType.Coin, "5 Franc Coin", "Igiceri cy'Amafaranga 5", Usage: CashUsagePolicy.NonRecyclable),
+        new CashFaceInfo(10m, CashType.Coin, "10 Franc Coin", "Igiceri cy'Amafaranga 10", Usage: CashUsagePolicy.NonRecyclable),
+        new CashFaceInfo(20m, CashType.Coin, "20 Franc Coin", "Igiceri cy'Amafaranga 20", Usage: CashUsagePolicy.NonRecyclable),
+        new CashFaceInfo(50m, CashType.Coin, "50 Franc Coin", "Igiceri cy'Amafaranga 50", Usage: CashUsagePolicy.NonRecyclable),
         new CashFaceInfo(100m, CashType.Coin, "100 Franc Coin", "Igiceri cy'Amafaranga 100")
     ];
 

@@ -30,8 +30,8 @@ public sealed class ScrCurrency : ICurrency, ICashCountFormattable<ScrCurrency>,
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new CashFaceInfo(0.01m, CashType.Coin, "1 Cent Coin", "1 cent"),
-        new CashFaceInfo(0.05m, CashType.Coin, "5 Cent Coin", "5 cents"),
+        new CashFaceInfo(0.01m, CashType.Coin, "1 Cent Coin", "1 cent", Usage: CashUsagePolicy.NonRecyclable),
+        new CashFaceInfo(0.05m, CashType.Coin, "5 Cent Coin", "5 cents", Usage: CashUsagePolicy.NonRecyclable),
         new CashFaceInfo(0.10m, CashType.Coin, "10 Cent Coin", "10 cents"),
         new CashFaceInfo(0.25m, CashType.Coin, "25 Cent Coin", "25 cents"),
         new CashFaceInfo(0.50m, CashType.Coin, "50 Cent Coin", "50 cents"),

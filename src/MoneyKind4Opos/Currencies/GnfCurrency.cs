@@ -33,11 +33,11 @@ public class GnfCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(1m, CashType.Coin, "1 Franc", "1FG"),
-        new(5m, CashType.Coin, "5 Francs", "5FG"),
-        new(10m, CashType.Coin, "10 Francs", "10FG"),
-        new(25m, CashType.Coin, "25 Francs", "25FG"),
-        new(50m, CashType.Coin, "50 Francs", "50FG"),
+        new(1m, CashType.Coin, "1 Franc", "1FG", Usage: CashUsagePolicy.NonRecyclable),
+        new(5m, CashType.Coin, "5 Francs", "5FG", Usage: CashUsagePolicy.NonRecyclable),
+        new(10m, CashType.Coin, "10 Francs", "10FG", Usage: CashUsagePolicy.NonRecyclable),
+        new(25m, CashType.Coin, "25 Francs", "25FG", Usage: CashUsagePolicy.NonRecyclable),
+        new(50m, CashType.Coin, "50 Francs", "50FG", Usage: CashUsagePolicy.NonRecyclable),
     ];
 
     /// <inheritdoc/>

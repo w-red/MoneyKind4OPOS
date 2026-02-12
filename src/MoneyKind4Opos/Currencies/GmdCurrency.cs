@@ -36,11 +36,11 @@ public class GmdCurrency :
     /// <inheritdoc/>
     public static IEnumerable<CashFaceInfo> Coins =>
     [
-        new(0.01m, CashType.Coin, "1 Butut", "1b"),
-        new(0.05m, CashType.Coin, "5 Bututs", "5b"),
-        new(0.10m, CashType.Coin, "10 Bututs", "10b"),
-        new(0.25m, CashType.Coin, "25 Bututs", "25b"),
-        new(0.50m, CashType.Coin, "50 Bututs", "50b"),
+        new(0.01m, CashType.Coin, "1 Butut", "1b", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.05m, CashType.Coin, "5 Bututs", "5b", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.10m, CashType.Coin, "10 Bututs", "10b", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.25m, CashType.Coin, "25 Bututs", "25b", Usage: CashUsagePolicy.NonRecyclable),
+        new(0.50m, CashType.Coin, "50 Bututs", "50b", Usage: CashUsagePolicy.NonRecyclable),
         new(1m, CashType.Coin, "1 Dalasi", "D1"),
     ];
 
