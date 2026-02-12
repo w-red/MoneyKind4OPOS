@@ -10,7 +10,10 @@ namespace MoneyKind4Opos.Currencies;
 /// <item><term>Issuer</term><description>Bank of Somaliland (Baanka Somaliland)</description></item>
 /// </list>
 /// </remarks>
-public sealed class SlsCurrency : ICurrency, ICashCountFormattable<SlsCurrency>, ICurrencyFormattable<SlsCurrency>
+public sealed class SlsCurrency :
+    ICurrency,
+    ICashCountFormattable<SlsCurrency>,
+    ICurrencyFormattable<SlsCurrency>
 {
     private SlsCurrency() { }
 
@@ -26,7 +29,8 @@ public sealed class SlsCurrency : ICurrency, ICashCountFormattable<SlsCurrency>,
 
     /// <inheritdoc/>
     public static CurrencyFormattingOptions Local =>
-        CurrencyFormattingOptions.Create("/-", "n$", decimalDigits: 0);
+        CurrencyFormattingOptions
+        .Create("/-", "n$", decimalDigits: 0);
 
     /// <inheritdoc/>
     public static IEnumerable<ISubsidiaryUnit> SubsidiaryUnits => [];
